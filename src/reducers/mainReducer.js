@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const mainReducer = (state = initialState, action) => {
-
   if (action.type === "HANDLE_LOGIN") {
     if (action.payload.hasOwnProperty("error")) {
       state.isLoggedIn = false;
@@ -15,9 +14,7 @@ const mainReducer = (state = initialState, action) => {
       state.isLoggedIn = true;
       state.info = action.payload;
     }
-
     state.loading = false;
-
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_SIGN") {
@@ -28,25 +25,19 @@ const mainReducer = (state = initialState, action) => {
       state.isLoggedIn = true;
       state.info = action.payload;
     }
-
     state.loading = false;
-
     return Object.assign({}, state);
   }
-  
-
   if (action.type === "HANDLE_LOGOUT") {
     state.isLoggedIn = false;
     return Object.assign({}, state);
   }
 
   if (action.type === "FETCH_PLAYGROUND") {
-    state.isLoggedIn = true;
+    // state.isLoggedIn = true;
     state.playground = [...state.playground, ...action.payload];
-
     return Object.assign({}, state);
   }
-
   return state;
 };
 

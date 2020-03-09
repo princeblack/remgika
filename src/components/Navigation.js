@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import pro3 from "../img/pro3.jpeg";
@@ -19,24 +19,21 @@ import {
   faLinkedin,
   faDiscord
 } from "@fortawesome/free-brands-svg-icons";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { logOut } from "../actions";
 import remgika from "../img/remgika.png";
 
 const Navigation = props => {
-  const status = props.isLoggedIn;
-  console.log(status);
-  
+  const status = props.isLoggedIn;  
   const toggleSidebar = e => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("slide-right");
   };
   const handleLogOut = e => {
     toggleSidebar();
-    props.logOut();
     props.history.push("/");
+    props.logOut();
   };
-
   const active = {
     color: "#6bc774"
   };

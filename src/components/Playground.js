@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { fetchPlayground } from "../actions";
 import Play from "./Play";
 import "../scss/Playground.scss";
 import camera from "../img/camera.svg";
+import { Link, NavLink, withRouter } from "react-router-dom";
 
 import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
@@ -18,6 +19,7 @@ class Playground extends React.Component {
     };
     this.createChildren = this.createChildren.bind(this);
     this.changeActiveItem = this.changeActiveItem.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     this.props.fetchPlayground();
@@ -32,6 +34,9 @@ class Playground extends React.Component {
         children: this.createChildren(20)
       });
     }, 100);
+  }
+  handleClick(e) {
+    e.preventDefault();
   }
   createChildren = n =>
     range(n).map(i => (
@@ -55,12 +60,15 @@ class Playground extends React.Component {
             {/* <input
                type="file" id="myFile" name="filename"
               ></input> */}
-            <input 
-            type="search"
-            placeholder=" Look for playground in your city"
+            <input
+              type="search"
+              placeholder=" Look for playground in your city"
             ></input>
             <div className="camera-flex">
-            <img src={camera} alt="camera" onClick={this.handleClick}></img>
+              <NavLink to="addplayground"></NavLink>
+              <NavLink to="/addplayground">
+                <img src={camera} alt="camera" ></img>
+              </NavLink>
               <span>Add Playground</span>
             </div>
           </div>

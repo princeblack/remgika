@@ -11,6 +11,7 @@ import { authorise } from "../actions";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./Playground";
+import AddPlaygroung from "./AddPlaygroung";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>
@@ -37,7 +39,7 @@ class App extends React.Component {
 const mapsStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    loading: state.loading,
+    // loading: state.loading,
     info: state.info
   };
 };
