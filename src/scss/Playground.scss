@@ -8,60 +8,81 @@ $remgika: #c7cda4;
 //   **********************************************************/
 
 .playground {
-
   .serchBar {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    input, input:focus {
-      width: 70%;
-      height: 45px;
-      border: solid 3px #c7cda4;
-      border-radius: 10px;
-      box-shadow: 4px 4px 4px #00000025;
-      margin: 5px;
-      margin-top: 13px;
-      background-color:  #c7cda448 ;
-      color: black;
-      font-size: 15px;
-      letter-spacing: 1px;
-    }
-    input:hover{
-      background-color: white;
-    }
-    .camera-flex{
-      width: 25%;
+    width: 100%;
+    .play-autocomplte {
+      margin-top: 20px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      img {
-        width: 100%;
-        height: 70px;
-        color: $remgika;
-        cursor: pointer;
-        //   border: solid 5px blue;
+      width: 100%;
+      .inpute-auto {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        input,
+        input:focus {
+          height: 45px;
+          border: solid 3px #c7cda4;
+          border-radius: 10px;
+          box-shadow: 4px 4px 4px #00000025;
+          margin-top: 13px;
+          background-color: #c7cda448;
+          color: black;
+          font-size: 15px;
+          letter-spacing: 1px;
+          outline: none;
+        }
+        input:hover {
+          background-color: white;
+        }
+       
+        ul {
+          // background-color: #c7cda4;
+          padding: 0;
+          border: solid 3px #c7cda4;
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+          border-width: 1px 1px 1px;
+          border-style: none solid solid;
+          list-style-type: none;
+          text-align: left;
+          border-image: initial;
+          border-top: none;
+          li{
+            margin: 5px;
+          }
+        }
       }
-      span{
-        font-size: 13px;
-        letter-spacing: 1px;
+      .camera-flex {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        img {
+          width: 100%;
+          height: 70px;
+          color: $remgika;
+          cursor: pointer;
+        }
+        span {
+          font-size: 13px;
+          letter-spacing: 1px;
+        }
       }
     }
-
   }
   /**********************************************************
 ******************** PLAYGROUND ITEMS *********************
 ***********************************************************/
-  .categorie{
+  .categorie {
     display: flex;
     flex-direction: column;
     align-items: center;
-     h1{
-       text-align: left;
-       align-self: flex-start;
-       margin-left: 5%;
+    h1 {
+      text-align: left;
+      align-self: flex-start;
+      margin-left: 5%;
     }
-    hr{
+    hr {
       height: 5px;
       width: 90%;
       background-color: rgba(58, 57, 57, 0.335);
@@ -74,15 +95,14 @@ $remgika: #c7cda4;
     margin: 0;
     .playgroud-item {
       border-radius: 20px;
-      .userVote{
-        img{
+      .userVote {
+        img {
           width: 20px;
           height: 20px;
           cursor: pointer;
         }
-        :first-child{
-           margin-right: 10px;
-
+        :first-child {
+          margin-right: 10px;
         }
       }
       img {
@@ -118,11 +138,11 @@ $remgika: #c7cda4;
         }
       }
     }
-    .kaHnvc{
+    .kaHnvc {
       height: 20%;
       top: 30px;
       width: 30px;
-      button{
+      button {
         color: $remgika;
         width: 90%;
         height: 100%;
@@ -132,11 +152,11 @@ $remgika: #c7cda4;
         border: 0;
       }
     }
-    .dFFQiB{
+    .dFFQiB {
       height: 20%;
       top: 30px;
       width: 30px;
-      button{
+      button {
         color: $remgika;
         width: 90%;
         height: 100%;

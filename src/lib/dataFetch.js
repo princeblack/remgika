@@ -87,3 +87,22 @@ export const handleLogOut = async data => {
     return [];
   }
 };
+
+
+export const addPlayground = async data => {
+  try {
+    const res = await (
+      await fetch(`${url}/playground`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+    ).json();
+    return res;    
+  } catch (error) {
+    return [];
+  }
+};

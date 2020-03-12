@@ -1,11 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authorise, handleLogin } from "../actions/index";
-import { Redirect } from "react-router-dom";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { handleLogin } from "../actions";
+import { playground } from "../actions/index";
+
+// import { Link, NavLink, withRouter } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
+// import { Link, NavLink, withRouter } from "react-router-dom";
 import LoginHeader from "./LoginHeader";
 import "../scss/Addplayground.scss";
 class AddPlaygroung extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageUrl:"",
+      title: "",
+      address:{
+        street:"",
+        code: "",
+        city: ""
+      }
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [name]: value
+    });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.playground(this.state);   
+  }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     return (
@@ -14,7 +42,7 @@ class AddPlaygroung extends Component {
           <>
             <LoginHeader />
             <div className="addPlaygroung-form">
-              <form>
+              <form onSubmit={this.handleSubmit} >
                 <div className="input">
                   <label htmlFor="files"> Picture: </label>
                   <input
@@ -24,18 +52,20 @@ class AddPlaygroung extends Component {
                     accept="image/*"
                     multiple
                     required
+                    value={this.state.imageUrl}
+                    onChange={this.handleInputChange}
                   />
                 </div>
                 <div className="input">
                   <label htmlFor="files">Address: </label>
                   <input
                     className="input-transition"
-                    name="address"
+                    name="street"
                     type="text"
-                    // value={this.state.email}
-                    placeholder="Address"
-                    // onChange={this.handleInputChange}
-                    id="address"
+                    // value={this.state.address.street}
+                    placeholder="street"
+                    onChange={this.handleInputChange}
+                    id="street"
                     required
                   />
                 </div>
@@ -46,9 +76,9 @@ class AddPlaygroung extends Component {
                       className="input-transition"
                       name="Code"
                       type="text"
-                      // value={this.state.email}
+                      value={this.state.address.code}
                       placeholder="Code"
-                      // onChange={this.handleInputChange}
+                      onChange={this.handleInputChange}
                       id="code"
                       required
                     />
@@ -59,9 +89,9 @@ class AddPlaygroung extends Component {
                       className="input-transition"
                       name="City"
                       type="text"
-                      // value={this.state.email}
+                      value={this.state.address.city}
                       placeholder="city"
-                      // onChange={this.handleInputChange}
+                      onChange={this.handleInputChange}
                       id="city"
                       required
                     />
@@ -98,9 +128,9 @@ class AddPlaygroung extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    info: state.info
+    addplay : state.addPlay
   };
 };
-export default connect(mapStateToProps, { authorise, handleLogin })(
+export default connect(mapStateToProps, { playground, handleLogin })(
   AddPlaygroung
 );

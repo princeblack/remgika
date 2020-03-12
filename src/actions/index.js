@@ -3,7 +3,8 @@ import {
   getPlayground,
   authoriseUser,
   handleLogOut,
-  signUpUsers
+  signUpUsers,
+  addPlayground
 } from "../lib/dataFetch.js";
 
 export const authorise = payload => {
@@ -51,6 +52,16 @@ export const fetchPlayground = payload => {
     const data = await getPlayground();
     dispatch({
       type: "FETCH_PLAYGROUND",
+      payload: data
+    });
+  };
+};
+
+export const playground = payload => {
+  return async dispatch => {
+    const data = await addPlayground(payload);
+    dispatch({
+      type: "ADD_PLAYGROUND",
       payload: data
     });
   };

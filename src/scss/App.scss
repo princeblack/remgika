@@ -8,10 +8,16 @@ $remgika: #c7cda4;
   padding: 0;
   box-sizing: border-box;
   font-family: "Oswald", Arial, Helvetica, sans-serif;
+
 }
 .App {
   text-align: center;
-
+  input:focus{
+    outline: none;
+  }
+  button:focus{
+    outline: none;
+  }
   /*********************************************************
   **********************************************************
   ********************* NAVIGATION HEADER ******************
