@@ -12,13 +12,12 @@ class AddPlaygroung extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUrl:"",
+      // imageUrl:"",
       title: "",
-      address:{
-        street:"",
-        code: "",
-        city: ""
-      }
+      street:"",
+      postalCode:"",
+      city: "",
+      description: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +25,8 @@ class AddPlaygroung extends Component {
   handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
+    console.log(e.target.value);
+
     this.setState({
       [name]: value
     });
@@ -36,6 +37,7 @@ class AddPlaygroung extends Component {
   }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
+    
     return (
       <>
         {isLoggedIn ? (
@@ -43,71 +45,54 @@ class AddPlaygroung extends Component {
             <LoginHeader />
             <div className="addPlaygroung-form">
               <form onSubmit={this.handleSubmit} >
-                <div className="input">
-                  <label htmlFor="files"> Picture: </label>
-                  <input
-                    type="file"
-                    id="files"
-                    name="files"
-                    accept="image/*"
-                    multiple
-                    required
-                    value={this.state.imageUrl}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
-                <div className="input">
-                  <label htmlFor="files">Address: </label>
-                  <input
-                    className="input-transition"
-                    name="street"
-                    type="text"
-                    // value={this.state.address.street}
-                    placeholder="street"
-                    onChange={this.handleInputChange}
-                    id="street"
-                    required
-                  />
-                </div>
-                <div className="codeAndCity">
-                  <div className="input">
-                    <label htmlFor="files">Code: </label>
+              <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
-                      name="Code"
+                      name="title"
                       type="text"
-                      value={this.state.address.code}
-                      placeholder="Code"
+                      value={this.state.title}
+                      placeholder="title or place name"
                       onChange={this.handleInputChange}
-                      id="code"
+                      id="title"
                       required
                     />
                   </div>
-                  <div className="input">
-                    <label htmlFor="files">City: </label>
+                  <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
-                      name="City"
+                      name="street"
                       type="text"
-                      value={this.state.address.city}
-                      placeholder="city"
+                      value={this.state.street}
+                      placeholder=" Addresse"
                       onChange={this.handleInputChange}
-                      id="city"
+                      id="street"
                       required
                     />
                   </div>
-                </div>
-                <div className="Playgroung-description">
-                  <label>Description</label>
-                  <textarea
-                    maxLength="200"
-                    minLength="100"
-                    required
-                    placeholder="Some description about the place"
-                    rows="5"
-                    // cols="90%"
-                   />
-                </div>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
+                      name="postalCode"
+                      type="text"
+                      value={this.state.postalCode}
+                      placeholder="Postal Code"
+                      onChange={this.handleInputChange}
+                      id="postalCode"
+                      required
+                    />
+                  </div>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
+                      name="description"
+                      type="text"
+                      placeholder="description"
+                      value={this.state.description}
+                      onChange={this.handleInputChange}
+                      id="description"
+                      required
+                    />
+                  </div>
                 <input
                     className="addPlay-submit"
                     type="submit"

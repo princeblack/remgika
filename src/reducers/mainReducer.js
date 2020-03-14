@@ -49,6 +49,7 @@ const mainReducer = (state = initialState, action) => {
       state.addPlay = true;
       state.playground = [...state.playground, ...action.payload];
     }
+    state.loading = false;
     return Object.assign({}, state);
   }
   return state;

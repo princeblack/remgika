@@ -70,50 +70,6 @@ class Profile extends React.Component {
                     required
                   ></input>
                 </div>
-                <div className="user-data">
-                  <label htmlFor="email">Birthday </label>
-                  <input
-                    name="birthday"
-                    type="text"
-                    value={data.birthday}
-                    onChange={this.handleInputChange}
-                    id="birthday"
-                    required
-                  ></input>
-                </div>
-                <div className="user-data">
-                  <label htmlFor="Address">Address </label>
-                  <input
-                    name="Address"
-                    type="text"
-                    value="briesestr 81"
-                    onChange={this.handleInputChange}
-                    id="Address"
-                    required
-                  ></input>
-                </div>
-                <div className="user-data">
-                  <label htmlFor="code">Code Postal</label>
-                  <input
-                    name="CodePostal"
-                    type="text"
-                    value="12053"
-                    onChange={this.handleInputChange}
-                    id="CodePostal"
-                    required
-                  ></input>
-                </div>
-                <div className="user-data">
-                  <label htmlFor="City">City </label>
-                  <input
-                    name="City"
-                    type="text"
-                    value="Berlin"
-                    onChange={this.handleInputChange}
-                    id="City"
-                    required
-                  ></input>
-                </div>
               </div>
             </div>
           </div>

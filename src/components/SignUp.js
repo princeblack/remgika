@@ -12,7 +12,6 @@ class SignUp extends React.Component {
     this.state = {
       firstName: "",
       lastName: "",
-      birthday: "",
       email: "",
       password: "",
       role:  "Admin"
@@ -73,18 +72,6 @@ class SignUp extends React.Component {
                       placeholder="Last Name"
                       onChange={this.handleInputChange}
                       id="lastName"
-                      required
-                    />
-                  </div>
-                  <div className="row flex-revcol-left">
-                    <input
-                      className="input-transition"
-                      name="birthday"
-                      type="text"
-                      value={this.state.birthday}
-                      placeholder="Birthday ex: 26-09-1991"
-                      onChange={this.handleInputChange}
-                      id="birthday"
                       required
                     />
                   </div>
