@@ -12,9 +12,10 @@ class AddPlaygroung extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userID: this.props.info._id,
       title: "",
-      street:"",
-      postalCode:"",
+      street: "",
+      postalCode: "",
       city: "",
       description: ""
     };
@@ -35,7 +36,7 @@ class AddPlaygroung extends Component {
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     const addPlay = this.props.addPlay
-    console.log(addPlay);
+    console.log(this.props.info._id);
     
     return (
       <>
@@ -138,7 +139,8 @@ class AddPlaygroung extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    addplay : state.addPlay
+    addplay : state.addPlay,
+    info: state.info
   };
 };
 export default connect(mapStateToProps, { playground, handleLogin })(
