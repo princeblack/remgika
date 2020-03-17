@@ -12,7 +12,6 @@ class AddPlaygroung extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // imageUrl:"",
       title: "",
       street:"",
       postalCode:"",
@@ -25,8 +24,6 @@ class AddPlaygroung extends Component {
   handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(e.target.value);
-
     this.setState({
       [name]: value
     });
@@ -37,6 +34,8 @@ class AddPlaygroung extends Component {
   }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
+    const addPlay = this.props.addPlay
+    console.log(addPlay);
     
     return (
       <>
@@ -84,6 +83,18 @@ class AddPlaygroung extends Component {
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
+                      name="city"
+                      type="text"
+                      value={this.state.city}
+                      placeholder=" City"
+                      onChange={this.handleInputChange}
+                      id="city"
+                      required
+                    />
+                  </div>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
                       name="description"
                       type="text"
                       placeholder="description"
@@ -99,6 +110,20 @@ class AddPlaygroung extends Component {
                     value="Submit"
                   />
               </form>
+              { addPlay ? (
+                <div className="addPlaygound-accept">
+                  <p> the playground is add successfuly</p>
+                </div>
+              ):(
+                this.shandleSubmit && 
+                ( <div className="addPlaygound-erreur">
+                    <p>Sorry somethings wint r</p>
+                  </div>)
+                
+              )}
+              <div>
+
+              </div>
             </div>
           </>
         ) : (

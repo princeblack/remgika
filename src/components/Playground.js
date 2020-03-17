@@ -50,6 +50,7 @@ class Playground extends React.Component {
       return <Play data={el} key={index}></Play>;
     });
     const { activeItemIndex, children } = this.state;
+    const addPlay = this.props.addPlay
 
     return (
       <div className="playground">
@@ -84,6 +85,7 @@ class Playground extends React.Component {
               {playgroundList}
             </ItemsCarousel>
           </div>
+         
         </>
       </div>
     );
@@ -92,7 +94,8 @@ class Playground extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    playground: state.playground
+    playground: state.playground,
+    addPlay: state.addPlay
   };
 };
 export default connect(mapStateToProps, { fetchPlayground })(Playground);
