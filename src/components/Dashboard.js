@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { authorise, handleLogin } from "../actions/index";
+import { authorise, myPlayground } from "../actions/index";
 import "../scss/Dashboard.scss";
 import Profile from "./Profile";
+import Myplay from "./Myplay";
+import "../scss/myplay.scss";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -20,7 +22,10 @@ class Dashboard extends React.Component {
     this.handleEvents = this.handleEvents.bind(this);
   }
   componentDidMount() {
-    if (this.props.isLoggedIn) this.props.authorise();
+    if (this.props.isLoggedIn){ 
+      this.props.authorise();
+    this.props.myPlayground();
+  }
   }
   handleInputChange(e) {
     const name = e.target.name;
@@ -77,6 +82,9 @@ class Dashboard extends React.Component {
     const isToggleOn = this.state.isToggleOn;
     const evantToggle = this.state.evantToggle;
     const playToggle = this.state.playToggle
+    const PlaygroundList = this.props.personalPlayground.map((el, index) => {
+      return <Myplay data={el} key={index}></Myplay>;
+    });
     return (
       <>
         {!isLoggedIn ? (
@@ -96,10 +104,9 @@ class Dashboard extends React.Component {
                   {this.state.evantToggle ? "Events" : "Events "}
                 </button>
               </div>
-              <>{!isToggleOn && <Profile /> }</>
+              <>{!isToggleOn && <Profile />}</>
               <>{!evantToggle && <p>hallo</p>}</>
-              <>{!playToggle && <p>mama</p>}</>
-
+              <>{!playToggle && <div>{PlaygroundList}</div>}</>
             </div>
           </>
         )}
@@ -110,7 +117,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    info: state.info
+    info: state.info,
+    personalPlayground: state.personalPlayground
   };
 };
-export default connect(mapStateToProps, { authorise, handleLogin })(Dashboard);
+export default connect(mapStateToProps, { authorise, myPlayground })(Dashboard);

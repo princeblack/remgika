@@ -1,6 +1,7 @@
 import {
   checkCredentials,
   getPlayground,
+  getMyPlayground,
   authoriseUser,
   handleLogOut,
   signUpUsers,
@@ -47,6 +48,16 @@ export const logOut = payload => {
   };
 };
 
+export const playground = payload => {
+  return async dispatch => {
+    const data = await addPlayground(payload);
+    dispatch({
+      type: "ADD_PLAYGROUND",
+      payload: data
+    });
+  };
+};
+
 export const fetchPlayground = payload => {
   return async dispatch => {
     const data = await getPlayground();
@@ -57,11 +68,12 @@ export const fetchPlayground = payload => {
   };
 };
 
-export const playground = payload => {
+
+export const myPlayground = payload => {
   return async dispatch => {
-    const data = await addPlayground(payload);
+    const data = await getMyPlayground();
     dispatch({
-      type: "ADD_PLAYGROUND",
+      type: "MY_PLAYGROUND",
       payload: data
     });
   };

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { fetchPlayground } from "../actions";
 import Play from "./Play";
 import "../scss/Playground.scss";
-// import { Link, NavLink, withRouter } from "react-router-dom";
 import PlacesAutocomplete from './PlacesAutocomplete';
 import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
@@ -50,21 +49,13 @@ class Playground extends React.Component {
       return <Play data={el} key={index}></Play>;
     });
     const { activeItemIndex, children } = this.state;
-    const addPlay = this.props.addPlay
-
+    console.log(this.props.playground);
+    
     return (
       <div className="playground">
         <>
           <div className="serchBar">
-            {/* <input
-               type="file" id="myFile" name="filename"
-              ></input> */}
-            {/* <input
-              type="search"
-              placeholder=" Look for playground in your city"
-            ></input> */}
             <PlacesAutocomplete/>
-
           </div>
           <div className="categorie">
             <h1>Playground</h1>

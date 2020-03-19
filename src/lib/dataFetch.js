@@ -35,23 +35,6 @@ export const signUpUsers = async data => {
   }
 };
 
-export const getPlayground = async data => {
-  try {
-    const res = await (
-      await fetch(`${url}/playground`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      })
-    ).json();
-
-    return res;
-  } catch (error) {
-    return [];
-  }
-};
 
 export const authoriseUser = async data => {
   try {
@@ -88,6 +71,26 @@ export const handleLogOut = async data => {
   }
 };
 
+/**********************************************************
+************************ PLAYGROUND ***********************
+***********************************************************/
+export const getPlayground = async data => {
+  try {
+    const res = await (
+      await fetch(`${url}/playground`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+    ).json();
+
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
 
 export const addPlayground = async data => {
   try {
@@ -102,6 +105,22 @@ export const addPlayground = async data => {
       })
     ).json();
     return res;    
+  } catch (error) {
+    return [];
+  }
+};
+export const getMyPlayground = async data => {
+  try {
+    const res = await (
+      await fetch(`${url}/playground/my`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+    ).json();
+    return res;
   } catch (error) {
     return [];
   }

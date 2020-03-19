@@ -1,0 +1,57 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+.mainProfile {
+  .all-my-play {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .playgroud-item {
+      border-radius: 20px;
+      border: solid 2px #c7cda4;
+      width: 80%;
+      .userVote {
+        img {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+        :first-child {
+          margin-right: 10px;
+        }
+      }
+      img {
+        border-radius: 20px;
+        width: 99%;
+        object-fit: cover;
+        height: 200px;
+      }
+      .addressItem {
+        display: flex;
+        justify-content: space-around;
+        .address {
+          display: flex;
+          margin: 2px;
+          span {
+            color: rgb(182, 20, 20);
+            margin: 1px;
+          }
+          p {
+            margin: 2px;
+          }
+        }
+        .addressDistance {
+          display: flex;
+          align-items: center;
+          span {
+            color: rgb(182, 20, 20);
+            margin: 1px;
+          }
+          p {
+            margin: 2px;
+          }
+        }
+      }
+    }
+  }
+}

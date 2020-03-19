@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import Home from "./Home";
+// import Home from "./Home";
 import NotFound from "./NotFound.js";
 import Welcome from "./Welcome";
 import { authorise } from "../actions";
@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./Playground";
 import AddPlaygroung from "./AddPlaygroung";
+// import  Myplayground  from "./Myplayground";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
@@ -27,7 +28,8 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
-            <Route exact path="/home" component={Home} />
+            {/* <Route exact path="/home" component={Home} /> */}
+            {/* <Route exact path="/myPlayground" component={Myplayground} /> */}
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>
