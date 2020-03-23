@@ -12,8 +12,8 @@ const mainReducer = (state = initialState, action) => {
   /**********************************************************
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
-  if (action.type === "HANDLE_LOGIN") {
-    if (action.payload.hasOwnProperty("error")) {
+  if (action.type === 'HANDLE_LOGIN') {
+    if (action.payload.hasOwnProperty('error')) {
       state.isLoggedIn = false;
     } else {
       state.isLoggedIn = true;
@@ -22,8 +22,8 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
-  if (action.type === "HANDLE_SIGN") {
-    if (action.payload.hasOwnProperty("error")) {
+  if (action.type === 'HANDLE_SIGN') {
+    if (action.payload.hasOwnProperty('error')) {
       state.sign = false;
     } else {
       state.sign = true;
@@ -33,7 +33,7 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
-  if (action.type === "HANDLE_LOGOUT") {
+  if (action.type === 'HANDLE_LOGOUT') {
     console.log(state.info);
     state.isLoggedIn = false;
     console.log(state.isLoggedIn);
@@ -43,13 +43,12 @@ const mainReducer = (state = initialState, action) => {
   /**********************************************************
    ************************ PLAYGROUND ***********************
    ***********************************************************/
-  if (action.type === "FETCH_PLAYGROUND") {
+  if (action.type === 'FETCH_PLAYGROUND') {
     state.playground = [...state.playground, ...action.payload];
     return Object.assign({}, state);
   }
-  if (action.type === "ADD_PLAYGROUND") {
-        debugger;
-    if (action.payload.hasOwnProperty("error")) {
+  if (action.type === 'ADD_PLAYGROUND') {
+    if (action.payload.hasOwnProperty('error')) {
       state.addPlay = false;
     } else {
       state.addPlay = true;
@@ -57,7 +56,7 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
-  if (action.type === "MY_PLAYGROUND") {
+  if (action.type === 'MY_PLAYGROUND') {
     state.personalPlayground = [...action.payload];
     return Object.assign({}, state);
   }

@@ -1,4 +1,5 @@
 const url = 'http://localhost:8000';
+const axios = require('axios');
 
 export const checkCredentials = async data => {
   try {
@@ -12,7 +13,7 @@ export const checkCredentials = async data => {
         credentials: 'include'
       })
     ).json();
-    return res;    
+    return res;
   } catch (error) {
     return [];
   }
@@ -29,12 +30,11 @@ export const signUpUsers = async data => {
         credentials: 'include'
       })
     ).json();
-    return res;    
+    return res;
   } catch (error) {
     return [];
   }
 };
-
 
 export const authoriseUser = async data => {
   try {
@@ -72,17 +72,17 @@ export const handleLogOut = async data => {
 };
 
 /**********************************************************
-************************ PLAYGROUND ***********************
-***********************************************************/
+ ************************ PLAYGROUND ***********************
+ ***********************************************************/
 export const getPlayground = async data => {
   try {
     const res = await (
       await fetch(`${url}/playground`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
-        credentials: "include"
+        credentials: 'include'
       })
     ).json();
 
@@ -94,31 +94,28 @@ export const getPlayground = async data => {
 
 export const addPlayground = async data => {
   try {
-        debugger;
     const res = await (
       await fetch(`${url}/playground`, {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        body: data,
         credentials: 'include'
       })
     ).json();
-    return res;    
+    return res;
   } catch (error) {
     return [error];
   }
 };
+
 export const getMyPlayground = async data => {
   try {
     const res = await (
       await fetch(`${url}/playground/my`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
-        credentials: "include"
+        credentials: 'include'
       })
     ).json();
     return res;

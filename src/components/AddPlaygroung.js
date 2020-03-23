@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { handleLogin } from "../actions";
-import { playground } from "../actions/index";
-import axios from "axios";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleLogin } from '../actions';
+import { playground } from '../actions/index';
+import axios from 'axios';
 
 // import { Link, NavLink, withRouter } from "react-router-dom";
 // import { Redirect } from "react-router-dom";
 // import { Link, NavLink, withRouter } from "react-router-dom";
-import LoginHeader from "./LoginHeader";
-import "../scss/Addplayground.scss";
+import LoginHeader from './LoginHeader';
+import '../scss/Addplayground.scss';
 class AddPlaygroung extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUrl: "",
-      title: "",
-      street: "",
-      postalCode: "",
-      city: "",
-      description: ""
+      imgCollection: '',
+      title: 'afs',
+      street: 'asf',
+      postalCode: 'afs',
+      city: 'afs',
+      description: 'fas'
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,32 +30,34 @@ class AddPlaygroung extends Component {
       [name]: value
     });
   }
+
   maxSelectFile = event => {
     let files = event.target.files; // create file object
     if (files.length > 3) {
-      const msg = "Only 3 images can be uploaded at a time";
+      const msg = 'Only 3 images can be uploaded at a time';
       event.target.value = null; // discard selected file
       console.log(msg);
       return false;
     }
     return true;
   };
+
   checkMimeType = event => {
     //getting file object
     let files = event.target.files;
     //define message container
-    let err = "";
+    let err = '';
     // list allow mime type
-    const types = ["image/png", "image/jpeg", "image/gif"];
+    const types = ['image/png', 'image/jpeg', 'image/gif'];
     // loop access array
     for (var x = 0; x < files.length; x++) {
       // compare file type find doesn't matach
       if (types.every(type => files[x].type !== type)) {
         // create error message and assign to container
-        err += files[x].type + " is not a supported format\n";
+        err += files[x].type + ' is not a supported format\n';
       }
     }
-    if (err !== "") {
+    if (err !== '') {
       // if message not same old that mean has error
       event.target.value = null; // discard selected file
       console.log(err);
@@ -63,16 +65,17 @@ class AddPlaygroung extends Component {
     }
     return true;
   };
+
   checkFileSize = event => {
     let files = event.target.files;
     let size = 15000;
-    let err = "";
+    let err = '';
     for (var x = 0; x < files.length; x++) {
       if (files[x].size > size) {
-        err += files[x].type + "is too large, please pick a smaller file\n";
+        err += files[x].type + 'is too large, please pick a smaller file\n';
       }
     }
-    if (err !== "") {
+    if (err !== '') {
       event.target.value = null;
       console.log(err);
       return false;
@@ -82,37 +85,28 @@ class AddPlaygroung extends Component {
   };
 
   handlefiles = event => {
-    console.log(event.target.files);
     var files = event.target.files;
-    if (
-      this.maxSelectFile(event) &&
-      this.checkMimeType(event) && this.checkMimeType(event)
-    ) {
-        
-        // if return true allow to setState
-        this.setState({
-          imageUrl: files
-        });
-      }
+    if (this.maxSelectFile(event) && this.checkMimeType(event)) {
+      // if return true allow to setState
+      console.log('All files', files);
+      this.setState({
+        imgCollection: files
+      });
+    }
   };
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.playground(this.state);
-    // const data = new FormData();
-    // for (var x = 0; x < this.state.imageUrl.length; x++) {
-    //   data.append("file", this.state.imageUrl[x]);
-    // }
+    const data = new FormData();
+    for (const key of Object.keys(this.state.imgCollection)) {
+      data.append('imgCollection', this.state.imgCollection[key]);
+    }
 
-    // axios
-    //   .post("http://localhost:8000/playground", data, {
-    //     // receive two    parameter endpoint url ,form data
-    //   })
+    for (var key in this.state) {
+      data.append(key, this.state[key]);
+    }
 
-    //   .then(res => {
-    //     // then print response status
-    //     console.log(res.statusText);
-    //   });
+    this.props.playground(data);
   }
 
   render() {
@@ -127,11 +121,7 @@ class AddPlaygroung extends Component {
             <div className="addPlaygroung-form">
               <form onSubmit={this.handleSubmit}>
                 <div className="row flex-revcol-left">
-                  <input
-                    type="file"
-                    name="myImage"
-                    onChange={this.handlefiles}
-                  />
+                  <input type="file" name="myImage" onChange={this.handlefiles} multiple />
                 </div>
                 <div className="row flex-revcol-left">
                   <input
@@ -192,7 +182,8 @@ class AddPlaygroung extends Component {
                     id="description"
                     required
                   />
-                </div>*
+                </div>
+                *
                 <input
                   className="addPlay-submit"
                   type="submit"
@@ -230,6 +221,4 @@ const mapStateToProps = state => {
     info: state.info
   };
 };
-export default connect(mapStateToProps, { playground, handleLogin })(
-  AddPlaygroung
-);
+export default connect(mapStateToProps, { playground, handleLogin })(AddPlaygroung);
