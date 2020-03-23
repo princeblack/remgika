@@ -6,10 +6,12 @@ $remgika: #c7cda4;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     .playgroud-item {
       border-radius: 20px;
       border: solid 2px #c7cda4;
       width: 80%;
+      margin: 10px;
       .userVote {
         img {
           width: 20px;

@@ -94,6 +94,7 @@ export const getPlayground = async data => {
 
 export const addPlayground = async data => {
   try {
+        debugger;
     const res = await (
       await fetch(`${url}/playground`, {
         method: 'POST',
@@ -106,7 +107,7 @@ export const addPlayground = async data => {
     ).json();
     return res;    
   } catch (error) {
-    return [];
+    return [error];
   }
 };
 export const getMyPlayground = async data => {

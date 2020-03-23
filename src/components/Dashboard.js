@@ -106,7 +106,13 @@ class Dashboard extends React.Component {
               </div>
               <>{!isToggleOn && <Profile />}</>
               <>{!evantToggle && <p>hallo</p>}</>
-              <>{!playToggle && <div>{PlaygroundList}</div>}</>
+              <>
+                {!playToggle && (
+                  <div className="all-my-play">
+                    {PlaygroundList}
+                  </div>
+                )}
+              </>
             </div>
           </>
         )}

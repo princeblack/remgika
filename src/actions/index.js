@@ -49,6 +49,7 @@ export const logOut = payload => {
 };
 
 export const playground = payload => {
+  debugger
   return async dispatch => {
     const data = await addPlayground(payload);
     dispatch({

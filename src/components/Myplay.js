@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 
  class Myplay extends Component {
-    render() {
-        console.log(this.props.data);
-        
+    render() {        
         return (
           <>
             <div className="playgroud-item">
@@ -33,7 +31,6 @@ import { connect } from "react-redux";
     }
 }
 const mapStateToProps = state => {
-  debugger;
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,

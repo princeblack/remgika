@@ -48,6 +48,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
+        debugger;
     if (action.payload.hasOwnProperty("error")) {
       state.addPlay = false;
     } else {
@@ -57,7 +58,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-    state.personalPlayground = [...state.personalPlayground, ...action.payload];
+    state.personalPlayground = [...action.payload];
     return Object.assign({}, state);
   }
   return state;
