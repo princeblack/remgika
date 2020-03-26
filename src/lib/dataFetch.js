@@ -1,16 +1,16 @@
-const url = 'http://localhost:8000';
-const axios = require('axios');
+const url = "http://localhost:8000";
+const axios = require("axios");
 
 export const checkCredentials = async data => {
   try {
     const res = await (
       await fetch(`${url}/users/login`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
     return res;
@@ -22,12 +22,12 @@ export const signUpUsers = async data => {
   try {
     const res = await (
       await fetch(`${url}/users`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
     return res;
@@ -40,11 +40,11 @@ export const authoriseUser = async data => {
   try {
     const res = await (
       await fetch(`${url}/users/me`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
 
@@ -58,11 +58,11 @@ export const handleLogOut = async data => {
   try {
     const res = await (
       await fetch(`${url}/users/logout`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
     return res;
@@ -78,11 +78,11 @@ export const getPlayground = async data => {
   try {
     const res = await (
       await fetch(`${url}/playground`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
 
@@ -96,9 +96,9 @@ export const addPlayground = async data => {
   try {
     const res = await (
       await fetch(`${url}/playground`, {
-        method: 'POST',
+        method: "POST",
         body: data,
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
     return res;
@@ -111,11 +111,11 @@ export const getMyPlayground = async data => {
   try {
     const res = await (
       await fetch(`${url}/playground/my`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        credentials: 'include'
+        credentials: "include"
       })
     ).json();
     return res;

@@ -49,13 +49,12 @@ class Playground extends React.Component {
       return <Play data={el} key={index}></Play>;
     });
     const { activeItemIndex, children } = this.state;
-    console.log(this.props.playground);
     
     return (
       <div className="playground">
         <>
           <div className="serchBar">
-            <PlacesAutocomplete/>
+            <PlacesAutocomplete />
           </div>
           <div className="categorie">
             <h1>Playground</h1>
@@ -71,12 +70,12 @@ class Playground extends React.Component {
               leftChevron={<button></button>}
               rightChevron={<button></button>}
               outsideChevron
+              disableSwipe
               chevronWidth={chevronWidth}
             >
               {playgroundList}
             </ItemsCarousel>
           </div>
-         
         </>
       </div>
     );

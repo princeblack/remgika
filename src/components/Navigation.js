@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import pro3 from "../img/pro3.jpeg";
+import avatar from "../img/avatar.png";
 
 import {
   faBars,
@@ -45,7 +45,11 @@ const Navigation = props => {
         {status && (
           <div className="right flex-row-center">
             <div className="avatar" id="avatarHide">
-              <img src={pro3} alt="avatar"></img>
+              {props.info.avatar !== undefined ? (
+                <img src={props.info.avatar} alt="avatar"></img>
+              ) : (
+                <img src={avatar} alt="avatar"></img>
+              )}
             </div>
             <div className="name">
               <p>{props.info.firstName + " " + props.info.lastName}</p>

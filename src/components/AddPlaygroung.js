@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { handleLogin } from '../actions';
 import { playground } from '../actions/index';
 import axios from 'axios';
-
+import { Progress } from "reactstrap";
+import done from '../img/done.svg'
 // import { Link, NavLink, withRouter } from "react-router-dom";
 // import { Redirect } from "react-router-dom";
 // import { Link, NavLink, withRouter } from "react-router-dom";
@@ -13,12 +14,12 @@ class AddPlaygroung extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgCollection: '',
-      title: 'afs',
-      street: 'asf',
-      postalCode: 'afs',
-      city: 'afs',
-      description: 'fas'
+      imgCollection: "",
+      title: "",
+      street: "",
+      postalCode: "",
+      city: "",
+      description: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -101,18 +102,30 @@ class AddPlaygroung extends Component {
     for (const key of Object.keys(this.state.imgCollection)) {
       data.append('imgCollection', this.state.imgCollection[key]);
     }
-
     for (var key in this.state) {
       data.append(key, this.state[key]);
     }
-
     this.props.playground(data);
+    this.setState(state => ({
+      imgCollection: "",
+      title: "",
+      street: "",
+      postalCode: "",
+      city: "",
+      description: ""
+    }));
   }
 
   render() {
     const isLoggedIn = this.props.isLoggedIn;
-    const addPlay = this.props.addPlay;
-
+    const addPlay = this.props.addplay;
+    console.log(addPlay);
+    const fileNum = this.state.imgCollection.length
+    if (addPlay) {
+      setTimeout(() =>{
+        window.location.reload(false)
+      },5000)
+    }
     return (
       <>
         {isLoggedIn ? (
@@ -120,8 +133,23 @@ class AddPlaygroung extends Component {
             <LoginHeader />
             <div className="addPlaygroung-form">
               <form onSubmit={this.handleSubmit}>
-                <div className="row flex-revcol-left">
-                  <input type="file" name="myImage" onChange={this.handlefiles} multiple />
+                <div className="row flex-revcol-left fileNum">
+                  <button onClick={() => this.fileInput.click()}>
+                    Pick File
+                  </button>
+                  <input
+                    style={{ display: "none" }}
+                    type="file"
+                    name="myImage"
+                    id="myImage"
+                    required
+                    onChange={this.handlefiles}
+                    multiple
+                    ref={fileInput => (this.fileInput = fileInput)}
+                  />
+                  {this.state.imgCollection.length > 0 && (
+                    <p> {fileNum} Files </p>
+                  )}
                 </div>
                 <div className="row flex-revcol-left">
                   <input
@@ -172,7 +200,7 @@ class AddPlaygroung extends Component {
                   />
                 </div>
                 <div className="row flex-revcol-left">
-                  <input
+                  <textarea
                     className="input-transition"
                     name="description"
                     type="text"
@@ -181,26 +209,22 @@ class AddPlaygroung extends Component {
                     onChange={this.handleInputChange}
                     id="description"
                     required
+                    maxLength={150}
+                    cols="30"
+                    rows="5"
                   />
                 </div>
-                *
                 <input
                   className="addPlay-submit"
                   type="submit"
                   value="Submit"
-                  // onClick={() => this.fileInput.click()}
                 />
               </form>
-              {addPlay ? (
-                <div className="addPlaygound-accept">
+              {addPlay && (
+                <div className="addPlaygound-accept" id="accept">
                   <p> the playground is add successfuly</p>
+                  <img src={done} alt="done"></img>
                 </div>
-              ) : (
-                this.shandleSubmit && (
-                  <div className="addPlaygound-erreur">
-                    <p>Sorry somethings wint r</p>
-                  </div>
-                )
               )}
               <div></div>
             </div>

@@ -11,8 +11,8 @@ $remgika: #c7cda4;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
     width: 100%;
     .sayHallo{
         text-align: left;

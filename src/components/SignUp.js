@@ -13,7 +13,7 @@ class SignUp extends React.Component {
       lastName: "",
       email: "",
       password: "",
-      role:  "Admin"
+      role: "Admin"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,21 +27,19 @@ class SignUp extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signUp(this.state);   
+    this.props.signUp(this.state);
   }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
-    const sign = this.props.sign    
+    const sign = this.props.sign;
     return (
       <>
-        {
-        isLoggedIn ? (
-          <Redirect to= "/dashboard"/>
+        {isLoggedIn ? (
+          <Redirect to="/dashboard" />
+        ) : sign ? (
+          <Redirect to="/dashboard" />
         ) : (
-          sign ? (
-            <Redirect to="/dashboard"/>
-          ):(
-            <div id="sign-up">
+          <div id="sign-up">
             <LoginHeader />
             <div className="sign-body">
               <div id="sign-img">
@@ -107,7 +105,6 @@ class SignUp extends React.Component {
               </div>
             </div>
           </div>
-          )
         )}
       </>
     );
@@ -118,7 +115,6 @@ const mapStateToProps = state => {
     isLoggedIn: state.isLoggedIn,
     sign: state.sign,
     info: state.info
-
   };
 };
 export default connect(mapStateToProps, { handleLogin, signUp })(SignUp);

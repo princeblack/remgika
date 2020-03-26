@@ -68,7 +68,9 @@ const PlacesAutocomplete = () => {
           value={value}
           onChange={handleInput}
           disabled={!ready}
-          placeholder="Look for playground in your city"
+          type="text"
+          name="search"
+          placeholder="Playground in your city"
         />
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
         {status === "OK" && <ul>{renderSuggestions()}</ul>}

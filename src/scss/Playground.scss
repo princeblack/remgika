@@ -21,6 +21,11 @@ $remgika: #c7cda4;
         flex-direction: column;
         input,
         input:focus {
+          background-image: url("../img/search-64.png");
+          background-repeat: no-repeat;
+          background-position: -2px -5px;
+          padding: 10px 20px 12px 50px;
+          background-size: 50px;
           height: 45px;
           border: solid 3px #c7cda4;
           border-radius: 10px;
@@ -35,7 +40,7 @@ $remgika: #c7cda4;
         input:hover {
           background-color: white;
         }
-       
+
         ul {
           // background-color: #c7cda4;
           padding: 0;
@@ -48,7 +53,7 @@ $remgika: #c7cda4;
           text-align: left;
           border-image: initial;
           border-top: none;
-          li{
+          li {
             margin: 5px;
           }
         }
@@ -112,7 +117,7 @@ $remgika: #c7cda4;
         height: 200px;
       }
       .addressItem {
-        display: flex;
+        // display: flex;
         justify-content: space-around;
         .address {
           display: flex;
@@ -137,9 +142,16 @@ $remgika: #c7cda4;
           }
         }
       }
+      .description {
+        text-align: center;
+        p {
+          box-sizing: border-box;
+          word-wrap: break-word;
+        }
+      }
     }
     .kaHnvc {
-      height: 20%;
+      height: 70%;
       top: 30px;
       width: 30px;
       button {
@@ -153,7 +165,7 @@ $remgika: #c7cda4;
       }
     }
     .dFFQiB {
-      height: 20%;
+      height: 70%;
       top: 30px;
       width: 30px;
       button {
