@@ -7,51 +7,55 @@ $remgika: #c7cda4;
   **********************************************************
   **********************************************************/
 .mainProfile {
-    background-image: url("../img/b.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh;
-    height: max-content;
-    width: 100%;
-    .sayHallo{
-        text-align: left;
-        font-size: 20px;
+  background-image: url("../img/b.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  height: max-content;
+  width: 100%;
+  .sayHallo {
+    text-align: left;
+    font-size: 20px;
+  }
+  .profileMenu {
+    #userInfo {
+      width: 80%;
     }
-    .profileMenu{
-        #userInfo{
-            width: 80%;
-        }
-        button{
-            width: 30%;
-            height: 40px;
-            color: $main-color;
-            background-color: white;
-            margin: 5px;
-            border-color:#c0d1a3;
-            outline: none;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 5px;
-            font-size: 20px;
-        }
-        button:focus{
-            background-color: white;
-            width: 30%;
-            margin: 5px;
-            outline: none;
-        }
-        button:hover{
-          background-color: $main-color;
-          color: white;
-        }
+    button {
+      width: 30%;
+      height: 40px;
+      color: $main-color;
+      background-color: white;
+      margin: 5px;
+      border-color: #c0d1a3;
+      outline: none;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 5px;
+      font-size: 20px;
     }
+    button:focus {
+      background-color: white;
+      width: 30%;
+      margin: 5px;
+      outline: none;
+    }
+    button:hover {
+      background-color: $main-color;
+      color: white;
+    }
+  }
   .dashboard {
     display: flex;
     justify-content: center;
     .profile {
       width: 95%;
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
       p {
         font-size: 20px;
       }
@@ -85,6 +89,50 @@ $remgika: #c7cda4;
             letter-spacing: 1px;
             font-size: 0.85rem;
             word-break: break-all;
+          }
+        }
+      }
+      .fileNum {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        button , input{
+          border: none;
+          margin: 5px;
+          border-radius: 10px;
+          &:focus{
+            outline: none;
+          }
+        }
+        button{
+          width: 120px;
+          height: 30px;
+          background-color: rgba(0, 128, 0, 0.466);
+         
+        }
+        input{
+          width: 60px;
+          height:30px ;
+          background-color: rgba(255, 0, 0, 0.377);
+        }
+        .imgContainer {
+          margin-top: 10px;
+          border: solid 2px rgb(194, 190, 190);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          border-radius: 10px;
+
+          img {
+            width: 40%;
+            height: 150px;
+            box-sizing: border-box;
+            object-fit: cover;
+            margin: 5px;
+            border: solid bisque 2px;
+            border-radius: 10px;
+            
           }
         }
       }

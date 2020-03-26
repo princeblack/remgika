@@ -1,11 +1,13 @@
 const initialState = {
+  loading: true,
   isLoggedIn: false,
   sign: false,
   addPlay: false,
   personalPlayground: [],
   info: {},
   playground: [],
-  loading: true
+  proImage: [],
+  valideImg: false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -13,7 +15,10 @@ const mainReducer = (state = initialState, action) => {
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
   if (action.type === "HANDLE_LOGIN") {
-    if (action.payload.hasOwnProperty("error")) {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
       state.isLoggedIn = false;
     } else {
       state.isLoggedIn = true;
@@ -23,7 +28,10 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_SIGN") {
-    if (action.payload.hasOwnProperty("error")) {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
       state.sign = false;
     } else {
       state.sign = true;
@@ -33,6 +41,23 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
+  if (action.type === "ADD_PROFILE_IMAGE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.valideImg = false;
+    } else {
+      state.valideImg = true;
+    }
+    state.loading = false;
+    return Object.assign({}, state);
+  }
+   if (action.type === "GET_PROFILE_IMAGE") {
+     state.proImage = [...action.payload];
+     return Object.assign({}, state);
+   }
+
   if (action.type === "HANDLE_LOGOUT") {
     console.log(state.info);
     state.isLoggedIn = false;
@@ -48,7 +73,10 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
-    if (action.payload.hasOwnProperty("error")) {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
       state.addPlay = false;
     } else {
       state.addPlay = true;
@@ -57,7 +85,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-    state.personalPlayground = [...action.payload];
+    state.personalPlayground = [...state.personalPlayground, ...action.payload];
     return Object.assign({}, state);
   }
   return state;

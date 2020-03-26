@@ -5,7 +5,9 @@ import {
   authoriseUser,
   handleLogOut,
   signUpUsers,
-  addPlayground
+  addPlayground,
+  addProfileImage,
+  getProfileImage
 } from "../lib/dataFetch.js";
 
 export const authorise = payload => {
@@ -32,6 +34,25 @@ export const handleLogin = payload => {
     const data = await checkCredentials(payload);
     dispatch({
       type: "HANDLE_LOGIN",
+      payload: data
+    });
+  };
+};
+
+export const profileImage = payload => {
+  return async dispatch => {
+    const data = await addProfileImage(payload);
+    dispatch({
+      type: "ADD_PROFILE_IMAGE",
+      payload: data
+    });
+  };
+};
+export const allMyImage = payload => {
+  return async dispatch => {
+    const data = await getProfileImage(payload);
+    dispatch({
+      type: "GET_PROFILE_IMAGE",
       payload: data
     });
   };

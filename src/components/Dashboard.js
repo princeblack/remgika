@@ -104,13 +104,17 @@ class Dashboard extends React.Component {
                   {this.state.evantToggle ? "Events" : "Events "}
                 </button>
               </div>
-              <>{!isToggleOn && <Profile />}</>
+              <>
+                {!isToggleOn && (
+                  <>
+                    <Profile/>
+                  </>
+                )}
+              </>
               <>{!evantToggle && <p>hallo</p>}</>
               <>
                 {!playToggle && (
-                  <div className="all-my-play">
-                    {PlaygroundList}
-                  </div>
+                  <div className="all-my-play">{PlaygroundList}</div>
                 )}
               </>
             </div>

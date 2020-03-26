@@ -30,9 +30,7 @@ class Login extends React.Component {
 
   }
   render() {
-    const isLoggedIn = this.props.isLoggedIn;
-    console.log(isLoggedIn);
-    
+    const isLoggedIn = this.props.isLoggedIn;    
     return (
       <>
         {isLoggedIn ? (

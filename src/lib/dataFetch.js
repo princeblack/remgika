@@ -1,5 +1,4 @@
 const url = "http://localhost:8000";
-const axios = require("axios");
 
 export const checkCredentials = async data => {
   try {
@@ -30,6 +29,39 @@ export const signUpUsers = async data => {
         credentials: "include"
       })
     ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const addProfileImage = async data => {
+  try {
+    const res = await (
+      await fetch(`${url}/images`, {
+        method: "POST",
+        body: data,
+        credentials: "include"
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const getProfileImage = async data => {
+  try {
+    const res = await (
+      await fetch(`${url}/images/my`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+    ).json();
+
     return res;
   } catch (error) {
     return [];
