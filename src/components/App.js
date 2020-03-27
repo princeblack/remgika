@@ -7,21 +7,26 @@ import SignUp from "./SignUp";
 // import Home from "./Home";
 import NotFound from "./NotFound.js";
 import Welcome from "./Welcome";
-import { authorise } from "../actions";
+import { authorise, allMyImage } from "../actions";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./Playground";
 import AddPlaygroung from "./AddPlaygroung";
-// import  Myplayground  from "./Myplayground";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
+    this.props.allMyImage();
   }
   render() {
+        let userImage;
+        if (this.props.proImage.length > 0) {
+          userImage = this.props.proImage[0]
+        }
+    
     return (
       <div className="App">
         <BrowserRouter>
-          <Navigation></Navigation>
+          <Navigation data={userImage}></Navigation>
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/login" component={Login} />
@@ -29,7 +34,6 @@ class App extends React.Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
             {/* <Route exact path="/home" component={Home} /> */}
-            {/* <Route exact path="/myPlayground" component={Myplayground} /> */}
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>
@@ -42,8 +46,10 @@ const mapsStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
     // loading: state.loading,
-    info: state.info
+    info: state.info,
+    proImage: state.proImage
+
   };
 };
 
-export default connect(mapsStateToProps, { authorise })(App);
+export default connect(mapsStateToProps, { authorise, allMyImage })(App);

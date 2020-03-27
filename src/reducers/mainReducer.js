@@ -14,6 +14,20 @@ const mainReducer = (state = initialState, action) => {
   /**********************************************************
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
+  if (action.type === "HANDLE_USER") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.isLoggedIn = false;
+    } else {
+      state.isLoggedIn = true;
+      state.sign = true;
+      state.info = action.payload;
+    }
+    state.loading = false;
+    return Object.assign({}, state);
+  }
   if (action.type === "HANDLE_LOGIN") {
     if (
       action.payload.hasOwnProperty("error") ||
@@ -22,17 +36,20 @@ const mainReducer = (state = initialState, action) => {
       state.isLoggedIn = false;
     } else {
       state.isLoggedIn = true;
+      state.sign = true
       state.info = action.payload;
     }
     state.loading = false;
     return Object.assign({}, state);
   }
+
   if (action.type === "HANDLE_SIGN") {
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors")
     ) {
       state.sign = false;
+      state.isLoggedIn = false;
     } else {
       state.sign = true;
       state.isLoggedIn = true;
@@ -59,17 +76,15 @@ const mainReducer = (state = initialState, action) => {
    }
 
   if (action.type === "HANDLE_LOGOUT") {
-    console.log(state.info);
     state.isLoggedIn = false;
-    console.log(state.isLoggedIn);
-
+    state.sign = false
     return Object.assign({}, state);
   }
   /**********************************************************
    ************************ PLAYGROUND ***********************
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
-    state.playground = [...state.playground, ...action.payload];
+    state.playground = [...action.payload];
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
@@ -85,7 +100,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-    state.personalPlayground = [...state.personalPlayground, ...action.payload];
+    state.personalPlayground = [...action.payload];
     return Object.assign({}, state);
   }
   return state;

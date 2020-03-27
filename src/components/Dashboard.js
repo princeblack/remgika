@@ -81,7 +81,7 @@ class Dashboard extends React.Component {
     const data = this.props.info;
     const isToggleOn = this.state.isToggleOn;
     const evantToggle = this.state.evantToggle;
-    const playToggle = this.state.playToggle
+    const playToggle = this.state.playToggle    
     const PlaygroundList = this.props.personalPlayground.map((el, index) => {
       return <Myplay data={el} key={index}></Myplay>;
     });

@@ -1,7 +1,18 @@
-// import React,{useEffect} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { logOut, authorise, myPlayground, allMyImage } from "../actions/index";
+import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import avatar from "../img/avatar.png";
+import ProfileImage from "./ProfileImage";
+import remgika from "../img/remgika.png";
 
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faDiscord
+} from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
   faUserInjured,
@@ -10,22 +21,13 @@ import {
   faCarrot,
   faDemocrat
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faDiscord
-} from "@fortawesome/free-brands-svg-icons";
-import { NavLink, withRouter } from "react-router-dom";
-import { logOut, allMyImage } from "../actions";
-import remgika from "../img/remgika.png";
-
-import React, { Component } from "react";
 class Navigation extends Component {
-  componentDidMount() {
-    // if (this.props.isLoggedIn) {
-    this.props.allMyImage();
-    // }
+  componentWillMount() {
+    if (this.props.isLoggedIn) {
+      this.props.authorise();
+      this.props.allMyImage();
+      this.props.myPlayground();
+    }
   }
   toggleSidebar = e => {
     const sidebar = document.querySelector(".sidebar");
@@ -38,35 +40,21 @@ class Navigation extends Component {
   };
 
   render() {
-    const status = this.props.isLoggedIn;
+    const isLoggedIn = this.props.isLoggedIn;
     const active = {
       color: "#6bc774"
     };
-    // console.log(this.props.proImage[0]);
-    console.log(this.props.isLoggedIn);
-
-    let userImage;
-
-    if (this.props.proImage.length > 0) {
-      userImage = this.props.proImage.map((el, index) => {
-        return <img src={el} key={index} alt="profile"></img>;
-      });
-    }
-    console.log(userImage);
-    
     return (
       <>
         <div id="navigation" className="flex-row-space-between navColor">
           <div className="logo">
             <img src={remgika} alt="remgika"></img>
           </div>
-          {status && (
+          {isLoggedIn && (
             <div className="right flex-row-center">
               <div className="avatar" id="avatarHide">
-                {this.props.info.avatar !== undefined ? (
-                  <img src={this.props.info.avatar} alt="avatar"></img>
-                ) : (
-                  <img src={this.props.picture} alt="avatar"></img>
+                {this.props.data !== undefined && (
+                  <img src={this.props.data.imgCollection} alt="profile"></img>
                 )}
               </div>
               <div className="name">
@@ -95,7 +83,7 @@ class Navigation extends Component {
               Playground
             </NavLink>
           </div>
-          {status && (
+          {isLoggedIn && (
             <div className="menu-item" onClick={this.handleLogOut}>
               <NavLink to="" activeStyle={active}>
                 <FontAwesomeIcon icon={faBaby} />
@@ -103,7 +91,7 @@ class Navigation extends Component {
               </NavLink>
             </div>
           )}
-          {!status && (
+          {!isLoggedIn && (
             <>
               <div className="menu-item" onClick={this.toggleSidebar}>
                 <NavLink to="/login" activeStyle={active}>
@@ -132,14 +120,18 @@ class Navigation extends Component {
   }
 }
 
-const mapsStateToProps = state => {
+const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
+    personalPlayground: state.personalPlayground,
     proImage: state.proImage
   };
 };
 
-export default connect(mapsStateToProps, { logOut, allMyImage })(
-  withRouter(Navigation)
-);
+export default connect(mapStateToProps, {
+  authorise,
+  allMyImage,
+  myPlayground,
+  logOut
+})(withRouter(Navigation));

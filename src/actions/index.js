@@ -14,7 +14,7 @@ export const authorise = payload => {
   return async dispatch => {
     const data = await authoriseUser();
     dispatch({
-      type: "HANDLE_LOGIN",
+      type: "HANDLE_USER",
       payload: data
     });
   };

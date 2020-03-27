@@ -119,7 +119,6 @@ class AddPlaygroung extends Component {
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     const addPlay = this.props.addplay;
-    console.log(addPlay);
     const fileNum = this.state.imgCollection.length
     if (addPlay) {
       setTimeout(() =>{

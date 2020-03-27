@@ -3,11 +3,11 @@ import { handleLogin } from "../actions";
 import Navigation from "./Navigation";
 
 export class Userimg extends Component {
-  handleClick(e) {
-    // console.log(e.target.src);
+  // handleClick(e) {
+  //   // console.log(e.target.src);
          
-      return <Navigation data={this.props.data.imgCollection}></Navigation>;
-  }
+  //     return <Navigation data={this.props.data.imgCollection}></Navigation>;
+  // }
   render() {
     return (
       <>

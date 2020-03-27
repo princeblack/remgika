@@ -9,7 +9,6 @@ import {
 } from "../actions/index";
 import "../scss/Dashboard.scss";
 import Userimg from "./Userimg";
-import Navigation from "./Navigation";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -120,14 +119,11 @@ class Profile extends React.Component {
         return <Userimg data={el} key={index}></Userimg>;
       });
     }
-        if (this.props.valideImg) {
-          setTimeout(() => {
-            window.location.reload(false);
-          }, 200);
-        }
-    console.log(this.props.proImage.length);
-    
-
+    if (this.props.valideImg) {
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 200);
+    }
     return (
       <>
         {!isLoggedIn ? (
