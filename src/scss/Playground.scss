@@ -100,6 +100,7 @@ $remgika: #c7cda4;
     margin: 0;
     .playgroud-item {
       border-radius: 20px;
+
       .userVote {
         img {
           width: 20px;
@@ -149,23 +150,18 @@ $remgika: #c7cda4;
           word-wrap: break-word;
         }
       }
-      .mapLogo{
-        img{
+      .mapLogo {
+        img {
           width: 20%;
           height: 50px;
         }
       }
-      .mapImage{
-        visibility: hidden;
-      }
-      .mapImage-cover{
-        display: flex !important ;
-        justify-content: center !important;
-        align-items: center !important;
-        visibility: visible !important; 
-         background-color: rgba(0, 0, 0, 0.39);
-         margin: 20px;
-      }
+      // .mapImage {
+      //   visibility: hidden;
+      // }
+      // .mapImage-cover {
+      //   visibility: visible;
+      // }
     }
     .kaHnvc {
       height: 70%;
