@@ -48,7 +48,7 @@ class Playground extends React.Component {
     const playgroundList = this.props.playground.map((el, index) => {
       return <Play data={el} key={index}></Play>;
     });
-    const { activeItemIndex, children } = this.state;
+    const  activeItemIndex = this.state.activeItemIndex;
     
     return (
       <div className="playground">

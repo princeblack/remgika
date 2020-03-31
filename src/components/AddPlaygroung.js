@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions';
 import { playground } from '../actions/index';
-import axios from 'axios';
-import { Progress } from "reactstrap";
 import done from '../img/done.svg'
 // import { Link, NavLink, withRouter } from "react-router-dom";
 // import { Redirect } from "react-router-dom";
@@ -53,6 +51,7 @@ class AddPlaygroung extends Component {
     // loop access array
     for (var x = 0; x < files.length; x++) {
       // compare file type find doesn't matach
+      // eslint-disable-next-line no-loop-func
       if (types.every(type => files[x].type !== type)) {
         // create error message and assign to container
         err += files[x].type + ' is not a supported format\n';

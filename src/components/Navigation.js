@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { logOut, authorise, myPlayground, allMyImage } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import avatar from "../img/avatar.png";
-import ProfileImage from "./ProfileImage";
 import remgika from "../img/remgika.png";
 
 import {

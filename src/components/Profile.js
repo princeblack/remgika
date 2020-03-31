@@ -47,6 +47,7 @@ class Profile extends React.Component {
     // loop access array
     for (var x = 0; x < files.length; x++) {
       // compare file type find doesn't matach
+      // eslint-disable-next-line no-loop-func
       if (types.every(type => files[x].type !== type)) {
         // create error message and assign to container
         err += files[x].type + " is not a supported format\n";

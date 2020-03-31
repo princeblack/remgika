@@ -22,7 +22,7 @@ import range from "lodash/range";
    changeActiveItem = activeItemIndex => this.setState({ activeItemIndex });
    render() {
      const chevronWidth = 40;
-     const { activeItemIndex, children } = this.state;
+     const  activeItemIndex = this.state.activeItemIndex;
      const image = this.props.data.imgCollection.map((el, index) => {
        return <MyPlaygroundimg data={el} key={index}></MyPlaygroundimg>;
      });
