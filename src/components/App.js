@@ -22,7 +22,6 @@ class App extends React.Component {
         if (this.props.proImage.length > 0) {
           userImage = this.props.proImage[0]
         }
-    
     return (
       <div className="App">
         <BrowserRouter>
@@ -33,7 +32,6 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
-            {/* <Route exact path="/home" component={Home} /> */}
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>

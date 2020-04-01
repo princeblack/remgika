@@ -25,6 +25,7 @@ class Play extends Component {
     this.handlePlace = this.handlePlace.bind(this);
   }
   componentDidMount() {
+    navigator.geolocation.getCurrentPosition(function(position) {});
     this.handlePlace();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -45,17 +46,21 @@ class Play extends Component {
     })
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        this.setState({
-          lat: lat,
-          lng: lng,
-          userlng: userlongitude,
-          userlat: userlatitude
-        });
+        if (lat !== null) {
+          this.setState({
+            lat: lat,
+            lng: lng,
+            userlng: userlongitude,
+            userlat: userlatitude
+          });
+        }
       })
       .catch(error => {
         // console.log("😱 Error: ", error);
       });
   }
+
+  //  handle the distance google maps Api function
   handleDistance() {
     //  google maps distance INIT
     const { google } = this.props;
