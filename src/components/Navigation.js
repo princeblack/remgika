@@ -69,12 +69,16 @@ class Navigation extends Component {
           </div>
         </div>
         <div className="navColor sidebar">
-          <div className="menu-item" onClick={this.toggleSidebar}>
-            <NavLink activeStyle={active} to="/dashboard">
-              <FontAwesomeIcon icon={faCarrot} />
-              Dashboard
-            </NavLink>
-          </div>
+          {isLoggedIn && (
+            <>
+              <div className="menu-item" onClick={this.toggleSidebar}>
+                <NavLink activeStyle={active} to="/dashboard">
+                  <FontAwesomeIcon icon={faCarrot} />
+                  Dashboard
+                </NavLink>
+              </div>
+            </>
+          )}
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/playground">
               <FontAwesomeIcon icon={faDemocrat} />

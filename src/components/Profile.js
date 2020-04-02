@@ -135,36 +135,15 @@ class Profile extends React.Component {
               <div className="user">
                 <div className="user-data">
                   <label htmlFor="email">First Name </label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    value={data.firstName}
-                    onChange={this.handleInputChange}
-                    id="firstName"
-                    required
-                  ></input>
+                  <span>{data.firstName}</span>
                 </div>
                 <div className="user-data">
                   <label htmlFor="email">Last Name </label>
-                  <input
-                    name="lastName"
-                    type="text"
-                    value={data.lastName}
-                    onChange={this.handleInputChange}
-                    id="lastName"
-                    required
-                  ></input>
+                  <span>{data.lastName}</span>
                 </div>
                 <div className="user-data">
                   <label htmlFor="email">Email ID </label>
-                  <input
-                    name="email"
-                    type="text"
-                    value={data.email}
-                    onChange={this.handleInputChange}
-                    id="email"
-                    required
-                  ></input>
+                  <span>{data.email}</span>
                 </div>
               </div>
               <div className="row flex-revcol-left fileNum">

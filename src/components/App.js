@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import SignUp from "./SignUp";
-// import Home from "./Home";
 import NotFound from "./NotFound.js";
 import Welcome from "./Welcome";
 import { authorise, allMyImage } from "../actions";
@@ -15,7 +14,7 @@ import AddPlaygroung from "./AddPlaygroung";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
-    this.props.allMyImage();
+    // this.props.allMyImage();
   }
   render() {
         let userImage;

@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { handleLogin } from '../actions';
 import { playground } from '../actions/index';
 import done from '../img/done.svg'
-// import { Link, NavLink, withRouter } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
-// import { Link, NavLink, withRouter } from "react-router-dom";
 import LoginHeader from './LoginHeader';
 import '../scss/Addplayground.scss';
 class AddPlaygroung extends Component {
@@ -229,7 +226,7 @@ class AddPlaygroung extends Component {
           </>
         ) : (
           <div>
-            <p>please you need to be loged to Add a playground</p>
+            <p>please you need to be logged to Add a playground</p>
           </div>
         )}
       </>

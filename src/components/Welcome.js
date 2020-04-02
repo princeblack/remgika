@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import remgika from "../img/remgika.png";
 import {handleLogin} from "../actions"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
+
 class Welcome extends Component {
   render() {
     const isLoggedIn= this.props.isLoggedIn;

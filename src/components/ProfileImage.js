@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
 export class ProfileImage extends Component {
-    render() {
-        console.log(this.props.data.imgCollection);
-        
+    render() {        
         return (
           <>
             <img

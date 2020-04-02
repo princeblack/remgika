@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
   }
   componentDidMount() {
     if (this.props.isLoggedIn){ 
-      this.props.authorise();
+      // this.props.authorise();
     this.props.myPlayground();
   }
   }
