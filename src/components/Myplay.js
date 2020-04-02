@@ -23,9 +23,12 @@ import range from "lodash/range";
    render() {
      const chevronWidth = 40;
      const  activeItemIndex = this.state.activeItemIndex;
-     const image = this.props.data.imgCollection.map((el, index) => {
-       return <MyPlaygroundimg data={el} key={index}></MyPlaygroundimg>;
-     });
+     let image;
+    if (this.props.data.imgCollection !== undefined) {
+       image = this.props.data.imgCollection.map((el, index) => {
+        return <MyPlaygroundimg data={el} key={index}></MyPlaygroundimg>;
+      });
+    }
 
      return (
        <>

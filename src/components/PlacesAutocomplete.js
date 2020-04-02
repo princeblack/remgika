@@ -63,6 +63,9 @@ const PlacesAutocomplete = () => {
 
   return (
     <div ref={ref} className="play-autocomplte">
+       <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI&libraries=places&callback=initMap"
+        ></script>
       <div className="inpute-auto">
         <input
           value={value}

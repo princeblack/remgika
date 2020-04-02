@@ -17,10 +17,10 @@ class App extends React.Component {
     // this.props.allMyImage();
   }
   render() {
-        let userImage;
-        if (this.props.proImage.length > 0) {
-          userImage = this.props.proImage[0]
-        }
+    let userImage;
+    if (this.props.proImage.length > 0) {
+      userImage = this.props.proImage[0];
+    }
     return (
       <div className="App">
         <BrowserRouter>
@@ -45,7 +45,6 @@ const mapsStateToProps = state => {
     // loading: state.loading,
     info: state.info,
     proImage: state.proImage
-
   };
 };
 

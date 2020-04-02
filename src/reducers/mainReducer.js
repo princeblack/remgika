@@ -36,7 +36,7 @@ const mainReducer = (state = initialState, action) => {
       state.isLoggedIn = false;
     } else {
       state.isLoggedIn = true;
-      state.sign = true
+      state.sign = true;
       state.info = action.payload;
     }
     state.loading = false;
@@ -70,14 +70,14 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
-   if (action.type === "GET_PROFILE_IMAGE") {
-     state.proImage = [...action.payload];
-     return Object.assign({}, state);
-   }
+  if (action.type === "GET_PROFILE_IMAGE") {
+    state.proImage = [...action.payload];
+    return Object.assign({}, state);
+  }
 
   if (action.type === "HANDLE_LOGOUT") {
     state.isLoggedIn = false;
-    state.sign = false
+    state.sign = false;
     return Object.assign({}, state);
   }
   /**********************************************************
@@ -100,7 +100,10 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-    state.personalPlayground = [...action.payload];
+    for (let play of Object.keys(action.payload)) {
+      let results = action.payload[play]
+      state.personalPlayground.push(results)
+    }
     return Object.assign({}, state);
   }
   return state;

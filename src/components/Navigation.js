@@ -42,6 +42,8 @@ class Navigation extends Component {
     const active = {
       color: "#6bc774"
     };
+    console.log(this.props.proImage);
+    
     return (
       <>
         <div id="navigation" className="flex-row-space-between navColor">
