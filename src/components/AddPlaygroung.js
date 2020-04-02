@@ -32,7 +32,6 @@ class AddPlaygroung extends Component {
     if (files.length > 3) {
       const msg = 'Only 3 images can be uploaded at a time';
       event.target.value = null; // discard selected file
-      console.log(msg);
       return false;
     }
     return true;
@@ -57,7 +56,6 @@ class AddPlaygroung extends Component {
     if (err !== '') {
       // if message not same old that mean has error
       event.target.value = null; // discard selected file
-      console.log(err);
       return false;
     }
     return true;
@@ -74,7 +72,6 @@ class AddPlaygroung extends Component {
     }
     if (err !== '') {
       event.target.value = null;
-      console.log(err);
       return false;
     }
 
@@ -85,7 +82,6 @@ class AddPlaygroung extends Component {
     var files = event.target.files;
     if (this.maxSelectFile(event) && this.checkMimeType(event)) {
       // if return true allow to setState
-      console.log('All files', files);
       this.setState({
         imgCollection: files
       });

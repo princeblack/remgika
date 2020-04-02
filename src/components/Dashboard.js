@@ -37,7 +37,6 @@ class Dashboard extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.signUp(this.state);
-    console.log(this.state);
   }
   handleProfile(e) {
     e.preventDefault();

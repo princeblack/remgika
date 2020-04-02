@@ -56,7 +56,6 @@ class Play extends Component {
         }
       })
       .catch(error => {
-        // console.log("😱 Error: ", error);
       });
   }
 
@@ -118,7 +117,6 @@ class Play extends Component {
     this.setState({ activeItemIndex });
   }
   handleResults(e) {
-    console.log("test");
   }
   // RENDER
   render() {
