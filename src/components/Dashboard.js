@@ -82,6 +82,8 @@ class Dashboard extends React.Component {
     const evantToggle = this.state.evantToggle;
     const playToggle = this.state.playToggle   
      
+    console.log(isLoggedIn);
+    
     const PlaygroundList = this.props.personalPlayground.map((el, index) => {      
       return <Myplay data={el} key={index}></Myplay>;
     });

@@ -17,7 +17,8 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "HANDLE_USER") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
     ) {
       state.isLoggedIn = false;
     } else {
@@ -31,7 +32,8 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "HANDLE_LOGIN") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
     ) {
       state.isLoggedIn = false;
     } else {
@@ -46,7 +48,8 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "HANDLE_SIGN") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
     ) {
       state.sign = false;
       state.isLoggedIn = false;
@@ -61,7 +64,8 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "ADD_PROFILE_IMAGE") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
     ) {
       state.valideImg = false;
     } else {
@@ -90,7 +94,8 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "ADD_PLAYGROUND") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
     ) {
       state.addPlay = false;
     } else {
