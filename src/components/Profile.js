@@ -17,7 +17,6 @@ class Profile extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -94,8 +93,6 @@ class Profile extends React.Component {
       [name]: value
     });
   }
-  handleClick(e) {}
-
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData();
@@ -115,7 +112,7 @@ class Profile extends React.Component {
       userImage = this.props.proImage.map((el, index) => {
         return <Userimg data={el} key={index}></Userimg>;
       });
-    }
+    }    
     if (this.props.valideImg) {
       setTimeout(() => {
         window.location.reload(false);

@@ -118,10 +118,13 @@ $remgika: #c7cda4;
         }
         .imgContainer {
           margin-top: 10px;
-          border: solid 2px rgb(194, 190, 190);
+          border: solid 2px rgba(255, 253, 253, 0.671);
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           border-radius: 10px;
 
           img {
@@ -133,6 +136,9 @@ $remgika: #c7cda4;
             border: solid bisque 2px;
             border-radius: 10px;
             
+          }
+          button{
+            background-color: rgba(255, 0, 0, 0.377);
           }
         }
       }

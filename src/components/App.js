@@ -14,17 +14,13 @@ import AddPlaygroung from "./AddPlaygroung";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
-    // this.props.allMyImage();
+    this.props.allMyImage();
   }
   render() {
-    let userImage;
-    if (this.props.proImage.length > 0) {
-      userImage = this.props.proImage[0];
-    }
     return (
       <div className="App">
         <BrowserRouter>
-          <Navigation data={userImage}></Navigation>
+          <Navigation ></Navigation>
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/login" component={Login} />
@@ -42,7 +38,6 @@ class App extends React.Component {
 const mapsStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    // loading: state.loading,
     info: state.info,
     proImage: state.proImage
   };

@@ -30,40 +30,20 @@ $remgika: #c7cda4;
         height: 200px;
       }
       .addressItem {
-        justify-content: space-around;
-        .address {
-          display: flex;
+        display: flex;
+        margin: 2px;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        flex-wrap: wrap;
+        span {
+          color: rgb(182, 20, 20);
+          margin: 1px;
+        }
+        p {
           margin: 2px;
           box-sizing: border-box;
           word-wrap: break-word;
-          flex-wrap: wrap;
-          span {
-            color: rgb(182, 20, 20);
-            margin: 1px;
-          }
-          p {
-            margin: 2px;
-            box-sizing: border-box;
-            word-wrap: break-word;
-            word-break: break-all;
-          }
-        }
-        .addressDistance {
-          display: flex;
-          align-items: center;
-          box-sizing: border-box;
-          word-wrap: break-word;
-                    flex-wrap: wrap;
-
-          span {
-            color: rgb(182, 20, 20);
-            margin: 1px;
-          }
-          p {
-            margin: 2px;
-            box-sizing: border-box;
-            word-wrap: break-word;
-          }
+          word-break: break-all;
         }
       }
       .description {
@@ -71,6 +51,16 @@ $remgika: #c7cda4;
         p {
           box-sizing: border-box;
           word-wrap: break-word;
+        }
+        button {
+          background-color: rgba(255, 0, 0, 0.377);
+          border: none;
+          width: 50px;
+          margin: 5px;
+          border-radius: 10px;
+          &:focus {
+            outline: none;
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logOut, authorise, myPlayground, allMyImage } from "../actions/index";
+import { logOut, authorise, allMyImage } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import remgika from "../img/remgika.png";
@@ -9,7 +9,7 @@ import {
   faFacebook,
   faInstagram,
   faLinkedin,
-  faDiscord
+  faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
@@ -17,21 +17,28 @@ import {
   faBaby,
   faUserAstronaut,
   faCarrot,
-  faDemocrat
+  faDemocrat,
 } from "@fortawesome/free-solid-svg-icons";
 class Navigation extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      refrech: false,
+    };
+  }
+  componentDidMount() {
     if (this.props.isLoggedIn) {
       this.props.authorise();
-      this.props.allMyImage();
-      this.props.myPlayground();
+    }
+    if (this.props.proImage) {
+        this.props.allMyImage();
     }
   }
-  toggleSidebar = e => {
+  toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("slide-right");
   };
-  handleLogOut = e => {
+  handleLogOut = (e) => {
     this.toggleSidebar();
     this.props.history.push("/");
     this.props.logOut();
@@ -39,10 +46,7 @@ class Navigation extends Component {
 
   render() {
     const isLoggedIn = this.props.isLoggedIn;
-    const active = {
-      color: "#6bc774"
-    };
-    
+    const active = { color: "#6bc774" };      
     return (
       <>
         <div id="navigation" className="flex-row-space-between navColor">
@@ -52,14 +56,19 @@ class Navigation extends Component {
           {isLoggedIn && (
             <div className="right flex-row-center">
               <div className="avatar" id="avatarHide">
-                {this.props.data !== undefined && (
-                  <img src={this.props.data.imgCollection} alt="profile"></img>
+                {this.props.proImage[0] !== undefined && ( 
+                  <img
+                    src={this.props.proImage[0].imgCollection}
+                    alt="profile"
+                  ></img>
                 )}
               </div>
               <div className="name">
-                <p>
-                  {this.props.info.firstName + " " + this.props.info.lastName}
-                </p>
+                {this.props.info.firstName !== undefined && (
+                  <p>
+                    {this.props.info.firstName + " " + this.props.info.lastName}
+                  </p>
+                )}
               </div>
             </div>
           )}
@@ -123,18 +132,16 @@ class Navigation extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
-    personalPlayground: state.personalPlayground,
-    proImage: state.proImage
+    proImage: state.proImage,
   };
 };
 
 export default connect(mapStateToProps, {
   authorise,
   allMyImage,
-  myPlayground,
-  logOut
+  logOut,
 })(withRouter(Navigation));

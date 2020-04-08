@@ -7,7 +7,9 @@ const initialState = {
   info: {},
   playground: [],
   proImage: [],
-  valideImg: false
+  valideImg: false,
+  ImageIsDelete: false,
+  playIsDelete : false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -46,6 +48,7 @@ const mainReducer = (state = initialState, action) => {
   }
 
   if (action.type === "HANDLE_SIGN") {
+    debugger;
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
@@ -75,20 +78,46 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "GET_PROFILE_IMAGE") {
-    state.proImage = [...action.payload];
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+    } else {
+      for (let proImage of Object.keys(action.payload)) {
+        state.proImage = [action.payload[proImage]];
+      }
+    }
     return Object.assign({}, state);
   }
 
   if (action.type === "HANDLE_LOGOUT") {
     state.isLoggedIn = false;
     state.sign = false;
+    state.valideImg = false;
+    console.log(action.payload);
+
     return Object.assign({}, state);
   }
+  if (action.type === "DELETE_PROFILE_IMAGE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.ImageIsDelete = false;
+    } else {
+      state.ImageIsDelete = true;
+    }
+    return Object.assign({}, state);
+  }
+
   /**********************************************************
    ************************ PLAYGROUND ***********************
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
-    state.playground = [...action.payload];
+    for (let playground of Object.keys(action.payload)) {
+      state.playground = [...state.playground, action.payload[playground]];
+    }
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
@@ -106,8 +135,19 @@ const mainReducer = (state = initialState, action) => {
   }
   if (action.type === "MY_PLAYGROUND") {
     for (let play of Object.keys(action.payload)) {
-      let results = action.payload[play]
-      state.personalPlayground.push(results)
+      state.personalPlayground = [action.payload[play]];
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "DELETE_PLAYGROUND") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.playIsDelete = false;
+    } else {
+      state.playIsDelete = true;
     }
     return Object.assign({}, state);
   }

@@ -103,6 +103,26 @@ export const handleLogOut = async data => {
   }
 };
 
+export const deleteProfileImage = async (data) => {
+  const id = data;
+  if (window.confirm("Are you sure !")) {
+    try {
+      const res = await (
+        await fetch(`${url}/images/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+      ).json();      
+      return res;
+    } catch (error) {
+      return [];
+    }
+  }
+};
+
 /**********************************************************
  ************************ PLAYGROUND ***********************
  ***********************************************************/
@@ -153,5 +173,26 @@ export const getMyPlayground = async data => {
     return res;
   } catch (error) {
     return [];
+  }
+};
+
+
+export const deletePlayground = async (data) => {
+  const id = data;
+  if (window.confirm("Are you sure !")) {
+    try {
+      const res = await (
+        await fetch(`${url}/playground/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+      ).json();
+      return res;
+    } catch (error) {
+      return [];
+    }
   }
 };
