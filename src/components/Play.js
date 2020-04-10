@@ -121,7 +121,7 @@ class Play extends Component {
   // RENDER
   render() {
     const chevronWidth = 40;
-    const activeItemIndex = this.state.activeItemIndex;
+    const activeItemIndex = this.state.activeItemIndex;    
     const image = this.props.data.imgCollection.map((el, index) => {
       return <PlayImage data={el} key={index}></PlayImage>;
     });

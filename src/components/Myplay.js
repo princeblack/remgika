@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MyPlaygroundimg from "./MyPlaygroundimg";
+import MyPlayimg from "./MyPlayimg";
 import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
-import { deletePlay } from "../actions/index";
+import { deletePlay,myPlayground } from "../actions/index";
 class Myplay extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,11 @@ class Myplay extends Component {
     this.createChildren = this.createChildren.bind(this);
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.playIsDelete !== this.props.playIsDelete) {
+      this.props.myPlayground()
+    }
   }
   createChildren = (n) =>
     range(n).map((i) => (
@@ -32,15 +37,15 @@ class Myplay extends Component {
     let image;
     if (this.props.data.imgCollection !== undefined) {
       image = this.props.data.imgCollection.map((el, index) => {
-        return <MyPlaygroundimg data={el} key={index}></MyPlaygroundimg>;
+        return <MyPlayimg data={el} key={index}></MyPlayimg>;
       });
     }
-     if (this.props.playIsDelete) {
-       setTimeout(() => {
-         window.location.reload(false);
-       }, 1);
-     }
-    return (      
+    // if (this.props.playIsDelete) {
+    //   setTimeout(() => {
+    //     window.location.reload(false);
+    //   }, 1);
+    // }
+    return (
       <>
         <div className="playgroud-item">
           <ItemsCarousel
@@ -54,6 +59,9 @@ class Myplay extends Component {
           >
             {image}
           </ItemsCarousel>
+          <div className="title">
+            <h4>{this.props.data.title}</h4>
+          </div>
           <div className="addressItem">
             <span>Place:</span>
             <p>{this.props.data.street}</p>
@@ -75,4 +83,4 @@ const mapStateToProps = (state) => {
     playIsDelete: state.playIsDelete,
   };
 };
-export default connect(mapStateToProps, { deletePlay })(Myplay);
+export default connect(mapStateToProps, { deletePlay, myPlayground })(Myplay);

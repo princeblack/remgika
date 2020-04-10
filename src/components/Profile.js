@@ -5,37 +5,45 @@ import {
   authorise,
   handleLogin,
   profileImage,
-  allMyImage
+  allMyImage,
+  deleteImage,
 } from "../actions/index";
 import "../scss/Dashboard.scss";
-import Userimg from "./Userimg";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgCollection: ""
+      imgCollection: "",
+      test: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
   componentDidMount() {
-    if (this.props.isLoggedIn) {
-      this.props.authorise();
+    this.props.allMyImage();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.valideImg !== this.props.valideImg) {
+      this.props.allMyImage();
+    }
+    if (prevProps.ImageIsDelete !== this.props.ImageIsDelete) {
       this.props.allMyImage();
     }
   }
 
-  maxSelectFile = event => {
+  maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 1) {
-      const msg = "Only 1 images can be uploaded at a time";
+      // const msg = "Only 1 images can be uploaded at a time";
       event.target.value = null; // discard selected file
       return false;
     }
     return true;
   };
 
-  checkMimeType = event => {
+  checkMimeType = (event) => {
     //getting file object
     let files = event.target.files;
     //define message container
@@ -46,7 +54,7 @@ class Profile extends React.Component {
     for (var x = 0; x < files.length; x++) {
       // compare file type find doesn't matach
       // eslint-disable-next-line no-loop-func
-      if (types.every(type => files[x].type !== type)) {
+      if (types.every((type) => files[x].type !== type)) {
         // create error message and assign to container
         err += files[x].type + " is not a supported format\n";
       }
@@ -59,7 +67,7 @@ class Profile extends React.Component {
     return true;
   };
 
-  checkFileSize = event => {
+  checkFileSize = (event) => {
     let files = event.target.files;
     let size = 15000;
     let err = "";
@@ -76,12 +84,12 @@ class Profile extends React.Component {
     return true;
   };
 
-  handlefiles = event => {
+  handlefiles = (event) => {
     var files = event.target.files;
     if (this.maxSelectFile(event) && this.checkMimeType(event)) {
       // if return true allow to setState
       this.setState({
-        imgCollection: files
+        imgCollection: files,
       });
     }
   };
@@ -90,7 +98,7 @@ class Profile extends React.Component {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
   handleSubmit(e) {
@@ -103,20 +111,18 @@ class Profile extends React.Component {
       this.props.profileImage(data);
     }
   }
+  handleDeleteClick() {
+    const id = this.props.proImage[0]._id;
+    this.props.deleteImage(id);
+  }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     const data = this.props.info;
     const fileNum = this.state.imgCollection.length;
-    let userImage;
-    if (this.props.proImage.length > 0) {
-      userImage = this.props.proImage.map((el, index) => {
-        return <Userimg data={el} key={index}></Userimg>;
-      });
-    }    
-    if (this.props.valideImg) {
+    if (this.props.ImageIsDelete) {
       setTimeout(() => {
         window.location.reload(false);
-      }, 200);
+      }, 1);
     }
     return (
       <>
@@ -140,7 +146,7 @@ class Profile extends React.Component {
                 </div>
               </div>
               <div className="row flex-revcol-left fileNum">
-                {this.props.proImage.length <= 0 && (
+                {this.props.proImage.length <= 0 ? (
                   <>
                     <button onClick={() => this.fileInput.click()}>
                       Upload profile image
@@ -152,7 +158,7 @@ class Profile extends React.Component {
                       id="myImage"
                       required
                       onChange={this.handlefiles}
-                      ref={fileInput => (this.fileInput = fileInput)}
+                      ref={(fileInput) => (this.fileInput = fileInput)}
                     />
                     {this.state.imgCollection.length > 0 && (
                       <p> {fileNum} Files </p>
@@ -164,9 +170,22 @@ class Profile extends React.Component {
                       onClick={this.handleSubmit}
                     />
                   </>
+                ) : (
+                  <div className="avatar" id="avatarHide">
+                    {this.props.proImage[0] !== undefined && (
+                      <div className="imgContainer">
+                        <img
+                          src={this.props.proImage[0].imgCollection}
+                          alt="profile"
+                        ></img>
+                        <button onClick={this.handleDeleteClick}>
+                          {" "}
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 )}
-
-                <div className="imgContainer">{userImage}</div>
               </div>
             </div>
           </div>
@@ -175,17 +194,19 @@ class Profile extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
     proImage: state.proImage,
-    valideImg: state.valideImg
+    valideImg: state.valideImg,
+    ImageIsDelete: state.ImageIsDelete,
   };
 };
 export default connect(mapStateToProps, {
   authorise,
   handleLogin,
   profileImage,
-  allMyImage
+  allMyImage,
+  deleteImage,
 })(Profile);

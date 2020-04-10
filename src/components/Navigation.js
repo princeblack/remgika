@@ -4,6 +4,7 @@ import { logOut, authorise, allMyImage } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import remgika from "../img/remgika.png";
+import avatar from "../img/avatar.png"
 
 import {
   faFacebook,
@@ -30,9 +31,12 @@ class Navigation extends Component {
     if (this.props.isLoggedIn) {
       this.props.authorise();
     }
-    if (this.props.proImage) {
-        this.props.allMyImage();
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
+      this.props.allMyImage();     
     }
+    
   }
   toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");
@@ -46,7 +50,7 @@ class Navigation extends Component {
 
   render() {
     const isLoggedIn = this.props.isLoggedIn;
-    const active = { color: "#6bc774" };      
+    const active = { color: "#6bc774" };
     return (
       <>
         <div id="navigation" className="flex-row-space-between navColor">
@@ -56,11 +60,13 @@ class Navigation extends Component {
           {isLoggedIn && (
             <div className="right flex-row-center">
               <div className="avatar" id="avatarHide">
-                {this.props.proImage[0] !== undefined && ( 
+                {this.props.proImage[0] !== undefined ? (
                   <img
                     src={this.props.proImage[0].imgCollection}
                     alt="profile"
                   ></img>
+                ) : (
+                  <img src={avatar} alt="profile"></img>
                 )}
               </div>
               <div className="name">

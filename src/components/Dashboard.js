@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
     this.state = {
       isToggleOn: true,
       playToggle: true,
-      evantToggle: true
+      evantToggle: true,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,16 +22,15 @@ class Dashboard extends React.Component {
     this.handleEvents = this.handleEvents.bind(this);
   }
   componentDidMount() {
-    if (this.props.isLoggedIn){ 
-      // this.props.authorise();
-    this.props.myPlayground();
-  }
+    if (this.props.isLoggedIn) {      
+      this.props.myPlayground();
+    }
   }
   handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
   handleSubmit(e) {
@@ -40,37 +39,37 @@ class Dashboard extends React.Component {
   }
   handleProfile(e) {
     e.preventDefault();
-    this.setState(state => ({
-      isToggleOn: !state.isToggleOn
+    this.setState((state) => ({
+      isToggleOn: !state.isToggleOn,
     }));
     if (this.state.isToggleOn === true) {
-      this.setState(state => ({
+      this.setState((state) => ({
         playToggle: true,
-        evantToggle: true
+        evantToggle: true,
       }));
     }
   }
   handlePlayground(e) {
     e.preventDefault();
-    this.setState(state => ({
-      playToggle: !state.playToggle
+    this.setState((state) => ({
+      playToggle: !state.playToggle,
     }));
     if (this.state.playToggle === true) {
-      this.setState(state => ({
+      this.setState((state) => ({
         isToggleOn: true,
-        evantToggle: true
+        evantToggle: true,
       }));
     }
   }
   handleEvents(e) {
     e.preventDefault();
-    this.setState(state => ({
-      evantToggle: !state.evantToggle
+    this.setState((state) => ({
+      evantToggle: !state.evantToggle,
     }));
     if (this.state.evantToggle === true) {
-      this.setState(state => ({
+      this.setState((state) => ({
         playToggle: true,
-        isToggleOn: true
+        isToggleOn: true,
       }));
     }
   }
@@ -80,10 +79,13 @@ class Dashboard extends React.Component {
     const data = this.props.info;
     const isToggleOn = this.state.isToggleOn;
     const evantToggle = this.state.evantToggle;
-    const playToggle = this.state.playToggle       
-    const PlaygroundList = this.props.personalPlayground.map((el, index) => {      
-      return <Myplay data={el} key={index}></Myplay>;
-    });    
+    const playToggle = this.state.playToggle;
+    let PlaygroundList;
+    if (!this.props.personalPlayground.error ) {            
+      PlaygroundList = this.props.personalPlayground.map((el, index) => {
+        return <Myplay data={el} key={index}></Myplay>;
+      });
+    }           
     return (
       <>
         {!isLoggedIn ? (
@@ -106,7 +108,7 @@ class Dashboard extends React.Component {
               <>
                 {!isToggleOn && (
                   <>
-                    <Profile/>
+                    <Profile />
                   </>
                 )}
               </>
@@ -123,11 +125,11 @@ class Dashboard extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
-    personalPlayground: state.personalPlayground
+    personalPlayground: state.personalPlayground,
   };
 };
 export default connect(mapStateToProps, { authorise, myPlayground })(Dashboard);

@@ -9,7 +9,7 @@ const initialState = {
   proImage: [],
   valideImg: false,
   ImageIsDelete: false,
-  playIsDelete : false
+  playIsDelete: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -73,6 +73,8 @@ const mainReducer = (state = initialState, action) => {
       state.valideImg = false;
     } else {
       state.valideImg = true;
+      console.log(state.valideImg, "add-reducer");
+      
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -94,8 +96,6 @@ const mainReducer = (state = initialState, action) => {
     state.isLoggedIn = false;
     state.sign = false;
     state.valideImg = false;
-    console.log(action.payload);
-
     return Object.assign({}, state);
   }
   if (action.type === "DELETE_PROFILE_IMAGE") {
@@ -105,6 +105,8 @@ const mainReducer = (state = initialState, action) => {
       action.payload.hasOwnProperty("length")
     ) {
       state.ImageIsDelete = false;
+      console.log(state.ImageIsDelete, "is false");
+      
     } else {
       state.ImageIsDelete = true;
     }
@@ -115,9 +117,7 @@ const mainReducer = (state = initialState, action) => {
    ************************ PLAYGROUND ***********************
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
-    for (let playground of Object.keys(action.payload)) {
-      state.playground = [...state.playground, action.payload[playground]];
-    }
+    state.playground =  action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
@@ -134,9 +134,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-    for (let play of Object.keys(action.payload)) {
-      state.personalPlayground = [action.payload[play]];
-    }
+      state.personalPlayground = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "DELETE_PLAYGROUND") {

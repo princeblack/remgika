@@ -14,7 +14,9 @@ import AddPlaygroung from "./AddPlaygroung";
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
-    this.props.allMyImage();
+    if (this.props.isLoggedIn) {
+      this.props.allMyImage();
+    }
   }
   render() {
     return (
