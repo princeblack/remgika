@@ -154,30 +154,6 @@ class Myplay extends Component {
                   />
                 </div>
                 <div className="row flex-revcol-left">
-                  <input
-                    className="input-transition"
-                    name="postalCode"
-                    type="text"
-                    value={this.state.postalCode}
-                    placeholder="Postal Code"
-                    onChange={this.handleInputChange}
-                    id="postalCode"
-                    required
-                  />
-                </div>
-                <div className="row flex-revcol-left">
-                  <input
-                    className="input-transition"
-                    name="city"
-                    type="text"
-                    value={this.state.city}
-                    placeholder=" City"
-                    onChange={this.handleInputChange}
-                    id="city"
-                    required
-                  />
-                </div>
-                <div className="row flex-revcol-left">
                   <textarea
                     className="input-transition"
                     name="description"

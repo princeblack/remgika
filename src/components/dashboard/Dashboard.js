@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { authorise, myPlayground } from "../../actions/index";
+import { authorise, myPlayground, allMyImage } from "../../actions/index";
 import "../../scss/Dashboard.scss";
 import Profile from "./Profile";
 import Myplay from "./Myplay";
@@ -24,6 +24,8 @@ class Dashboard extends React.Component {
   componentDidMount() {
     if (this.props.isLoggedIn) {      
       this.props.myPlayground();
+      this.props.allMyImage();     
+
     }
   }
   handleInputChange(e) {
@@ -132,4 +134,8 @@ const mapStateToProps = (state) => {
     personalPlayground: state.personalPlayground,
   };
 };
-export default connect(mapStateToProps, { authorise, myPlayground })(Dashboard);
+export default connect(mapStateToProps, {
+  authorise,
+  myPlayground,
+  allMyImage,
+})(Dashboard);

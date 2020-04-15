@@ -158,10 +158,6 @@ class Play extends Component {
             <span>Place:</span>
             <p>{this.props.data.street}</p>
           </div>
-          <div className="address">
-            <span>City:</span>
-            <p>{this.props.data.city}</p>
-          </div>
           <div className="addressDistance">
             {this.state.distanceResults !== null &&
               this.state.distanceResults.length > 0 && (

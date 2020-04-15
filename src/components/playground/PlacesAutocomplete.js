@@ -11,10 +11,9 @@ import camera from "../../img/camera.svg";
 import "../../scss/Playground.scss";
 import Play from "./Play";
 import ItemsCarousel from "react-items-carousel";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import {  GoogleApiWrapper } from "google-maps-react";
 const Test = (props) => {
-  // props.fetchPlayground()
-  const [userId, setUserId] = useState(0);
+  const [userId] = useState(0);
   useEffect(() => {
     props.fetchPlayground();
   }, [userId]);
@@ -68,88 +67,12 @@ const Test = (props) => {
         </li>
       );
     });
-  const handlePlace = () => {
-    let userlongitude, userlatitude;
-    navigator.geolocation.getCurrentPosition(function (position) {
-      userlongitude = position.coords.latitude;
-      userlatitude = position.coords.longitude;
-    });
-    getGeocode({
-      address: this.props.data.street + " " + this.props.data.postalCode,
-    })
-      .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        if (lat !== null) {
-          this.setState({
-            lat: lat,
-            lng: lng,
-            userlng: userlongitude,
-            userlat: userlatitude,
-          });
-        }
-      })
-      .catch((error) => {});
-  }
-
-  //  handle the distance google maps Api function
-  const handleDistance=()=> {
-    //  google maps distance INIT
-    const { google } = this.props;
-    const travelMode = "WALKING";
-    let theDistance = [];
-    const origins = new google.maps.LatLng(
-      this.state.userlng,
-      this.state.userlat
-    );
-    const destination = new google.maps.LatLng(this.state.lat, this.state.lng);
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [origins],
-        destinations: [destination],
-        travelMode: travelMode,
-      },
-      callback
-    );
-
-    // geting the result in the CALLBACK function
-    async function callback(response, status) {
-      if (status === "OK") {
-        var origins = response.originAddresses;
-        if (response.rows[0].elements[0].distance) {
-          for (var i = 0; i < origins.length; i++) {
-            var results = response.rows[i].elements;
-            for (var j = 0; j < results.length; j++) {
-              var element = results[j];
-              var distance = element.distance;
-              if (distance) {
-                var resultsDistance = distance.text;
-                theDistance.push(resultsDistance);
-              }
-            }
-          }
-        }
-      }
-    }
-    if (this.state.distanceResults !== theDistance && this.state.count === 0) {
-      this.setState({
-        distanceResults: theDistance,
-        count: 1,
-      });
-    }
-    console.log(this.state.distanceResults);
-    
-  }
   const [getPlay, setgetPlay] = useState();
   const handelCharacters = async (character) => {
     let filterCharacter;
     filterCharacter = await props.playground.filter((play) => {
       return (
-        play.street.toLowerCase().includes(character.toLowerCase()) ||
-        play.city.toLowerCase().includes(character.toLowerCase()) ||
-        play.postalCode.toLowerCase().includes(character.toLowerCase()) ||
-        play.postalCode.toLowerCase().includes(character.toLowerCase())  &
-        play.city.toLowerCase().includes(character.toLowerCase())
+        play.street.toLowerCase().indexOf(character.toLowerCase()) !== -1 
       );
     });
     setgetPlay(filterCharacter);

@@ -28,8 +28,10 @@ class Navigation extends Component {
     };
   }
   componentDidMount() {
+      this.props.allMyImage();     
     if (this.props.isLoggedIn) {
       this.props.authorise();
+      this.props.allMyImage();     
     }
   }
   componentDidUpdate(prevProps) {
@@ -66,13 +68,6 @@ class Navigation extends Component {
                   ></img>
                 ) : (
                   <img src={avatar} alt="profile"></img>
-                )}
-              </div>
-              <div className="name">
-                {this.props.info.firstName !== undefined && (
-                  <p>
-                    {this.props.info.firstName + " " + this.props.info.lastName}
-                  </p>
                 )}
               </div>
             </div>

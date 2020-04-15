@@ -26,10 +26,31 @@ header {
   margin-top: 20px;
   form {
     width: 80%;
-    background-color: gray;
+    background-color: rgba(128, 128, 128, 0.479);
     border-radius: 5px;
+    p {
+      color: rgb(231, 114, 114);
+      font-size: 15px;
+    }
+    ul {
+      // background-color: #c7cda4;
+      padding: 0;
+      border: solid 3px #c7cda4;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-width: 1px 1px 1px;
+      border-style: none solid solid;
+      list-style-type: none;
+      text-align: left;
+      border-image: initial;
+      border-top: none;
+      li {
+        margin: 5px;
+      }
+    }
     .fileNum {
       display: flex;
+      flex-direction: column;
       width: 90%;
       margin: 7px;
       margin-left: 15px;
@@ -55,7 +76,7 @@ header {
       color: rgb(14, 13, 13);
       border: none;
       padding: 9px;
-      margin: 7px;
+      margin: 3px;
       border-radius: 5px;
       &::placeholder {
         color: black;
@@ -91,6 +112,7 @@ header {
       font-size: 11px;
       border-radius: 10px;
       margin: auto;
+      margin-top: 5px;
       outline: none;
       display: block;
       margin-bottom: 10px;
@@ -109,7 +131,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-     display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -130,30 +152,28 @@ header {
  * animation fade-out
  * ----------------------------------------
  */
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 1;
-    display: block;
+  @-webkit-keyframes fade-out {
+    0% {
+      opacity: 1;
+      display: block;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
   }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    display: none;
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+      display: block;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
   }
-}
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-    display: block;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    display: none;
-
-  }
-}
-
 
   .addPlaygound-erreur {
     background-color: rgba(137, 43, 226, 0.534);
