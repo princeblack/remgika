@@ -36,7 +36,6 @@ class Navigation extends Component {
     if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
       this.props.allMyImage();     
     }
-    
   }
   toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");

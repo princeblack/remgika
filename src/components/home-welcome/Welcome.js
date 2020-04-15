@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import remgika from "../img/remgika.png";
-import {handleLogin} from "../actions"
+import remgika from "../../img/remgika.png";
+import {handleLogin} from "../../actions"
 
 class Welcome extends Component {
   render() {

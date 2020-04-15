@@ -9,7 +9,8 @@ import {
   addProfileImage,
   getProfileImage,
   deleteProfileImage,
-  deletePlayground
+  deletePlayground,
+  updatePlayground,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -116,6 +117,15 @@ export const deletePlay = (payload) => {
     const data = await deletePlayground(payload);    
     dispatch({
       type: "DELETE_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
+export const updatePlay = (payload,id) => {
+  return async (dispatch) => {
+    const data = await updatePlayground(payload,id);
+    dispatch({
+      type: "UPDATE_PLAYGROUND",
       payload: data,
     });
   };

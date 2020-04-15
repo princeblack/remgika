@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleLogin } from '../actions';
-import { playground } from '../actions/index';
-import done from '../img/done.svg'
-import LoginHeader from './LoginHeader';
-import '../scss/Addplayground.scss';
+import { handleLogin } from '../../actions';
+import { playground } from '../../actions/index';
+import done from '../../img/done.svg'
+import LoginHeader from '../login-signUp/LoginHeader';
+import '../../scss/Addplayground.scss';
 class AddPlaygroung extends Component {
   constructor(props) {
     super(props);

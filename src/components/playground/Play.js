@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import link from "../img/link.svg";
-import unlink from "../img/unlink.svg";
-import map from "../img/map.svg";
+import link from "../../img/link.svg";
+import unlink from "../../img/unlink.svg";
+import map from "../../img/map.svg";
 import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
 import PlayImage from "./PlayImage";
@@ -18,14 +18,15 @@ class Play extends Component {
       userlng: null,
       userlat: null,
       distanceResults: null,
-      count: 0
+      count: 0,
     };
     this.createChildren = this.createChildren.bind(this);
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handlePlace = this.handlePlace.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this)
   }
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(function(position) {});
+    navigator.geolocation.getCurrentPosition(function (position) {});
     this.handlePlace();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -34,29 +35,33 @@ class Play extends Component {
       this.handlePlace();
       this.handleDistance();
     }
+   
   }
+  toggleSidebar = (e) => {
+    const mapBar = document.querySelector(".mapBar");
+    mapBar.classList.toggle("map-show");
+  };
   handlePlace() {
     let userlongitude, userlatitude;
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       userlongitude = position.coords.latitude;
       userlatitude = position.coords.longitude;
     });
     getGeocode({
-      address: this.props.data.street + " " + this.props.data.postalCode
+      address: this.props.data.street + " " + this.props.data.postalCode,
     })
-      .then(results => getLatLng(results[0]))
+      .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         if (lat !== null) {
           this.setState({
             lat: lat,
             lng: lng,
             userlng: userlongitude,
-            userlat: userlatitude
+            userlat: userlatitude,
           });
         }
       })
-      .catch(error => {
-      });
+      .catch((error) => {});
   }
 
   //  handle the distance google maps Api function
@@ -75,7 +80,7 @@ class Play extends Component {
       {
         origins: [origins],
         destinations: [destination],
-        travelMode: travelMode
+        travelMode: travelMode,
       },
       callback
     );
@@ -102,12 +107,12 @@ class Play extends Component {
     if (this.state.distanceResults !== theDistance && this.state.count === 0) {
       this.setState({
         distanceResults: theDistance,
-        count: 1
+        count: 1,
       });
-    }
+    }    
   }
   createChildren(n) {
-    range(n).map(i => (
+    range(n).map((i) => (
       <div key={i} style={{ height: 200, background: "#333" }}>
         {i}
       </div>
@@ -116,19 +121,17 @@ class Play extends Component {
   changeActiveItem(activeItemIndex) {
     this.setState({ activeItemIndex });
   }
-  handleResults(e) {
-  }
-  // RENDER
+  RENDER
   render() {
     const chevronWidth = 40;
-    const activeItemIndex = this.state.activeItemIndex;    
+    const activeItemIndex = this.state.activeItemIndex;
     const image = this.props.data.imgCollection.map((el, index) => {
       return <PlayImage data={el} key={index}></PlayImage>;
     });
     const mapStyles = {
       position: "relative",
       width: "90%",
-      height: "100%"
+      height: "100%",
     };
     return (
       <div className="playgroud-item">
@@ -147,38 +150,48 @@ class Play extends Component {
         >
           {image}
         </ItemsCarousel>
+        <div>
+          <h3>{this.props.data.title}</h3>
+        </div>
         <div className="addressItem">
           <div className="address">
             <span>Place:</span>
             <p>{this.props.data.street}</p>
           </div>
+          <div className="address">
+            <span>City:</span>
+            <p>{this.props.data.city}</p>
+          </div>
           <div className="addressDistance">
-            {this.state.distanceResults !== null && (
-              <>
-                <span>Distance:</span>
-                <p>{this.state.distanceResults}</p>
-              </>
-            )}
+            {this.state.distanceResults !== null &&
+              this.state.distanceResults.length > 0 && (
+                <>
+                  <span>Distance:</span>
+                  <p>{this.state.distanceResults}</p>
+                </>
+              )}
           </div>
         </div>
         <div className="description">
           <p>{this.props.data.description}</p>
         </div>
         <div className="mapLogo">
-          <img src={map} alt="map"></img>
+          <img src={map} alt="map" onClick={this.toggleSidebar}></img>
         </div>
         {this.state.lng !== null && (
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={mapStyles}
-            initialCenter={{
-              lat: this.state.lat,
-              lng: this.state.lng
-            }}
-          >
-            <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />
-          </Map>
+          <div className="mapBar">
+            <Map
+              google={this.props.google}
+              zoom={14}
+              style={mapStyles}
+              initialCenter={{
+                lat: this.state.lat,
+                lng: this.state.lng,
+              }}
+            >
+              <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />
+            </Map>
+          </div>
         )}
       </div>
     );

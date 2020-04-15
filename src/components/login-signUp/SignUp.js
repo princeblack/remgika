@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signUp, handleLogin } from "../actions";
-import LoginHeader from "./LoginHeader";
-import game from "../img/game.png";
+import { signUp, handleLogin } from "../../actions";
+import LoginHeader from "../login-signUp/LoginHeader";
+import game from "../../img/game.png";
 
 class SignUp extends React.Component {
   constructor(props) {

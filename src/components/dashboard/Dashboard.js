@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { authorise, myPlayground } from "../actions/index";
-import "../scss/Dashboard.scss";
+import { authorise, myPlayground } from "../../actions/index";
+import "../../scss/Dashboard.scss";
 import Profile from "./Profile";
 import Myplay from "./Myplay";
-import "../scss/myplay.scss";
+import "../../scss/myplay.scss";
 
 class Dashboard extends React.Component {
   constructor(props) {

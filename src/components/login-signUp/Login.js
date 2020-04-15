@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { handleLogin } from "../actions";
-import remgika from "../img/remgika.png";
+import { handleLogin } from "../../actions";
+import remgika from "../../img/remgika.png";
 import LoginHeader from "./LoginHeader";
 import { Link } from "react-router-dom";
 

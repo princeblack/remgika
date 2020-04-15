@@ -7,8 +7,8 @@ import {
   profileImage,
   allMyImage,
   deleteImage,
-} from "../actions/index";
-import "../scss/Dashboard.scss";
+} from "../../actions/index";
+import "../../scss/Dashboard.scss";
 class Profile extends React.Component {
   constructor(props) {
     super(props);

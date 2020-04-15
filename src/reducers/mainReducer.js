@@ -10,6 +10,7 @@ const initialState = {
   valideImg: false,
   ImageIsDelete: false,
   playIsDelete: false,
+  playIsUpdate: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -74,7 +75,6 @@ const mainReducer = (state = initialState, action) => {
     } else {
       state.valideImg = true;
       console.log(state.valideImg, "add-reducer");
-      
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -106,7 +106,6 @@ const mainReducer = (state = initialState, action) => {
     ) {
       state.ImageIsDelete = false;
       console.log(state.ImageIsDelete, "is false");
-      
     } else {
       state.ImageIsDelete = true;
     }
@@ -117,7 +116,7 @@ const mainReducer = (state = initialState, action) => {
    ************************ PLAYGROUND ***********************
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
-    state.playground =  action.payload;
+    state.playground = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
@@ -134,10 +133,11 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
-      state.personalPlayground = action.payload;
+    state.personalPlayground = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "DELETE_PLAYGROUND") {
+    debugger;
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
@@ -149,6 +149,19 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
+  if (action.type === "UPDATE_PLAYGROUND") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.playIsUpdate = false;
+    } else {
+      state.playIsUpdate = true;
+    }
+    return Object.assign({}, state);
+  }
+
   return state;
 };
 

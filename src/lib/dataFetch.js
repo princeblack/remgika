@@ -196,3 +196,18 @@ export const deletePlayground = async (data) => {
     }
   }
 };
+
+export const updatePlayground = async (data,id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/playground/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};

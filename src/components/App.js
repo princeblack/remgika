@@ -1,16 +1,17 @@
 import React from "react";
 import "../scss/App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import NotFound from "./NotFound.js";
-import Welcome from "./Welcome";
+import Dashboard from "./dashboard/Dashboard";
+import Login from "./login-signUp/Login";
+import SignUp from "./login-signUp/SignUp";
+import NotFound from "./load-notfound/NotFound";
+import Welcome from "./home-welcome/Welcome";
 import { authorise, allMyImage } from "../actions";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
-import Playground from "./Playground";
-import AddPlaygroung from "./AddPlaygroung";
+import Playground from "./playground/Playground";
+import AddPlaygroung from "./playground/AddPlaygroung";
+
 class App extends React.Component {
   componentDidMount() {
     this.props.authorise();
@@ -22,7 +23,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <Navigation ></Navigation>
+          <Navigation></Navigation>
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/login" component={Login} />
@@ -45,4 +46,5 @@ const mapsStateToProps = state => {
   };
 };
 
-export default connect(mapsStateToProps, { authorise, allMyImage })(App);
+export default connect(mapsStateToProps, { authorise, allMyImage })(App)
+;
