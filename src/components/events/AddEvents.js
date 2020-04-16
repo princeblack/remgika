@@ -1,21 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { handleLogin } from "../../actions";
+import { useForm } from "react-hook-form";
+import LoginHeader from "../login-signUp/LoginHeader";
 import { playground } from "../../actions/index";
 import done from "../../img/done.svg";
-import LoginHeader from "../login-signUp/LoginHeader";
-import "../../scss/AddplayAndEvents.scss";
-import { useForm } from "react-hook-form";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
-
-const AddPlaygroung = (props) => {
-
+import DatePicker  from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+const AddEvents = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [imgCollection, setimgCollection] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 3) {
@@ -34,44 +35,44 @@ const AddPlaygroung = (props) => {
     requestOptions: "string",
     debounce: 300,
   });
-  
+
   const ref = useRef();
   useOnclickOutside(ref, () => {
     // When user clicks outside of the component, we can dismiss
     // the searched suggestions by calling this method
     clearSuggestions();
   });
-   const handleInput = (e) => {
-     // Update the keyword of the input element
-     setValue(e.target.value);
-   };
+  const handleInput = (e) => {
+    // Update the keyword of the input element
+    setValue(e.target.value);
+  };
 
-   const handleSelect = ({ description }) => () => {
-     // When user selects a place, we can replace the keyword without request data from API
-     // by setting the second parameter as "false"
-     setValue(description, false);
-     // handelCharacters(description);
-     clearSuggestions();
+  const handleSelect = ({ description }) => () => {
+    // When user selects a place, we can replace the keyword without request data from API
+    // by setting the second parameter as "false"
+    setValue(description, false);
+    // handelCharacters(description);
+    clearSuggestions();
 
-     // Get latitude and longitude via utility functions
-     getGeocode({ address: description })
-       .then((results) => getLatLng(results[0]))
-       .then(({ lat, lng }) => {})
-       .catch((error) => {});
-   };
+    // Get latitude and longitude via utility functions
+    getGeocode({ address: description })
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {})
+      .catch((error) => {});
+  };
 
-   const renderSuggestions = () =>
-     data.map((suggestion) => {
-       const {
-         id,
-         structured_formatting: { main_text, secondary_text },
-       } = suggestion;
-       return (
-         <li key={id} onClick={handleSelect(suggestion)}>
-           <strong>{main_text}</strong> <small>{secondary_text}</small>
-         </li>
-       );
-     });
+  const renderSuggestions = () =>
+    data.map((suggestion) => {
+      const {
+        id,
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+      return (
+        <li key={id} onClick={handleSelect(suggestion)}>
+          <strong>{main_text}</strong> <small>{secondary_text}</small>
+        </li>
+      );
+    });
   const checkMimeType = (event) => {
     //getting file object
     let files = event.target.files;
@@ -96,8 +97,6 @@ const AddPlaygroung = (props) => {
     return true;
   };
 
-
-
   const handlefiles = (event) => {
     if (maxSelectFile(event) && checkMimeType(event)) {
       // if return true allow to setState
@@ -107,29 +106,28 @@ const AddPlaygroung = (props) => {
 
   const onSubmit = (e) => {
     //  e.preventDefault();
-    console.log(e.imgCollection);
 
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
     }
+    data.append("start", startDate);
+    data.append("start", endDate);
+
     for (var key in e) {
       data.append(key, e[key]);
     }
+        console.log(data);
+
     props.playground(data);
   };
 
   const isLoggedIn = props.isLoggedIn;
   const addPlay = props.addplay;
   const fileNum = imgCollection.length;
-  if (addPlay) {
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 5000);
-  }
   return (
     <>
-      {isLoggedIn ? (
+      {
         <>
           <LoginHeader />
           <div className="addPlaygroung-form">
@@ -151,7 +149,7 @@ const AddPlaygroung = (props) => {
                   className="input-transition"
                   name="title"
                   type="text"
-                  placeholder="Title or place name"
+                  placeholder="Events name"
                   id="title"
                   ref={register({ required: true })}
                 />
@@ -171,6 +169,51 @@ const AddPlaygroung = (props) => {
                 />
                 {status === "OK" && <ul>{renderSuggestions()}</ul>}
                 {errors.street && <p>Addresse name is required</p>}
+              </div>
+              <div className="calender">
+                <div className="StartCalender">
+                  <p className="Start">Start :</p>
+                  <DatePicker
+                    name="start"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    minDate={new Date()}
+                    showDisabledMonthNavigation
+                    showYearDropdown
+                    scrollableYearDropdown
+                    required
+                    dateFormat="MM/dd/yyyy HH:mm aa"
+                    showTimeInput
+                    timeInputLabel="Time:"
+                    timeCaption="Time"
+                    
+                  >
+                    <div style={{ color: "red" }}>
+                      Don't forget to check the weather!
+                    </div>
+                  </DatePicker>
+                </div>
+                <div className="EndCalender">
+                  <p className="End">End :</p>
+                  <DatePicker
+                    name="end"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    minDate={new Date()}
+                    showDisabledMonthNavigation
+                    showYearDropdown
+                    scrollableYearDropdown
+                    required
+                    dateFormat="MM/dd/yyyy HH:mm aa"
+                    showTimeInput
+                    timeInputLabel="Time:"
+                    timeCaption="Time"
+                  >
+                    <div style={{ color: "red" }}>
+                      Don't forget to check the weather!
+                    </div>
+                  </DatePicker>
+                </div>
               </div>
               <div className="row flex-revcol-left">
                 <textarea
@@ -197,11 +240,7 @@ const AddPlaygroung = (props) => {
             <div></div>
           </div>
         </>
-      ) : (
-        <div>
-          <p>please you need to be logged to Add a playground</p>
-        </div>
-      )}
+      }
     </>
   );
 };
@@ -212,6 +251,4 @@ const mapStateToProps = (state) => {
     info: state.info,
   };
 };
-export default connect(mapStateToProps, { playground, handleLogin })(
-  AddPlaygroung
-);
+export default connect(mapStateToProps, { playground })(AddEvents);

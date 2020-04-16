@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./playground/Playground";
 import AddPlaygroung from "./playground/AddPlaygroung";
+import MainEvents from "./events/MainEvents";
+import AddEvents from "./events/AddEvents";
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,6 +32,9 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
+            <Route exact path="/events" component={MainEvents} />
+            <Route exact path="/addEvents" component={AddEvents} />
+
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>

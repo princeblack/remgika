@@ -95,6 +95,12 @@ class Navigation extends Component {
               Playground
             </NavLink>
           </div>
+          <div className="menu-item" onClick={this.toggleSidebar}>
+            <NavLink activeStyle={active} to="/events">
+              <FontAwesomeIcon icon={faDemocrat} />
+              Events
+            </NavLink>
+          </div>
           {isLoggedIn && (
             <div className="menu-item" onClick={this.handleLogOut}>
               <NavLink to="" activeStyle={active}>

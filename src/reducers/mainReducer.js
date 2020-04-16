@@ -1,16 +1,21 @@
 const initialState = {
+  // Log and Sign and user Info
   loading: true,
   isLoggedIn: false,
   sign: false,
-  addPlay: false,
-  personalPlayground: [],
   info: {},
-  playground: [],
+  // user Image
   proImage: [],
   valideImg: false,
+  // playground
+  addPlay: false,
+  personalPlayground: [],
+  playground: [],
   ImageIsDelete: false,
   playIsDelete: false,
   playIsUpdate: false,
+  // events
+  addEvents: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -157,6 +162,21 @@ const mainReducer = (state = initialState, action) => {
       state.playIsUpdate = false;
     } else {
       state.playIsUpdate = true;
+    }
+    return Object.assign({}, state);
+  }
+    /**********************************************************
+   ************************ events ****************************
+   ***********************************************************/
+  if (action.type === "ADD_EVENTS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addEvents = false;
+    } else {
+      state.addEvents = true;
     }
     return Object.assign({}, state);
   }

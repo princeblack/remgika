@@ -95,9 +95,95 @@ header {
         }
       }
     }
+    .calender {
+      display: flex;
+      box-sizing: border-box;
+      .example-custom-input {
+        background-color: #306b99;
+        width: 100%;
+        color: white;
+        border: none;
+        padding: 8px;
+        text-transform: uppercase;
+        font-size: 11px;
+        border-radius: 10px;
+        outline: none;
+        &:hover {
+          background: greenyellow;
+          color: black;
+          transition: background-color 1s ease-out;
+        }
+      }
+      .StartCalender {
+        width: 50%;
+        .Start {
+          color: green;
+        }
+        .react-datepicker-wrapper {
+          width: 100%;
+          padding: 5px;
+          .react-datepicker__input-container {
+            input {
+              width: 100%;
+            }
+            .react-datepicker__close-icon::after {
+              background-color: rgba(240, 177, 118, 0.89);
+            }
+          }
+        }
+        .react-datepicker__tab-loop {
+          .react-datepicker-popper {
+            // top: -300px !important;
+            left: 0px !important;
+            border: solid 2 px red;
+          }
+          .react-datepicker-popper[data-placement^="bottom"]
+            .react-datepicker__triangle,
+          .react-datepicker-popper[data-placement^="top"]
+            .react-datepicker__triangle,
+          .react-datepicker__month-read-view--down-arrow,
+          .react-datepicker__month-year-read-view--down-arrow {
+            margin-left: 0px !important;
+          }
+        }
+      }
+      /**
+ * ----------------------------------------
+ * endcalender picker
+ * ----------------------------------------
+ */
+      .EndCalender {
+        width: 50%;
+        .End {
+          color: rgb(0, 51, 128);
+        }
+        .react-datepicker-wrapper {
+          width: 100%;
+          padding: 5px;
+          .react-datepicker__input-container {
+            input {
+              width: 100%;
+            }
+          }
+        }
+        .react-datepicker__tab-loop {
+          .react-datepicker-popper {
+            // top: -300px !important;
+            left: -120px !important;
+          }
+          .react-datepicker-popper[data-placement^="bottom"]
+            .react-datepicker__triangle,
+          .react-datepicker-popper[data-placement^="top"]
+            .react-datepicker__triangle,
+          .react-datepicker__month-read-view--down-arrow,
+          .react-datepicker__month-year-read-view--down-arrow {
+            margin-left: 90px !important;
+          }
+        }
+      }
+    }
     #myImage {
-      // width: 300px;
-      color: blue;
+      color: rgb(129, 129, 194);
       font-size: 15px;
     }
     .addPlay-submit,
