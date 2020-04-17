@@ -16,6 +16,7 @@ const initialState = {
   playIsUpdate: false,
   // events
   addEvents: false,
+  eventsList: [],
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -165,7 +166,7 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-    /**********************************************************
+  /**********************************************************
    ************************ events ****************************
    ***********************************************************/
   if (action.type === "ADD_EVENTS") {
@@ -180,7 +181,10 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-
+  if (action.type === "FETCH_EVENTS") {
+    state.eventsList = action.payload;
+    return Object.assign({}, state);
+  }
   return state;
 };
 

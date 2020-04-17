@@ -27,11 +27,11 @@ $remgika: #c7cda4;
           padding: 10px 20px 12px 50px;
           background-size: 50px;
           height: 45px;
-          border: solid 3px #c7cda4;
+          border: solid 3px rgba(106, 106, 240, 0.418);
           border-radius: 10px;
           box-shadow: 4px 4px 4px #00000025;
           margin-top: 13px;
-          background-color: #c7cda448;
+          background-color: rgba(106, 106, 240, 0.061);
           color: black;
           font-size: 15px;
           letter-spacing: 1px;
@@ -98,7 +98,7 @@ $remgika: #c7cda4;
     flex-direction: column;
     padding: 40px;
     margin: 0;
-    .MainEventsgroud-item {
+    .events-item {
       border-radius: 20px;
 
       .userVote {
@@ -125,8 +125,12 @@ $remgika: #c7cda4;
           flex-direction: column;
           margin: 2px;
           align-items: flex-start;
+        }
+        .address,
+        .end,
+        .start {
           span {
-            color: rgb(182, 20, 20);
+            color: rgb(30, 112, 5);
             margin: 1px;
           }
           p {
@@ -137,7 +141,7 @@ $remgika: #c7cda4;
           display: flex;
           align-items: center;
           span {
-            color: rgb(182, 20, 20);
+            color: rgb(30, 112, 5);
             margin: 1px;
           }
           p {
@@ -146,7 +150,7 @@ $remgika: #c7cda4;
         }
       }
       .description {
-        border: solid 1px rgb(169, 197, 132);
+        border: solid 1px rgba(106, 106, 240, 0.418);
         border-radius: 2px;
         text-align: center;
         padding: 4px;
@@ -172,27 +176,30 @@ $remgika: #c7cda4;
       height: 70%;
       top: 30px;
       width: 30px;
-      button {
+      button,
+      button:focus {
         color: $remgika;
         width: 90%;
         height: 100%;
         font-size: 50px;
         clip-path: polygon(0 47%, 100% 100%, 100% 0);
-        background-color: $remgika;
+        background-color: rgba(106, 106, 240, 0.418);
         border: 0;
+        outline: none;
       }
     }
     .dFFQiB {
       height: 70%;
       top: 30px;
       width: 30px;
-      button {
+      button,
+      button:focus {
         color: $remgika;
         width: 90%;
         height: 100%;
         font-size: 50px;
         clip-path: polygon(100% 49%, 0 0, 0 100%);
-        background-color: $remgika;
+        background-color: rgba(106, 106, 240, 0.418);
         border: 0;
       }
     }

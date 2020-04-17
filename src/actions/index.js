@@ -11,6 +11,8 @@ import {
   deleteProfileImage,
   deletePlayground,
   updatePlayground,
+  addEvents,
+  getEventsList,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -107,25 +109,48 @@ export const deleteImage = (payload) => {
     const data = await deleteProfileImage(payload);
     dispatch({
       type: "DELETE_PROFILE_IMAGE",
-      payload: data
+      payload: data,
     });
   };
 };
 
 export const deletePlay = (payload) => {
   return async (dispatch) => {
-    const data = await deletePlayground(payload);    
+    const data = await deletePlayground(payload);
     dispatch({
       type: "DELETE_PLAYGROUND",
       payload: data,
     });
   };
 };
-export const updatePlay = (payload,id) => {
+export const updatePlay = (payload, id) => {
   return async (dispatch) => {
-    const data = await updatePlayground(payload,id);
+    const data = await updatePlayground(payload, id);
     dispatch({
       type: "UPDATE_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
+
+/**********************************************************
+ ************************ events **************************
+ ***********************************************************/
+
+export const events = (payload) => {
+  return async (dispatch) => {
+    const data = await addEvents(payload);
+    dispatch({
+      type: "ADD_EVENTS",
+      payload: data,
+    });
+  };
+};
+export const fetcheventsList = (payload) => {
+  return async (dispatch) => {
+    const data = await getEventsList();
+    dispatch({
+      type: "FETCH_EVENTS",
       payload: data,
     });
   };

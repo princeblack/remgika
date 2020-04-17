@@ -3,10 +3,11 @@ import link from "../../img/link.svg";
 import unlink from "../../img/unlink.svg";
 import map from "../../img/map.svg";
 import ItemsCarousel from "react-items-carousel";
-import PlayImage from "./PlayImage";
+import EventsImage from "./EventsImage";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
-class Play extends Component {
+
+class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +22,7 @@ class Play extends Component {
     };
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handlePlace = this.handlePlace.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this)
+    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(function (position) {});
@@ -33,7 +34,6 @@ class Play extends Component {
       this.handlePlace();
       this.handleDistance();
     }
-   
   }
   toggleSidebar = (e) => {
     const mapBar = document.querySelector(".mapBar");
@@ -46,7 +46,7 @@ class Play extends Component {
       userlatitude = position.coords.longitude;
     });
     getGeocode({
-      address: this.props.data.street + " " + this.props.data.postalCode,
+      address: this.props.data.address,
     })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
@@ -107,7 +107,7 @@ class Play extends Component {
         distanceResults: theDistance,
         count: 1,
       });
-    }    
+    }
   }
 
   changeActiveItem(activeItemIndex) {
@@ -118,7 +118,7 @@ class Play extends Component {
     const chevronWidth = 40;
     const activeItemIndex = this.state.activeItemIndex;
     const image = this.props.data.imgCollection.map((el, index) => {
-      return <PlayImage data={el} key={index}></PlayImage>;
+      return <EventsImage data={el} key={index}></EventsImage>;
     });
     const mapStyles = {
       position: "relative",
@@ -126,7 +126,7 @@ class Play extends Component {
       height: "100%",
     };
     return (
-      <div className="playgroud-item">
+      <div className="events-item">
         <div className="userVote">
           <img src={link} alt="like"></img>
           <img src={unlink} alt="unlike"></img>
@@ -148,7 +148,17 @@ class Play extends Component {
         <div className="addressItem">
           <div className="address">
             <span>Place:</span>
-            <p>{this.props.data.street}</p>
+            <p>{this.props.data.address}</p>
+          </div>
+          <div className="TimeItem">
+            <div className="start">
+              <span>Start:</span>
+              <p>{this.props.data.start}</p>
+            </div>
+            <div className="end">
+              <span>End:</span>
+              <p>{this.props.data.end}</p>
+            </div>
           </div>
           <div className="addressDistance">
             {this.state.distanceResults !== null &&
@@ -185,6 +195,10 @@ class Play extends Component {
     );
   }
 }
+
+// const mapStateToProps = (state) => ({});
+
+// export default connect(mapStateToProps)(Events);
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI"
-})(Play);
+  apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
+})(Events);

@@ -27,8 +27,8 @@ class Navigation extends Component {
       refrech: false,
     };
   }
-  componentDidMount() {
-      this.props.allMyImage();     
+ async componentDidMount() {
+     this.props.allMyImage();     
     if (this.props.isLoggedIn) {
       this.props.authorise();
       this.props.allMyImage();     

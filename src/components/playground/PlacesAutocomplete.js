@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { fetchPlayground } from "../../actions";
+import { fetchPlayground, fetcheventsList } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -13,9 +13,10 @@ import Play from "./Play";
 import ItemsCarousel from "react-items-carousel";
 import {  GoogleApiWrapper } from "google-maps-react";
 const Test = (props) => {
-  const [userId] = useState(0);
+  const [userId,setUserID] = useState(0);
   useEffect(() => {
     props.fetchPlayground();
+    props.fetcheventsList();
   }, [userId]);
 
   const {
@@ -88,6 +89,7 @@ const Test = (props) => {
   }
  const [activeItemIndex, setActiveItemIndex] = useState(0);
  const chevronWidth = 40;
+ 
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -138,11 +140,12 @@ const mapStateToProps = (state) => {
   return {
     playground: state.playground,
     addPlay: state.addPlay,
+    eventsList: state.eventsList,
   };
 };
 GoogleApiWrapper({
-  apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
+  // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 });
-export default connect(mapStateToProps, { fetchPlayground, GoogleApiWrapper })(
+export default connect(mapStateToProps, { fetchPlayground,fetcheventsList, GoogleApiWrapper })(
   Test
 );

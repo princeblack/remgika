@@ -1,15 +1,15 @@
 const url = "http://localhost:8000";
 
-export const checkCredentials = async data => {
+export const checkCredentials = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/users/login`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -17,16 +17,16 @@ export const checkCredentials = async data => {
     return [];
   }
 };
-export const signUpUsers = async data => {
+export const signUpUsers = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/users`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -35,13 +35,13 @@ export const signUpUsers = async data => {
   }
 };
 
-export const addProfileImage = async data => {
+export const addProfileImage = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/images`, {
         method: "POST",
         body: data,
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -50,15 +50,15 @@ export const addProfileImage = async data => {
   }
 };
 
-export const getProfileImage = async data => {
+export const getProfileImage = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/images/my`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
 
@@ -68,15 +68,15 @@ export const getProfileImage = async data => {
   }
 };
 
-export const authoriseUser = async data => {
+export const authoriseUser = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/users/me`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
 
@@ -86,15 +86,15 @@ export const authoriseUser = async data => {
   }
 };
 
-export const handleLogOut = async data => {
+export const handleLogOut = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/users/logout`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -115,7 +115,7 @@ export const deleteProfileImage = async (data) => {
           },
           credentials: "include",
         })
-      ).json();      
+      ).json();
       return res;
     } catch (error) {
       return [];
@@ -126,15 +126,15 @@ export const deleteProfileImage = async (data) => {
 /**********************************************************
  ************************ PLAYGROUND ***********************
  ***********************************************************/
-export const getPlayground = async data => {
+export const getPlayground = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/playground`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
 
@@ -144,13 +144,13 @@ export const getPlayground = async data => {
   }
 };
 
-export const addPlayground = async data => {
+export const addPlayground = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/playground`, {
         method: "POST",
         body: data,
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -159,15 +159,15 @@ export const addPlayground = async data => {
   }
 };
 
-export const getMyPlayground = async data => {
+export const getMyPlayground = async (data) => {
   try {
     const res = await (
       await fetch(`${url}/playground/my`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: "include"
+        credentials: "include",
       })
     ).json();
     return res;
@@ -175,7 +175,6 @@ export const getMyPlayground = async data => {
     return [];
   }
 };
-
 
 export const deletePlayground = async (data) => {
   const id = data;
@@ -197,7 +196,7 @@ export const deletePlayground = async (data) => {
   }
 };
 
-export const updatePlayground = async (data,id) => {
+export const updatePlayground = async (data, id) => {
   try {
     const res = await (
       await fetch(`${url}/playground/${id}`, {
@@ -209,5 +208,39 @@ export const updatePlayground = async (data,id) => {
     return res;
   } catch (error) {
     return [error];
+  }
+};
+
+/**********************************************************
+ ************************ events **************************
+ ***********************************************************/
+export const addEvents = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/events`, {
+        method: "POST",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const getEventsList = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/events`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
   }
 };

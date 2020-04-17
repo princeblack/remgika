@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState,  useRef } from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import LoginHeader from "../login-signUp/LoginHeader";
-import { playground } from "../../actions/index";
+import { events } from "../../actions/index";
 import done from "../../img/done.svg";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -105,21 +105,17 @@ const AddEvents = (props) => {
   };
 
   const onSubmit = (e) => {
-    //  e.preventDefault();
-
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
-      data.append("imgCollection", e.imgCollection[key]);
+      data.append("imgCollection", e.imgCollection[key]);      
     }
     data.append("start", startDate);
-    data.append("start", endDate);
+    data.append("end", endDate);
 
     for (var key in e) {
       data.append(key, e[key]);
     }
-        console.log(data);
-
-    props.playground(data);
+    props.events(data);
   };
 
   const isLoggedIn = props.isLoggedIn;
@@ -127,7 +123,7 @@ const AddEvents = (props) => {
   const fileNum = imgCollection.length;
   return (
     <>
-      {
+      {isLoggedIn && 
         <>
           <LoginHeader />
           <div className="addPlaygroung-form">
@@ -147,7 +143,7 @@ const AddEvents = (props) => {
               <div className="row flex-revcol-left">
                 <input
                   className="input-transition"
-                  name="title"
+                  name="eventName"
                   type="text"
                   placeholder="Events name"
                   id="title"
@@ -159,7 +155,7 @@ const AddEvents = (props) => {
                 <input
                   className="input-transition"
                   autoComplete="off"
-                  name="street"
+                  name="address"
                   type="text"
                   value={value}
                   placeholder="Addresse"
@@ -186,7 +182,6 @@ const AddEvents = (props) => {
                     showTimeInput
                     timeInputLabel="Time:"
                     timeCaption="Time"
-                    
                   >
                     <div style={{ color: "red" }}>
                       Don't forget to check the weather!
@@ -233,7 +228,7 @@ const AddEvents = (props) => {
             </form>
             {addPlay && (
               <div className="addPlaygound-accept" id="accept">
-                <p> the playground is add successfuly</p>
+                <p> the events is add successfuly</p>
                 <img src={done} alt="done"></img>
               </div>
             )}
@@ -251,4 +246,4 @@ const mapStateToProps = (state) => {
     info: state.info,
   };
 };
-export default connect(mapStateToProps, { playground })(AddEvents);
+export default connect(mapStateToProps, { events })(AddEvents);

@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
-// import { fetchMainEventsground } from "../../actions";
+import { connect } from "react-redux"; 
+import { fetcheventsList } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { NavLink } from "react-router-dom";
-import camera from "../../img/camera.svg";
-import "../../scss/MainEventsground.scss";
-import MainEvents from "./MainEvents";
+import camerablue from "../../img/camerablue.png";
+import "../../scss/Playground.scss";
+import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
 import { GoogleApiWrapper } from "google-maps-react";
 const EventsAutocomplete = (props) => {
   const [userId] = useState(0);
   useEffect(() => {
-    // props.fetchMainEventsground();
+    props.fetcheventsList();
   }, [userId]);
-
   const {
     ready,
     value,
@@ -67,23 +66,23 @@ const EventsAutocomplete = (props) => {
         </li>
       );
     });
-  const [getMainEvents, setgetMainEvents] = useState();
+  const [getEvents, setgetEvents] = useState();
   const handelCharacters = async (character) => {
     let filterCharacter;
-    filterCharacter = await props.MainEventsground.filter((MainEvents) => {
-      return MainEvents.street.toLowerCase().indexOf(character.toLowerCase()) !== -1;
+    filterCharacter = await props.eventsList.filter((play) => {
+      return play.street.toLowerCase().indexOf(character.toLowerCase()) !== -1;
     });
-    setgetMainEvents(filterCharacter);
+    setgetEvents(filterCharacter);
   };
-//   let MainEventsgroundList;
-//   MainEventsgroundList = props.MainEventsground.map((el, index) => {
-//     return <MainEvents data={el} key={index}></MainEvents>;
-//   });
-//   if (getMainEvents !== undefined) {
-//     MainEventsgroundList = getMainEvents.map((el, index) => {
-//       return <MainEvents data={el} key={index}></MainEvents>;
-//     });
-//   }
+  let events;
+  events = props.eventsList.map((el, index) => {
+    return <Events data={el} key={index}></Events>;
+  });
+  if (getEvents !== undefined) {
+    events = getEvents.map((el, index) => {
+      return <Events data={el} key={index}></Events>;
+    });
+  }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
   return (
@@ -98,12 +97,12 @@ const EventsAutocomplete = (props) => {
             name="search"
             placeholder="Events in your city"
           />
-          {/* We can use the "status" to decide whether we should disMainEvents the dropdown or not */}
+          {/* We can use the "status" to decide whether we should display the dropdown or not */}
           {status === "OK" && <ul>{renderSuggestions()}</ul>}
         </div>
         <div className="camera-flex">
           <NavLink to="/addEvents">
-            <img src={camera} alt="camera"></img>
+            <img src={camerablue} alt="camera"></img>
           </NavLink>
           <span>Add Events</span>
         </div>
@@ -125,7 +124,7 @@ const EventsAutocomplete = (props) => {
           disableSwipe
           chevronWidth={chevronWidth}
         >
-          {/* {MainEventsgroundList} */}
+          {events}
         </ItemsCarousel>
       </div>
     </>
@@ -134,13 +133,13 @@ const EventsAutocomplete = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    MainEventsground: state.MainEventsground,
-    addMainEvents: state.addMainEvents,
+    eventsList: state.eventsList,
+    addEvents: state.addEvents,
   };
 };
 GoogleApiWrapper({
-//   apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
+  // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 });
-export default connect(mapStateToProps, {  GoogleApiWrapper })(
+export default connect(mapStateToProps, { fetcheventsList, GoogleApiWrapper })(
   EventsAutocomplete
 );

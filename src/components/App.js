@@ -15,7 +15,7 @@ import MainEvents from "./events/MainEvents";
 import AddEvents from "./events/AddEvents";
 
 class App extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.authorise();
     if (this.props.isLoggedIn) {
       this.props.allMyImage();

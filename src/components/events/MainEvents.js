@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import EventsAutocomplete from "./EventsAutocomplete"
 import "../../scss/MainEventsground.scss";
 
-const MainEvents = () => {
-  const [startDate, setStartDate] = useState(new Date());
+import { connect } from "react-redux";
+
+const MainEvents = (props) => {
   return (
     <div className="MainEventsground">
       <>
@@ -14,5 +15,10 @@ const MainEvents = () => {
     </div>
   );
 };
-
-export default MainEvents;
+const mapStateToProps = (state) => {
+  return {
+    eventsList: state.eventsList,
+    addEvents: state.addEvents,
+  };
+};
+export default connect(mapStateToProps)(MainEvents);
