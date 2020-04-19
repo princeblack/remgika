@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import { fetchPlayground, fetcheventsList } from "../../actions";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import useOnclickOutside from "react-cool-onclickoutside";
-import { NavLink } from "react-router-dom";
-import camera from "../../img/camera.svg";
-import "../../scss/Playground.scss";
-import Play from "./Play";
-import ItemsCarousel from "react-items-carousel";
-import {  GoogleApiWrapper } from "google-maps-react";
+import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import { fetchPlayground, fetcheventsList } from '../../actions';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import useOnclickOutside from 'react-cool-onclickoutside';
+import { NavLink } from 'react-router-dom';
+import camera from '../../img/camera.svg';
+import '../../scss/Playground.scss';
+import Play from './Play';
+import ItemsCarousel from 'react-items-carousel';
+import { GoogleApiWrapper } from 'google-maps-react';
 const Test = (props) => {
-  const [userId,setUserID] = useState(0);
+  const [userId, setUserID] = useState(0);
   useEffect(() => {
     props.fetchPlayground();
     props.fetcheventsList();
@@ -26,7 +23,7 @@ const Test = (props) => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete({
-    requestOptions: "string",
+    requestOptions: 'string',
     debounce: 300,
   });
   const ref = useRef();
@@ -68,13 +65,12 @@ const Test = (props) => {
         </li>
       );
     });
+
   const [getPlay, setgetPlay] = useState();
   const handelCharacters = async (character) => {
     let filterCharacter;
     filterCharacter = await props.playground.filter((play) => {
-      return (
-        play.street.toLowerCase().indexOf(character.toLowerCase()) !== -1 
-      );
+      return play.street.toLowerCase().indexOf(character.toLowerCase()) !== -1;
     });
     setgetPlay(filterCharacter);
   };
@@ -87,9 +83,9 @@ const Test = (props) => {
       return <Play data={el} key={index}></Play>;
     });
   }
- const [activeItemIndex, setActiveItemIndex] = useState(0);
- const chevronWidth = 40;
- 
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const chevronWidth = 40;
+
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -103,7 +99,7 @@ const Test = (props) => {
             placeholder="Playground in your city"
           />
           {/* We can use the "status" to decide whether we should display the dropdown or not */}
-          {status === "OK" && <ul>{renderSuggestions()}</ul>}
+          {status === 'OK' && <ul>{renderSuggestions()}</ul>}
         </div>
         <div className="camera-flex">
           <NavLink to="/addplayground">
@@ -146,6 +142,4 @@ const mapStateToProps = (state) => {
 GoogleApiWrapper({
   // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 });
-export default connect(mapStateToProps, { fetchPlayground,fetcheventsList, GoogleApiWrapper })(
-  Test
-);
+export default connect(mapStateToProps, { fetchPlayground, fetcheventsList, GoogleApiWrapper })(Test);
