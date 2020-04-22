@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp, handleLogin } from "../../actions";
 import LoginHeader from "../login-signUp/LoginHeader";
-import game from "../../img/game.png";
+import black from "../../img/black-man-phone.svg";
+import { Link } from "react-router-dom";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class SignUp extends React.Component {
             <LoginHeader />
             <div className="sign-body">
               <div id="sign-img">
-                <img src={game} alt="remgika"></img>
+                <img src={black} alt="remgika"></img>
               </div>
               <div className="sign-form">
                 <h1>SIGN UP</h1>
@@ -102,6 +103,9 @@ class SignUp extends React.Component {
                     value="Submit"
                   />
                 </form>
+                <p>
+                  Already have an account? <Link to="/login">Sign In</Link>
+                </p>
               </div>
             </div>
           </div>

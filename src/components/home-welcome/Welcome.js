@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import remgika from "../../img/remgika.png";
-import {handleLogin} from "../../actions"
+import {handleLogin} from "../../actions";
+import black from "../../img/black-man.svg";
 
 class Welcome extends Component {
   render() {
@@ -27,7 +27,7 @@ class Welcome extends Component {
         </div> */}
       </header>
       <div className="first-section">
-        <img src={remgika} alt="remgika"></img>
+        <img src={black} alt="remgika"></img>
         <div className="remgika-texte">
           <h2>purus sit amet volutpat</h2>
           <p>

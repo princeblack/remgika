@@ -4,7 +4,7 @@ import "../../scss/MainEventsground.scss";
 
 import { connect } from "react-redux";
 
-const MainEvents = (props) => {
+const MainEvents = (props) => {  
   return (
     <div className="MainEventsground">
       <>

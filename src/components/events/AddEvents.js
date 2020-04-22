@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import LoginHeader from "../login-signUp/LoginHeader";
 import { events } from "../../actions/index";
 import done from "../../img/done.svg";
+import blackCalender from "../../img/black-events.svg";
+
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -123,10 +125,13 @@ const AddEvents = (props) => {
   const fileNum = imgCollection.length;
   return (
     <>
-      {isLoggedIn && 
+      {isLoggedIn && (
         <>
           <LoginHeader />
           <div className="addPlaygroung-form">
+            <div id="addPlay-img">
+              <img src={blackCalender} alt="game"></img>
+            </div>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="row flex-revcol-left fileNum">
                 <input
@@ -235,7 +240,7 @@ const AddEvents = (props) => {
             <div></div>
           </div>
         </>
-      }
+      )}
     </>
   );
 };

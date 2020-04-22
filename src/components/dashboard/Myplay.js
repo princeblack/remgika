@@ -5,6 +5,8 @@ import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
 import { deletePlay, myPlayground, updatePlay } from "../../actions/index";
 import close from "../../img/close.svg";
+import { Collapse } from "react-collapse";
+import classNames from "classnames";
 class Myplay extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class Myplay extends Component {
       postalCode: "",
       city: "",
       description: "",
+      activeIndex: null,
     };
     this.createChildren = this.createChildren.bind(this);
     this.changeActiveItem = this.changeActiveItem.bind(this);
@@ -23,15 +26,15 @@ class Myplay extends Component {
     this.handleToggleUpdateForm = this.handleToggleUpdateForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleClass = this.toggleClass.bind(this);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.playIsDelete !== this.props.playIsDelete) {
       this.props.myPlayground();
     }
     if (prevProps.playIsUpdate !== this.props.playIsUpdate) {
-            this.props.myPlayground();
-                this.props.updatePlay("");
-
+      this.props.myPlayground();
+      this.props.updatePlay("");
     }
   }
   componentDidMount() {
@@ -41,6 +44,11 @@ class Myplay extends Component {
       postalCode: this.props.data.postalCode,
       city: this.props.data.city,
       description: this.props.data.description,
+    });
+  }
+  toggleClass(index, e) {
+    this.setState({
+      activeIndex: this.state.activeIndex === index ? null : index,
     });
   }
   handleToggleUpdateForm = (e) => {
@@ -73,6 +81,7 @@ class Myplay extends Component {
     }
     data.delete("activeItemIndex", this.state.activeItemIndex);
     data.delete("setActiveItemIndex", this.state.setActiveItemIndex);
+     data.delete("activeIndex", this.state.activeIndex);
     const id = this.props.data._id;
     this.props.updatePlay(data, id);
   }
@@ -85,6 +94,7 @@ class Myplay extends Component {
         return <MyPlayimg data={el} key={index}></MyPlayimg>;
       });
     }
+    const index = this.props.playIndex;
     return (
       <>
         <div className="playgroud-item">
@@ -109,73 +119,83 @@ class Myplay extends Component {
           <div className="description">
             <p>{this.props.data.description}</p>
             <button onClick={this.handleClick}> Delete</button>
-            <button className="updatePlay" onClick={this.handleToggleUpdateForm}>
+            <button
+              className="updatePlay"
+              onClick={this.toggleClass.bind(this, index)}
+            >
               Update
             </button>
           </div>
-          <div className={`update-form`}>
-            <div className="close-item">
-              <img
-                src={close}
-                alt="close"
-                className="close"
-                onClick={this.handleToggleUpdateForm}
-              ></img>
-            </div>
-            {/**********************************************************
-             **********************************************************
-             **************** UPDATE PLAYGROUND  FORM *****************
-             **********************************************************
-             ********************************************************** */}
-            <div className="addPlaygroung-form">
-              <form onSubmit={this.handleSubmit}>
-                <div className="row flex-revcol-left">
+          {/**********************************************************
+           **********************************************************
+           **************** UPDATE PLAYGROUND  FORM *****************
+           **********************************************************
+           ********************************************************** */}
+          <Collapse isOpened={this.state.activeIndex === index}>
+            <div
+              className={classNames("update-form", {
+                show: this.state.activeIndex === index,
+                hide: this.state.activeIndex !== index,
+              })}
+            >
+              <div className="close-item">
+                <img
+                  src={close}
+                  alt="close"
+                  className="close"
+                  onClick={this.toggleClass.bind(this, index)}
+                ></img>
+              </div>
+              <div>
+                <form onSubmit={this.handleSubmit}>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
+                      name="title"
+                      type="text"
+                      value={this.state.title}
+                      placeholder="title or place name"
+                      onChange={this.handleInputChange}
+                      id="title"
+                      required
+                    />
+                  </div>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
+                      name="street"
+                      type="text"
+                      value={this.state.street}
+                      placeholder=" Addresse"
+                      onChange={this.handleInputChange}
+                      id="street"
+                      required
+                    />
+                  </div>
+                  <div className="row flex-revcol-left">
+                    <textarea
+                      className="input-transition"
+                      name="description"
+                      type="text"
+                      placeholder="description"
+                      value={this.state.description}
+                      onChange={this.handleInputChange}
+                      id="description"
+                      required
+                      maxLength={150}
+                      cols="30"
+                      rows="5"
+                    />
+                  </div>
                   <input
-                    className="input-transition"
-                    name="title"
-                    type="text"
-                    value={this.state.title}
-                    placeholder="title or place name"
-                    onChange={this.handleInputChange}
-                    id="title"
-                    required
+                    className="addPlay-submit"
+                    type="submit"
+                    value="Submit"
                   />
-                </div>
-                <div className="row flex-revcol-left">
-                  <input
-                    className="input-transition"
-                    name="street"
-                    type="text"
-                    value={this.state.street}
-                    placeholder=" Addresse"
-                    onChange={this.handleInputChange}
-                    id="street"
-                    required
-                  />
-                </div>
-                <div className="row flex-revcol-left">
-                  <textarea
-                    className="input-transition"
-                    name="description"
-                    type="text"
-                    placeholder="description"
-                    value={this.state.description}
-                    onChange={this.handleInputChange}
-                    id="description"
-                    required
-                    maxLength={150}
-                    cols="30"
-                    rows="5"
-                  />
-                </div>
-                <input
-                  className="addPlay-submit"
-                  type="submit"
-                  value="Submit"
-                />
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
+          </Collapse>
         </div>
       </>
     );

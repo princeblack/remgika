@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
     let PlaygroundList;
     if (!this.props.personalPlayground.error ) {            
       PlaygroundList = this.props.personalPlayground.map((el, index) => {
-        return <Myplay data={el} key={index}></Myplay>;
+        return <Myplay playIndex={index} data={el} key={index}></Myplay>;
       });
     }           
     return (

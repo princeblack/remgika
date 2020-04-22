@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { handleLogin } from "../../actions";
-import remgika from "../../img/remgika.png";
+import woman from "../../img/black-woman.svg";
 import LoginHeader from "./LoginHeader";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,7 @@ class Login extends React.Component {
             <LoginHeader />
             <div className="login-body">
               <div id="login-img">
-                <img src={remgika} alt="remgika"></img>
+                <img src={woman} alt="remgika"></img>
               </div>
               <div className="login-form">
                 <h1>SIGN IN</h1>

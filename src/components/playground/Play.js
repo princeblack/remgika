@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import link from '../../img/link.svg';
 import unlink from '../../img/unlink.svg';
 import map from '../../img/map.svg';
+import close from "../../img/close.svg";
 import ItemsCarousel from 'react-items-carousel';
 import PlayImage from './PlayImage';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import AddressInfo from './AddressInfo';
+import { Collapse } from "react-collapse";
+import classNames from "classnames";
+
+
 
 class Play extends Component {
   constructor(props) {
@@ -19,29 +24,22 @@ class Play extends Component {
       userlng: null,
       userlat: null,
       distanceResults: null,
-      count: 0,
+      activeIndex: null,
     };
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handlePlace = this.handlePlace.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.toggleClass = this.toggleClass.bind(this);
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(function (position) {});
     this.handlePlace();
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.google !== this.props.google) {
-  //     this.handlePlace();
-  //   }
-  // }
-
-  toggleSidebar = (e) => {
-    const mapBar = document.querySelector('.mapBar');
-    mapBar.classList.toggle('map-show');
-  };
-
+  toggleClass(index, e) {
+    this.setState({
+      activeIndex: this.state.activeIndex === index ? null : index,
+    });
+  }
   handlePlace() {
     let userlongitude, userlatitude;
 
@@ -51,7 +49,7 @@ class Play extends Component {
     });
 
     getGeocode({
-      address: this.props.data.street + ' ' + this.props.data.postalCode,
+      address: this.props.data.street + " " + this.props.data.postalCode,
     })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
@@ -81,58 +79,85 @@ class Play extends Component {
     });
 
     const mapStyles = {
-      position: 'relative',
-      width: '90%',
-      height: '100%',
+      position: "relative",
+      width: "100%",
+      height: "100%",
     };
-
+    const index = this.props.playIndex;
     return (
       <div className="playgroud-item">
         <div className="userVote">
           <img src={link} alt="like"></img>
           <img src={unlink} alt="unlike"></img>
         </div>
-        <ItemsCarousel
-          enablePlaceholder
-          requestToChangeActive={this.changeActiveItem}
-          activeItemIndex={activeItemIndex}
-          numberOfCards={1}
-          gutter={12}
-          outsideChevron={false}
-          chevronWidth={chevronWidth}
-        >
-          {image}
-        </ItemsCarousel>
+        <div className="image">
+          <ItemsCarousel
+            enablePlaceholder
+            requestToChangeActive={this.changeActiveItem}
+            activeItemIndex={activeItemIndex}
+            numberOfCards={1}
+            gutter={12}
+            outsideChevron={false}
+            chevronWidth={chevronWidth}
+          >
+            {image}
+          </ItemsCarousel>
+          <div className="info">
+            <p className="address">{this.props.data.street}</p>
+          </div>
+          <div className="dictanceInfo">
+            <AddressInfo
+              google={this.props.google}
+              data={this.state}
+            ></AddressInfo>
+          </div>
+        </div>
         <div>
           <h3>{this.props.data.title}</h3>
-        </div>
-        <div className="addressItem">
-          <div className="address">
-            <span>Place:</span>
-            <p>{this.props.data.street}</p>
-          </div>
-          <AddressInfo google={this.props.google} data={this.state}></AddressInfo>
         </div>
         <div className="description">
           <p>{this.props.data.description}</p>
         </div>
         <div className="mapLogo">
-          <img src={map} alt="map" onClick={this.toggleSidebar}></img>
+          <img
+            src={map}
+            alt="map"
+            onClick={this.toggleClass.bind(this, index)}
+          ></img>
+          <span>Click here to see the map</span>
         </div>
         {this.state.lng !== null && (
-          <div className="mapBar">
-            <Map
-              google={this.props.google}
-              zoom={14}
-              style={mapStyles}
-              initialCenter={{
-                lat: this.state.lat,
-                lng: this.state.lng,
-              }}
+          <Collapse isOpened={this.state.activeIndex === index}>
+            <div
+              className={classNames("map", {
+                show: this.state.activeIndex === index,
+                hide: this.state.activeIndex !== index,
+              })}
             >
-              <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />
-            </Map>
-          </div>
+              <div className="close-container">
+                <img
+                  className="close"
+                  src={close}
+                  alt="close"
+                  onClick={this.toggleClass.bind(this, index)}
+                ></img>
+              </div>
+              <Map
+                className="map"
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={{
+                  lat: this.state.lat,
+                  lng: this.state.lng,
+                }}
+              >
+                <Marker
+                  position={{ lat: this.state.lat, lng: this.state.lng }}
+                />
+              </Map>
+            </div>
+          </Collapse>
         )}
       </div>
     );

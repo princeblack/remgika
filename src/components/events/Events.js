@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import link from "../../img/link.svg";
 import unlink from "../../img/unlink.svg";
 import map from "../../img/map.svg";
+import close from "../../img/close.svg";
 import ItemsCarousel from "react-items-carousel";
 import EventsImage from "./EventsImage";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
-
+import AddressInfo from "./AddressInfo";
+import { Collapse } from "react-collapse";
+import classNames from "classnames";
+import moment from "moment";
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -18,27 +22,21 @@ class Events extends Component {
       userlng: null,
       userlat: null,
       distanceResults: null,
-      count: 0,
+      activeIndex: null,
     };
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handlePlace = this.handlePlace.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.toggleClass = this.toggleClass.bind(this);
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(function (position) {});
     this.handlePlace();
   }
-  componentDidUpdate(prevProps, prevState) {
-    this.handleDistance();
-    if (prevProps.google !== this.props.google) {
-      this.handlePlace();
-      this.handleDistance();
-    }
+  toggleClass(index, e) {
+    this.setState({
+      activeIndex: this.state.activeIndex === index ? null : index,
+    });
   }
-  toggleSidebar = (e) => {
-    const mapBar = document.querySelector(".mapBar");
-    mapBar.classList.toggle("map-show");
-  };
   handlePlace() {
     let userlongitude, userlatitude;
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -61,55 +59,6 @@ class Events extends Component {
       })
       .catch((error) => {});
   }
-
-  //  handle the distance google maps Api function
-  handleDistance() {
-    //  google maps distance INIT
-    const { google } = this.props;
-    const travelMode = "WALKING";
-    let theDistance = [];
-    const origins = new google.maps.LatLng(
-      this.state.userlng,
-      this.state.userlat
-    );
-    const destination = new google.maps.LatLng(this.state.lat, this.state.lng);
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [origins],
-        destinations: [destination],
-        travelMode: travelMode,
-      },
-      callback
-    );
-
-    // geting the result in the CALLBACK function
-    async function callback(response, status) {
-      if (status === "OK") {
-        var origins = response.originAddresses;
-        if (response.rows[0].elements[0].distance) {
-          for (var i = 0; i < origins.length; i++) {
-            var results = response.rows[i].elements;
-            for (var j = 0; j < results.length; j++) {
-              var element = results[j];
-              var distance = element.distance;
-              if (distance) {
-                var resultsDistance = distance.text;
-                theDistance.push(resultsDistance);
-              }
-            }
-          }
-        }
-      }
-    }
-    if (this.state.distanceResults !== theDistance && this.state.count === 0) {
-      this.setState({
-        distanceResults: theDistance,
-        count: 1,
-      });
-    }
-  }
-
   changeActiveItem(activeItemIndex) {
     this.setState({ activeItemIndex });
   }
@@ -122,74 +71,105 @@ class Events extends Component {
     });
     const mapStyles = {
       position: "relative",
-      width: "90%",
+      width: "100%",
       height: "100%",
     };
+    const index = this.props.eventsIndex;
+    const newDate = new Date(this.props.data.start);
+    const newEndDate = new Date(this.props.data.end);
+    const dateStart = moment(newDate);
+    const dateEnd = moment(newEndDate);
+    const start = moment(dateStart).format("dddd, MMMM D, h:mm A");
+    const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
+
     return (
       <div className="events-item">
         <div className="userVote">
           <img src={link} alt="like"></img>
           <img src={unlink} alt="unlike"></img>
         </div>
-        <ItemsCarousel
-          enablePlaceholder
-          requestToChangeActive={this.changeActiveItem}
-          activeItemIndex={activeItemIndex}
-          numberOfCards={1}
-          gutter={12}
-          outsideChevron={false}
-          chevronWidth={chevronWidth}
-        >
-          {image}
-        </ItemsCarousel>
-        <div>
-          <h3>{this.props.data.title}</h3>
+        <div className="image">
+          <ItemsCarousel
+            enablePlaceholder
+            requestToChangeActive={this.changeActiveItem}
+            activeItemIndex={activeItemIndex}
+            numberOfCards={1}
+            gutter={12}
+            outsideChevron={false}
+            chevronWidth={chevronWidth}
+          >
+            {image}
+          </ItemsCarousel>
+          <div className="info">
+            <p className="address">{this.props.data.address}</p>
+          </div>
+          <div className="dictanceInfo">
+            <AddressInfo
+              google={this.props.google}
+              data={this.state}
+            ></AddressInfo>
+          </div>
         </div>
-        <div className="addressItem">
-          <div className="address">
-            <span>Place:</span>
-            <p>{this.props.data.address}</p>
+        <div>
+          <h3>{this.props.data.eventName}</h3>
+        </div>
+        <div className="timeItem">
+          <div className="start">
+            <span>Start:</span>
+            <p>{start}</p>
           </div>
-          <div className="TimeItem">
-            <div className="start">
-              <span>Start:</span>
-              <p>{this.props.data.start}</p>
-            </div>
-            <div className="end">
-              <span>End:</span>
-              <p>{this.props.data.end}</p>
-            </div>
-          </div>
-          <div className="addressDistance">
-            {this.state.distanceResults !== null &&
-              this.state.distanceResults.length > 0 && (
-                <>
-                  <span>Distance:</span>
-                  <p>{this.state.distanceResults}</p>
-                </>
-              )}
+          <div className="end">
+            <span>End:</span>
+            <p>{end}</p>
           </div>
         </div>
         <div className="description">
           <p>{this.props.data.description}</p>
         </div>
         <div className="mapLogo">
-          <img src={map} alt="map" onClick={this.toggleSidebar}></img>
+          <img
+            src={map}
+            alt="map"
+            onClick={this.toggleClass.bind(this, index)}
+          ></img>
+          <span>Click here to see the map</span>
         </div>
         {this.state.lng !== null && (
-          <div className="mapBar">
-            <Map
-              google={this.props.google}
-              zoom={14}
-              style={mapStyles}
-              initialCenter={{
-                lat: this.state.lat,
-                lng: this.state.lng,
-              }}
+          <Collapse isOpened={this.state.activeIndex === index}>
+            <div
+              className={classNames("map", {
+                show: this.state.activeIndex === index,
+                hide: this.state.activeIndex !== index,
+              })}
             >
-              <Marker position={{ lat: this.state.lat, lng: this.state.lng }} />
-            </Map>
-          </div>
+              <div className="close-container">
+                <img
+                  className="close"
+                  src={close}
+                  alt="close"
+                  onClick={this.toggleClass.bind(this, index)}
+                ></img>
+              </div>
+
+              <Map
+                className="map"
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={{
+                  lat: this.state.lat,
+                  lng: this.state.lng,
+                }}
+              >
+                <Marker
+                  position={{
+                    lat: this.state.lat,
+                    lng: this.state.lng,
+                  }}
+                />
+              </Map>
+            </div>
+          </Collapse>
         )}
       </div>
     );

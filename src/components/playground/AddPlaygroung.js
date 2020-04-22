@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleLogin } from "../../actions";
 import { playground } from "../../actions/index";
 import done from "../../img/done.svg";
+import game from "../../img/game.png";
 import LoginHeader from "../login-signUp/LoginHeader";
 import "../../scss/AddplayAndEvents.scss";
 import { useForm } from "react-hook-form";
@@ -130,6 +131,9 @@ const AddPlaygroung = (props) => {
         <>
           <LoginHeader />
           <div className="addPlaygroung-form">
+            <div id="addPlay-img">
+              <img src={game} alt="game"></img>
+            </div>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="row flex-revcol-left fileNum">
                 <input

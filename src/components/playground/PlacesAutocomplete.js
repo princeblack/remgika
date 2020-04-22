@@ -10,7 +10,7 @@ import Play from './Play';
 import ItemsCarousel from 'react-items-carousel';
 import { GoogleApiWrapper } from 'google-maps-react';
 const Test = (props) => {
-  const [userId, setUserID] = useState(0);
+  const [userId] = useState(0);
   useEffect(() => {
     props.fetchPlayground();
     props.fetcheventsList();
@@ -76,11 +76,11 @@ const Test = (props) => {
   };
   let playgroundList;
   playgroundList = props.playground.map((el, index) => {
-    return <Play data={el} key={index}></Play>;
+    return <Play playIndex={index} data={el} key={index}></Play>;
   });
   if (getPlay !== undefined) {
     playgroundList = getPlay.map((el, index) => {
-      return <Play data={el} key={index}></Play>;
+      return <Play playIndex={index} data={el} key={index}></Play>;
     });
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);

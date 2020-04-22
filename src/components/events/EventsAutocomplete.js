@@ -80,7 +80,7 @@ const EventsAutocomplete = (props) => {
   });
   if (getEvents !== undefined) {
     events = getEvents.map((el, index) => {
-      return <Events data={el} key={index}></Events>;
+      return <Events eventsIndex={index} data={el} key={index}></Events>;
     });
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
