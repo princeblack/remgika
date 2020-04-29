@@ -105,7 +105,6 @@ export const handleLogOut = async (data) => {
 
 export const deleteProfileImage = async (data) => {
   const id = data;
-  if (window.confirm("Are you sure !")) {
     try {
       const res = await (
         await fetch(`${url}/images/${id}`, {
@@ -120,7 +119,7 @@ export const deleteProfileImage = async (data) => {
     } catch (error) {
       return [];
     }
-  }
+  
 };
 
 /**********************************************************
@@ -178,7 +177,6 @@ export const getMyPlayground = async (data) => {
 
 export const deletePlayground = async (data) => {
   const id = data;
-  if (window.confirm("Are you sure !")) {
     try {
       const res = await (
         await fetch(`${url}/playground/${id}`, {
@@ -193,7 +191,7 @@ export const deletePlayground = async (data) => {
     } catch (error) {
       return [];
     }
-  }
+  
 };
 
 export const updatePlayground = async (data, id) => {
@@ -243,4 +241,54 @@ export const getEventsList = async (data) => {
   } catch (error) {
     return [];
   }
+};
+
+export const getMyEvents = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/events/my`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+export const updateEvents = async (data, id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/events/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const deleteEvents = async (data) => {
+  const id = data;
+    try {
+      const res = await (
+        await fetch(`${url}/events/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+      ).json();
+      return res;
+    } catch (error) {
+      return [error];
+    }
+  
 };

@@ -81,7 +81,6 @@ class Events extends Component {
     const dateEnd = moment(newEndDate);
     const start = moment(dateStart).format("dddd, MMMM D, h:mm A");
     const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
-
     return (
       <div className="events-item">
         <div className="userVote">
@@ -122,6 +121,9 @@ class Events extends Component {
             <span>End:</span>
             <p>{end}</p>
           </div>
+        </div>
+        <div className="author">
+          <p>By:</p> <span>{this.props.user.firstName}</span>
         </div>
         <div className="description">
           <p>{this.props.data.description}</p>

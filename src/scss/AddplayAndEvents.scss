@@ -40,9 +40,9 @@ header {
       font-size: 15px;
     }
     ul {
-      // background-color: #c7cda4;
+      background-color: #e6e9d5;
       padding: 0;
-      border: solid 3px #c7cda4;
+      border: solid 3px #697a05;
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
       border-width: 1px 1px 1px;
@@ -51,8 +51,15 @@ header {
       text-align: left;
       border-image: initial;
       border-top: none;
+      width: 90%;
+      margin-left: 15px;
+
       li {
         margin: 5px;
+        color: rgb(70, 30, 30);
+        strong{
+          font-weight: 400;
+        }
       }
     }
     .fileNum {

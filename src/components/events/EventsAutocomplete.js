@@ -76,15 +76,22 @@ const EventsAutocomplete = (props) => {
   };
   let events;
   events = props.eventsList.map((el, index) => {
-    return <Events data={el} key={index}></Events>;
+    return (
+      <Events
+        user={props.info}
+        eventsIndex={index}
+        data={el}
+        key={index}
+      ></Events>
+    );
   });
   if (getEvents !== undefined) {
     events = getEvents.map((el, index) => {
-      return <Events eventsIndex={index} data={el} key={index}></Events>;
+      return <Events user={props.info} eventsIndex={index} data={el} key={index}></Events>;
     });
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 40;
+  const chevronWidth = 40;  
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">
@@ -135,6 +142,7 @@ const mapStateToProps = (state) => {
   return {
     eventsList: state.eventsList,
     addEvents: state.addEvents,
+    info: state.info,
   };
 };
 GoogleApiWrapper({

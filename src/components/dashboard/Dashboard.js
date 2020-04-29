@@ -1,12 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { authorise, myPlayground, allMyImage } from "../../actions/index";
+import {
+  authorise,
+  myPlayground,
+  allMyImage,
+  myEvents,
+} from "../../actions/index";
 import "../../scss/Dashboard.scss";
 import Profile from "./Profile";
 import Myplay from "./Myplay";
 import "../../scss/myplay.scss";
-
+import MyEvents from "./MyEvents";
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +19,7 @@ class Dashboard extends React.Component {
       isToggleOn: true,
       playToggle: true,
       evantToggle: true,
+      deletePLAY: true,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,12 +28,39 @@ class Dashboard extends React.Component {
     this.handleEvents = this.handleEvents.bind(this);
   }
   componentDidMount() {
-    if (this.props.isLoggedIn) {      
+    if (this.props.isLoggedIn) {
       this.props.myPlayground();
-      this.props.allMyImage();     
-
+      this.props.allMyImage();
+      this.props.myEvents();
+      this.props.authorise();
     }
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.valideImg !== this.props.valideImg) {
+      this.props.allMyImage();
+    }
+    // playground
+    if (
+      prevProps.personalPlayground.length !==
+      this.props.personalPlayground.length
+    ) {
+      this.props.myPlayground();
+    }
+    if (prevProps.playIsDelete !== this.props.playIsDelete) {
+      this.props.myPlayground();
+    }
+    if (prevProps.playIsUpdate !== this.props.playIsUpdate) {
+      this.props.myPlayground();
+    }
+    // evenement
+    if (prevProps.eventIsUpdate !== this.props.eventIsUpdate) {
+      this.props.myEvents();
+    }
+    if (prevProps.eventIsDelete !== this.props.eventIsDelete) {
+      this.props.myEvents();
+    }
+  }
+
   handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -82,12 +115,19 @@ class Dashboard extends React.Component {
     const isToggleOn = this.state.isToggleOn;
     const evantToggle = this.state.evantToggle;
     const playToggle = this.state.playToggle;
+
     let PlaygroundList;
-    if (!this.props.personalPlayground.error ) {            
+    if (!this.props.personalPlayground.error) {
       PlaygroundList = this.props.personalPlayground.map((el, index) => {
-        return <Myplay playIndex={index} data={el} key={index}></Myplay>;
+        return <Myplay awat playIndex={index} data={el} key={index}></Myplay>;
       });
-    }           
+    }
+    let EventsList;
+    if (!this.props.personalEvents.error) {
+      EventsList = this.props.personalEvents.map((el, index) => {
+        return <MyEvents playIndex={index} data={el} key={index}></MyEvents>;
+      });
+    }
     return (
       <>
         {!isLoggedIn ? (
@@ -114,10 +154,14 @@ class Dashboard extends React.Component {
                   </>
                 )}
               </>
-              <>{!evantToggle && <p>hallo</p>}</>
+              <>
+                {!evantToggle && (
+                  <div className="all-my-events-play">{EventsList}</div>
+                )}
+              </>
               <>
                 {!playToggle && (
-                  <div className="all-my-play">{PlaygroundList}</div>
+                  <div className="all-my-events-play">{PlaygroundList}</div>
                 )}
               </>
             </div>
@@ -132,10 +176,20 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
     personalPlayground: state.personalPlayground,
+    personalEvents: state.personalEvents,
+    proImage: state.proImage,
+    sign: state.sign,
+    playIsDelete: state.playIsDelete,
+    playIsUpdate: state.playIsUpdate,
+    eventIsUpdate: state.eventIsUpdate,
+    eventIsDelete: state.eventIsDelete,
+    valideImg: state.valideImg,
+    ImageIsDelete: state.ImageIsDelete,
   };
 };
 export default connect(mapStateToProps, {
   authorise,
   myPlayground,
   allMyImage,
+  myEvents,
 })(Dashboard);

@@ -1,24 +1,37 @@
-import React, { useState,  useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import LoginHeader from "../login-signUp/LoginHeader";
-import { events } from "../../actions/index";
+import { events, myEvents } from "../../actions/index";
 import done from "../../img/done.svg";
 import blackCalender from "../../img/black-events.svg";
+import { Redirect } from "react-router-dom";
 
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
-import DatePicker  from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 const AddEvents = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [imgCollection, setimgCollection] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [redirect, setRedirect] = useState(false);
+  useEffect(() => {
+    async function f() {
+      if (props.addEvents) {
+        console.log(props.addEvents);
+        setTimeout(() => {
+          setRedirect(true);
+          props.myEvents();
+        }, 3000);
+      }
+    }
+    f();
+  }, [props.addEvents]);
   const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 3) {
@@ -109,7 +122,7 @@ const AddEvents = (props) => {
   const onSubmit = (e) => {
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
-      data.append("imgCollection", e.imgCollection[key]);      
+      data.append("imgCollection", e.imgCollection[key]);
     }
     data.append("start", startDate);
     data.append("end", endDate);
@@ -121,10 +134,11 @@ const AddEvents = (props) => {
   };
 
   const isLoggedIn = props.isLoggedIn;
-  const addPlay = props.addplay;
+  const addEvents = props.addEvents;
   const fileNum = imgCollection.length;
   return (
     <>
+      {redirect && <Redirect to="/events"></Redirect>}
       {isLoggedIn && (
         <>
           <LoginHeader />
@@ -231,9 +245,9 @@ const AddEvents = (props) => {
               </div>
               <input className="addPlay-submit" type="submit" value="Submit" />
             </form>
-            {addPlay && (
+            {addEvents && (
               <div className="addPlaygound-accept" id="accept">
-                <p> the events is add successfuly</p>
+                <p> The events is add successfuly</p>
                 <img src={done} alt="done"></img>
               </div>
             )}
@@ -247,8 +261,8 @@ const AddEvents = (props) => {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
-    addplay: state.addPlay,
+    addEvents: state.addEvents,
     info: state.info,
   };
 };
-export default connect(mapStateToProps, { events })(AddEvents);
+export default connect(mapStateToProps, { events, myEvents })(AddEvents);

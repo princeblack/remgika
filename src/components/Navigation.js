@@ -27,13 +27,12 @@ class Navigation extends Component {
       refrech: false,
     };
   }
- async componentDidMount() {
-     this.props.allMyImage();     
-    if (this.props.isLoggedIn) {
-      this.props.authorise();
-      this.props.allMyImage();     
-    }
-  }
+//  componentDidMount() {
+//     if (this.props.isLoggedIn) {
+//       this.props.authorise();
+//       this.props.allMyImage();     
+//     }
+//   }
   componentDidUpdate(prevProps) {
     if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
       this.props.allMyImage();     

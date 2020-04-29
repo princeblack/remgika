@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
-import { handleLogin } from "../../actions";
+import { handleLogin, myPlayground } from "../../actions";
 import { playground } from "../../actions/index";
 import done from "../../img/done.svg";
 import game from "../../img/game.png";
+import { Redirect } from "react-router-dom";
 import LoginHeader from "../login-signUp/LoginHeader";
 import "../../scss/AddplayAndEvents.scss";
 import { useForm } from "react-hook-form";
@@ -16,6 +17,20 @@ import useOnclickOutside from "react-cool-onclickoutside";
 const AddPlaygroung = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [imgCollection, setimgCollection] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    async function f() {
+      if (props.addplay) {
+        setTimeout(() => {
+          setRedirect(true);
+          props.myPlayground();
+        }, 3000);
+      }
+    }
+    f();
+  }, [props.addplay]);
+
   const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 3) {
@@ -24,7 +39,6 @@ const AddPlaygroung = (props) => {
     }
     return true;
   };
-
   const {
     value,
     suggestions: { status, data },
@@ -105,8 +119,6 @@ const AddPlaygroung = (props) => {
 
   const onSubmit = (e) => {
     //  e.preventDefault();
-    console.log(e.imgCollection);
-
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
@@ -120,15 +132,11 @@ const AddPlaygroung = (props) => {
   const isLoggedIn = props.isLoggedIn;
   const addPlay = props.addplay;
   const fileNum = imgCollection.length;
-  if (addPlay) {
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 5000);
-  }
   return (
     <>
       {isLoggedIn ? (
         <>
+          {redirect && <Redirect to="/playground"></Redirect>}
           <LoginHeader />
           <div className="addPlaygroung-form">
             <div id="addPlay-img">
@@ -209,10 +217,12 @@ const AddPlaygroung = (props) => {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
-    addplay: state.addPlay,
+    addplay: state.addplay,
     info: state.info,
   };
 };
-export default connect(mapStateToProps, { playground, handleLogin })(
-  AddPlaygroung
-);
+export default connect(mapStateToProps, {
+  playground,
+  handleLogin,
+  myPlayground,
+})(AddPlaygroung);

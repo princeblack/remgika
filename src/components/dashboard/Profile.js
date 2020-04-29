@@ -19,20 +19,11 @@ class Profile extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
-  componentDidMount() {
-    this.props.allMyImage();
+  forceUpdateHandler() {
+    this.forceUpdate();
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.valideImg !== this.props.valideImg) {
-      this.props.allMyImage();
-    }
-    if (prevProps.ImageIsDelete !== this.props.ImageIsDelete) {
-      this.props.allMyImage();
-    }
-  }
-
   maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 1) {
@@ -122,7 +113,7 @@ class Profile extends React.Component {
     if (this.props.ImageIsDelete) {
       setTimeout(() => {
         window.location.reload(false);
-      }, 1);
+      }, 0);
     }
     return (
       <>

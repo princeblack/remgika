@@ -137,12 +137,12 @@ $remgika: #c7cda4;
           top: 0;
           width: 100%;
           .address {
-            background: #31aa37;;
+            background: #31aa37;
             padding: 2px 5px;
             border-radius: 5px;
           }
           .address-info {
-            background: #31aa37;;
+            background: #31aa37;
             padding: 2px 5px;
             border-radius: 5px;
           }
@@ -165,19 +165,29 @@ $remgika: #c7cda4;
             width: 100%;
             .addressDistance {
               display: flex;
-              background: #31aa37;;
+              background: #31aa37;
               justify-content: space-between;
               border-radius: 5px;
               padding: 2px 5px;
             }
             .addressDuration {
               display: flex;
-              background: #31aa37;;
+              background: #31aa37;
               justify-content: space-around;
               border-radius: 5px;
               padding: 2px 5px;
             }
           }
+        }
+      }
+      .author {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1px;
+        p {
+          margin: 5px;
+          font-weight: 400;
         }
       }
       .description {
@@ -190,43 +200,50 @@ $remgika: #c7cda4;
           word-wrap: break-word;
         }
       }
-      .mapLogo {
-                display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        span{
-          color: rgb(189, 65, 65);
-        }
-        img {
-          width: 20%;
-          height: 50px;
-          -webkit-animation: scale-up-center 1s
-            cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
-          animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
-            infinite both;
-        }
-        @-webkit-keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+      .map-feedback {
+        display: flex;
+        justify-content: space-around;
+        margin: 5px;
+        .mapLogo {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          // width: 50%;
+          span {
+            color: rgb(189, 65, 65);
           }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
+          img {
+            // width: 50%;
+            height: 50px;
+            -webkit-animation: scale-up-center 1s
+              cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
+            animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+              infinite both;
           }
-        }
-        @keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+          @-webkit-keyframes scale-up-center {
+            0% {
+              -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+            }
+            100% {
+              -webkit-transform: scale(1);
+              transform: scale(1);
+            }
           }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
+          @keyframes scale-up-center {
+            0% {
+              -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+            }
+            100% {
+              -webkit-transform: scale(1);
+              transform: scale(1);
+            }
           }
         }
       }
+      // map contenaire
       .map.hide {
         visibility: hidden;
         display: none;
@@ -234,10 +251,10 @@ $remgika: #c7cda4;
       .map.show {
         visibility: visible !important;
         background-color: rgb(216, 212, 212);
-        position: relative;
+        position: absolute;
         width: 100%;
         height: 100%;
-        top: -410px;
+        top: 0px;
         z-index: 1;
         animation-name: maptransition;
         animation-duration: 1s;
@@ -256,14 +273,81 @@ $remgika: #c7cda4;
           z-index: 2;
         }
       }
+      // feedback container 
+      .feedback.hide {
+        visibility: hidden;
+        display: none;
+      }
+      .feedback.show {
+        visibility: visible !important;
+        background-color: rgb(216, 212, 212);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        z-index: 1;
+        animation-name: feedbacktransition;
+        animation-duration: 1s;
+        transition: width 2s linear 1s;
+        .close-container {
+          display: flex;
+          justify-content: flex-end;
+          height: 50px;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        .map {
+          height: 80vh !important;
+          z-index: 2;
+        }
+        form{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          textarea{
+            border: none;
+            border-radius: 2px;
+            &:focus{
+              border: none;
+              outline: none;
+            }
+          }
+          input{
+            background-color: green;
+            color: white;
+            width: 100px;
+            border: none;
+            margin: 5px;
+            font-size: 20px;
+          }
+        }
+        .all-comment{
+          margin: 5px;
+          display: flex;
+        }
+      }
     }
+    // map contenaire anaimation
     @keyframes maptransition {
       0% {
-        top: 0px;
+        top: 500px;
       }
 
       100% {
-        top: -410px;
+        top: 0px;
+      }
+    }
+    // commenter contenaire animation
+        @keyframes feedbacktransition {
+      0% {
+        top: 500px;
+      }
+
+      100% {
+        top: 0px;
       }
     }
     .kaHnvc {

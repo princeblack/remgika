@@ -62,7 +62,7 @@ class AddressInfo extends Component {
         )}
         {this.state.duration !== null && (
           <div className="addressDuration">
-            <span>Duration:</span>
+            <span>Walking:</span>
             <p>{this.state.duration}</p>
           </div>
         )}

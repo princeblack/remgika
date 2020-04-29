@@ -76,11 +76,13 @@ const Test = (props) => {
   };
   let playgroundList;
   playgroundList = props.playground.map((el, index) => {
-    return <Play playIndex={index} data={el} key={index}></Play>;
+    return <Play user={props.info} playIndex={index} data={el} key={index}></Play>;
   });
   if (getPlay !== undefined) {
     playgroundList = getPlay.map((el, index) => {
-      return <Play playIndex={index} data={el} key={index}></Play>;
+      return (
+        <Play user={props.info} playIndex={index} data={el} key={index}></Play>
+      );
     });
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -137,6 +139,7 @@ const mapStateToProps = (state) => {
     playground: state.playground,
     addPlay: state.addPlay,
     eventsList: state.eventsList,
+    info: state.info
   };
 };
 GoogleApiWrapper({

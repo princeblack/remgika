@@ -7,22 +7,26 @@ const initialState = {
   // user Image
   proImage: [],
   valideImg: false,
+  ImageIsDelete: false,
   // playground
-  addPlay: false,
+  addplay: false,
   personalPlayground: [],
   playground: [],
-  ImageIsDelete: false,
   playIsDelete: false,
   playIsUpdate: false,
   // events
   addEvents: false,
   eventsList: [],
+  personalEvents: [],
+  eventIsUpdate: false,
+  eventIsDelete: false,
 };
 
 const mainReducer = (state = initialState, action) => {
   /**********************************************************
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
+
   if (action.type === "HANDLE_USER") {
     if (
       action.payload.hasOwnProperty("error") ||
@@ -36,6 +40,7 @@ const mainReducer = (state = initialState, action) => {
       state.info = action.payload;
     }
     state.loading = false;
+
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_LOGIN") {
@@ -55,7 +60,6 @@ const mainReducer = (state = initialState, action) => {
   }
 
   if (action.type === "HANDLE_SIGN") {
-    debugger;
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
@@ -71,6 +75,14 @@ const mainReducer = (state = initialState, action) => {
     state.loading = false;
     return Object.assign({}, state);
   }
+  if (action.type === "HANDLE_LOGOUT") {
+    state.isLoggedIn = false;
+    state.sign = false;
+    return Object.assign({}, state);
+  }
+  /**********************************************************
+   ************************ Profile iMAGES ***********************
+   ***********************************************************/
   if (action.type === "ADD_PROFILE_IMAGE") {
     if (
       action.payload.hasOwnProperty("error") ||
@@ -80,30 +92,16 @@ const mainReducer = (state = initialState, action) => {
       state.valideImg = false;
     } else {
       state.valideImg = true;
-      console.log(state.valideImg, "add-reducer");
     }
-    state.loading = false;
     return Object.assign({}, state);
   }
   if (action.type === "GET_PROFILE_IMAGE") {
-    if (
-      action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
-    ) {
-    } else {
-      for (let proImage of Object.keys(action.payload)) {
-        state.proImage = [action.payload[proImage]];
-      }
+    for (let proImage of Object.keys(action.payload)) {
+      state.proImage = [action.payload[proImage]];
     }
     return Object.assign({}, state);
   }
 
-  if (action.type === "HANDLE_LOGOUT") {
-    state.isLoggedIn = false;
-    state.sign = false;
-    state.valideImg = false;
-    return Object.assign({}, state);
-  }
   if (action.type === "DELETE_PROFILE_IMAGE") {
     if (
       action.payload.hasOwnProperty("error") ||
@@ -111,7 +109,6 @@ const mainReducer = (state = initialState, action) => {
       action.payload.hasOwnProperty("length")
     ) {
       state.ImageIsDelete = false;
-      console.log(state.ImageIsDelete, "is false");
     } else {
       state.ImageIsDelete = true;
     }
@@ -131,15 +128,18 @@ const mainReducer = (state = initialState, action) => {
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.addPlay = false;
+      state.addplay = false;
     } else {
-      state.addPlay = true;
+      state.addplay = true;
     }
     state.loading = false;
     return Object.assign({}, state);
   }
   if (action.type === "MY_PLAYGROUND") {
     state.personalPlayground = action.payload;
+    state.playIsDelete = false;
+    state.playIsUpdate = false;
+    // state.addEvent = false;
     return Object.assign({}, state);
   }
   if (action.type === "DELETE_PLAYGROUND") {
@@ -185,6 +185,39 @@ const mainReducer = (state = initialState, action) => {
     state.eventsList = action.payload;
     return Object.assign({}, state);
   }
+  if (action.type === "MY_EVENTS") {
+    state.personalEvents = action.payload;
+    state.eventIsUpdate = false;
+    state.eventIsDelete = false;
+    state.addEvents = false;
+
+    return Object.assign({}, state);
+  }
+  if (action.type === "UPDATE_EVENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.eventIsUpdate = false;
+    } else {
+      state.eventIsUpdate = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "DELETE_EVENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.eventIsDelete = false;
+    } else {
+      state.eventIsDelete = true;
+    }
+    return Object.assign({}, state);
+  }
+
   return state;
 };
 

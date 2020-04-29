@@ -13,17 +13,23 @@ import Playground from "./playground/Playground";
 import AddPlaygroung from "./playground/AddPlaygroung";
 import MainEvents from "./events/MainEvents";
 import AddEvents from "./events/AddEvents";
+import Loading from "./Loading";
 
 class App extends React.Component {
-  async componentDidMount() {
-    this.props.authorise();
+   componentDidMount() {
+    this.props.authorise();    
     if (this.props.isLoggedIn) {
       this.props.allMyImage();
+      this.props.myPlayground();
+      this.props.myEvents();
+      this.props.authorise();    
     }
   }
   render() {
+    const loading = this.props.loading
     return (
       <div className="App">
+        {loading && <Loading></Loading>}
         <BrowserRouter>
           <Navigation></Navigation>
           <Switch>
@@ -34,7 +40,6 @@ class App extends React.Component {
             <Route exact path="/playground" component={Playground} />
             <Route exact path="/events" component={MainEvents} />
             <Route exact path="/addEvents" component={AddEvents} />
-
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route path="*" component={NotFound} />
           </Switch>
@@ -47,7 +52,8 @@ const mapsStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
-    proImage: state.proImage
+    proImage: state.proImage,
+    loading: state.loading
   };
 };
 

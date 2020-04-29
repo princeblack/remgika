@@ -13,6 +13,9 @@ import {
   updatePlayground,
   addEvents,
   getEventsList,
+  getMyEvents,
+  updateEvents,
+  deleteEvents,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -151,6 +154,35 @@ export const fetcheventsList = (payload) => {
     const data = await getEventsList();
     dispatch({
       type: "FETCH_EVENTS",
+      payload: data,
+    });
+  };
+};
+export const myEvents = (payload) => {
+  return async (dispatch) => {
+    const data = await getMyEvents();
+    dispatch({
+      type: "MY_EVENTS",
+      payload: data,
+    });
+  };
+};
+
+export const updateEvent = (payload, id) => {
+  return async (dispatch) => {
+    const data = await updateEvents(payload, id);
+    dispatch({
+      type: "UPDATE_EVENT",
+      payload: data,
+    });
+  };
+};
+
+export const deleteEvent = (payload) => {
+  return async (dispatch) => {
+    const data = await deleteEvents(payload);
+    dispatch({
+      type: "DELETE_EVENT",
       payload: data,
     });
   };

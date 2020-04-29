@@ -1,7 +1,7 @@
 $main-color: #69ca62;
 $remgika: #c7cda4;
 .mainProfile {
-  .all-my-play {
+  .all-my-events-play {
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -78,11 +78,15 @@ $remgika: #c7cda4;
         visibility: hidden;
         display: none;
       }
-      .update-form ,.show{
+      .update-form.show{
+       visibility: visible !important;
         position: relative;
-        bottom: 350px;
-        visibility: visible;
-        // width: 100%;
+        width: 100%;
+        top: 0px;
+        z-index: 1;
+        animation-name: maptransition;
+        animation-duration: 1s;
+        transition: width 2s linear 1s;
         background-color: rgb(238, 233, 220);
         display: flex;
         flex-direction: column;

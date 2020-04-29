@@ -3,49 +3,67 @@ import { connect } from "react-redux";
 import MyPlayimg from "./MyPlayimg";
 import ItemsCarousel from "react-items-carousel";
 import range from "lodash/range";
-import { deletePlay, myPlayground, updatePlay } from "../../actions/index";
+import { updateEvent, myEvents, deleteEvent } from "../../actions/index";
 import close from "../../img/close.svg";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
-class Myplay extends Component {
+import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+class MyEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeItemIndex: 0,
       setActiveItemIndex: 0,
-      title: "",
-      street: "",
-      postalCode: "",
-      city: "",
+      eventName: "",
+      address: "",
       description: "",
       activeIndex: null,
+      startDate: new Date(),
+      endDate: new Date(),
     };
     this.createChildren = this.createChildren.bind(this);
     this.changeActiveItem = this.changeActiveItem.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleToggleUpdateForm = this.handleToggleUpdateForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleClass = this.toggleClass.bind(this);
+    this.handleDateStart = this.handleDateStart.bind(this);
+    this.handleDateEnd = this.handleDateEnd.bind(this);
   }
   componentDidMount() {
     this.setState({
-      title: this.props.data.title,
-      street: this.props.data.street,
-      postalCode: this.props.data.postalCode,
-      city: this.props.data.city,
+      eventName: this.props.data.eventName,
+      address: this.props.data.address,
+      start: this.props.data.start,
+      end: this.props.data.end,
       description: this.props.data.description,
     });
   }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.eventIsUpdate !== this.props.eventIsUpdate) {
+  //     this.props.myEvents();
+  //   }
+  //   if (prevProps.eventIsDelete !== this.props.eventIsDelete) {
+  //     this.props.myEvents();
+  //   }
+  // }
   toggleClass(index, e) {
     this.setState({
       activeIndex: this.state.activeIndex === index ? null : index,
     });
   }
-  handleToggleUpdateForm = (e) => {
-    const updateForm = document.querySelector(".update-form");
-    updateForm.classList.toggle("updateForm-show");
-  };
+  handleDateStart(e) {
+    this.setState({
+      startDate: e,
+    });
+  }
+  handleDateEnd(e) {
+    this.setState({
+      endDate: e,
+    });
+  }
   createChildren = (n) =>
     range(n).map((i) => (
       <div key={i} style={{ height: 200, background: "#333" }}>
@@ -62,19 +80,18 @@ class Myplay extends Component {
   }
   handleClick() {
     const id = this.props.data._id;
-    this.props.deletePlay(id);
+    this.props.deleteEvent(id);
   }
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData();
-    for (var key in this.state) {
-      data.append(key, this.state[key]);
-    }
-    data.delete("activeItemIndex", this.state.activeItemIndex);
-    data.delete("setActiveItemIndex", this.state.setActiveItemIndex);
-     data.delete("activeIndex", this.state.activeIndex);
+    data.append("eventName", this.state.eventName);
+    data.append("address", this.state.address);
+    data.append("start", this.state.startDate);
+    data.append("end", this.state.endDate);
+    data.append("description", this.state.description);
     const id = this.props.data._id;
-    this.props.updatePlay(data, id);
+    this.props.updateEvent(data, id);
   }
   render() {
     const chevronWidth = 40;
@@ -86,6 +103,13 @@ class Myplay extends Component {
       });
     }
     const index = this.props.playIndex;
+
+    const newDate = new Date(this.props.data.start);
+    const newEndDate = new Date(this.props.data.end);
+    const dateStart = moment(newDate);
+    const dateEnd = moment(newEndDate);
+    const start = moment(dateStart).format("dddd, MMMM D, h:mm A");
+    const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
     return (
       <>
         <div className="playgroud-item">
@@ -105,8 +129,17 @@ class Myplay extends Component {
           </div>
           <div className="addressItem">
             <span>Place:</span>
-            <p>{this.props.data.street}</p>
+            <p>{this.props.data.address}</p>
           </div>
+          <div className="addressItem">
+            <span>Start:</span>
+            <p>{start}</p>
+          </div>
+          <div className="addressItem">
+            <span>End:</span>
+            <p>{end}</p>
+          </div>
+
           <div className="description">
             <p>{this.props.data.description}</p>
             <button onClick={this.handleClick}> Delete</button>
@@ -142,10 +175,10 @@ class Myplay extends Component {
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
-                      name="title"
+                      name="eventName"
                       type="text"
-                      value={this.state.title}
-                      placeholder="title or place name"
+                      value={this.state.eventName}
+                      placeholder="Events name"
                       onChange={this.handleInputChange}
                       id="title"
                       required
@@ -154,14 +187,58 @@ class Myplay extends Component {
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
-                      name="street"
+                      name="address"
                       type="text"
-                      value={this.state.street}
-                      placeholder=" Addresse"
+                      value={this.state.address}
+                      placeholder="Addresse"
                       onChange={this.handleInputChange}
                       id="street"
                       required
                     />
+                  </div>
+                  <div className="calender">
+                    <div className="StartCalender">
+                      <p className="Start">Start :</p>
+                      <DatePicker
+                        name="start"
+                        selected={this.state.startDate}
+                        onChange={(date) => this.handleDateStart(date)}
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                        showYearDropdown
+                        scrollableYearDropdown
+                        required
+                        dateFormat="MM/dd/yyyy HH:mm aa"
+                        showTimeInput
+                        timeInputLabel="Time:"
+                        timeCaption="Time"
+                      >
+                        <div style={{ color: "red" }}>
+                          Don't forget to check the weather!
+                        </div>
+                      </DatePicker>
+                    </div>
+                    <div className="EndCalender">
+                      <p className="End">End :</p>
+                      <DatePicker
+                        name="end"
+                        selected={this.state.endDate}
+                        onChange={(date) => this.handleDateEnd(date)}
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                        showYearDropdown
+                        scrollableYearDropdown
+                        required
+                        dateFormat="MM/dd/yyyy HH:mm aa"
+                        showTimeInput
+                        timeInputLabel="Time:"
+                        timeCaption="Time"
+                      >
+                        <div style={{ color: "red" }}>
+                          Don't forget to check the weather!
+                        </div>
+                      </DatePicker>
+                    </div>
                   </div>
                   <div className="row flex-revcol-left">
                     <textarea
@@ -198,11 +275,13 @@ const mapStateToProps = (state) => {
     info: state.info,
     personalPlayground: state.personalPlayground,
     playIsDelete: state.playIsDelete,
-    playIsUpdate: state.playIsUpdate
+    playIsUpdate: state.playIsUpdate,
+    eventIsUpdate: state.eventIsUpdate,
+    eventIsDelete: state.eventIsDelete,
   };
 };
 export default connect(mapStateToProps, {
-  deletePlay,
-  myPlayground,
-  updatePlay,
-})(Myplay);
+  updateEvent,
+  myEvents,
+  deleteEvent,
+})(MyEvents);
