@@ -139,7 +139,7 @@ const mainReducer = (state = initialState, action) => {
     state.personalPlayground = action.payload;
     state.playIsDelete = false;
     state.playIsUpdate = false;
-    // state.addEvent = false;
+    state.addplay = false;
     return Object.assign({}, state);
   }
   if (action.type === "DELETE_PLAYGROUND") {
@@ -190,7 +190,6 @@ const mainReducer = (state = initialState, action) => {
     state.eventIsUpdate = false;
     state.eventIsDelete = false;
     state.addEvents = false;
-
     return Object.assign({}, state);
   }
   if (action.type === "UPDATE_EVENT") {
