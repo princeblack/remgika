@@ -19,7 +19,7 @@ const AddPlaygroung = (props) => {
   const [imgCollection, setimgCollection] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {    
     async function f() {
       if (props.addplay) {
         setTimeout(() => {

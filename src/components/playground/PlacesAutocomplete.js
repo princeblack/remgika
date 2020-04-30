@@ -10,11 +10,12 @@ import Play from './Play';
 import ItemsCarousel from 'react-items-carousel';
 import { GoogleApiWrapper } from 'google-maps-react';
 const Test = (props) => {
-  const [userId] = useState(0);
   useEffect(() => {
+    console.log("test");
+
     props.fetchPlayground();
     props.fetcheventsList();
-  }, [userId]);
+  }, []);
 
   const {
     ready,

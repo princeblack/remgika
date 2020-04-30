@@ -1,4 +1,5 @@
-const url = "https://node-server.remgika.com";
+// const url = "https://node-server.remgika.com";
+const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -53,7 +54,7 @@ export const addProfileImage = async (data) => {
 export const getProfileImage = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/images/my`, {
+      await fetch(`${url}/images/profileImage`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +72,7 @@ export const getProfileImage = async (data) => {
 export const authoriseUser = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/users/me`, {
+      await fetch(`${url}/users/auth`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +162,7 @@ export const addPlayground = async (data) => {
 export const getMyPlayground = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/playground/my`, {
+      await fetch(`${url}/playground/userPlay`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -246,7 +247,7 @@ export const getEventsList = async (data) => {
 export const getMyEvents = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/events/my`, {
+      await fetch(`${url}/events/userEvent`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
