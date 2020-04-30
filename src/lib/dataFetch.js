@@ -1,5 +1,5 @@
-// const url = "https://node-server.remgika.com";
-const url = "http://localhost:8000";
+const url = "https://node-server.remgika.com";
+// const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
