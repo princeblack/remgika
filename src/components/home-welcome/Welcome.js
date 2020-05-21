@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import {handleLogin} from "../../actions";
 import black from "../../img/black-man.svg";
+import '../../scss/welcom.scss'
 
 class Welcome extends Component {
   render() {

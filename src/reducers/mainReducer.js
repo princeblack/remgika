@@ -20,6 +20,8 @@ const initialState = {
   personalEvents: [],
   eventIsUpdate: false,
   eventIsDelete: false,
+  // COMMENT
+  addComment: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -216,7 +218,31 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-
+  /**********************************************************
+   ************************ comment ****************************
+   ***********************************************************/
+  if (action.type === "ADD_COMMENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addComment = false;
+    } else {
+      state.addComment = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "FETCH_COMMENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+    } else {
+    }
+    return Object.assign({}, state);
+  }
   return state;
 };
 

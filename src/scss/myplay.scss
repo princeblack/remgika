@@ -178,3 +178,71 @@ $remgika: #c7cda4;
     }
   }
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+  .App {
+    .all-my-events-play{
+      flex-direction: row;
+      flex-wrap: wrap;
+      .playgroud-item{
+        width: 40%;
+        .userVote {
+          img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+          :first-child {
+            margin-right: 10px;
+          }
+        }
+        img {
+          border-radius: 10px;
+          width: 99%;
+          // height: 100px;
+          object-fit: cover;
+          height: 300px;
+        }
+      }
+    }
+  }
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .App {
+    .all-my-events-play{
+      flex-direction: row;
+      flex-wrap: wrap;
+      .playgroud-item{
+        width: 30%;
+        .userVote {
+          img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+          :first-child {
+            margin-right: 10px;
+          }
+        }
+        img {
+          border-radius: 10px;
+          width: 99%;
+          object-fit: contain;
+          height: 300px;
+        }
+      }
+    }
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}

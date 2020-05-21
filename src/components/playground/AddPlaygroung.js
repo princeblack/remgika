@@ -163,6 +163,7 @@ const AddPlaygroung = (props) => {
                   placeholder="Title or place name"
                   id="title"
                   ref={register({ required: true })}
+                  maxLength={60}
                 />
                 {errors.title && <p>Title is required</p>}
               </div>
@@ -188,7 +189,7 @@ const AddPlaygroung = (props) => {
                   type="text"
                   placeholder="Description"
                   id="description"
-                  maxLength={150}
+                  maxLength={200}
                   cols="30"
                   rows="5"
                   ref={register({ required: true })}

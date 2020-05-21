@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect } from "react-redux"; 
 import { fetcheventsList } from "../../actions";
 import usePlacesAutocomplete, {
@@ -92,6 +92,30 @@ const EventsAutocomplete = (props) => {
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;  
+
+  const [size, setSize] = useState(0);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []); 
+  
+  let cardNumber = 1;
+  if (size >= 500) {
+    cardNumber= 2
+  }
+  if (size >= 850) {
+    cardNumber= 3
+  }
+  if (size >= 990) {
+    cardNumber= 4
+  }
+  if (size >= 1400) {
+    cardNumber= 5
+  }
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">
@@ -123,7 +147,7 @@ const EventsAutocomplete = (props) => {
           enablePlaceholder
           requestToChangeActive={setActiveItemIndex}
           activeItemIndex={activeItemIndex}
-          numberOfCards={1}
+          numberOfCards={cardNumber}
           gutter={12}
           leftChevron={<button></button>}
           rightChevron={<button></button>}

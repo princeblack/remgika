@@ -5,6 +5,7 @@ import { signUp, handleLogin } from "../../actions";
 import LoginHeader from "../login-signUp/LoginHeader";
 import black from "../../img/black-man-phone.svg";
 import { Link } from "react-router-dom";
+import '../../scss/sign.scss'
 
 class SignUp extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect} from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayground, fetcheventsList } from '../../actions';
+import { fetchPlayground, fetcheventsList , commentAdd,fetchComment} from '../../actions';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { NavLink } from 'react-router-dom';
@@ -9,14 +9,15 @@ import '../../scss/Playground.scss';
 import Play from './Play';
 import ItemsCarousel from 'react-items-carousel';
 import { GoogleApiWrapper } from 'google-maps-react';
+
 const Test = (props) => {
   useEffect(() => {
-    console.log("test");
-
     props.fetchPlayground();
     props.fetcheventsList();
-  }, []);
+    
 
+  }, []);
+ 
   const {
     ready,
     value,
@@ -77,18 +78,48 @@ const Test = (props) => {
   };
   let playgroundList;
   playgroundList = props.playground.map((el, index) => {
-    return <Play user={props.info} playIndex={index} data={el} key={index}></Play>;
+    return <Play 
+      commentFunc={props.commentAdd} user={props.info} playIndex={index} data={el} key={index}
+      fetchCommentFunc ={props.fetchComment}
+      ></Play>;
   });
   if (getPlay !== undefined) {
     playgroundList = getPlay.map((el, index) => {
       return (
-        <Play user={props.info} playIndex={index} data={el} key={index}></Play>
+        <Play  
+        commentFunc={props.commentAdd} user={props.info} playIndex={index} data={el} key={index}
+        fetchCommentFunc ={props.fetchComment}
+        ></Play>
       );
     });
   }
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
 
+  const [size, setSize] = useState(0);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []); 
+  
+  let cardNumber = 1;
+  if (size >= 500) {
+    cardNumber= 2
+  }
+  if (size >= 850) {
+    cardNumber= 3
+  }
+  if (size >= 990) {
+    cardNumber= 4
+  }
+  if (size >= 1200) {
+    cardNumber= 5
+  }
+  
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -112,7 +143,7 @@ const Test = (props) => {
         </div>
       </div>
       <div className="categorie">
-        <h1>Playground</h1>
+        <h1>Playgrounds</h1>
         <hr></hr>
       </div>
       <div className="carouselDiv">
@@ -120,7 +151,7 @@ const Test = (props) => {
           enablePlaceholder
           requestToChangeActive={setActiveItemIndex}
           activeItemIndex={activeItemIndex}
-          numberOfCards={1}
+          numberOfCards={cardNumber}
           gutter={12}
           leftChevron={<button></button>}
           rightChevron={<button></button>}
@@ -146,4 +177,4 @@ const mapStateToProps = (state) => {
 GoogleApiWrapper({
   // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 });
-export default connect(mapStateToProps, { fetchPlayground, fetcheventsList, GoogleApiWrapper })(Test);
+export default connect(mapStateToProps, {commentAdd, fetchComment, fetchPlayground, fetcheventsList, GoogleApiWrapper })(Test);

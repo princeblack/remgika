@@ -42,7 +42,6 @@ $remgika: #c7cda4;
         }
 
         ul {
-          // background-color: #c7cda4;
           padding: 0;
           border: solid 3px #c7cda4;
           border-bottom-left-radius: 8px;
@@ -97,9 +96,14 @@ $remgika: #c7cda4;
     display: flex;
     flex-direction: column;
     padding: 40px;
-    margin: 0;
+    margin: 0; 
+    ::-webkit-scrollbar {
+      display: none;
+    }
     .playgroud-item {
-      border-radius: 20px;
+      border-radius: 10px;
+      box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;
+      transition: transform ease-in-out 0.6s;
 
       .userVote {
         img {
@@ -111,12 +115,6 @@ $remgika: #c7cda4;
           margin-right: 10px;
         }
       }
-      img {
-        border-radius: 20px;
-        width: 99%;
-        object-fit: cover;
-        height: 200px;
-      }
       .image {
         position: relative;
         color: white;
@@ -124,7 +122,7 @@ $remgika: #c7cda4;
           border-radius: 20px;
           width: 99%;
           object-fit: cover;
-          height: 200px;
+          height: 400px;
         }
         .info {
           display: flex;
@@ -132,7 +130,6 @@ $remgika: #c7cda4;
           flex-wrap: nowrap;
           justify-content: space-between;
           align-content: flex-start;
-          // padding: 0 10px;
           position: absolute;
           top: 0;
           width: 100%;
@@ -180,6 +177,16 @@ $remgika: #c7cda4;
           }
         }
       }
+      .title{
+        height: 60px;
+        border-radius: 5px;
+        box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;
+        h3{
+          font-size: 18px;
+          font-weight: 400;
+          min-height: 60px;     
+        }
+      }
       .author {
         display: flex;
         justify-content: center;
@@ -191,13 +198,16 @@ $remgika: #c7cda4;
         }
       }
       .description {
-        border: solid 1px rgb(169, 197, 132);
+        // border: solid 1px rgb(169, 197, 132);
+        box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;
         border-radius: 2px;
         text-align: center;
         padding: 4px;
+        min-height: 140px;
         p {
           box-sizing: border-box;
           word-wrap: break-word;
+          text-align: center;
         }
       }
       .map-feedback {
@@ -216,10 +226,10 @@ $remgika: #c7cda4;
           img {
             // width: 50%;
             height: 50px;
-            -webkit-animation: scale-up-center 1s
-              cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
-            animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
-              infinite both;
+            // -webkit-animation: scale-up-center 1s
+            //   cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
+            // animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+            //   infinite both;
           }
           @-webkit-keyframes scale-up-center {
             0% {
@@ -251,10 +261,13 @@ $remgika: #c7cda4;
       .map.show {
         visibility: visible !important;
         background-color: rgb(216, 212, 212);
+        // border: solid 2px red;
+        // padding: 10px !important;
+        // margin: 100px ;
         position: absolute;
         width: 100%;
         height: 100%;
-        top: 0px;
+        top: 0;
         z-index: 1;
         animation-name: maptransition;
         animation-duration: 1s;
@@ -270,6 +283,8 @@ $remgika: #c7cda4;
         }
         .map {
           height: 80vh !important;
+          // width: 100% !important; 
+          padding: 10px;
           z-index: 2;
         }
       }
@@ -330,6 +345,12 @@ $remgika: #c7cda4;
         }
       }
     }
+          /**********************************************************
+******************** playground ITEMS hover *********************
+***********************************************************/
+    .playgroud-item:hover{
+      // transform: scale(1.05);
+    }
     // map contenaire anaimation
     @keyframes maptransition {
       0% {
@@ -376,6 +397,28 @@ $remgika: #c7cda4;
         clip-path: polygon(100% 49%, 0 0, 0 100%);
         background-color: $remgika;
         border: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .playground{
+    .carouselDiv{
+      .playgroud-item{
+        .ReactCollapse--collapse{
+          position: relative;
+          top: -750px;
+          .map.show {
+            background-color: antiquewhite;
+            height: 750px;
+          }
+        }
+        .feedback.show{
+          background-color: antiquewhite;
+          height: 750px;
+        }
+       
       }
     }
   }

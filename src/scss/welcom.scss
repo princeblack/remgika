@@ -1,0 +1,140 @@
+
+$clip-distance: 0.05;
+$main-color: #69ca62;
+$remgika: #c7cda4;
+
+.App{
+      /*********************************************************
+  **********************************************************
+  ********************* WELCOME HOME PAGE ******************
+  **********************************************************
+  **********************************************************/
+  .welcome {
+    width: 100%;
+    min-height: 100vh;
+    max-height: max-content;
+    background-image: url("../img/b.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: left;
+    position: sticky;
+    /**********************************************************
+    ************************ HEADER ***************************
+    ***********************************************************/
+    .welcom-header {
+      height: 40px;
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 15px;
+      .login-logout {
+        display: flex;
+        flex-direction: row;
+        .login-button {
+          background-color: #c7cda4;
+          margin-right: 10px;
+          width: 90px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px;
+          a,
+          a:visited {
+            font-size: 20px;
+            font-weight: 400;
+            text-decoration: none;
+            color: black;
+          }
+        }
+        .logout-button {
+          background-color: #c7cda4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px;
+          width: 90px;
+          a,
+          a:visited {
+            font-size: 20px;
+            font-weight: 400;
+            text-decoration: none;
+            color: black;
+          }
+        }
+      }
+      .menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 40px;
+        text-align: center;
+        font-size: 40px;
+        background: linear-gradient(rgba(199, 205, 164, 0.787), #cacdf39f);
+      }
+    }
+    /**********************************************************
+  ************************ FIRST SECTION ********************
+  ***********************************************************/
+    .first-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      img {
+        width: 200px;
+        margin: 0;
+        padding: 0;
+      }
+      .remgika-texte {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h2 {
+          font-weight: 500;
+          text-align: center;
+        }
+        p {
+          font-weight: 300;
+          font-size: 17px;
+          text-align: center;
+        }
+      }
+    }
+    /**********************************************************
+  ************************ SECOND SECTION *******************
+  ***********************************************************/
+    .second-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      .direct-home {
+        background-color: white;
+        width: 70%;
+        height: 60px;
+        border-radius: 20px;
+        box-shadow: -3px -1.5px 6px #505dd89f, rgb(197, 135, 135) 3px 2px 6px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        a,
+        a:visited {
+          font-size: 20px;
+          font-weight: 400;
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}

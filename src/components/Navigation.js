@@ -52,7 +52,7 @@ class Navigation extends Component {
     const isLoggedIn = this.props.isLoggedIn;
     const active = { color: "#6bc774" };
     return (
-      <>
+      <div className="navigation-block">
         <div id="navigation" className="flex-row-space-between navColor">
           <div className="logo">
             <img src={remgika} alt="remgika"></img>
@@ -91,7 +91,7 @@ class Navigation extends Component {
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/playground">
               <FontAwesomeIcon icon={faDemocrat} />
-              Playground
+              Playgrounds
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
@@ -102,7 +102,7 @@ class Navigation extends Component {
           </div>
           {isLoggedIn && (
             <div className="menu-item" onClick={this.handleLogOut}>
-              <NavLink to="" activeStyle={active}>
+              <NavLink to="">
                 <FontAwesomeIcon icon={faBaby} />
                 Log out
               </NavLink>
@@ -125,14 +125,14 @@ class Navigation extends Component {
             </>
           )}
           <div className="divider"></div>
-          <div className="menu-item social">
+          {/* <div className="menu-item social">
             <FontAwesomeIcon icon={faFacebook} />
             <FontAwesomeIcon icon={faInstagram} />
             <FontAwesomeIcon icon={faLinkedin} />
             <FontAwesomeIcon icon={faDiscord} />
-          </div>
+          </div> */}
         </div>
-      </>
+      </div>
     );
   }
 }

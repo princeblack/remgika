@@ -5,6 +5,7 @@ import { handleLogin } from "../../actions";
 import woman from "../../img/black-woman.svg";
 import LoginHeader from "./LoginHeader";
 import { Link } from "react-router-dom";
+import '../../scss/login.scss'
 
 class Login extends React.Component {
   constructor(props) {

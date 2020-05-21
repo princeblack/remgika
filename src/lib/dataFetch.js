@@ -1,5 +1,5 @@
-const url = "https://node-server.remgika.com";
-// const url = "http://localhost:8000";
+// const url = "https://node-server.remgika.com";
+const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -292,4 +292,42 @@ export const deleteEvents = async (data) => {
       return [error];
     }
   
+};
+/**********************************************************
+ ************************ comment **************************
+ ***********************************************************/
+
+export const addComment = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/comment`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getcomment = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/comment/data`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
 };

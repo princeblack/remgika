@@ -23,7 +23,6 @@ const AddEvents = (props) => {
   useEffect(() => {
     async function f() {
       if (props.addEvents) {
-        console.log(props.addEvents);
         setTimeout(() => {
           setRedirect(true);
           props.myEvents();
@@ -167,6 +166,7 @@ const AddEvents = (props) => {
                   placeholder="Events name"
                   id="title"
                   ref={register({ required: true })}
+                  maxLength={60}
                 />
                 {errors.title && <p>Title is required</p>}
               </div>
@@ -236,7 +236,7 @@ const AddEvents = (props) => {
                   type="text"
                   placeholder="Description"
                   id="description"
-                  maxLength={150}
+                  maxLength={300}
                   cols="30"
                   rows="5"
                   ref={register({ required: true })}

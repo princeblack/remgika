@@ -58,7 +58,8 @@ export default class AddressInfo extends Component {
   }
 
   render() {
-    this.handleDistance();
+    this.handleDistance(); 
+    
     return (
       <div className="address-info">
         {this.state.distance !== null && (
@@ -69,11 +70,7 @@ export default class AddressInfo extends Component {
         )}
         {this.state.duration !== null && (
           <div className="addressDuration">
-            <span>Walking: </span>
             <p> {this.state.duration}</p>
-            {/* <span role="img" aria-label="Panda">
-              🚶🚶🚶
-            </span> */}
           </div>
         )}
       </div>

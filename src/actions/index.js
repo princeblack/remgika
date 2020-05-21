@@ -16,6 +16,8 @@ import {
   getMyEvents,
   updateEvents,
   deleteEvents,
+  addComment,
+  getcomment
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -183,6 +185,29 @@ export const deleteEvent = (payload) => {
     const data = await deleteEvents(payload);
     dispatch({
       type: "DELETE_EVENT",
+      payload: data,
+    });
+  };
+};
+/**********************************************************
+ ************************ comment **************************
+ ***********************************************************/
+
+export const commentAdd = (payload) => {
+  return async (dispatch) => {
+    const data = await addComment(payload);
+    dispatch({
+      type: "ADD_COMMENT",
+      payload: data,
+    });
+  };
+};
+
+export const fetchComment= (payload) => {
+  return async (dispatch) => {
+    const data = await getcomment(payload);
+    dispatch({
+      type: "FETCH_COMMENT",
       payload: data,
     });
   };
