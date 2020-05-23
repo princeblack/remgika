@@ -26,9 +26,10 @@ header {
   margin-top: 20px;
   #addPlay-img {
     width: 70%;
+    height: 400px;
     img {
-      width: 100%;
       height: 100%;
+      width: 100%;
     }
   }
   form {
@@ -57,7 +58,7 @@ header {
       li {
         margin: 5px;
         color: rgb(70, 30, 30);
-        strong{
+        strong {
           font-weight: 400;
         }
       }

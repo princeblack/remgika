@@ -7,25 +7,12 @@ import PlacesAutocomplete from "./PlacesAutocomplete";
 
 class Playground extends React.Component {
 
-  // componentDidMount() {
-  //   this.props.fetchPlayground();
-  // }
-
-
-  render() {   
-    // let
-    // if (condition) {
-      
-    // } 
-    // console.log(window.screen.width);
-    
+  render() {      
     return (
       <div className="playground">
-        <>
           <div className="serchBar">
             <PlacesAutocomplete />
           </div>
-        </>
       </div>
     );
   }

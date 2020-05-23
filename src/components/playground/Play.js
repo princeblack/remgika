@@ -116,10 +116,10 @@ class Play extends Component {
     const mapStyles = {
       position: "relative",
       width: "100%",
-      height: "100%",
+      height: "80%",
     };
     const index = this.props.playIndex;
-    const commet = this.props.playIndex;
+    const commet = this.props.playIndex;    
     return (
       <div className="playgroud-item">
         <div className="userVote">
@@ -135,6 +135,8 @@ class Play extends Component {
             gutter={12}
             outsideChevron={false}
             chevronWidth={chevronWidth}
+            leftChevron={'<'}
+            rightChevron={'>'}
           >
             {image}
           </ItemsCarousel>
@@ -151,9 +153,9 @@ class Play extends Component {
         <div className="title">
           <h3>{this.props.data.title}</h3>
         </div>
-        <div className="author">
+        {/* <div className="author">
           <p>By:</p> <span>{this.props.user.firstName}</span>
-        </div>
+        </div> */}
         <div className="description">
           <p>{this.props.data.description}</p>
         </div>

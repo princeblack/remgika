@@ -142,22 +142,29 @@ const EventsAutocomplete = (props) => {
         <h1>Events</h1>
         <hr></hr>
       </div>
-      <div className="carouselDiv">
-        <ItemsCarousel
-          enablePlaceholder
-          requestToChangeActive={setActiveItemIndex}
-          activeItemIndex={activeItemIndex}
-          numberOfCards={cardNumber}
-          gutter={12}
-          leftChevron={<button></button>}
-          rightChevron={<button></button>}
-          outsideChevron
-          disableSwipe
-          chevronWidth={chevronWidth}
-        >
+      {size <= 768 ? (
+              <div className="carouselDiv">
+              <ItemsCarousel
+                enablePlaceholder
+                requestToChangeActive={setActiveItemIndex}
+                activeItemIndex={activeItemIndex}
+                numberOfCards={cardNumber}
+                gutter={12}
+                leftChevron={<button></button>}
+                rightChevron={<button></button>}
+                outsideChevron
+                disableSwipe
+                chevronWidth={chevronWidth}
+              >
+                {events}
+              </ItemsCarousel>
+            </div>
+        ):(
+          <div className="event-table">
           {events}
-        </ItemsCarousel>
-      </div>
+        </div>
+        )
+      }
     </>
   );
 };

@@ -1,23 +1,29 @@
-import React, { useState, useEffect, useRef, useLayoutEffect} from 'react';
-import { connect } from 'react-redux';
-import { fetchPlayground, fetcheventsList , commentAdd,fetchComment} from '../../actions';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-import useOnclickOutside from 'react-cool-onclickoutside';
-import { NavLink } from 'react-router-dom';
-import camera from '../../img/camera.svg';
-import '../../scss/Playground.scss';
-import Play from './Play';
-import ItemsCarousel from 'react-items-carousel';
-import { GoogleApiWrapper } from 'google-maps-react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { connect } from "react-redux";
+import {
+  fetchPlayground,
+  fetcheventsList,
+  commentAdd,
+  fetchComment,
+} from "../../actions";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import useOnclickOutside from "react-cool-onclickoutside";
+import { NavLink } from "react-router-dom";
+import camera from "../../img/camera.svg";
+import "../../scss/Playground.scss";
+import Play from "./Play";
+import ItemsCarousel from "react-items-carousel";
+import { GoogleApiWrapper } from "google-maps-react";
 
 const Test = (props) => {
   useEffect(() => {
     props.fetchPlayground();
     props.fetcheventsList();
-    
-
   }, []);
- 
+
   const {
     ready,
     value,
@@ -25,7 +31,7 @@ const Test = (props) => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete({
-    requestOptions: 'string',
+    requestOptions: "string",
     debounce: 300,
   });
   const ref = useRef();
@@ -68,6 +74,7 @@ const Test = (props) => {
       );
     });
 
+  // find play by city reseach
   const [getPlay, setgetPlay] = useState();
   const handelCharacters = async (character) => {
     let filterCharacter;
@@ -76,19 +83,31 @@ const Test = (props) => {
     });
     setgetPlay(filterCharacter);
   };
+
+  /* seaching playround return r*/
   let playgroundList;
   playgroundList = props.playground.map((el, index) => {
-    return <Play 
-      commentFunc={props.commentAdd} user={props.info} playIndex={index} data={el} key={index}
-      fetchCommentFunc ={props.fetchComment}
-      ></Play>;
+    return (
+      <Play
+        commentFunc={props.commentAdd}
+        user={props.info}
+        playIndex={index}
+        data={el}
+        key={index}
+        fetchCommentFunc={props.fetchComment}
+      ></Play>
+    );
   });
   if (getPlay !== undefined) {
     playgroundList = getPlay.map((el, index) => {
       return (
-        <Play  
-        commentFunc={props.commentAdd} user={props.info} playIndex={index} data={el} key={index}
-        fetchCommentFunc ={props.fetchComment}
+        <Play
+          commentFunc={props.commentAdd}
+          user={props.info}
+          playIndex={index}
+          data={el}
+          key={index}
+          fetchCommentFunc={props.fetchComment}
         ></Play>
       );
     });
@@ -101,25 +120,26 @@ const Test = (props) => {
     function updateSize() {
       setSize(window.innerWidth);
     }
-    window.addEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
     updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []); 
-  
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   let cardNumber = 1;
   if (size >= 500) {
-    cardNumber= 2
+    cardNumber = 2;
   }
   if (size >= 850) {
-    cardNumber= 3
+    cardNumber = 3;
   }
   if (size >= 990) {
-    cardNumber= 4
+    cardNumber = 4;
   }
   if (size >= 1200) {
-    cardNumber= 5
+    cardNumber = 5;
   }
-  
+  console.log(size);
+
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -133,7 +153,7 @@ const Test = (props) => {
             placeholder="Playground in your city"
           />
           {/* We can use the "status" to decide whether we should display the dropdown or not */}
-          {status === 'OK' && <ul>{renderSuggestions()}</ul>}
+          {status === "OK" && <ul>{renderSuggestions()}</ul>}
         </div>
         <div className="camera-flex">
           <NavLink to="/addplayground">
@@ -146,22 +166,28 @@ const Test = (props) => {
         <h1>Playgrounds</h1>
         <hr></hr>
       </div>
-      <div className="carouselDiv">
-        <ItemsCarousel
-          enablePlaceholder
-          requestToChangeActive={setActiveItemIndex}
-          activeItemIndex={activeItemIndex}
-          numberOfCards={cardNumber}
-          gutter={12}
-          leftChevron={<button></button>}
-          rightChevron={<button></button>}
-          outsideChevron
-          disableSwipe
-          chevronWidth={chevronWidth}
-        >
+      {size <= 768 ? (
+        <div className="carouselDiv">
+          <ItemsCarousel
+            enablePlaceholder
+            requestToChangeActive={setActiveItemIndex}
+            activeItemIndex={activeItemIndex}
+            numberOfCards={cardNumber}
+            gutter={12}
+            leftChevron={<button></button>}
+            rightChevron={<button></button>}
+            outsideChevron
+            disableSwipe
+            chevronWidth={chevronWidth}
+          >
+            {playgroundList}
+          </ItemsCarousel>
+        </div>
+      ) : (
+        <div className="playground-table">
           {playgroundList}
-        </ItemsCarousel>
-      </div>
+        </div>
+      )}
     </>
   );
 };
@@ -171,10 +197,16 @@ const mapStateToProps = (state) => {
     playground: state.playground,
     addPlay: state.addPlay,
     eventsList: state.eventsList,
-    info: state.info
+    info: state.info,
   };
 };
 GoogleApiWrapper({
   // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 });
-export default connect(mapStateToProps, {commentAdd, fetchComment, fetchPlayground, fetcheventsList, GoogleApiWrapper })(Test);
+export default connect(mapStateToProps, {
+  commentAdd,
+  fetchComment,
+  fetchPlayground,
+  fetcheventsList,
+  GoogleApiWrapper,
+})(Test);

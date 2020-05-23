@@ -122,9 +122,9 @@ class Events extends Component {
             <p>{end}</p>
           </div>
         </div>
-        <div className="author">
+        {/* <div className="author">
           <p>By:</p> <span>{this.props.user.firstName}</span>
-        </div>
+        </div> */}
         <div className="description">
           <p>{this.props.data.description}</p>
         </div>
