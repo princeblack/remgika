@@ -106,21 +106,20 @@ export const handleLogOut = async (data) => {
 
 export const deleteProfileImage = async (data) => {
   const id = data;
-    try {
-      const res = await (
-        await fetch(`${url}/images/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        })
-      ).json();
-      return res;
-    } catch (error) {
-      return [];
-    }
-  
+  try {
+    const res = await (
+      await fetch(`${url}/images/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
 };
 
 /**********************************************************
@@ -178,21 +177,20 @@ export const getMyPlayground = async (data) => {
 
 export const deletePlayground = async (data) => {
   const id = data;
-    try {
-      const res = await (
-        await fetch(`${url}/playground/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        })
-      ).json();
-      return res;
-    } catch (error) {
-      return [];
-    }
-  
+  try {
+    const res = await (
+      await fetch(`${url}/playground/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
 };
 
 export const updatePlayground = async (data, id) => {
@@ -277,21 +275,20 @@ export const updateEvents = async (data, id) => {
 
 export const deleteEvents = async (data) => {
   const id = data;
-    try {
-      const res = await (
-        await fetch(`${url}/events/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        })
-      ).json();
-      return res;
-    } catch (error) {
-      return [error];
-    }
-  
+  try {
+    const res = await (
+      await fetch(`${url}/events/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
 };
 /**********************************************************
  ************************ comment **************************
@@ -311,15 +308,69 @@ export const addComment = async (data) => {
     ).json();
     return res;
   } catch (error) {
-    return [];
+    return [error];
   }
 };
 
 export const getcomment = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/comment/data`, {
+      await fetch(`${url}/comment/`, {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const getwriterImage = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/images/writer/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const getWriterInfo = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/users/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const deleteComment = async (data) => {
+  const id = data;
+  try {
+    const res = await (
+      await fetch(`${url}/comment/${id}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },

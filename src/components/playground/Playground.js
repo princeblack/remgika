@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPlayground } from "../../actions";
 import "../../scss/Playground.scss";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 
 
 class Playground extends React.Component {
-
-  render() {      
+  render() { 
     return (
       <div className="playground">
           <div className="serchBar">
@@ -24,4 +22,4 @@ const mapStateToProps = (state) => {
     addPlay: state.addPlay,
   };
 };
-export default connect(mapStateToProps, { fetchPlayground })(Playground);
+export default connect(mapStateToProps)(Playground);

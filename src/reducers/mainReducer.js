@@ -22,6 +22,11 @@ const initialState = {
   eventIsDelete: false,
   // COMMENT
   addComment: false,
+  getComment: false,
+  allComment: [],
+  writerImg: [],
+  writerInfo:[],
+  commentIsDelete: false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -234,12 +239,28 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "FETCH_COMMENT") {
+    state.allComment = action.payload;
+    state.addComment= false
+    state.commentIsDelete = false;
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_WRITER_IMAGE") {
+    state.writerImg = action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_WRITER_INFO") {
+    state.writerInfo = action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "DELETE_COMMENT") {
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
+      state.commentIsDelete = false;
     } else {
+      state.commentIsDelete = true;
     }
     return Object.assign({}, state);
   }

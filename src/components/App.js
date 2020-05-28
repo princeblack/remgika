@@ -6,7 +6,7 @@ import Login from "./login-signUp/Login";
 import SignUp from "./login-signUp/SignUp";
 import NotFound from "./load-notfound/NotFound";
 import Welcome from "./home-welcome/Welcome";
-import { authorise, allMyImage } from "../actions";
+import { authorise, allMyImage,fetchComment } from "../actions";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./playground/Playground";
@@ -20,11 +20,10 @@ class App extends React.Component {
     this.props.authorise();    
     if (this.props.isLoggedIn) {
       this.props.allMyImage();
-      this.props.myPlayground();
-      this.props.myEvents();
       this.props.authorise();    
+      // this.props.fetchComment()
     }
-  }
+  }   
   render() {
     const loading = this.props.loading
     return (
@@ -53,7 +52,9 @@ const mapsStateToProps = state => {
     isLoggedIn: state.isLoggedIn,
     info: state.info,
     proImage: state.proImage,
-    loading: state.loading
+    loading: state.loading,
+    allComment: state.allComment,
+
   };
 };
 

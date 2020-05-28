@@ -11,9 +11,9 @@ import { getGeocode, getLatLng } from "use-places-autocomplete";
 import AddressInfo from "./AddressInfo";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
-import {commentAdd} from '../../actions/index'
-import {addComment} from '../../lib/dataFetch'
-
+import { connect } from "react-redux";
+import { commentAdd, fetchComment ,writerImage} from "../../actions";
+import Comment from "./Comment";
 
 class Play extends Component {
   constructor(props) {
@@ -36,17 +36,20 @@ class Play extends Component {
     this.toggleCommenter = this.toggleCommenter.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.commentOnchange = this.commentOnchange.bind(this);
-
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(function (position) {});
     this.handlePlace();
-
-    const data = new FormData();
-    data.append("postId", this.props.data._id);
-    this.props.fetchCommentFunc(data);
-
+    this.props.writerImage()
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.addComment !== this.props.addComment) {
+      this.props.fetchComment();
+    }
+    if (prevProps.commentIsDelete !== this.props.commentIsDelete) {
+      this.props.fetchComment();
+    }
   }
   toggleClass(index, e) {
     this.setState({
@@ -86,40 +89,56 @@ class Play extends Component {
   changeActiveItem(activeItemIndex) {
     this.setState({ activeItemIndex });
   }
-  commentOnchange= (e)=>{
+  commentOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
-  }
-  onSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("commenter", this.state.comment);
-    data.append("writer", this.props.user._id);
-    data.append("postId", this.props.data._id)
-    this.props.commentFunc(data)
-    this.setState({
-      comment: ""
-    })
   };
-  
+  onSubmit = async (e) => {
+    e.preventDefault();
+    const newData = await {
+      content: this.state.comment,
+      postId: this.props.data._id,
+    };
+    this.props.commentAdd(newData);
+    this.setState({
+      comment: "",
+    });
+  };
 
   // RENDER
   render() {
+    // console.log(this.state.comment);
+    // console.log(this.props.data);
+    // console.log(this.props);
+    // console.log(this.props.data._id, 'play');
+    // // let commentList;
+    // commentList = this.props.allComment.map((el, index)=>{
+    //   return(
+    //     <p comment={el} key={index}></p>
+    //   )
+    // })
+    // const test = commentList
+    // console.log(test);
+    let commentList;
+    commentList = this.props.allComment.map((el, index) => {
+      return <Comment key={index} comment={el} data={this.props.data}></Comment>;
+    });
+
     const chevronWidth = 40;
     const activeItemIndex = this.state.activeItemIndex;
     const image = this.props.data.imgCollection.map((el, index) => {
       return <PlayImage data={el} key={index}></PlayImage>;
-    });    
+    });
     const mapStyles = {
       position: "relative",
       width: "100%",
       height: "80%",
     };
     const index = this.props.playIndex;
-    const commet = this.props.playIndex;    
+    const commet = this.props.playIndex;
     return (
       <div className="playgroud-item">
         <div className="userVote">
@@ -135,8 +154,8 @@ class Play extends Component {
             gutter={12}
             outsideChevron={false}
             chevronWidth={chevronWidth}
-            leftChevron={'<'}
-            rightChevron={'>'}
+            leftChevron={"<"}
+            rightChevron={">"}
           >
             {image}
           </ItemsCarousel>
@@ -211,14 +230,14 @@ class Play extends Component {
           </Collapse>
         )}
         <Collapse isOpened={this.state.activeCommet === commet}>
-        <div
+          <div
             className={classNames("feedback", {
               show: this.state.activeCommet === commet,
               hide: this.state.activeCommet !== commet,
             })}
           >
-          {/* <Comment ></Comment> */}
-          <div className="close-container">
+            {/* <Comment ></Comment> */}
+            <div className="close-container">
               <img
                 className="close"
                 src={close}
@@ -231,12 +250,20 @@ class Play extends Component {
               autoComplete="off"
               onSubmit={this.onSubmit}
             >
-              <textarea maxLength={150} cols="40" rows="5" onChange={this.commentOnchange} value={this.state.comment} name="comment" ></textarea>
+              <textarea
+                maxLength={100}
+                cols="40"
+                rows="2"
+                onChange={this.commentOnchange}
+                value={this.state.comment}
+                name="comment"
+              ></textarea>
               <input className="addPlay-submit" type="submit" value="submit" />
             </form>
             <hr></hr>
             <div className="all-comment">
-              <p>ici</p>
+              {/* <Comment data={this.props.data} ></Comment> */}
+              {commentList}
             </div>
           </div>
         </Collapse>
@@ -244,12 +271,18 @@ class Play extends Component {
     );
   }
 }
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
+const WrappedContainer = GoogleApiWrapper({
+  // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 })(Play);
 
-// const mapStateToProps = (state) => ({
-  
-// })
+const mapStateToProps = (state) => {
+  return {
+    allComment: state.allComment,
+    addComment: state.addComment,
+    commentIsDelete: state.commentIsDelete
+  };
+};
 
-// export default connect(mapStateToProps,{commentAdd,GoogleApiWrapper })(Play);
+export default connect(mapStateToProps, {commentAdd, fetchComment,writerImage })(
+  WrappedContainer
+);

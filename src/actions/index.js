@@ -17,7 +17,10 @@ import {
   updateEvents,
   deleteEvents,
   addComment,
-  getcomment
+  getcomment,
+  getwriterImage,
+  getWriterInfo,
+  deleteComment
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -208,6 +211,36 @@ export const fetchComment= (payload) => {
     const data = await getcomment(payload);
     dispatch({
       type: "FETCH_COMMENT",
+      payload: data,
+    });
+  };
+};
+
+export const writerImage = (payload) => {
+  return async (dispatch) => {
+    const data = await getwriterImage(payload);
+    dispatch({
+      type: "GET_WRITER_IMAGE",
+      payload: data,
+    });
+  };
+};
+
+export const writerInfomation = (payload) => {
+  return async (dispatch) => {
+    const data = await getWriterInfo(payload);
+    dispatch({
+      type: "GET_WRITER_INFO",
+      payload: data,
+    });
+  };
+};
+
+export const deleteCommenter = (payload) => {
+  return async (dispatch) => {
+    const data = await deleteComment(payload);
+    dispatch({
+      type: "DELETE_COMMENT",
       payload: data,
     });
   };

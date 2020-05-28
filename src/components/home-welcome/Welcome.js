@@ -30,7 +30,7 @@ class Welcome extends Component {
       <div className="first-section">
         <img src={black} alt="remgika"></img>
         <div className="remgika-texte">
-          <h2>purus sit amet volutpat</h2>
+          <h2>Welcome to Remgika</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem

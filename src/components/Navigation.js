@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logOut, authorise, allMyImage } from "../actions/index";
+import { logOut, allMyImage } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import remgika from "../img/remgika.png";
 import avatar from "../img/avatar.png"
 
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faDiscord,
-} from "@fortawesome/free-brands-svg-icons";
+// import {
+//   faFacebook,
+//   faInstagram,
+//   faLinkedin,
+//   faDiscord,
+// } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
   faUserInjured,
@@ -27,17 +27,15 @@ class Navigation extends Component {
       refrech: false,
     };
   }
-//  componentDidMount() {
-//     if (this.props.isLoggedIn) {
-//       this.props.authorise();
-//       this.props.allMyImage();     
-//     }
-//   }
-  componentDidUpdate(prevProps) {
-    if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
-      this.props.allMyImage();     
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   console.log('jh');
+
+  //   // this.props.allMyImage();     
+
+  //   // if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
+  //   //   this.props.allMyImage();     
+  //   // }
+  // }
   toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("slide-right");
@@ -51,6 +49,7 @@ class Navigation extends Component {
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     const active = { color: "#6bc774" };
+    
     return (
       <div className="navigation-block">
         <div id="navigation" className="flex-row-space-between navColor">
@@ -125,12 +124,6 @@ class Navigation extends Component {
             </>
           )}
           <div className="divider"></div>
-          {/* <div className="menu-item social">
-            <FontAwesomeIcon icon={faFacebook} />
-            <FontAwesomeIcon icon={faInstagram} />
-            <FontAwesomeIcon icon={faLinkedin} />
-            <FontAwesomeIcon icon={faDiscord} />
-          </div> */}
         </div>
       </div>
     );
@@ -146,7 +139,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  authorise,
   allMyImage,
   logOut,
 })(withRouter(Navigation));
