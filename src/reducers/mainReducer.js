@@ -1,6 +1,7 @@
 const initialState = {
   // Log and Sign and user Info
   loading: true,
+  allUserInfo: [],
   isLoggedIn: false,
   sign: false,
   info: {},
@@ -48,6 +49,10 @@ const mainReducer = (state = initialState, action) => {
     }
     state.loading = false;
 
+    return Object.assign({}, state);
+  }
+  if(action.type === "HANDLE_ALL_USERS"){
+    state.allUserInfo = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_LOGIN") {

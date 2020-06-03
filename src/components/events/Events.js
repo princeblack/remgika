@@ -82,10 +82,12 @@ class Events extends Component {
     const start = moment(dateStart).format("dddd, MMMM D, h:mm A");
     const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
     return (
-      <div className="events-item">
+      this.props.data && (
+        <>
+               <div className="events-item">
         <div className="userVote">
-          <img src={link} alt="like"></img>
-          <img src={unlink} alt="unlike"></img>
+          {/* <img src={link} alt="like"></img>
+          <img src={unlink} alt="unlike"></img> */}
         </div>
         <div className="image">
           <ItemsCarousel
@@ -96,6 +98,8 @@ class Events extends Component {
             gutter={12}
             outsideChevron={false}
             chevronWidth={chevronWidth}
+            leftChevron={<button></button>}
+            rightChevron={<button></button>}
           >
             {image}
           </ItemsCarousel>
@@ -109,7 +113,7 @@ class Events extends Component {
             ></AddressInfo>
           </div>
         </div>
-        <div>
+        <div  className="title">
           <h3>{this.props.data.eventName}</h3>
         </div>
         <div className="timeItem">
@@ -174,6 +178,8 @@ class Events extends Component {
           </Collapse>
         )}
       </div>
+        </>
+      )
     );
   }
 }

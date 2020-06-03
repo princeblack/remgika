@@ -106,6 +106,7 @@ $remgika: #c7cda4;
       overflow: hidden;
       padding: 20px;
       transition: transform ease-in-out 0.6s;
+      height: 950px;
       .userVote {
         img {
           width: 20px;
@@ -197,7 +198,6 @@ $remgika: #c7cda4;
         display: flex;
         flex-direction: column;
         text-align: center;
-        // border: solid 1px rgba(106, 106, 240, 0.418);
         padding: 5px;
         border-radius: 5px;
         justify-content: space-around;
@@ -221,11 +221,11 @@ $remgika: #c7cda4;
         }
       }
       .description {
-        // border: solid 1px rgba(106, 106, 240, 0.418);
-        
+        border: solid 1px rgba(106, 106, 240, 0.418);
         border-radius: 2px;
         text-align: center;
         padding: 4px;
+        min-height: 200px;
         p {
           box-sizing: border-box;
           word-wrap: break-word;
@@ -242,30 +242,6 @@ $remgika: #c7cda4;
         img {
           width: 20%;
           height: 50px;
-          // -webkit-animation: scale-up-center 1s
-          //   cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
-          // animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
-          //   infinite both;
-        }
-        @-webkit-keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-          }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-          }
-        }
-        @keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-          }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-          }
         }
       }
       .map.hide {
@@ -303,7 +279,7 @@ $remgika: #c7cda4;
 ***********************************************************/
 
     
-    @keyframes mapTransitionEvents {
+  @keyframes mapTransitionEvents {
       0% {
         top: 500px;
       }
@@ -346,11 +322,10 @@ $remgika: #c7cda4;
 }
 @media (min-width: 500px) {
   .MainEventsground{
-    .carouselDiv{
       .events-item{
         .ReactCollapse--collapse{
           position: relative;
-          top: -880px;
+          top: -790px;
           .map.show {
             background-color: antiquewhite;
             height: 880px;
@@ -360,30 +335,35 @@ $remgika: #c7cda4;
           background-color: antiquewhite;
           height: 880px;
         }
-       
       }
       .events-item:hover{
         transform: scale(1.05);
       }
-    }
   }
 }
-      /**********************************************************
+/**********************************************************
 ******************** MainEventsGROUND Bid Devices*********************
 ***********************************************************/
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .event-table {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
     justify-content: start;
+    .events-item{
+      height: 950px;
+    }
+    .events-item:hover{
+      transform: scale(1.01);
+    }
   }
 }
 
-@media (min-width: 768px) {
+
+@media (min-width: 600px) {
   .event-table > div  {
-    width: 30%;
+    width: 45%;
     margin: 10px;
     .events-item {
       border-radius: 10px;
@@ -410,11 +390,27 @@ $remgika: #c7cda4;
           height: 400px;
           transition: transform ease-in-out 0.3s;
         }
-        // img:hover { 
-        //   transform: scale(1.2);
-        //   scroll-snap-type: none;
-        //   scroll-behavior: inherit;
-        // }
+        .aoTUt{
+          button{
+            width: 20px;
+            height: 100px;
+            clip-path: polygon(100% 49%, 0 0, 0 100%);
+            background-color: #c0c5f1;
+            border: 0px;
+            opacity: 0.8;
+          }
+        }
+        .dHQcjo{
+          button{
+            width: 20px;
+            height: 100px;
+            clip-path: polygon(0 47%, 100% 100%, 100% 0);
+            background-color: #c0c5f1;
+            border: 0px;
+            opacity: 0.8;
+          }
+        }
+
         .info {
           display: flex;
           flex-direction: row;
@@ -472,24 +468,23 @@ $remgika: #c7cda4;
           }
         }
       }
-      h3 {
-        font-size: 18px;
-        font-weight: 400;
-        height: 60px;
+      .title{
+        h3 {
+          font-size: 18px;
+          font-weight: 400;
+          min-height: 60px;
+        }
       }
-
       .timeItem {
         display: flex;
         flex-direction: column;
         text-align: center;
-        // border: solid 1px rgba(106, 106, 240, 0.418);
         padding: 5px;
         border-radius: 5px;
         justify-content: space-around;
         align-items: center;
         align-content: center;
       box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;
-
         span {
           color: rgb(30, 112, 5);
           margin: 1px;
@@ -505,12 +500,11 @@ $remgika: #c7cda4;
           font-weight: 400;
         }
       }
-      .description {
-        // border: solid 1px rgba(106, 106, 240, 0.418);
-        
+      .description {        
         border-radius: 2px;
         text-align: center;
         padding: 4px;
+        min-height: 200px;
         p {
           box-sizing: border-box;
           word-wrap: break-word;
@@ -527,30 +521,6 @@ $remgika: #c7cda4;
         img {
           width: 20%;
           height: 50px;
-          // -webkit-animation: scale-up-center 1s
-          //   cubic-bezier(0.39, 0.575, 0.565, 1) infinite both;
-          // animation: scale-up-center 1s cubic-bezier(0.39, 0.575, 0.565, 1)
-          //   infinite both;
-        }
-        @-webkit-keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-          }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-          }
-        }
-        @keyframes scale-up-center {
-          0% {
-            -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-          }
-          100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-          }
         }
       }
       .map.hide {
@@ -558,16 +528,6 @@ $remgika: #c7cda4;
         display: none;
       }
       .map.show {
-        visibility: visible !important;
-        background-color: rgb(216, 212, 212);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0px;
-        z-index: 1;
-        animation-name: mapTransitionEvents;
-        animation-duration: 1s;
-        transition: width 2s linear 1s;
         .close-container {
           display: flex;
           justify-content: flex-end;
@@ -586,8 +546,13 @@ $remgika: #c7cda4;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 800px) {
   .event-table > div {
-    width: 22%;
+    width: 30%;
+  }
+}
+@media (min-width: 1092px) {
+  .event-table> div {
+    width: 23%;
   }
 }

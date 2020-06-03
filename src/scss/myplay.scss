@@ -4,8 +4,8 @@ $remgika: #c7cda4;
   .all-my-events-play {
     margin-top: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    justify-content: start;
     flex-direction: column;
     background-color: white;
     .playgroud-item {
@@ -189,6 +189,7 @@ $remgika: #c7cda4;
     .all-my-events-play{
       flex-direction: row;
       flex-wrap: wrap;
+      align-items: flex-start;
       .playgroud-item{
         width: 40%;
         .userVote {

@@ -103,8 +103,28 @@ $remgika: #c7cda4;
         }
         p {
           font-weight: 300;
-          font-size: 17px;
+          font-size: 22px;
           text-align: center;
+        }
+        .soon{
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+          .title-soon{
+            font-size: 20px;
+            font-weight: 500;
+          }
+          div{
+            display: flex;
+            flex-wrap: wrap;
+            p{
+              margin: 10px;
+              padding: 5px;
+              background-color: rgba(0, 128, 0, 0.658);
+              border-radius: 5px;
+              color: white;
+            }
+          }
         }
       }
     }

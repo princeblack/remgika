@@ -44,7 +44,9 @@ class SignUp extends React.Component {
           <div id="sign-up">
             <LoginHeader />
             <div className="sign-body">
-              <div id="sign-img">
+              {black && (
+                <>
+                                <div id="sign-img">
                 <img src={black} alt="remgika"></img>
               </div>
               <div className="sign-form">
@@ -108,6 +110,8 @@ class SignUp extends React.Component {
                   Already have an account? <Link to="/login">Sign In</Link>
                 </p>
               </div>
+                </>
+              )}
             </div>
           </div>
         )}

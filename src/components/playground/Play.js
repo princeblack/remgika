@@ -41,7 +41,6 @@ class Play extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(function (position) {});
     this.handlePlace();
-    this.props.writerImage()
   }
   componentDidUpdate(prevProps) {
     if (prevProps.addComment !== this.props.addComment) {
@@ -101,6 +100,8 @@ class Play extends Component {
     const newData = await {
       content: this.state.comment,
       postId: this.props.data._id,
+      firstName: this.props.data.firstName,
+      lastName: this.props.data.lastName
     };
     this.props.commentAdd(newData);
     this.setState({
@@ -109,24 +110,10 @@ class Play extends Component {
   };
 
   // RENDER
-  render() {
-    // console.log(this.state.comment);
-    // console.log(this.props.data);
-    // console.log(this.props);
-    // console.log(this.props.data._id, 'play');
-    // // let commentList;
-    // commentList = this.props.allComment.map((el, index)=>{
-    //   return(
-    //     <p comment={el} key={index}></p>
-    //   )
-    // })
-    // const test = commentList
-    // console.log(test);
-    let commentList;
-    commentList = this.props.allComment.map((el, index) => {
-      return <Comment key={index} comment={el} data={this.props.data}></Comment>;
-    });
-
+  render() {    
+   const commentList = this.props.allComment.map((el, index)=>{
+      return(<Comment key={index} comment={el} data={this.props.data}></Comment>)
+    })
     const chevronWidth = 40;
     const activeItemIndex = this.state.activeItemIndex;
     const image = this.props.data.imgCollection.map((el, index) => {
@@ -140,10 +127,12 @@ class Play extends Component {
     const index = this.props.playIndex;
     const commet = this.props.playIndex;
     return (
-      <div className="playgroud-item">
+      this.props.data && (
+        <>
+                <div className="playgroud-item">
         <div className="userVote">
-          <img src={link} alt="like"></img>
-          <img src={unlink} alt="unlike"></img>
+          {/* <img src={link} alt="like"></img>
+          <img src={unlink} alt="unlike"></img> */}
         </div>
         <div className="image">
           <ItemsCarousel
@@ -154,8 +143,8 @@ class Play extends Component {
             gutter={12}
             outsideChevron={false}
             chevronWidth={chevronWidth}
-            leftChevron={"<"}
-            rightChevron={">"}
+            leftChevron={<button></button>}
+            rightChevron={<button></button>}
           >
             {image}
           </ItemsCarousel>
@@ -262,24 +251,27 @@ class Play extends Component {
             </form>
             <hr></hr>
             <div className="all-comment">
-              {/* <Comment data={this.props.data} ></Comment> */}
               {commentList}
             </div>
           </div>
         </Collapse>
       </div>
+        </>
+      )
     );
   }
 }
 const WrappedContainer = GoogleApiWrapper({
-  // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
+  apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 })(Play);
 
 const mapStateToProps = (state) => {
   return {
     allComment: state.allComment,
     addComment: state.addComment,
-    commentIsDelete: state.commentIsDelete
+    commentIsDelete: state.commentIsDelete,
+    allUserInfo: state.allUserInfo,
+    writerImg: state.writerImg,
   };
 };
 

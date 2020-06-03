@@ -1,5 +1,5 @@
-// const url = "https://node-server.remgika.com";
-const url = "http://localhost:8000";
+const url = "https://node-server.remgika.com";
+// const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -7,6 +7,22 @@ export const checkCredentials = async (data) => {
       await fetch(`${url}/users/login`, {
         method: "POST",
         body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+export const getAllUsers = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/users/`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -69,6 +85,41 @@ export const getProfileImage = async (data) => {
   }
 };
 
+export const getwriterImage = async (data) => {
+  const id =data
+  try {
+    const res = await (
+      await fetch(`${url}/images/writer/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const deleteProfileImage = async (data) => {
+  const id = data;
+  try {
+    const res = await (
+      await fetch(`${url}/images/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
 export const authoriseUser = async (data) => {
   try {
     const res = await (
@@ -104,23 +155,6 @@ export const handleLogOut = async (data) => {
   }
 };
 
-export const deleteProfileImage = async (data) => {
-  const id = data;
-  try {
-    const res = await (
-      await fetch(`${url}/images/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      })
-    ).json();
-    return res;
-  } catch (error) {
-    return [];
-  }
-};
 
 /**********************************************************
  ************************ PLAYGROUND ***********************
@@ -329,23 +363,6 @@ export const getcomment = async (data) => {
   }
 };
 
-export const getwriterImage = async (data) => {
-  const id = data
-  try {
-    const res = await (
-      await fetch(`${url}/images/writer/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      })
-    ).json();
-    return res;
-  } catch (error) {
-    return [error];
-  }
-};
 
 export const getWriterInfo = async (data) => {
   const id = data

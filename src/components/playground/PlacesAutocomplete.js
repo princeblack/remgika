@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import {
+  allUser,
   fetchPlayground,
   commentAdd,
   fetchComment,
+  writerImage
 } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -19,9 +21,12 @@ import ItemsCarousel from "react-items-carousel";
 const PlacesAutocomplete = (props) => {
   
   useEffect((prevProps, nextState) => {
+    props.allUser()
     props.fetchPlayground();
     props.fetchComment()
   }, []);
+// console.log(props.allUserInfo);
+// console.log(props.playground);
 
 
   const {
@@ -34,6 +39,7 @@ const PlacesAutocomplete = (props) => {
     requestOptions: "string",
     debounce: 300,
   });
+  
   const ref = useRef();
   useOnclickOutside(ref, () => {
     // When user clicks outside of the component, we can dismiss
@@ -83,22 +89,11 @@ const PlacesAutocomplete = (props) => {
     });
     setgetPlay(filterCharacter);
   };
+// console.log(props.allUserInfo);
 
   /* seaching playround return r*/
-
   let playgroundList;
   playgroundList =  props.playground.map((el, index) => {
-    return (
-      <Play
-        user={props.info}
-        playIndex={index}
-        data={el}
-        key={index}
-      ></Play>
-    );
-  });
-  if (getPlay !== undefined) {
-    playgroundList = getPlay.map((el, index) => {
       return (
         <Play
           user={props.info}
@@ -106,8 +101,20 @@ const PlacesAutocomplete = (props) => {
           data={el}
           key={index}
         ></Play>
-      );
-    });
+      );    
+  });
+  if (getPlay !== undefined) {
+    playgroundList = getPlay.map((el, index) => {
+        return (
+          <Play
+            // allUsers={ell}
+            user={props.info}
+            playIndex={index}
+            data={el}
+            key={index}
+          ></Play>
+        );
+      })
   }
   
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -124,18 +131,18 @@ const PlacesAutocomplete = (props) => {
   }, []);
 
   let cardNumber = 1;
-  if (size >= 500) {
-    cardNumber = 2;
-  }
-  if (size >= 850) {
-    cardNumber = 3;
-  }
-  if (size >= 990) {
-    cardNumber = 4;
-  }
-  if (size >= 1200) {
-    cardNumber = 5;
-  }
+  // if (size >= 600) {
+  //   cardNumber = 2;
+  // }
+  // if (size >= 850) {
+  //   cardNumber = 3;
+  // }
+  // if (size >= 990) {
+  //   cardNumber = 4;
+  // }
+  // if (size >= 1200) {
+  //   cardNumber = 5;
+  // }
 
   return (
     <>
@@ -162,7 +169,7 @@ const PlacesAutocomplete = (props) => {
         <h1>Playgrounds</h1>
         <hr></hr>
       </div>
-      {size <= 768 ? (
+      {size <= 600 ? (
         <div className="carouselDiv">
           <ItemsCarousel
             enablePlaceholder
@@ -192,6 +199,7 @@ const PlacesAutocomplete = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    allUserInfo: state.allUserInfo,
     playground: state.playground,
     addPlay: state.addPlay,
     info: state.info,
@@ -200,6 +208,8 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  allUser,
+  writerImage,
   commentAdd,
   fetchComment,
   fetchPlayground,

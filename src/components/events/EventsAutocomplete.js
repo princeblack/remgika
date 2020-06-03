@@ -11,7 +11,6 @@ import camerablue from "../../img/camerablue.png";
 import "../../scss/Playground.scss";
 import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
-import { GoogleApiWrapper } from "google-maps-react";
 const EventsAutocomplete = (props) => {
   const [userId] = useState(0);
   useEffect(() => {
@@ -104,18 +103,18 @@ const EventsAutocomplete = (props) => {
   }, []); 
   
   let cardNumber = 1;
-  if (size >= 500) {
-    cardNumber= 2
-  }
-  if (size >= 850) {
-    cardNumber= 3
-  }
-  if (size >= 990) {
-    cardNumber= 4
-  }
-  if (size >= 1400) {
-    cardNumber= 5
-  }
+  // if (size >= 500) {
+  //   cardNumber= 2
+  // }
+  // if (size >= 850) {
+  //   cardNumber= 3
+  // }
+  // if (size >= 990) {
+  //   cardNumber= 4
+  // }
+  // if (size >= 1400) {
+  //   cardNumber= 5
+  // }
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">
@@ -142,7 +141,7 @@ const EventsAutocomplete = (props) => {
         <h1>Events</h1>
         <hr></hr>
       </div>
-      {size <= 768 ? (
+      {size <= 600 ? (
               <div className="carouselDiv">
               <ItemsCarousel
                 enablePlaceholder
@@ -176,9 +175,6 @@ const mapStateToProps = (state) => {
     info: state.info,
   };
 };
-GoogleApiWrapper({
-  // apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
-});
-export default connect(mapStateToProps, { fetcheventsList, GoogleApiWrapper })(
+export default connect(mapStateToProps, { fetcheventsList})(
   EventsAutocomplete
 );

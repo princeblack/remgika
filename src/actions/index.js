@@ -1,5 +1,6 @@
 import {
   checkCredentials,
+  getAllUsers,
   getPlayground,
   getMyPlayground,
   authoriseUser,
@@ -28,6 +29,15 @@ export const authorise = (payload) => {
     const data = await authoriseUser();
     dispatch({
       type: "HANDLE_USER",
+      payload: data,
+    });
+  };
+};
+export const allUser = (payload) => {
+  return async (dispatch) => {
+    const data = await getAllUsers();
+    dispatch({
+      type: "HANDLE_ALL_USERS",
       payload: data,
     });
   };

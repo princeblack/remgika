@@ -40,7 +40,9 @@ class Login extends React.Component {
           <div id="login" className="page thirdColor">
             <LoginHeader />
             <div className="login-body">
-              <div id="login-img">
+              {woman && (
+                <>
+                               <div id="login-img">
                 <img src={woman} alt="remgika"></img>
               </div>
               <div className="login-form">
@@ -81,6 +83,8 @@ class Login extends React.Component {
                   Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>
               </div>
+                </>
+              )}
             </div>
           </div>
         )}
