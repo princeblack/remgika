@@ -1,0 +1,217 @@
+.App {
+  /*********************************************************
+  **********************************************************
+  ********************* SIGN UP PAGE ***********************
+  **********************************************************
+  **********************************************************/
+}
+
+.App #sign-up {
+  width: 100%;
+  min-height: 100vh;
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+  /**********************************************************
+  ************************ body sign-up *********************
+  ***********************************************************/
+}
+
+.App #sign-up header {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  background-color: #c7cda4;
+}
+
+.App #sign-up header .icon-go-back {
+  height: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+
+.App #sign-up header .icon-go-back a,
+.App #sign-up header .icon-go-back a:visited {
+  text-decoration: none;
+  color: #0a0a0a;
+}
+
+.App #sign-up .sign-body {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App #sign-up .sign-body #sign-img {
+  width: 70%;
+  height: 400px;
+}
+
+.App #sign-up .sign-body #sign-img img {
+  height: 100%;
+  width: 100%;
+}
+
+.App #sign-up .sign-body .sign-form {
+  background-color: rgba(182, 166, 166, 0.24);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  width: 80%;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 1rem;
+  /**********************************************************
+        ************************ Sign up animation*****************
+        ***********************************************************/
+}
+
+.App #sign-up .sign-body .sign-form .input-transition {
+  width: 95%;
+  font-weight: 200;
+  letter-spacing: 3px;
+  background: #f8f8f8;
+  color: #0e0d0d;
+  border: none;
+  border-bottom: 1px solid  black;
+  padding: 9px;
+  margin: 7px;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition::-webkit-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition::-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition::placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:focus {
+  color: black;
+  outline: none;
+  border-bottom: 1.2px solid pink;
+  font-size: 1em;
+  -webkit-transition: .8s all ease;
+  transition: .8s all ease;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.App #sign-up .sign-body .sign-form .input-transition:focus::placeholder {
+  opacity: 0.2;
+}
+
+.App #sign-up .sign-body .sign-form .login-submit {
+  padding: 12px;
+  background: #c7cda4;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  border-radius: 10px;
+  margin: auto;
+  outline: none;
+  display: block;
+}
+
+.App #sign-up .sign-body .sign-form .login-submit:hover {
+  background: #69ca62;
+  color: white;
+  -webkit-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
+
+.App #sign-up .sign-body .sign-form a, .App #sign-up .sign-body .sign-form a:visited {
+  text-decoration: none;
+  color: #085797;
+}
+
+.App #sign-up .sign-body .sign-form::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #399953;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#db1acb), to(#399953)), -webkit-gradient(linear, left top, left bottom, from(#fafd32), to(#659b20)), -webkit-gradient(linear, left top, left bottom, from(#be251a), to(#d17771)), -webkit-gradient(linear, left top, left bottom, from(#1e79d4), to(#07090e));
+  background-image: linear-gradient(#db1acb, #399953), linear-gradient(#fafd32, #659b20), linear-gradient(#be251a, #d17771), linear-gradient(#1e79d4, #07090e);
+  -webkit-animation: rotate 16s linear infinite;
+          animation: rotate 16s linear infinite;
+}
+
+.App #sign-up .sign-body .sign-form::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 6px;
+  top: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  background: white;
+  border-radius: 5px;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(1turn);
+            transform: rotate(1turn);
+  }
+}
+/*# sourceMappingURL=sign.css.map */

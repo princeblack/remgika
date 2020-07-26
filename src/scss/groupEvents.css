@@ -1,0 +1,280 @@
+.groupEvent {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.groupEvent .addButton {
+  padding: 20px;
+  background-color: white;
+}
+
+.groupEvent .addButton button {
+  border: 0;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: #c7cda4;
+}
+
+.groupEvent .addButton button:hover {
+  background-color: #69ca62;
+}
+
+.groupEvent .addPlaygroung-form {
+  background-color: white;
+}
+
+.groupEvent .title {
+  width: 100%;
+  text-align: left;
+  background-color: white;
+}
+
+.groupEvent .title span {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 12px;
+}
+
+.groupEvent .event-container .event-item {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: -1px -1px 4px #dcdef19f, #e2d8d8 1px 1px 4px;
+          box-shadow: -1px -1px 4px #dcdef19f, #e2d8d8 1px 1px 4px;
+  overflow: hidden;
+  padding: 20px;
+  -webkit-transition: -webkit-transform ease-in-out 0.6s;
+  transition: -webkit-transform ease-in-out 0.6s;
+  transition: transform ease-in-out 0.6s;
+  transition: transform ease-in-out 0.6s, -webkit-transform ease-in-out 0.6s;
+}
+
+.groupEvent .event-container .event-item .image {
+  position: relative;
+}
+
+.groupEvent .event-container .event-item .image img {
+  border-radius: 20px;
+  width: 90%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 300px;
+  -webkit-transition: -webkit-transform ease-in-out 0.3s;
+  transition: -webkit-transform ease-in-out 0.3s;
+  transition: transform ease-in-out 0.3s;
+  transition: transform ease-in-out 0.3s, -webkit-transform ease-in-out 0.3s;
+}
+
+.groupEvent .event-container .event-item .image img:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -ms-scroll-snap-type: none;
+      scroll-snap-type: none;
+  scroll-behavior: inherit;
+}
+
+.groupEvent .event-container .event-item .eventTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #025cc2;
+  width: 100%;
+  min-height: auto;
+}
+
+.groupEvent .event-container .event-item .eventTitle h4 {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-align: left;
+  color: #f0dbdb;
+  padding: 10px;
+}
+
+.groupEvent .event-container .event-item .addressItem span {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.groupEvent .event-container .event-item .description {
+  border: solid 1px rgba(106, 106, 240, 0.418);
+  border-radius: 2px;
+  text-align: center;
+  padding: 4px;
+  min-height: 200px;
+}
+
+.groupEvent .event-container .event-item .description p {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  word-wrap: break-word;
+  font-size: 16px;
+  text-align: left;
+  color: #4e4a4a;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse {
+  margin-top: 10px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content {
+  border: solid;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show {
+  z-index: 1;
+  -webkit-animation-name: maptransition;
+          animation-name: maptransition;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-transition: width 2s linear 1s;
+  transition: width 2s linear 1s;
+  background-color: #eee9dc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  z-index: 1;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show .close-item .close {
+  width: 50px;
+  height: 50px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form {
+  width: 100%;
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .fileNum {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  margin: 7px;
+  margin-left: 15px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .fileNum button {
+  width: 40%;
+  height: 30px;
+  border-radius: 100px;
+  border: 0;
+  outline: none;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .fileNum button:focus {
+  outline: none;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .fileNum p {
+  margin-left: 10px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition {
+  width: 90%;
+  font-weight: 300;
+  letter-spacing: 3px;
+  background: #f9f9fa;
+  color: #0e0d0d;
+  border: none;
+  padding: 9px;
+  margin: 7px;
+  border-radius: 5px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition::-webkit-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition::-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition::placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:focus {
+  color: black;
+  outline: none;
+  border-bottom: 1.2px solid pink;
+  font-size: 1em;
+  -webkit-transition: 0.8s all ease;
+  transition: 0.8s all ease;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:focus:-ms-input-placeholder {
+  opacity: 0;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:focus::-ms-input-placeholder {
+  opacity: 0;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .input-transition:focus::placeholder {
+  opacity: 0;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .addPlay-submit,
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .addPlay-submit:focus {
+  width: 100px;
+  height: 40px;
+  background-color: #69ca62;
+  border: none;
+  padding: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  border-radius: 10px;
+  margin: auto;
+  outline: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .addPlay-submit:hover,
+.groupEvent .event-container .event-item .ReactCollapse--collapse .ReactCollapse--content .update-form.show form .addPlay-submit:focus:hover {
+  background: #69ca62;
+  color: white;
+  -webkit-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
+/*# sourceMappingURL=groupEvents.css.map */

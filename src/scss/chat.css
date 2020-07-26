@@ -1,0 +1,147 @@
+.chatContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  border-top: solid;
+  border-top-color: #c7cda4;
+  border-top-width: 40px;
+  padding: 10px;
+  position: relative;
+}
+
+.chatContainer .chatItems .chatBoxItem {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.chatContainer .chatItems .chatBoxItem .user {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chatContainer .chatItems .chatBoxItem .user .messageBox {
+  max-width: 80%;
+  background: #69ca6242;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.chatContainer .chatItems .chatBoxItem .user .messageBox p {
+  width: 100%;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.chatContainer .chatItems .chatBoxItem .outer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chatContainer .chatItems .chatBoxItem .outer .messageBox {
+  max-width: 80%;
+  background: #dad8d8;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.chatContainer .chatItems .chatBoxItem .outer .messageBox p {
+  width: 100%;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.chatContainer .chatItems .chatBoxItem .outer .userName {
+  margin: 5px;
+  color: #828282;
+}
+
+.chatContainer .input {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chatContainer .input .text-input {
+  background-color: rgba(128, 128, 128, 0.096);
+  width: 80%;
+  border-radius: 10px;
+}
+
+.chatContainer .input .text-input input {
+  width: 90%;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(128, 128, 128, 0.11);
+  text-align: center;
+  word-break: break-all;
+}
+
+.chatContainer .input .text-input input:focus, .chatContainer .input .text-input input:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.chatContainer .input .text-input svg {
+  font-size: 20px;
+  color: #69ca62;
+}
+
+.chatContainer .input .emo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 20%;
+}
+
+.chatContainer .input .emo svg {
+  font-size: 40px;
+  color: #69ca62;
+}
+
+.chatContainer .emoji-mart.emoji-mart-light {
+  width: 80% !important;
+  position: absolute;
+  left: 10%;
+  bottom: 80px;
+}
+/*# sourceMappingURL=chat.css.map */

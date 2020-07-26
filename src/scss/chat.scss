@@ -1,0 +1,112 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-top: solid;
+  border-top-color: $remgika;
+  border-top-width: 40px;
+  padding: 10px;
+  position: relative;
+  .chatItems {
+    // max-height: 27vh;
+    // min-height: 27vh;
+    // overflow: scroll;
+    // overscroll-behavior: contain;
+    // overflow-y: auto;
+    // width: 85%;
+    .chatBoxItem{
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      .user{
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        .messageBox{
+          max-width: 80%;
+          background: #69ca6242;
+          border-radius: 8px;
+          padding: 10px;
+          p{
+            width: 100%;
+            word-break: break-all;
+            word-wrap: break-word;
+          }
+        }
+      }
+      .outer{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .messageBox{
+          max-width: 80%;
+          background: #dad8d8;
+          padding: 10px;
+          border-radius: 8px;
+          p{
+            width: 100%;
+            word-break: break-all;
+            word-wrap: break-word;
+          }
+        }
+        .userName{
+          margin: 5px;
+          color:#828282;
+        }
+      }
+    }
+  }
+  .input {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .text-input{
+        background-color: rgba(128, 128, 128, 0.096);
+        width: 80%;
+        border-radius: 10px;
+        input {
+            width: 90%;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            background-color: rgba(128, 128, 128, 0.11);
+            text-align: center;
+            word-break: break-all;
+            &:focus,
+            &:focus-visible {
+              border: none;
+              outline: none;
+            }
+          }
+          svg {
+            font-size: 20px;
+            color: $main-color;
+          }
+    }
+    
+    .emo {
+      display: flex;
+      justify-content: space-around;
+      width: 20%;
+
+      svg {
+        font-size: 40px;
+        color: $main-color;
+      }
+    }
+  }
+  .emoji-mart.emoji-mart-light {
+    width: 80% !important;
+    position: absolute;
+    // top: 50vh;
+    left: 10%;
+    bottom: 80px;
+  }
+}

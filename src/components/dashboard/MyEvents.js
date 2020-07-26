@@ -41,14 +41,6 @@ class MyEvents extends Component {
       description: this.props.data.description,
     });
   }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.eventIsUpdate !== this.props.eventIsUpdate) {
-  //     this.props.myEvents();
-  //   }
-  //   if (prevProps.eventIsDelete !== this.props.eventIsDelete) {
-  //     this.props.myEvents();
-  //   }
-  // }
   toggleClass(index, e) {
     this.setState({
       activeIndex: this.state.activeIndex === index ? null : index,
@@ -152,7 +144,7 @@ class MyEvents extends Component {
           </div>
           {/**********************************************************
            **********************************************************
-           **************** UPDATE PLAYGROUND  FORM *****************
+           **************** UPDATE event  FORM *****************
            **********************************************************
            ********************************************************** */}
           <Collapse isOpened={this.state.activeIndex === index}>

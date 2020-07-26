@@ -11,6 +11,7 @@ import camerablue from "../../img/camerablue.png";
 import "../../scss/Playground.scss";
 import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
+
 const EventsAutocomplete = (props) => {
   const [userId] = useState(0);
   useEffect(() => {
@@ -103,18 +104,6 @@ const EventsAutocomplete = (props) => {
   }, []); 
   
   let cardNumber = 1;
-  // if (size >= 500) {
-  //   cardNumber= 2
-  // }
-  // if (size >= 850) {
-  //   cardNumber= 3
-  // }
-  // if (size >= 990) {
-  //   cardNumber= 4
-  // }
-  // if (size >= 1400) {
-  //   cardNumber= 5
-  // }
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">

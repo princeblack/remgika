@@ -1,3 +1,5 @@
+import { publicGroup } from "../lib/dataFetch";
+
 const initialState = {
   // Log and Sign and user Info
   loading: true,
@@ -27,7 +29,19 @@ const initialState = {
   allComment: [],
   writerImg: [],
   writerInfo:[],
-  commentIsDelete: false
+  commentIsDelete: false,
+  // Groups
+  addGroup: false,
+  allPublicGroup : [],
+  urlGroupInfo: [],
+  addNewsGroup : [],
+  GroupNews: [],
+  groupMembers: [],
+  addGroupEvent: false,
+  groupEvents: [],
+  groupEventIsUpdate: false,
+  GroupEventIsDelete: false,
+  groupChats : [],
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -45,6 +59,7 @@ const mainReducer = (state = initialState, action) => {
     } else {
       state.isLoggedIn = true;
       state.sign = true;
+      state.addGroup = false;
       state.info = action.payload;
     }
     state.loading = false;
@@ -90,6 +105,7 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "HANDLE_LOGOUT") {
     state.isLoggedIn = false;
     state.sign = false;
+    state.info= []
     return Object.assign({}, state);
   }
   /**********************************************************
@@ -267,6 +283,104 @@ const mainReducer = (state = initialState, action) => {
     } else {
       state.commentIsDelete = true;
     }
+    return Object.assign({}, state);
+  }
+    /**********************************************************
+   ************************ comment ****************************
+   ***********************************************************/
+  if (action.type === "ADD_GROUPS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addGroup = false;
+    } else {
+      state.addGroup = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "PUBLIC_GROUPS") {
+    state.allPublicGroup = action.payload;
+    return Object.assign({}, state);
+  } 
+  if (action.type === "URL_GROUPS_BY_ID") {
+    if (action.payload.hasOwnProperty("error") ||
+    action.payload.hasOwnProperty("errors") ||
+    action.payload.hasOwnProperty("length")) {
+      state.urlGroupInfo= false
+    } else {
+      state.urlGroupInfo = action.payload;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "POST_GROUP_NEWS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addNewsGroup = false;
+    } else {
+      state.addNewsGroup =  action.payload;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_GROUP_NEWS") {
+    state.GroupNews =  action.payload;
+    state.addNewsGroup = false;
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_GROUP_MEMBERS") {
+    state.groupMembers =  action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "POST_GROUP_EVENTS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addGroupEvent = false;
+    } else {
+      state.addGroupEvent = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_GROUP_EVENTS") {
+    state.groupEvents=  action.payload;
+    state.addGroupEvent = false;
+    state.groupEventIsUpdate = false;
+    state.GroupEventIsDelete = false;
+    return Object.assign({}, state);
+  }
+  if (action.type === "UPDATE_GROUP_EVENTS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.groupEventIsUpdate = false;
+    } else {
+      state.groupEventIsUpdate = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "DELETE_GROUP_EVENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.GroupEventIsDelete = false;
+    } else {
+      state.GroupEventIsDelete = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_GROUP_CHATS") {
+    debugger
+    state.groupChats= action.payload;
     return Object.assign({}, state);
   }
   return state;

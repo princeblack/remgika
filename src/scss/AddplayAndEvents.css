@@ -1,0 +1,384 @@
+/*********************************************************
+  **********************************************************
+  ************************* ADD PLAYGROUND *****************
+  **********************************************************
+  **********************************************************/
+header {
+  background-color: #c7cda4;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50px;
+}
+
+header div {
+  font-size: 40px;
+}
+
+header div a:visited {
+  color: black;
+}
+
+.addPlaygroung-form {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+  /**
+ * ----------------------------------------
+ * animation fade-out
+ * ----------------------------------------
+ */
+}
+
+.addPlaygroung-form #addPlay-img {
+  width: 70%;
+  height: 400px;
+}
+
+.addPlaygroung-form #addPlay-img img {
+  height: 100%;
+  width: 100%;
+}
+
+.addPlaygroung-form form {
+  width: 80%;
+  background-color: rgba(128, 128, 128, 0.479);
+  border-radius: 5px;
+}
+
+.addPlaygroung-form form p {
+  color: #e77272;
+  font-size: 15px;
+}
+
+.addPlaygroung-form form ul {
+  background-color: #e6e9d5;
+  padding: 0;
+  border: solid 3px #697a05;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-width: 1px 1px 1px;
+  border-style: none solid solid;
+  list-style-type: none;
+  text-align: left;
+  -o-border-image: initial;
+     border-image: initial;
+  border-top: none;
+  width: 90%;
+  margin-left: 15px;
+}
+
+.addPlaygroung-form form ul li {
+  margin: 5px;
+  color: #461e1e;
+}
+
+.addPlaygroung-form form ul li strong {
+  font-weight: 400;
+}
+
+.addPlaygroung-form form .fileNum {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 90%;
+  margin: 7px;
+  margin-left: 15px;
+}
+
+.addPlaygroung-form form .fileNum button {
+  width: 40%;
+  height: 30px;
+  border-radius: 100px;
+  border: 0;
+  outline: none;
+}
+
+.addPlaygroung-form form .fileNum button:focus {
+  outline: none;
+}
+
+.addPlaygroung-form form .fileNum p {
+  margin-left: 10px;
+}
+
+.addPlaygroung-form form .input-transition {
+  width: 90%;
+  font-weight: 300;
+  letter-spacing: 3px;
+  background: #f9f9fa;
+  color: #0e0d0d;
+  border: none;
+  padding: 9px;
+  margin: 3px;
+  border-radius: 5px;
+}
+
+.addPlaygroung-form form .input-transition::-webkit-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.addPlaygroung-form form .input-transition:-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.addPlaygroung-form form .input-transition::-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.addPlaygroung-form form .input-transition::placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.addPlaygroung-form form .input-transition:focus {
+  color: black;
+  outline: none;
+  border-bottom: 1.2px solid pink;
+  font-size: 1em;
+  -webkit-transition: 0.8s all ease;
+  transition: 0.8s all ease;
+}
+
+.addPlaygroung-form form .input-transition:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.addPlaygroung-form form .input-transition:focus:-ms-input-placeholder {
+  opacity: 0;
+}
+
+.addPlaygroung-form form .input-transition:focus::-ms-input-placeholder {
+  opacity: 0;
+}
+
+.addPlaygroung-form form .input-transition:focus::placeholder {
+  opacity: 0;
+}
+
+.addPlaygroung-form form .calender {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /**
+ * ----------------------------------------
+ * endcalender picker
+ * ----------------------------------------
+ */
+}
+
+.addPlaygroung-form form .calender .example-custom-input {
+  background-color: #306b99;
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 8px;
+  text-transform: uppercase;
+  font-size: 11px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.addPlaygroung-form form .calender .example-custom-input:hover {
+  background: greenyellow;
+  color: black;
+  -webkit-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
+
+.addPlaygroung-form form .calender .StartCalender {
+  width: 50%;
+}
+
+.addPlaygroung-form form .calender .StartCalender .Start {
+  color: green;
+}
+
+.addPlaygroung-form form .calender .StartCalender .react-datepicker-wrapper {
+  width: 100%;
+  padding: 5px;
+}
+
+.addPlaygroung-form form .calender .StartCalender .react-datepicker-wrapper .react-datepicker__input-container input {
+  width: 100%;
+}
+
+.addPlaygroung-form form .calender .StartCalender .react-datepicker-wrapper .react-datepicker__input-container .react-datepicker__close-icon::after {
+  background-color: rgba(240, 177, 118, 0.89);
+}
+
+.addPlaygroung-form form .calender .StartCalender .react-datepicker__tab-loop .react-datepicker-popper {
+  left: 0px !important;
+  border: solid 2 px red;
+}
+
+.addPlaygroung-form form .calender .StartCalender .react-datepicker__tab-loop .react-datepicker-popper[data-placement^="bottom"]
+.react-datepicker__triangle,
+.addPlaygroung-form form .calender .StartCalender .react-datepicker__tab-loop .react-datepicker-popper[data-placement^="top"]
+.react-datepicker__triangle,
+.addPlaygroung-form form .calender .StartCalender .react-datepicker__tab-loop .react-datepicker__month-read-view--down-arrow,
+.addPlaygroung-form form .calender .StartCalender .react-datepicker__tab-loop .react-datepicker__month-year-read-view--down-arrow {
+  margin-left: 0px !important;
+}
+
+.addPlaygroung-form form .calender .EndCalender {
+  width: 50%;
+}
+
+.addPlaygroung-form form .calender .EndCalender .End {
+  color: #003380;
+}
+
+.addPlaygroung-form form .calender .EndCalender .react-datepicker-wrapper {
+  width: 100%;
+  padding: 5px;
+}
+
+.addPlaygroung-form form .calender .EndCalender .react-datepicker-wrapper .react-datepicker__input-container input {
+  width: 100%;
+}
+
+.addPlaygroung-form form .calender .EndCalender .react-datepicker__tab-loop .react-datepicker-popper {
+  left: -120px !important;
+}
+
+.addPlaygroung-form form .calender .EndCalender .react-datepicker__tab-loop .react-datepicker-popper[data-placement^="bottom"]
+.react-datepicker__triangle,
+.addPlaygroung-form form .calender .EndCalender .react-datepicker__tab-loop .react-datepicker-popper[data-placement^="top"]
+.react-datepicker__triangle,
+.addPlaygroung-form form .calender .EndCalender .react-datepicker__tab-loop .react-datepicker__month-read-view--down-arrow,
+.addPlaygroung-form form .calender .EndCalender .react-datepicker__tab-loop .react-datepicker__month-year-read-view--down-arrow {
+  margin-left: 90px !important;
+}
+
+.addPlaygroung-form form #myImage {
+  color: #8181c2;
+  font-size: 15px;
+}
+
+.addPlaygroung-form form .addPlay-submit,
+.addPlaygroung-form form .addPlay-submit:focus {
+  width: 100px;
+  height: 40px;
+  background-color: #69ca62;
+  border: none;
+  padding: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 5px;
+  outline: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.addPlaygroung-form form .addPlay-submit:hover,
+.addPlaygroung-form form .addPlay-submit:focus:hover {
+  background: #69ca62;
+  color: white;
+  -webkit-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
+
+.addPlaygroung-form .addPlaygound-accept {
+  background-color: rgba(109, 189, 102, 0.808);
+  width: 70%;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 2;
+  border-radius: 20px;
+  -webkit-animation: fade-out 7s 2s ease-out both;
+  animation: fade-out 7s 2s ease-out both;
+}
+
+.addPlaygroung-form .addPlaygound-accept p {
+  color: white;
+  font-size: 20px;
+}
+
+.addPlaygroung-form .addPlaygound-accept img {
+  width: 50px;
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+
+.addPlaygroung-form .addPlaygound-erreur {
+  background-color: rgba(137, 43, 226, 0.534);
+  width: 80%;
+  height: 30vh;
+  position: absolute;
+  top: 100;
+  overflow: hidden;
+}
+/*# sourceMappingURL=AddplayAndEvents.css.map */

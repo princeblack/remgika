@@ -1,0 +1,199 @@
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+}
+
+form div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 70%;
+  margin: 10px;
+}
+
+form div span {
+  color: red;
+}
+
+form div select {
+  font-size: 15px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+form div select option {
+  background-color: #c7cda4;
+  font-size: 18px;
+}
+
+form div select option:hover {
+  background-color: yellow;
+}
+
+form div select option:focus {
+  color: none;
+  outline: none;
+}
+
+form div select option:active {
+  color: none;
+  outline: none;
+}
+
+form div select option:hover {
+  color: none;
+  outline: none;
+}
+
+form div select option:checked {
+  background-color: none;
+  outline: none;
+}
+
+form #image-block img {
+  width: 200px;
+  height: 150px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+form .submit {
+  background-color: #c7cda4;
+  border: 0;
+  margin: 10px;
+  width: 30%;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+form .spinner-container {
+  position: relative;
+  bottom: 510px;
+  z-index: 1;
+  background-color: #c7cda4b7;
+  height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 10px;
+}
+
+form .spinner-container .spinner {
+  width: 100%;
+  font-size: 100px;
+  color: #bdacce;
+  -webkit-animation: rotate-center 0.9s linear infinite both;
+  animation: rotate-center 0.9s linear infinite both;
+}
+
+form .check-container {
+  position: relative;
+  bottom: 510px;
+  z-index: 1;
+  background-color: #c7cda4;
+  height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+form .check-container .spinner {
+  width: 100%;
+  font-size: 100px;
+  color: #ffffff;
+}
+
+form .check-container p {
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.sign-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sign-container .not-sign {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+}
+
+.sign-container .not-sign a, .sign-container .not-sign a:focus, .sign-container .not-sign a:visited {
+  color: white;
+  outline: none;
+  background-color: #69ca62;
+  font-size: 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.sign-container .not-sign a:hover {
+  background-color: #c7cda4;
+}
+/*# sourceMappingURL=addGroup.css.map */

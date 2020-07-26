@@ -119,6 +119,8 @@ const AddEvents = (props) => {
   };
 
   const onSubmit = (e) => {
+    console.log(e);
+    
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
@@ -135,6 +137,8 @@ const AddEvents = (props) => {
   const isLoggedIn = props.isLoggedIn;
   const addEvents = props.addEvents;
   const fileNum = imgCollection.length;
+  console.log(props);
+  
   return (
     <>
       {redirect && <Redirect to="/events"></Redirect>}
@@ -247,7 +251,7 @@ const AddEvents = (props) => {
             </form>
             {addEvents && (
               <div className="addPlaygound-accept" id="accept">
-                <p> The events is add successfuly</p>
+                <p> The events is added successfully</p>
                 <img src={done} alt="done"></img>
               </div>
             )}

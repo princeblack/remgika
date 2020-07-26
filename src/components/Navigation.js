@@ -6,12 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import remgika from "../img/remgika.png";
 import avatar from "../img/avatar.png"
 
-// import {
-//   faFacebook,
-//   faInstagram,
-//   faLinkedin,
-//   faDiscord,
-// } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
   faUserInjured,
@@ -19,6 +13,8 @@ import {
   faUserAstronaut,
   faCarrot,
   faDemocrat,
+  faUsers,
+  faCalendar
 } from "@fortawesome/free-solid-svg-icons";
 class Navigation extends Component {
   constructor(props) {
@@ -27,15 +23,10 @@ class Navigation extends Component {
       refrech: false,
     };
   }
-  // componentDidUpdate(prevProps) {
-  //   console.log('jh');
+  componentDidMount() {
+    this.props.allMyImage();     
 
-  //   // this.props.allMyImage();     
-
-  //   // if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
-  //   //   this.props.allMyImage();     
-  //   // }
-  // }
+  }
   toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("slide-right");
@@ -95,8 +86,14 @@ class Navigation extends Component {
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/events">
-              <FontAwesomeIcon icon={faDemocrat} />
+              <FontAwesomeIcon icon={faCalendar} />
               Events
+            </NavLink>
+          </div>
+          <div className="menu-item" onClick={this.toggleSidebar}>
+            <NavLink activeStyle={active} to="/groups">
+              <FontAwesomeIcon icon={faUsers} />
+              Groups
             </NavLink>
           </div>
           {isLoggedIn && (

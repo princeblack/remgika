@@ -1,0 +1,272 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+
+.groupePage {
+  background-color: rgb(218, 221, 225);
+  .icon-go-back {
+    width: 100%;
+    height: 40px;
+    background-color: $remgika;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-size: 30px;
+    a,
+    a:focus,
+    a:visited {
+      outline: none;
+      color: black;
+      margin-left: 15px;
+    }
+  }
+  .info {
+    .groupPictur-info {
+      position: relative;
+      .img_background {
+        width: 100%;
+        height: 300px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding-bottom: 50.222%;
+        border: 0px;
+      }
+      .name {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        color: #fff;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+        display: flex;
+        justify-content: center;
+        border: 0px;
+
+        div {
+          width: 95%;
+          text-align: left;
+          p {
+            font-size: 23px;
+            line-height: 22px;
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-style: inherit;
+            font-family: Helvetica, sans-serif;
+          }
+          span {
+            font-size: 14px;
+            letter-spacing: 1px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: bolder;
+            font-family: sans-serif;
+          }
+        }
+      }
+    }
+    .group-confi {
+      .public-descr-block {
+        display: flex;
+        border-bottom: solid 2px rgb(180, 179, 179);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        background-color: white;
+
+        .africa {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 10px;
+          svg {
+            font-size: 25px;
+          }
+        }
+        .public-descr {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px;
+          font-size: 14px;
+          overflow: hidden;
+          span {
+            font-size: 20px;
+            font-weight: 400;
+          }
+          p {
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      }
+      .join-group-button {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        button {
+          background-color: $remgika;
+          border: 0;
+          width: 90%;
+          height: 30px;
+          font-size: 20px;
+          text-align: center;
+          border-radius: 2px;
+          background-image: none;
+        }
+      }
+      .group-about {
+        margin-top: 10px;
+        display: flex;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        .about {
+          height: 30px;
+          border-bottom: groove;
+        }
+        div {
+          width: 100%;
+          display: flex;
+          span {
+            margin-left: 10px;
+            font-size: 14px;
+            text-align: left;
+          }
+        }
+      }
+      .navMenu {
+        .menu {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          background-color: white;
+          overflow: hidden;
+
+          div {
+            width: 30%;
+            height: 60px;
+            margin: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            svg {
+              font-size: 25px;
+              path {
+                color: cornflowerblue;
+              }
+              path:hover{
+                color: $main-color;
+              }
+            }
+            button {
+              width: 100%;
+              font-size: 14px;
+              border: 0;
+              background-color: white;
+              display: block;
+            }
+          }
+          div:hover{
+            svg {
+              path{
+                color: $main-color;
+              }
+            }
+          }
+          .more {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            svg {
+              font-size: 55px;
+              path {
+                color: $remgika;
+              }
+              path:hover{
+                color: $main-color;
+              }
+            }
+          }
+        }
+        .groupContent {
+          margin-top: 15px;
+          .pageContenair {
+            display: flex;
+            flex-direction: column;
+            .postContenair {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+              padding: 20px;
+              overflow: hidden;
+              flex-wrap: nowrap;
+              width: 100%;
+              .contenair {
+                width: 90%;
+                box-shadow: -1px -1px 4px #dcdef19f,
+                  rgb(226, 216, 216) 1px 1px 4px;
+                .text-contenair {
+                  width: 100%;
+                  border-bottom: groove;
+                  textarea{
+                    width: 100%;
+                    cursor: auto;
+                    cursor: default;
+                  }
+                }
+                .file-contenair {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 10px;
+                    .input{
+                      width: 50%;
+                    }
+                  .submit {
+                    width: 30%;
+                    border: 0;
+                    border-radius: 5px;
+                    font-size: 20px;
+                  }
+                }
+                #image-block{
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  img{
+                    width: 30%;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    padding: 10px;
+                    // height: 250px;
+                  }
+                }
+              }
+              .file-block {
+                 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

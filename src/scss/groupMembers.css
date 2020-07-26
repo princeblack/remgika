@@ -1,0 +1,50 @@
+.members-container {
+  margin-top: 10px;
+  background-color: white;
+}
+
+.members-container .members-numbers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.members-container .members-numbers span {
+  font-size: 18px;
+  color: gray;
+  margin-left: 10px;
+}
+
+.members-container .memebers .members-info {
+  margin: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.members-container .memebers .members-info img {
+  border-radius: 50%;
+  width: 50px;
+}
+
+.members-container .memebers .members-info .info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.members-container .memebers .members-info .info p {
+  margin-left: 5px;
+}
+/*# sourceMappingURL=groupMembers.css.map */

@@ -1,19 +1,23 @@
 import React from "react";
 import "../scss/App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { authorise, allMyImage} from "../actions";
+import { connect } from "react-redux";
 import Dashboard from "./dashboard/Dashboard";
 import Login from "./login-signUp/Login";
 import SignUp from "./login-signUp/SignUp";
 import NotFound from "./load-notfound/NotFound";
 import Welcome from "./home-welcome/Welcome";
-import { authorise, allMyImage,fetchComment } from "../actions";
-import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import Playground from "./playground/Playground";
 import AddPlaygroung from "./playground/AddPlaygroung";
 import MainEvents from "./events/MainEvents";
 import AddEvents from "./events/AddEvents";
 import Loading from "./Loading";
+import MainGroup  from "./group/MainGroup";
+import GroupPage  from "./group/GroupPage";
+import  EventFormular  from "./group/EventFormular";
+
 
 class App extends React.Component {
    componentDidMount() {
@@ -40,6 +44,11 @@ class App extends React.Component {
             <Route exact path="/events" component={MainEvents} />
             <Route exact path="/addEvents" component={AddEvents} />
             <Route exact path="/addplayground" component={AddPlaygroung} />
+            <Route exact path="/groups" component={MainGroup} />
+            <Route exact path="/group/:id" component={GroupPage} />
+            <Route exact path="/group/:id/:name" component={GroupPage} />
+            <Route exact path="/group/:id/:name/events" component={EventFormular} />
+
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>

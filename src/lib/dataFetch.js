@@ -1,5 +1,5 @@
-const url = "https://node-server.remgika.com";
-// const url = "http://localhost:8000";
+// const url = "https://node-server.remgika.com";
+const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -78,7 +78,6 @@ export const getProfileImage = async (data) => {
         credentials: "include",
       })
     ).json();
-
     return res;
   } catch (error) {
     return [];
@@ -86,7 +85,7 @@ export const getProfileImage = async (data) => {
 };
 
 export const getwriterImage = async (data) => {
-  const id =data
+  const id = data;
   try {
     const res = await (
       await fetch(`${url}/images/writer/${id}`, {
@@ -154,7 +153,6 @@ export const handleLogOut = async (data) => {
     return [];
   }
 };
-
 
 /**********************************************************
  ************************ PLAYGROUND ***********************
@@ -363,9 +361,8 @@ export const getcomment = async (data) => {
   }
 };
 
-
 export const getWriterInfo = async (data) => {
-  const id = data
+  const id = data;
   try {
     const res = await (
       await fetch(`${url}/users/${id}`, {
@@ -388,6 +385,194 @@ export const deleteComment = async (data) => {
     const res = await (
       await fetch(`${url}/comment/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+/**********************************************************
+ ************************ Group **************************
+ ***********************************************************/
+export const addGroup = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group`, {
+        method: "POST",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const publicGroup = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/public`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const groupUrlPage = async (data) => {
+  try {
+    const id = await data;
+    const res = await (
+      await fetch(`${url}/group/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const groupNews = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/news`, {
+        method: "POST",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const getGroupNews = async (data) => {
+  try {
+    const id = await data;
+    const res = await (
+      await fetch(`${url}/news/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getGroupMembers = async (data) => {
+  try {
+    const id = await data;
+    const res = await (
+      await fetch(`${url}/group/members/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const addGroupEvents = async (data) => {
+  try {
+    const res = await (
+      await fetch(`${url}/groupEvent`, {
+        method: "POST",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const getGroupEvent = async (data) => {
+  try {
+    const id = await data;
+    const res = await (
+      await fetch(`${url}/groupEvent/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const updateGroupEvents = async (data, id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/groupEvent/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const deleteGroupEvents = async (data) => {
+  const id = data;
+  try {
+    const res = await (
+      await fetch(`${url}/groupEvent/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const groupChats = async (data,page) => {
+  try {
+    debugger
+    const id = await data;
+    const res = await (
+      await fetch(`${url}/groupChats/${id}?skip=${page}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },

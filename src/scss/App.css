@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Oswald", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+* textarea {
+  resize: none;
+}
+
+.App {
+  text-align: center;
+  /*********************************************************
+  **********************************************************
+  ********************* NAVIGATION HEADER ******************
+  **********************************************************
+  **********************************************************/
+  /*********************************************************
+  **********************************************************
+  ************************* SIDEBAR ************************
+  **********************************************************
+  **********************************************************/
+}
+
+.App input:focus {
+  outline: none;
+}
+
+.App button:focus {
+  outline: none;
+}
+
+.App #navigation {
+  height: 110px;
+  color: black;
+  width: 100%;
+  z-index: 2222;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: solid 2px #c7cda4;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.App #navigation .logo {
+  width: 100px;
+  height: 100%;
+}
+
+.App #navigation .logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.App #navigation .left #burger {
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.App #navigation .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App #navigation .right .name {
+  font-size: 0.9em;
+  letter-spacing: 2px;
+}
+
+.App #navigation .right .avatar {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  -webkit-box-shadow: -3px -1.5px 6px #505dd89f, #c58787 3px 2px 6px;
+          box-shadow: -3px -1.5px 6px #505dd89f, #c58787 3px 2px 6px;
+}
+
+.App #navigation .right .avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.App .sidebar {
+  position: fixed;
+  top: 110px;
+  right: 0;
+  background-color: #c7cda4;
+  width: 200px;
+  height: 100%;
+  padding: 20px;
+  padding-top: 0px;
+  color: #181010;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  z-index: 122;
+}
+
+.App .sidebar .social {
+  font-size: 1.4em;
+}
+
+.App .sidebar .social svg {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.App .sidebar .menu-item {
+  margin: 15px 2px;
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+}
+
+.App .sidebar .menu-item a {
+  color: #160606;
+  text-decoration: none;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  -webkit-box-sizing: border-box !important;
+          box-sizing: border-box !important;
+  font-size: 100%;
+  width: 100%;
+}
+
+.App .sidebar .menu-item a svg {
+  font-size: 25px;
+  width: 50px;
+}
+
+.App .slide-right {
+  -webkit-transform: translateX(0%) !important;
+          transform: translateX(0%) !important;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+  .App {
+    /*********************************************************
+  **********************************************************
+  ************************* SIDEBAR ************************
+  **********************************************************
+  **********************************************************/
+  }
+  .App #navigation {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .App #navigation #burger {
+    display: none;
+  }
+  .App #navigation .logo {
+    justify-self: flex-start;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+  .App .navigation-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    z-index: 222;
+  }
+  .App .sidebar {
+    position: initial;
+    background-color: #c7cda4;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0px;
+    color: #181010;
+    -webkit-transform: none;
+            transform: none;
+    z-index: 122;
+    -webkit-animation: none;
+            animation: none;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+/* Extra large devices (large desktops, 1200px and up) */
+/*# sourceMappingURL=App.css.map */

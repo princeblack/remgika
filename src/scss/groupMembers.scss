@@ -1,0 +1,34 @@
+.members-container{
+    margin-top: 10px;
+    background-color: white;
+    .members-numbers{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span{
+            font-size: 18px;
+            color: gray;
+            margin-left: 10px;
+        }
+    }
+    .memebers{
+
+        .members-info{
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            img{
+                border-radius: 50%;
+                width: 50px;
+            }
+            .info{
+                display: flex;
+                justify-content: space-around;
+                p{
+                    margin-left: 5px;
+                }
+
+            }
+        }
+    }
+}

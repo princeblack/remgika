@@ -1,0 +1,255 @@
+.App {
+  /*********************************************************
+  **********************************************************
+  ********************* WELCOME HOME PAGE ******************
+  **********************************************************
+  **********************************************************/
+}
+
+.App .welcome {
+  width: 100%;
+  min-height: 100vh;
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+  background-image: url("../img/b.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: left;
+  position: -webkit-sticky;
+  position: sticky;
+  /**********************************************************
+    ************************ HEADER ***************************
+    ***********************************************************/
+  /**********************************************************
+  ************************ FIRST SECTION ********************
+  ***********************************************************/
+  /**********************************************************
+  ************************ SECOND SECTION *******************
+  ***********************************************************/
+}
+
+.App .welcome .welcom-header {
+  height: 40px;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 15px;
+}
+
+.App .welcome .welcom-header .login-logout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.App .welcome .welcom-header .login-logout .login-button {
+  background-color: #c7cda4;
+  margin-right: 10px;
+  width: 90px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 10px;
+}
+
+.App .welcome .welcom-header .login-logout .login-button a,
+.App .welcome .welcom-header .login-logout .login-button a:visited {
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+}
+
+.App .welcome .welcom-header .login-logout .logout-button {
+  background-color: #c7cda4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 10px;
+  width: 90px;
+}
+
+.App .welcome .welcom-header .login-logout .logout-button a,
+.App .welcome .welcom-header .login-logout .logout-button a:visited {
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+}
+
+.App .welcome .welcom-header .menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 40px;
+  text-align: center;
+  font-size: 40px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(199, 205, 164, 0.787)), to(#cacdf39f));
+  background: linear-gradient(rgba(199, 205, 164, 0.787), #cacdf39f);
+}
+
+.App .welcome .first-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px;
+}
+
+.App .welcome .first-section img {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+.App .welcome .first-section .remgika-texte {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App .welcome .first-section .remgika-texte h2 {
+  font-weight: 500;
+  text-align: center;
+}
+
+.App .welcome .first-section .remgika-texte p {
+  font-weight: 300;
+  font-size: 22px;
+  text-align: center;
+}
+
+.App .welcome .first-section .remgika-texte .soon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10px;
+}
+
+.App .welcome .first-section .remgika-texte .soon .title-soon {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.App .welcome .first-section .remgika-texte .soon div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.App .welcome .first-section .remgika-texte .soon div p {
+  margin: 10px;
+  padding: 5px;
+  background-color: rgba(0, 128, 0, 0.658);
+  border-radius: 5px;
+  color: white;
+}
+
+.App .welcome .second-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 150px;
+}
+
+.App .welcome .second-section .direct-home {
+  background-color: white;
+  width: 70%;
+  height: 60px;
+  border-radius: 20px;
+  -webkit-box-shadow: -3px -1.5px 6px #505dd89f, #c58787 3px 2px 6px;
+          box-shadow: -3px -1.5px 6px #505dd89f, #c58787 3px 2px 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App .welcome .second-section .direct-home a,
+.App .welcome .second-section .direct-home a:visited {
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+}
+/*# sourceMappingURL=welcom.css.map */

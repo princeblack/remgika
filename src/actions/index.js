@@ -6,22 +6,45 @@ import {
   authoriseUser,
   handleLogOut,
   signUpUsers,
+
+  //  playground 
+
   addPlayground,
   addProfileImage,
   getProfileImage,
   deleteProfileImage,
   deletePlayground,
   updatePlayground,
+
+  // events 
+
   addEvents,
   getEventsList,
   getMyEvents,
   updateEvents,
   deleteEvents,
+
+  // comment
+
   addComment,
   getcomment,
   getwriterImage,
   getWriterInfo,
-  deleteComment
+  deleteComment,
+
+  // group
+
+  publicGroup,
+  groupUrlPage,
+  groupNews,
+  addGroup,
+  getGroupNews,
+  getGroupMembers,
+  addGroupEvents,
+  getGroupEvent,
+  updateGroupEvents,
+  deleteGroupEvents,
+  groupChats
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -251,6 +274,116 @@ export const deleteCommenter = (payload) => {
     const data = await deleteComment(payload);
     dispatch({
       type: "DELETE_COMMENT",
+      payload: data,
+    });
+  };
+};
+
+/**********************************************************
+ ************************ Groups **************************
+ ***********************************************************/
+export const addNewsGroup = (payload) => {
+  return async (dispatch) =>{
+    const data = await addGroup(payload);
+    dispatch({
+      type: "ADD_GROUPS",
+      payload: data
+    })
+  }
+}
+ export const publicGroups = (payload) => {
+   return async (dispatch) =>{
+     const data = await publicGroup();
+     dispatch({
+       type: "PUBLIC_GROUPS",
+       payload: data
+     })
+   }
+ }
+
+export const urlGroupPage = (payload) => {
+  return async (dispatch) =>{
+    const data = await groupUrlPage(payload)
+    dispatch({
+      type: "URL_GROUPS_BY_ID",
+      payload: data
+    })
+  }
+}
+export const postNewsGroup = (payload) => {
+  return async (dispatch) =>{
+    const data = await groupNews(payload)
+    dispatch({
+      type: "POST_GROUP_NEWS",
+      payload: data
+    })
+  }
+}
+export const getAllGroupNews = (payload) => {
+  return async (dispatch) =>{
+    const data = await getGroupNews(payload)
+    dispatch({
+      type: "GET_GROUP_NEWS",
+      payload: data
+    })
+  }
+}
+
+export const getAllGroupMembers = (payload) => {
+  return async (dispatch) =>{
+    const data = await getGroupMembers(payload)
+    dispatch({
+      type: "GET_GROUP_MEMBERS",
+      payload: data
+    })
+  }
+}
+
+export const postGroupEvent = (payload) => {
+  return async (dispatch) =>{
+    const data = await addGroupEvents(payload)
+    dispatch({
+      type: "POST_GROUP_EVENTS",
+      payload: data
+    })
+  }
+}
+
+export const getAllGroupevents = (payload) => {
+  return async (dispatch) =>{
+    const data = await getGroupEvent(payload)
+    dispatch({
+      type: "GET_GROUP_EVENTS",
+      payload: data
+    })
+  }
+}
+export const updateGroupevents = (payload,id) => {
+  return async (dispatch) =>{
+    const data = await updateGroupEvents(payload,id)
+    dispatch({
+      type: "UPDATE_GROUP_EVENTS",
+      payload: data
+    })
+  }
+}
+
+export const deleteGroupEvent = (payload) => {
+  return async (dispatch) => {
+    const data = await deleteGroupEvents(payload);
+    dispatch({
+      type: "DELETE_GROUP_EVENT",
+      payload: data,
+    });
+  };
+};
+
+export const getGroupChats = (payload,page) => {
+  return async (dispatch) => {
+    debugger
+    const data = await groupChats(payload,page);
+    dispatch({
+      type: "GET_GROUP_CHATS",
       payload: data,
     });
   };

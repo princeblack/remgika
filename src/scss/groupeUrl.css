@@ -1,0 +1,385 @@
+.groupePage {
+  background-color: #dadde1;
+}
+
+.groupePage .icon-go-back {
+  width: 100%;
+  height: 40px;
+  background-color: #c7cda4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: left;
+  font-size: 30px;
+}
+
+.groupePage .icon-go-back a,
+.groupePage .icon-go-back a:focus,
+.groupePage .icon-go-back a:visited {
+  outline: none;
+  color: black;
+  margin-left: 15px;
+}
+
+.groupePage .info .groupPictur-info {
+  position: relative;
+}
+
+.groupePage .info .groupPictur-info .img_background {
+  width: 100%;
+  height: 300px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 50.222%;
+  border: 0px;
+}
+
+.groupePage .info .groupPictur-info .name {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.65)));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 0px;
+}
+
+.groupePage .info .groupPictur-info .name div {
+  width: 95%;
+  text-align: left;
+}
+
+.groupePage .info .groupPictur-info .name div p {
+  font-size: 23px;
+  line-height: 22px;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-style: inherit;
+  font-family: Helvetica, sans-serif;
+}
+
+.groupePage .info .groupPictur-info .name div span {
+  font-size: 14px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+.groupePage .info .group-confi .public-descr-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: solid 2px #b4b3b3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: white;
+}
+
+.groupePage .info .group-confi .public-descr-block .africa {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 10px;
+}
+
+.groupePage .info .group-confi .public-descr-block .africa svg {
+  font-size: 25px;
+}
+
+.groupePage .info .group-confi .public-descr-block .public-descr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 10px;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.groupePage .info .group-confi .public-descr-block .public-descr span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.groupePage .info .group-confi .public-descr-block .public-descr p {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.groupePage .info .group-confi .join-group-button {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+}
+
+.groupePage .info .group-confi .join-group-button button {
+  background-color: #c7cda4;
+  border: 0;
+  width: 90%;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 2px;
+  background-image: none;
+}
+
+.groupePage .info .group-confi .group-about {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.groupePage .info .group-confi .group-about .about {
+  height: 30px;
+  border-bottom: groove;
+}
+
+.groupePage .info .group-confi .group-about div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.groupePage .info .group-confi .group-about div span {
+  margin-left: 10px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.groupePage .info .group-confi .navMenu .menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: white;
+  overflow: hidden;
+}
+
+.groupePage .info .group-confi .navMenu .menu div {
+  width: 30%;
+  height: 60px;
+  margin: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.groupePage .info .group-confi .navMenu .menu div svg {
+  font-size: 25px;
+}
+
+.groupePage .info .group-confi .navMenu .menu div svg path {
+  color: cornflowerblue;
+}
+
+.groupePage .info .group-confi .navMenu .menu div svg path:hover {
+  color: #69ca62;
+}
+
+.groupePage .info .group-confi .navMenu .menu div button {
+  width: 100%;
+  font-size: 14px;
+  border: 0;
+  background-color: white;
+  display: block;
+}
+
+.groupePage .info .group-confi .navMenu .menu div:hover svg path {
+  color: #69ca62;
+}
+
+.groupePage .info .group-confi .navMenu .menu .more {
+  width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.groupePage .info .group-confi .navMenu .menu .more svg {
+  font-size: 55px;
+}
+
+.groupePage .info .group-confi .navMenu .menu .more svg path {
+  color: #c7cda4;
+}
+
+.groupePage .info .group-confi .navMenu .menu .more svg path:hover {
+  color: #69ca62;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent {
+  margin-top: 15px;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  padding: 20px;
+  overflow: hidden;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 100%;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair {
+  width: 90%;
+  -webkit-box-shadow: -1px -1px 4px #dcdef19f, #e2d8d8 1px 1px 4px;
+          box-shadow: -1px -1px 4px #dcdef19f, #e2d8d8 1px 1px 4px;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair .text-contenair {
+  width: 100%;
+  border-bottom: groove;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair .text-contenair textarea {
+  width: 100%;
+  cursor: auto;
+  cursor: default;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair .file-contenair {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair .file-contenair .input {
+  width: 50%;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair .file-contenair .submit {
+  width: 30%;
+  border: 0;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair #image-block {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.groupePage .info .group-confi .navMenu .groupContent .pageContenair .postContenair .contenair #image-block img {
+  width: 30%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  padding: 10px;
+}
+/*# sourceMappingURL=groupeUrl.css.map */

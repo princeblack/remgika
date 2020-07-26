@@ -29,16 +29,16 @@ const AddPlaygroung = (props) => {
       }
     }
     f();
-  }, [props.addplay]);
+  }, []);
 
-  const maxSelectFile = (event) => {
-    let files = event.target.files; // create file object
-    if (files.length > 3) {
-      event.target.value = null; // discard selected file
-      return false;
-    }
-    return true;
-  };
+  // const maxSelectFile = (event) => {
+  //   let files = event.target.files; // create file object
+  //   if (files.length > 3) {
+  //     event.target.value = null; // discard selected file
+  //     return false;
+  //   }
+  //   return true;
+  // };
   const {
     value,
     suggestions: { status, data },
@@ -86,52 +86,52 @@ const AddPlaygroung = (props) => {
         </li>
       );
     });
-  const checkMimeType = (event) => {
-    //getting file object
-    let files = event.target.files;
-    //define message container
-    let err = "";
-    // list allow mime type
-    const types = ["image/png", "image/jpeg", "image/gif"];
-    // loop access array
-    for (var x = 0; x < files.length; x++) {
-      // compare file type find doesn't matach
-      // eslint-disable-next-line no-loop-func
-      if (types.every((type) => files[x].type !== type)) {
-        // create error message and assign to container
-        err += files[x].type + " is not a supported format\n";
-      }
-    }
-    if (err !== "") {
-      // if message not same old that mean has error
-      event.target.value = null; // discard selected file
-      return false;
-    }
-    return true;
-  };
+  // const checkMimeType = (event) => {
+  //   //getting file object
+  //   let files = event.target.files;
+  //   //define message container
+  //   let err = "";
+  //   // list allow mime type
+  //   const types = ["image/png", "image/jpeg", "image/gif"];
+  //   // loop access array
+  //   for (var x = 0; x < files.length; x++) {
+  //     // compare file type find doesn't matach
+  //     // eslint-disable-next-line no-loop-func
+  //     if (types.every((type) => files[x].type !== type)) {
+  //       // create error message and assign to container
+  //       err += files[x].type + " is not a supported format\n";
+  //     }
+  //   }
+  //   if (err !== "") {
+  //     // if message not same old that mean has error
+  //     event.target.value = null; // discard selected file
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
-  const handlefiles = (event) => {
-    if (maxSelectFile(event) && checkMimeType(event)) {
-      // if return true allow to setState
-      setimgCollection(event);
-    }
-  };
+  // const handlefiles = (event) => {
+  //   if (maxSelectFile(event) && checkMimeType(event)) {
+  //     // if return true allow to setState
+  //     setimgCollection(event);
+  //   }
+  // };
 
-  const onSubmit = (e) => {
-    //  e.preventDefault();
+  const onSubmit = (e) => {    
     const data = new FormData();
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
     }
     for (var key in e) {
       data.append(key, e[key]);
+      console.log(e[key]);
+      
     }
     props.playground(data);
   };
 
   const isLoggedIn = props.isLoggedIn;
   const addPlay = props.addplay;
-  const fileNum = imgCollection.length;
   return (
     <>
       {isLoggedIn ? (
@@ -148,12 +148,11 @@ const AddPlaygroung = (props) => {
                   type="file"
                   name="imgCollection"
                   id="myImage"
-                  onChange={handlefiles}
+                  // onChange={handlefiles}
                   multiple
                   ref={register({ required: true })}
                 />
                 {errors.imgCollection && <p>Images is required</p>}
-                {imgCollection.length > 0 && <p> {fileNum} Files </p>}
               </div>
               <div className="row flex-revcol-left">
                 <input

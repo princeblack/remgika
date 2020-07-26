@@ -1,0 +1,325 @@
+.mainProfile .all-my-events-play {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: white;
+}
+
+.mainProfile .all-my-events-play .playgroud-item {
+  border-radius: 10px;
+  border: solid 2px #8d8d8c;
+  width: 70%;
+  margin: 10px;
+  height: auto;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .userVote img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .userVote :first-child {
+  margin-right: 10px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item img {
+  border-radius: 10px;
+  width: 99%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .addressItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  word-wrap: break-word;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .addressItem span {
+  color: #b61414;
+  margin: 1px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .addressItem p {
+  margin: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description {
+  text-align: center;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description p {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description button {
+  background-color: rgba(255, 0, 0, 0.377);
+  border: none;
+  width: 50px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description button:focus {
+  outline: none;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description .updatePlay {
+  background-color: rgba(166, 255, 0, 0.377);
+  border: none;
+  width: 50px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .description .updatePlay:focus {
+  outline: none;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form {
+  visibility: hidden;
+  display: none;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show {
+  visibility: visible !important;
+  position: relative;
+  width: 100%;
+  top: 0px;
+  z-index: 1;
+  -webkit-animation-name: maptransition;
+          animation-name: maptransition;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-transition: width 2s linear 1s;
+  transition: width 2s linear 1s;
+  background-color: #eee9dc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  z-index: 1;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show .close-item .close {
+  width: 50px;
+  height: 50px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form {
+  width: 100%;
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .fileNum {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  margin: 7px;
+  margin-left: 15px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .fileNum button {
+  width: 40%;
+  height: 30px;
+  border-radius: 100px;
+  border: 0;
+  outline: none;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .fileNum button:focus {
+  outline: none;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .fileNum p {
+  margin-left: 10px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition {
+  width: 90%;
+  font-weight: 300;
+  letter-spacing: 3px;
+  background: #f9f9fa;
+  color: #0e0d0d;
+  border: none;
+  padding: 9px;
+  margin: 7px;
+  border-radius: 5px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition::-webkit-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition::-ms-input-placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition::placeholder {
+  color: black;
+  letter-spacing: 2px;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:focus {
+  color: black;
+  outline: none;
+  border-bottom: 1.2px solid pink;
+  font-size: 1em;
+  -webkit-transition: 0.8s all ease;
+  transition: 0.8s all ease;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:focus:-ms-input-placeholder {
+  opacity: 0;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:focus::-ms-input-placeholder {
+  opacity: 0;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .input-transition:focus::placeholder {
+  opacity: 0;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .addPlay-submit,
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .addPlay-submit:focus {
+  width: 100px;
+  height: 40px;
+  background-color: #69ca62;
+  border: none;
+  padding: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  border-radius: 10px;
+  margin: auto;
+  outline: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .addPlay-submit:hover,
+.mainProfile .all-my-events-play .playgroud-item .update-form.show form .addPlay-submit:focus:hover {
+  background: #69ca62;
+  color: white;
+  -webkit-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+  .App .all-my-events-play {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .App .all-my-events-play .playgroud-item {
+    width: 40%;
+  }
+  .App .all-my-events-play .playgroud-item .userVote img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .App .all-my-events-play .playgroud-item .userVote :first-child {
+    margin-right: 10px;
+  }
+  .App .all-my-events-play .playgroud-item img {
+    border-radius: 10px;
+    width: 99%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 300px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .App .all-my-events-play {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .App .all-my-events-play .playgroud-item {
+    width: 30%;
+  }
+  .App .all-my-events-play .playgroud-item .userVote img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .App .all-my-events-play .playgroud-item .userVote :first-child {
+    margin-right: 10px;
+  }
+  .App .all-my-events-play .playgroud-item img {
+    border-radius: 10px;
+    width: 99%;
+    -o-object-fit: contain;
+       object-fit: contain;
+    height: 300px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+/*# sourceMappingURL=myplay.css.map */

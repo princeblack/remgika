@@ -1,0 +1,151 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        margin: 10px;
+        span{
+            color: red;
+        }
+          select{
+            font-size: 15px;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+            option{
+                // color: brown;
+                background-color: $remgika;
+                font-size: 18px;
+                &:hover{background-color:yellow;}
+
+                &:focus{
+                    color:none ;
+                    outline: none;
+                };
+                &:active{
+                    color:none ;
+                    outline: none;
+                };
+                &:hover{
+                    color:none;
+                    outline: none;
+                };
+                &:checked{
+                    background-color: none;
+                    outline: none;
+                }
+            }
+        }
+    }
+    #image-block{
+        img{
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+    }
+    .submit{
+        background-color: $remgika;
+        border: 0;
+        margin: 10px;
+        width: 30%;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    .spinner-container{
+        position: relative;
+        bottom: 510px;
+        z-index: 1;
+        background-color: #c7cda4b7;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        .spinner{
+            width: 100%;
+            font-size: 100px;
+            color: #bdacce;
+            -webkit-animation: rotate-center 0.9s linear infinite both;
+            animation: rotate-center 0.9s linear infinite both;
+        }
+    }
+    .check-container{
+        position: relative;
+        bottom: 510px;
+        z-index: 1;
+        background-color: #c7cda4;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        .spinner{
+            width: 100%;
+            font-size: 100px;
+            color: #ffffff;
+        }
+        p{
+            font-size: 22px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+    }
+    /**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+@-webkit-keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  
+}
+
+// WHEN THE USER IS NOT LOGN IN
+.sign-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .not-sign{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 50%;
+        a,a:focus,a:visited{
+            color: white;
+            outline: none;
+            background-color: $main-color;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        a:hover{
+            background-color: $remgika;
+        }
+    }
+}
+

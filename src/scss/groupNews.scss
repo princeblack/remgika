@@ -1,0 +1,44 @@
+.news-contenair {
+  margin-top: 15px;
+  .contenair {
+    background-color: white;
+    margin-bottom: 10px;
+
+    .info {
+      display: flex;
+      align-items: center;
+      img {
+        width: 50px;
+        border-radius: 50%;
+      }
+    }
+    .content {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 10px;
+      .text{
+        display: flex;
+        p {
+          text-align: left;
+          word-break: break-all;
+          a{
+            color: blue;
+            font-weight: 600;
+          }
+        }
+      }
+      div{
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          img{
+              width: 48%;
+              margin: 1%;
+              object-fit: cover;
+
+          }
+      }
+    }
+  }
+}
