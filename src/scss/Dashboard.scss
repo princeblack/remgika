@@ -7,7 +7,6 @@ $remgika: #c7cda4;
   **********************************************************
   **********************************************************/
 .mainProfile {
-  background-image: url("../img/b.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -19,6 +18,7 @@ $remgika: #c7cda4;
     font-size: 20px;
   }
   .profileMenu {
+    margin-top: 100px;
     #userInfo {
       width: 80%;
     }
@@ -49,6 +49,10 @@ $remgika: #c7cda4;
   .dashboard {
     display: flex;
     justify-content: center;
+    background-image: url("../img/b.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     .profile {
       width: 95%;
       text-align: left;

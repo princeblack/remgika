@@ -197,3 +197,22 @@ $remgika: #c7cda4;
     }
   }
 }
+@media (min-width: 770px){
+  .MainGroup .serchBar .groupSection .groupMenu{
+    display: flex;
+    position: relative;
+    .menu{
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      justify-content: space-evenly;
+    }
+    .element{
+      width: 50%;
+      margin-left: 10%;
+      height: 70vh;
+      overflow-y: auto;
+    }
+  }
+}

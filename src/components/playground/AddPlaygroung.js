@@ -123,9 +123,7 @@ const AddPlaygroung = (props) => {
       data.append("imgCollection", e.imgCollection[key]);
     }
     for (var key in e) {
-      data.append(key, e[key]);
-      console.log(e[key]);
-      
+      data.append(key, e[key]);      
     }
     props.playground(data);
   };

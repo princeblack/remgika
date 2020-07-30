@@ -378,10 +378,9 @@ export const deleteGroupEvent = (payload) => {
   };
 };
 
-export const getGroupChats = (payload,page) => {
+export const getGroupChats = (payload,skip,limit) => {
   return async (dispatch) => {
-    debugger
-    const data = await groupChats(payload,page);
+    const data = await groupChats(payload,skip,limit);
     dispatch({
       type: "GET_GROUP_CHATS",
       payload: data,

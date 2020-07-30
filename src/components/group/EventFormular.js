@@ -120,7 +120,6 @@ export const EventFormular = (props) => {
     };
     
     const onSubmit = (e) => {
-      console.log(e);
       const id = props.data._id
       const data = new FormData();
       for (const key of Object.keys(e.imgCollection)) {

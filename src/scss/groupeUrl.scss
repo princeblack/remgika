@@ -163,7 +163,7 @@ $remgika: #c7cda4;
               path {
                 color: cornflowerblue;
               }
-              path:hover{
+              path:hover {
                 color: $main-color;
               }
             }
@@ -175,9 +175,9 @@ $remgika: #c7cda4;
               display: block;
             }
           }
-          div:hover{
+          div:hover {
             svg {
-              path{
+              path {
                 color: $main-color;
               }
             }
@@ -193,7 +193,7 @@ $remgika: #c7cda4;
               path {
                 color: $remgika;
               }
-              path:hover{
+              path:hover {
                 color: $main-color;
               }
             }
@@ -221,7 +221,7 @@ $remgika: #c7cda4;
                 .text-contenair {
                   width: 100%;
                   border-bottom: groove;
-                  textarea{
+                  textarea {
                     width: 100%;
                     cursor: auto;
                     cursor: default;
@@ -235,9 +235,9 @@ $remgika: #c7cda4;
                   align-items: center;
                   justify-content: center;
                   padding: 10px;
-                    .input{
-                      width: 50%;
-                    }
+                  .input {
+                    width: 50%;
+                  }
                   .submit {
                     width: 30%;
                     border: 0;
@@ -245,13 +245,13 @@ $remgika: #c7cda4;
                     font-size: 20px;
                   }
                 }
-                #image-block{
+                #image-block {
                   width: 100%;
                   display: flex;
                   flex-direction: row;
                   flex-wrap: wrap;
                   justify-content: center;
-                  img{
+                  img {
                     width: 30%;
                     object-fit: cover;
                     border-radius: 10px;
@@ -261,7 +261,112 @@ $remgika: #c7cda4;
                 }
               }
               .file-block {
-                 
+              }
+            }
+          }
+        }
+        .adminPage {
+          width: 100%;
+          margin-top: 20px;
+          .admin_section {
+            background-color: white;
+            // height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            button {
+              // color: #69ca62;
+              width: 100px;
+              padding: 5px;
+              font-size: 14px;
+              height: 50px;
+              border-color: #c0d1a3;
+              background-color: white;
+              outline: none;
+              border-width: 1px;
+              border-style: solid;
+              border-radius: 5px;
+              margin: 5px;
+            }
+            .focus.btn.btn-secondary {
+              background-color: #69ca62;
+            }
+          }
+          .admin_members {
+            background-color: white;
+            margin-top: 10px;
+            .admin {
+              display: flex;
+              margin-left: 20px;
+              align-items: center;
+              img {
+                width: 35px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 478px) {
+  .groupePage {
+    .info {
+      .group-confi {
+        .navMenu {
+          .adminPage {
+            .admin_section {
+              button {
+                width: 150px ;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 770px) {
+  .groupePage {
+    .info {
+      .groupPictur-info {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .group-confi {
+        .navMenu {
+          .groupContent {
+            .pageContenair {
+              .postContenair {
+                .contenair {
+                  max-width: 500px;
+                }
+              }
+              .news-contenair {
+                max-width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            }
+          }
+          .eventPage {
+            max-width: 100%;
+            .groupEvent {
+              .addButton {
+                max-width: 100%;
+              }
+              .title {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+              }
+              .event-container {
+                max-width: 60%;
+                margin-left: auto;
+                margin-right: auto;
               }
             }
           }

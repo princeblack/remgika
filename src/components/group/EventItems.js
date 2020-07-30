@@ -90,7 +90,6 @@ const EventItems = (props) => {
     data.append("description", description);
     const id = props.data._id;    
     props.updateGroupevents(data, id);
-    console.log("hereee");
   };
   
   return (
@@ -99,7 +98,7 @@ const EventItems = (props) => {
       <div className="eventTitle">
         <h4>{data.eventName}</h4>
       </div>
-      {!toggling && <p onClick={toggle}> {toggling ? "Less" : "Read more"}</p>}
+      {!toggling && <p className="more" onClick={toggle}> {toggling ? "Less" : "Read more"}</p>}
       {toggling && (
         <>
           <div className="addressItem">

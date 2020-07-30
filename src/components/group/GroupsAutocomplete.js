@@ -44,7 +44,7 @@ export const GroupsAutocomplete = (props) => {
             onChange={handleInput}
             type="text"
             name="search"
-            placeholder="Groups in your city"
+            placeholder="Find Groups "
           />
         </div>
       </div>

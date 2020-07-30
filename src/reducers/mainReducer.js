@@ -42,6 +42,7 @@ const initialState = {
   groupEventIsUpdate: false,
   GroupEventIsDelete: false,
   groupChats : [],
+  groupChatsData : []
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -379,8 +380,14 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "GET_GROUP_CHATS") {
-    debugger
-    state.groupChats= action.payload;
+    // if (action.payload.meta.skip !== 0) {
+    //   state.groupChats=([...state.groupChats, ...action.payload.chats]);
+    //   state.groupChatsData = action.payload.meta
+    // }else{
+      state.groupChats=action.payload.chats;
+      state.groupChatsData = action.payload.meta
+    // }
+    
     return Object.assign({}, state);
   }
   return state;

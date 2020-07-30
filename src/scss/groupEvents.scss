@@ -55,7 +55,6 @@ $remgika: #c7cda4;
                 transition: transform ease-in-out 0.3s;
               }
               img:hover { 
-                transform: scale(1.2);
                 scroll-snap-type: none;
                 scroll-behavior: inherit;
               }
@@ -197,4 +196,25 @@ $remgika: #c7cda4;
        
         }
     }
+}
+
+@media (min-width: 770px){
+  .event-container{
+    .event-item{
+      .more{
+        margin-top: 10px;
+        font-weight: 800;
+      }
+      .image{
+
+      }
+      .description{
+        button{
+          margin-top: 20px;
+          padding: 5px;
+          margin-right: 9px;
+        }
+      }
+    }
+  }
 }

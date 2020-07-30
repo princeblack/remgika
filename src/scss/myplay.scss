@@ -1,13 +1,14 @@
 $main-color: #69ca62;
 $remgika: #c7cda4;
 .mainProfile {
+  background-color: white;
+
   .all-my-events-play {
     margin-top: 20px;
     display: flex;
     // align-items: center;
     justify-content: start;
     flex-direction: column;
-    background-color: white;
     .playgroud-item {
       border-radius: 10px;
       border: solid 2px #8d8d8c;

@@ -566,12 +566,11 @@ export const deleteGroupEvents = async (data) => {
   }
 };
 
-export const groupChats = async (data,page) => {
+export const groupChats = async (data,skip,limit) => {
   try {
-    debugger
     const id = await data;
     const res = await (
-      await fetch(`${url}/groupChats/${id}?skip=${page}`, {
+      await fetch(`${url}/groupChats/${id}?skip=${skip}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

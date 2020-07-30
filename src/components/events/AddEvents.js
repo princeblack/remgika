@@ -136,9 +136,7 @@ const AddEvents = (props) => {
 
   const isLoggedIn = props.isLoggedIn;
   const addEvents = props.addEvents;
-  const fileNum = imgCollection.length;
-  console.log(props);
-  
+  const fileNum = imgCollection.length;  
   return (
     <>
       {redirect && <Redirect to="/events"></Redirect>}

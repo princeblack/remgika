@@ -18,6 +18,7 @@ $remgika: #c7cda4;
     // overscroll-behavior: contain;
     // overflow-y: auto;
     // width: 85%;
+    margin-top: 50px;
     .chatBoxItem{
       width: 100%;
       margin-top: 5px;
@@ -35,7 +36,11 @@ $remgika: #c7cda4;
           p{
             width: 100%;
             word-break: break-all;
+            // word-wrap: normal;
+            line-break: auto;
+            // break-after: always;
             word-wrap: break-word;
+            // text-align: justify;
           }
         }
       }
@@ -71,7 +76,9 @@ $remgika: #c7cda4;
         background-color: rgba(128, 128, 128, 0.096);
         width: 80%;
         border-radius: 10px;
-        input {
+        display: flex;
+        align-items: center;
+        textarea {
             width: 90%;
             height: 50px;
             border-radius: 10px;
@@ -79,10 +86,13 @@ $remgika: #c7cda4;
             background-color: rgba(128, 128, 128, 0.11);
             text-align: center;
             word-break: break-all;
+            border-color: none;
+            padding: 10px;
             &:focus,
             &:focus-visible {
               border: none;
               outline: none;
+              border-color: red;
             }
           }
           svg {
@@ -103,10 +113,21 @@ $remgika: #c7cda4;
     }
   }
   .emoji-mart.emoji-mart-light {
-    width: 80% !important;
+    width: 300px !important;
     position: absolute;
-    // top: 50vh;
     left: 10%;
     bottom: 80px;
+    .emoji-mart-preview {
+      display: none;
+    }
+  }
+}
+@media (min-width: 770px){
+  .chatPage{
+    .chatContainer{
+      max-width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }

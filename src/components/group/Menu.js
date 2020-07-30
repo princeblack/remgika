@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ButtonToggle } from 'reactstrap'
 
 import {
   faUsers,
@@ -11,14 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import News from "./News";
 import  Members  from "./Members";
-import Chat  from "./Chat";
 import Events  from "./Events";
 import  Admin  from "./Admin";
-import ChatRoom  from "./ChatRoom";
 import ChatContainer from "./ChatContainer";
-import io from 'socket.io-client'
 
-let socket;
 
 export const Menu = (props) => {
   const [newsPage, setNewsPage] = useState(false);
@@ -26,86 +23,87 @@ export const Menu = (props) => {
   const [eventsPage, setEventsPage] = useState(true);
   const [chatPage, setChatPage] = useState(true);
   const [adminPage, setAdminPage] = useState(true);
-
   useEffect(() => {
     if (membresPage && eventsPage && chatPage && adminPage) {
       setNewsPage(newsPage);      
     }
-  }, [membresPage,eventsPage,chatPage,adminPage])
+  }, [membresPage,eventsPage,chatPage,adminPage,newsPage])
 
   const handleNewsPage = (e) => {
     e.preventDefault()
-    setNewsPage(!newsPage);
-    if (newsPage === true) {
+    setNewsPage(false);
       setMembersPage(true);
       setEventsPage(true);
       setChatPage(true);
       setAdminPage(true);
-    }
   };
   const handleMembersPage = (e) => {
     e.preventDefault()
-    setMembersPage(!membresPage);
-    if (membresPage === true) {
+    setMembersPage(false);
       setEventsPage(true);
       setChatPage(true);
       setAdminPage(true);
       setNewsPage(true);
-    }
   };
   const handleEventsPage = (e) => {
     e.preventDefault()
-    setEventsPage(!eventsPage);
-    if (eventsPage === true) {
+    setEventsPage(false);
       setChatPage(true);
       setAdminPage(true);
       setNewsPage(true);
       setMembersPage(true);
-    }
   };
   const handleChatPage = (e) => {
     e.preventDefault()
-    setChatPage(!chatPage);
-    if (chatPage === true) {
+    setChatPage(false);
       setAdminPage(true);
       setNewsPage(true);
       setMembersPage(true);
       setEventsPage(true);
-    }
   };
   const handleAdminPage = (e) => {
     e.preventDefault()
-    setAdminPage(!adminPage);
-    if (adminPage === true) {
+    setAdminPage(false);
       setChatPage(true);
       setNewsPage(true);
       setMembersPage(true);
       setEventsPage(true);
-    }
+    
   };
+  const userId = props.info._id
+  let IamAdminUser = false
+    for (let index = 0; index <props.data.admin.length; index++) {
+      const element = props.data.admin[index];
+      if (element.adminUsers._id === userId) {
+        IamAdminUser = true
+      }
+    }
 
   return (
     <>
       <div className="menu">
-        <div className="" onClick={handleNewsPage}>
+        <div className=""   onClick={handleNewsPage}>
           <FontAwesomeIcon icon={faNewspaper} />
-          <button>News</button>
+          <ButtonToggle autoFocus>News</ButtonToggle>
         </div>
         <div className="" onClick={handleMembersPage}>
           <FontAwesomeIcon icon={faUsers} />
-          <button>Members</button>
+          <ButtonToggle>Members</ButtonToggle>
         </div>
         <div className="" onClick={handleEventsPage}>
           <FontAwesomeIcon icon={faCalendarCheck} />
-          <button>Events</button>
+          <ButtonToggle>Events</ButtonToggle>
         </div>
         <div className="" onClick={handleChatPage}>
           <FontAwesomeIcon icon={faComments} />
-          <button>Chat</button>
+          <ButtonToggle>Chat</ButtonToggle>
         </div>
-        <div className="more" onClick={handleAdminPage}>
-          <FontAwesomeIcon icon={faCaretSquareDown} />
-        </div>
+        { IamAdminUser && 
+                <div className="more" onClick={handleAdminPage}>
+                <FontAwesomeIcon icon={faCaretSquareDown} />
+              </div>
+        }
+
       </div>
       {!newsPage && (
         <div className="groupContent">
@@ -129,7 +127,7 @@ export const Menu = (props) => {
       )}
       {!adminPage && (
         <div className="adminPage">
-          <Admin></Admin>
+          <Admin data={props.data}></Admin>
         </div>
       )}
     </>

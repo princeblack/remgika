@@ -19,9 +19,9 @@ export const NewsItems = (props) => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-  if (content.length > 300) {
+  if (content.length > 600) {
     if (!isOpen) {
-      text = content.slice(0, 300).join("") + "....." + "  ";
+      text = content.slice(0, 600).join("") + "....." + "  ";
     } else {
       text = content.join("");
     }
@@ -39,7 +39,7 @@ export const NewsItems = (props) => {
           <div className="text">
             <p>
               {text}
-              {content.length > 400 && (
+              {content.length > 600 && (
                 <a onClick={toggle}>   {isOpen ? "" : "Read more"}</a>
               )}
             </p>

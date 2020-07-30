@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { NewsItems } from "./NewsItems";
 import { useForm } from "react-hook-form";
 import { postNewsGroup, getAllGroupNews } from "../../actions";
+import TextareaAutosize from 'react-autosize-textarea';
 
 const News = (props) => {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -128,7 +129,9 @@ const News = (props) => {
           <div className="contenair">
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="text-contenair">
-                <textarea name="content" rows="4" ref={register} autoFocus />
+                <TextareaAutosize name="content" rows="4" ref={register} autoFocus >
+
+                </TextareaAutosize>
                 {errors.content && <p>content is required</p>}
               </div>
               <div className="file-contenair">
