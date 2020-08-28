@@ -1,15 +1,54 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+
 .news-contenair {
   margin-top: 15px;
+  min-height: 500px;
+
   .contenair {
     background-color: white;
     margin-bottom: 10px;
 
     .info {
       display: flex;
-      align-items: center;
-      img {
-        width: 50px;
-        border-radius: 50%;
+      justify-content: space-between;
+      padding: 10px;
+      position: relative;
+      .container{
+        display: flex;
+        align-items: center;
+        .userImage{
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          box-shadow: -3px -1.5px 6px #505dd89f, rgb(197, 135, 135) 3px 2px 6px;
+          margin-right: 10px;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+      .delete{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-right: 10px;
+        svg{
+          font-size: 30px;
+        }
+        .handledelete{
+          background-color: $main-color ;
+          position: absolute;
+          bottom: -20px;
+          left: -10px;
+          padding: 2px;
+          border-radius: 5px;
+
+          font-size: 20px;
+        }
       }
     }
     .content {
@@ -33,6 +72,7 @@
           display: flex;
           flex-wrap: wrap;
           img{
+            flex: 1;
               width: 48%;
               margin: 1%;
               object-fit: cover;

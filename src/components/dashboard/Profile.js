@@ -5,7 +5,6 @@ import {
   authorise,
   handleLogin,
   profileImage,
-  allMyImage,
   deleteImage,
 } from "../../actions/index";
 import "../../scss/Dashboard.scss";
@@ -198,6 +197,5 @@ export default connect(mapStateToProps, {
   authorise,
   handleLogin,
   profileImage,
-  allMyImage,
   deleteImage,
 })(Profile);

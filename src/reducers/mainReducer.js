@@ -7,6 +7,7 @@ const initialState = {
   isLoggedIn: false,
   sign: false,
   info: {},
+  getOneUser: {},
   // user Image
   proImage: [],
   valideImg: false,
@@ -15,34 +16,46 @@ const initialState = {
   addplay: false,
   personalPlayground: [],
   playground: [],
+  onePlayground: [],
   playIsDelete: false,
   playIsUpdate: false,
+  playIsLike: false,
   // events
   addEvents: false,
   eventsList: [],
   personalEvents: [],
   eventIsUpdate: false,
   eventIsDelete: false,
+  getOneEvent: [],
   // COMMENT
   addComment: false,
   getComment: false,
   allComment: [],
   writerImg: [],
-  writerInfo:[],
+  writerInfo: [],
   commentIsDelete: false,
   // Groups
   addGroup: false,
-  allPublicGroup : [],
+  allPublicGroup: [],
   urlGroupInfo: [],
-  addNewsGroup : [],
+  addNewsGroup: [],
   GroupNews: [],
+  deleteGroupNew: false,
   groupMembers: [],
   addGroupEvent: false,
   groupEvents: [],
   groupEventIsUpdate: false,
   GroupEventIsDelete: false,
-  groupChats : [],
-  groupChatsData : []
+  groupChats: [],
+  groupChatsData: [],
+  addNewAdmin: false,
+  removeAdmin: false,
+  removeMembers: false,
+  joinRequest: false,
+  groupAccpteUser: false,
+  groupRefusedUser: false,
+  updateGroupInfo: false,
+  updateGroupPIc: false,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -67,8 +80,12 @@ const mainReducer = (state = initialState, action) => {
 
     return Object.assign({}, state);
   }
-  if(action.type === "HANDLE_ALL_USERS"){
+  if (action.type === "HANDLE_ALL_USERS") {
     state.allUserInfo = action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_ONE_USERS") {
+    state.getOneUser = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_LOGIN") {
@@ -106,7 +123,7 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "HANDLE_LOGOUT") {
     state.isLoggedIn = false;
     state.sign = false;
-    state.info= []
+    state.info = [];
     return Object.assign({}, state);
   }
   /**********************************************************
@@ -149,6 +166,21 @@ const mainReducer = (state = initialState, action) => {
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
     state.playground = action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "FETCH_ONE_PLAYGROUND") {
+    // debugger
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.onePlayground = [];
+    } else {
+      state.onePlayground = action.payload;
+      state.playIsLike = false;
+      state.playIsUnLike = false;
+    }
     return Object.assign({}, state);
   }
   if (action.type === "ADD_PLAYGROUND") {
@@ -195,6 +227,30 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
+  if (action.type === "LIKE_PLAYGROUND") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.playIsLike = false;
+    } else {
+      state.playIsLike = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "UNLIKE_PLAYGROUND") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.playIsUnLike = false;
+    } else {
+      state.playIsUnLike = true;
+    }
+    return Object.assign({}, state);
+  }
   /**********************************************************
    ************************ events ****************************
    ***********************************************************/
@@ -207,6 +263,18 @@ const mainReducer = (state = initialState, action) => {
       state.addEvents = false;
     } else {
       state.addEvents = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "GET_ONE_EVENTS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.getOneEvent = [];
+    } else {
+      state.getOneEvent = action.payload;
     }
     return Object.assign({}, state);
   }
@@ -261,9 +329,10 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "FETCH_COMMENT") {
-    state.allComment = action.payload;
-    state.addComment= false
-    state.commentIsDelete = false;
+      state.allComment = action.payload;
+      state.addComment = false;
+      state.commentIsDelete = false;
+    
     return Object.assign({}, state);
   }
   if (action.type === "GET_WRITER_IMAGE") {
@@ -286,8 +355,8 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-    /**********************************************************
-   ************************ comment ****************************
+  /**********************************************************
+   ************************ group ****************************
    ***********************************************************/
   if (action.type === "ADD_GROUPS") {
     if (
@@ -304,14 +373,24 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "PUBLIC_GROUPS") {
     state.allPublicGroup = action.payload;
     return Object.assign({}, state);
-  } 
+  }
   if (action.type === "URL_GROUPS_BY_ID") {
-    if (action.payload.hasOwnProperty("error") ||
-    action.payload.hasOwnProperty("errors") ||
-    action.payload.hasOwnProperty("length")) {
-      state.urlGroupInfo= false
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.urlGroupInfo = [];
     } else {
       state.urlGroupInfo = action.payload;
+      state.removeAdmin = false;
+      state.addNewAdmin = false;
+      state.removeMembers = false;
+      state.joinRequest = false;
+      state.groupAccpteUser = false;
+      state.groupRefusedUser = false;
+      state.updateGroupInfo = false;
+      state.updateGroupPIc = false;
     }
     return Object.assign({}, state);
   }
@@ -323,17 +402,39 @@ const mainReducer = (state = initialState, action) => {
     ) {
       state.addNewsGroup = false;
     } else {
-      state.addNewsGroup =  action.payload;
+      state.addNewsGroup = action.payload;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "DELETE_GROUP_NEWS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.deleteGroupNew = false;
+    } else {
+      state.deleteGroupNew = true;
     }
     return Object.assign({}, state);
   }
   if (action.type === "GET_GROUP_NEWS") {
-    state.GroupNews =  action.payload;
+    state.GroupNews = action.payload;
     state.addNewsGroup = false;
+    state.deleteGroupNew = false;
+
     return Object.assign({}, state);
   }
   if (action.type === "GET_GROUP_MEMBERS") {
-    state.groupMembers =  action.payload;
+    state.groupMembers = action.payload;
+    state.removeAdmin = false;
+    state.addNewAdmin = false;
+    state.removeMembers = false;
+    state.joinRequest = false;
+    state.groupAccpteUser = false;
+    state.groupRefusedUser = false;
+    state.updateGroupInfo = false;
+    state.updateGroupPIc = false;
     return Object.assign({}, state);
   }
   if (action.type === "POST_GROUP_EVENTS") {
@@ -349,7 +450,7 @@ const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "GET_GROUP_EVENTS") {
-    state.groupEvents=  action.payload;
+    state.groupEvents = action.payload;
     state.addGroupEvent = false;
     state.groupEventIsUpdate = false;
     state.GroupEventIsDelete = false;
@@ -384,10 +485,106 @@ const mainReducer = (state = initialState, action) => {
     //   state.groupChats=([...state.groupChats, ...action.payload.chats]);
     //   state.groupChatsData = action.payload.meta
     // }else{
-      state.groupChats=action.payload.chats;
-      state.groupChatsData = action.payload.meta
+    state.groupChats = action.payload.chats;
+    state.groupChatsData = action.payload.meta;
     // }
-    
+
+    return Object.assign({}, state);
+  }
+  if (action.type === "ADD_TO_ADMIN") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.addNewAdmin = false;
+    } else {
+      state.addNewAdmin = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "REMOVE_TO_ADMIN") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.removeAdmin = false;
+    } else {
+      state.removeAdmin = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "REMOVE_GROUP_MEMBERS") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.removeMembers = false;
+    } else {
+      state.removeMembers = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "JOIN_GROUP_REQ") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.joinRequest = false;
+    } else {
+      state.joinRequest = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "JOIN_GROUP_ACCPET") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.groupAccpteUser = false;
+    } else {
+      state.groupAccpteUser = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "JOIN_GROUP_REFUSED") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.groupRefusedUser = false;
+    } else {
+      state.groupRefusedUser = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "UPDATE_GROUP_INFO") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.updateGroupInfo = false;
+    } else {
+      state.updateGroupInfo = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "UPDATE_GROUP_PICTURE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.updateGroupPIc = false;
+    } else {
+      state.updateGroupPIc = true;
+    }
     return Object.assign({}, state);
   }
   return state;

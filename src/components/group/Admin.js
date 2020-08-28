@@ -1,125 +1,164 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { connect } from 'react-redux'
 import { ButtonToggle } from 'reactstrap'
-import avatar from "../../img/avatar.png";
+import {getAllGroupMembers, removeToAdmin} from '../../actions/index';
+import  Addadmin  from './Addadmin';
+import  RemoveAdmin  from './RemoveAdmin';
+import  RemoveMembers  from './RemoveMembers'
+import NewMembers from "./NewMembers";
+import UpdateGroup from "./UpdateGroup";
+import UpdateGroupPicture from "./UpdateGroupPicture";
+
+import "../../scss/groupPictureUpdate.scss";
+import "../../scss/groupInfoUpdate.scss";
 
 export const Admin = (props) => {
     const [allAdmin, setAllAdmin] = useState(true)
     const [addAdmin, setAddAdmin] = useState(false)
-    const [remAdmin, setRemAdmin] = useState( false)
     const [remMembers, setRemMembers] = useState( false)
     const [accpteMembers, setAccpteMembers] = useState( false)
     const [confidentiality, setConfidentiality] = useState( false)
+    const [picture, setPicture] = useState( false)
+    const [info, setInfo] = useState( false)
+
+    const handlePicture = ()=>{
+        setPicture(true)
+        setInfo(false)
+    }
+    const handleInfo = ()=>{
+        setInfo(true)
+        setPicture(false)
+    }
     const handleallAdmin =()=>{
         setAllAdmin(true)
-        // if (allAdmin) {
             setAddAdmin(false)
-            setRemAdmin(false)
             setRemMembers(false)
             setAccpteMembers(false)
             setConfidentiality(false)
-        // }
     }
     const handeladdAdmin =()=>{
         setAddAdmin(true)
-        // if (addAdmin) {
-            setRemAdmin(false)
             setRemMembers(false)
             setAccpteMembers(false)
             setConfidentiality(false)
             setAllAdmin(false)
-        // }
-    }
-    const handelremAdmin  =()=>{
-        setRemAdmin(true)
-        // if (remAdmin) {
-            setRemMembers(false)
-            setAccpteMembers(false)
-            setConfidentiality(false)
-            setAllAdmin(false)
-            setAddAdmin(false)
-        // }
     }
     const handelremMembers =()=>{
         setRemMembers(true)
-        // if (remMembers) {
-            setRemAdmin(false)
             setAccpteMembers(false)
             setConfidentiality(false)
             setAllAdmin(false)
             setAddAdmin(false)
-        // }
     }
     const handelaccpteMembers = ()=>{
         setAccpteMembers(true)
-        // if (accpteMembers) {
-            setRemAdmin(false)
             setConfidentiality(false)
             setAllAdmin(false)
             setAddAdmin(false)
             setRemMembers(false)
-        // }
     }
     const handelconfidentiality = ()=>{
         setConfidentiality(true)
-        // if (confidentiality) {
-            setRemAdmin(false)
             setAllAdmin(false)
             setAddAdmin(false)
             setRemMembers(false)
             setAccpteMembers(false)
 
-        // }
+        
     }
+    useEffect(() => {
+        const id= props.data._id
+        props.getAllGroupMembers(id)
+}, [props.data._id])
+ 
+
     let groupAdmin = props.data.admin
-    // const handel()=>{}
-    // const handel()=>{}
     const getGroupAdmin = groupAdmin.map((el,index) =>{
-        return <div className="admin" key={el._id}>
-            <img src={avatar} alt="user"></img>
-            <p>{el.adminUsers.firstName} {el.adminUsers.lastName}</p>
-            {/* <p>{el.adminUsers.lastName}</p> */}
-        </div>
+       return <RemoveAdmin data={el} key={el._id} group={props.data._id}></RemoveAdmin>
+    })
+
+    let members;    
+     members = props.groupMembers.map((el,index)=>{
+  
+        return <Addadmin data={el} group={props.data} key={el._id}></Addadmin>
+    })
+    let removeMembers;
+    removeMembers = props.groupMembers.map((el,index)=>{
+  
+        return <RemoveMembers data={el} group={props.data} key={el._id}></RemoveMembers>
+    })
+    let userRequest = props.data.joindReq
+    const newMembers = userRequest.map((el,index) =>{
+
+        return <NewMembers data={el} group={props.data} key={el._id}></NewMembers>
     })
     return (
        <>
          <div className="admin_section">
             <ButtonToggle onClick={handleallAdmin} autoFocus>All Admin</ButtonToggle>
             <ButtonToggle onClick={handeladdAdmin}>Add Admin</ButtonToggle>
-            <ButtonToggle onClick={handelremAdmin}>Remove Admin</ButtonToggle>
             <ButtonToggle onClick={handelremMembers}>Remove Members</ButtonToggle>
             <ButtonToggle onClick={handelaccpteMembers}>members request</ButtonToggle>
             <ButtonToggle onClick={handelconfidentiality}>confidentiality</ButtonToggle>
         </div>
         {allAdmin &&
             <div className="admin_members">
-                <h3>All admin members</h3>
+                <h3>Admin members</h3>
                 {getGroupAdmin}
             </div>
         }
         {addAdmin && 
-            <div>add admin</div>
-        }
-        {remAdmin && 
-            <div>remove admin</div>
+            <div className="add_admin">
+                <>
+                <h3>Members</h3>
+                    {members}
+                </>
+            </div>
         }
         {remMembers && 
-            <div> remove members</div>
+            <div className="remove_members"> 
+                <h3>remove members</h3>
+                {removeMembers}
+            </div>
         }
         {accpteMembers && 
-            <div>accpte news users</div>
+            <div className="new_members">
+                <h3>User request</h3>
+                {newMembers}
+            </div>
         }
         {confidentiality && 
-            <div>group confidentiality</div>
+            <>
+                <div className="button-container">
+                    <div className="picture">
+                        <ButtonToggle onClick={handlePicture} >Update picture</ButtonToggle>
+                    </div>
+                    <div className="info-container">
+                        <ButtonToggle onClick={handleInfo}>Update Info</ButtonToggle>
+                    </div>
+                </div>
+                <div className="update-container">
+                    {picture && 
+                        <UpdateGroupPicture data={props.data}></UpdateGroupPicture>
+                    }
+                    {info &&
+                     <UpdateGroup data={props.data}></UpdateGroup> 
+                    }
+                </div>
+            </>
         }
        </>
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
+const mapStateToProps = (state) => {
+   return{
+    groupMembers: state.groupMembers,
+    info : state.info,
+    addNewAdmin : state.addNewAdmin
+   } 
+}
 
 
 
-export default connect(mapStateToProps)(Admin)
+export default connect(mapStateToProps,{getAllGroupMembers,removeToAdmin})(Admin)

@@ -55,13 +55,25 @@ useEffect(() => {
     event = <span>There is no event available</span>;
   }
 
+  let member = false;
+  if ( props.info.group) {
+    for (let i = 0; i <  props.info.group.length; i++) {
+      if (props.data._id ===  props.info.group[i]) {
+        member = true;
+      }
+    }
+  }
+
   return (
     <div className="groupEvent">
       {!show && (
         <>
-          <div className="addButton">
-            <button onClick={onClik}>Create an event</button>
-          </div>
+        {member && 
+           <div className="addButton">
+           <button onClick={onClik}>Create an event</button>
+         </div>
+        }
+         
           <div className="title">
             <span>Coming events</span>
           </div>
@@ -81,7 +93,8 @@ const mapStateToProps = (state) => {
     addGroupEvent: state.addGroupEvent,
     groupEvents: state.groupEvents,
     groupEventIsUpdate: state.groupEventIsUpdate,
-    GroupEventIsDelete: state.GroupEventIsDelete
+    GroupEventIsDelete: state.GroupEventIsDelete,
+    info: state.info,
   };
 };
 

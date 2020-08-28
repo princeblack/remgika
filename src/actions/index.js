@@ -6,15 +6,19 @@ import {
   authoriseUser,
   handleLogOut,
   signUpUsers,
+  getOneUser,
 
   //  playground 
 
+  getOnePlayground,
   addPlayground,
   addProfileImage,
   getProfileImage,
   deleteProfileImage,
   deletePlayground,
   updatePlayground,
+  likeOnePlayground,
+  unLikeOnePlayground,
 
   // events 
 
@@ -23,6 +27,7 @@ import {
   getMyEvents,
   updateEvents,
   deleteEvents,
+  getOneEvent,
 
   // comment
 
@@ -39,12 +44,21 @@ import {
   groupNews,
   addGroup,
   getGroupNews,
+  deleteGroupNews,
   getGroupMembers,
   addGroupEvents,
   getGroupEvent,
   updateGroupEvents,
   deleteGroupEvents,
-  groupChats
+  groupChats,
+  addNewAdmin,
+  removeAdmin,
+  removeMembers,
+  joinGroupRequest,
+  joinAccpet,
+  joinRefused,
+  updateGroupInfo,
+  updateGroupPicture,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -61,6 +75,15 @@ export const allUser = (payload) => {
     const data = await getAllUsers();
     dispatch({
       type: "HANDLE_ALL_USERS",
+      payload: data,
+    });
+  };
+};
+export const OneUser = (payload) => {
+  return async (dispatch) => {
+    const data = await getOneUser(payload);
+    dispatch({
+      type: "GET_ONE_USERS",
       payload: data,
     });
   };
@@ -94,11 +117,11 @@ export const profileImage = (payload) => {
     });
   };
 };
-export const allMyImage = (payload) => {
+export const deleteImage = (payload) => {
   return async (dispatch) => {
-    const data = await getProfileImage(payload);
+    const data = await deleteProfileImage(payload);
     dispatch({
-      type: "GET_PROFILE_IMAGE",
+      type: "DELETE_PROFILE_IMAGE",
       payload: data,
     });
   };
@@ -114,6 +137,10 @@ export const logOut = (payload) => {
     });
   };
 };
+
+/**********************************************************
+ ************************ PLAYGROUN **************************
+ ***********************************************************/
 
 export const playground = (payload) => {
   return async (dispatch) => {
@@ -134,6 +161,15 @@ export const fetchPlayground = (payload) => {
     });
   };
 };
+export const fetchOnePlayground = (payload) => {
+  return async (dispatch) => {
+    const data = await getOnePlayground(payload);
+    dispatch({
+      type: "FETCH_ONE_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
 
 export const myPlayground = (payload) => {
   return async (dispatch) => {
@@ -145,15 +181,7 @@ export const myPlayground = (payload) => {
   };
 };
 
-export const deleteImage = (payload) => {
-  return async (dispatch) => {
-    const data = await deleteProfileImage(payload);
-    dispatch({
-      type: "DELETE_PROFILE_IMAGE",
-      payload: data,
-    });
-  };
-};
+
 
 export const deletePlay = (payload) => {
   return async (dispatch) => {
@@ -169,6 +197,24 @@ export const updatePlay = (payload, id) => {
     const data = await updatePlayground(payload, id);
     dispatch({
       type: "UPDATE_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
+export const LikePlayground = (payload) => {
+  return async (dispatch) => {
+    const data = await likeOnePlayground(payload);
+    dispatch({
+      type: "LIKE_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
+export const unLikePlayground = (payload) => {
+  return async (dispatch) => {
+    const data = await unLikeOnePlayground(payload);
+    dispatch({
+      type: "UNLIKE_PLAYGROUND",
       payload: data,
     });
   };
@@ -196,6 +242,17 @@ export const fetcheventsList = (payload) => {
     });
   };
 };
+
+export const fetchOneEvents = (payload) => {
+  return async (dispatch) => {
+    const data = await getOneEvent(payload);
+    dispatch({
+      type: "GET_ONE_EVENTS",
+      payload: data,
+    });
+  };
+};
+
 export const myEvents = (payload) => {
   return async (dispatch) => {
     const data = await getMyEvents();
@@ -328,6 +385,15 @@ export const getAllGroupNews = (payload) => {
     })
   }
 }
+export const deleteNews = (payload) => {
+  return async (dispatch) =>{
+    const data = await deleteGroupNews(payload)
+    dispatch({
+      type: "DELETE_GROUP_NEWS",
+      payload: data
+    })
+  }
+}
 
 export const getAllGroupMembers = (payload) => {
   return async (dispatch) =>{
@@ -383,6 +449,82 @@ export const getGroupChats = (payload,skip,limit) => {
     const data = await groupChats(payload,skip,limit);
     dispatch({
       type: "GET_GROUP_CHATS",
+      payload: data,
+    });
+  };
+};
+
+export const addToAdmin = (payload,id) => {
+  return async (dispatch) => {
+    const data = await addNewAdmin(payload,id,);
+    dispatch({
+      type: "ADD_TO_ADMIN",
+      payload: data,
+    });
+  };
+};
+export const removeToAdmin = (payload,id) => {
+  return async (dispatch) => {
+    const data = await removeAdmin(payload,id,);
+    dispatch({
+      type: "REMOVE_TO_ADMIN",
+      payload: data,
+    });
+  };
+};
+
+export const removeMember= (payload,id) => {
+  return async (dispatch) => {
+    const data = await removeMembers(payload,id,);
+    dispatch({
+      type: "REMOVE_GROUP_MEMBERS",
+      payload: data,
+    });
+  };
+};
+
+export const joinGroupReq= (payload,id) => {
+  return async (dispatch) => {
+    const data = await joinGroupRequest(payload,id,);
+    dispatch({
+      type: "JOIN_GROUP_REQ",
+      payload: data,
+    });
+  };
+};
+export const joinGroupAccpet= (payload,user,admin) => {
+  return async (dispatch) => {
+    const data = await joinAccpet(payload,user,admin);
+    dispatch({
+      type: "JOIN_GROUP_ACCPET",
+      payload: data,
+    });
+  };
+};
+export const joinGroupRefused= (payload,user,admin) => {
+  return async (dispatch) => {
+    const data = await joinRefused(payload,user,admin);
+    dispatch({
+      type: "JOIN_GROUP_REFUSED",
+      payload: data,
+    });
+  };
+};
+export const updateGroupInformation= (payload,info) => {
+  return async (dispatch) => {
+    const data = await updateGroupInfo(payload,info);
+    dispatch({
+      type: "UPDATE_GROUP_INFO",
+      payload: data,
+    });
+  };
+};
+
+export const updateGroupPhoto= (payload,info) => {
+  return async (dispatch) => {
+    const data = await updateGroupPicture(payload,info);
+    dispatch({
+      type: "UPDATE_GROUP_PICTURE",
       payload: data,
     });
   };

@@ -1,13 +1,19 @@
-import React, { Component, useRef, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { connect } from "react-redux";
-import avatar from "../../img/avatar.png";
+
+// import avatar from "../../img/avatar.png";
 import "../../scss/groupNews.scss";
-import { getAllGroupNews } from "../../actions";
+import { getAllGroupNews, deleteNews } from "../../actions";
 import { GroupNewsImag } from "./GroupNewsImag";
 import moment from "moment";
+// import { NavLink, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
-export const NewsItems = (props) => {
+const NewsItems = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
   let image;
   image = props.data.imgCollection.map((el, index) => {
     return <GroupNewsImag data={el} key={index}></GroupNewsImag>;
@@ -18,7 +24,9 @@ export const NewsItems = (props) => {
   let text = content.join("");
   const toggle = () => {
     setIsOpen(!isOpen);
+    setShow(false)
   };
+
   if (content.length > 600) {
     if (!isOpen) {
       text = content.slice(0, 600).join("") + "....." + "  ";
@@ -26,21 +34,48 @@ export const NewsItems = (props) => {
       text = content.join("");
     }
   }
+  const user = props.data.userId.imgCollection[0];
+
+  const handleClick = (e)=>{
+    e.preventDefault();
+    setShow(!show)
+  }
+  const handleClickContent = (e)=>{
+    e.preventDefault();
+
+    setShow(false)
+  }
+  const handleDelete = (e)=>{
+    e.preventDefault();
+    const id = props.data._id
+    props.deleteNews(id)
+  }
 
   return (
     <>
       <div className="contenair">
         <div className="info">
-          <img src={avatar} alt="user"></img>
-          {/* <span>usr name is here</span> */}
-          <strong>{date}</strong>
+          <div className="container">
+            <div className="userImage">
+              <img id="userPicture" src={user} alt="user"></img>
+            </div>
+            <strong>{date}</strong>
+          </div>
+          <div className="delete">
+            <FontAwesomeIcon icon={faEllipsisH}  onClick={handleClick}/>
+            {show && (
+              <>
+                <div className="handledelete" onClick={handleDelete}>Delete</div>
+              </>
+            )}
+          </div>
         </div>
-        <div className="content">
+        <div className="content" onClick={handleClickContent}>
           <div className="text">
             <p>
               {text}
               {content.length > 600 && (
-                <a onClick={toggle}>   {isOpen ? "" : "Read more"}</a>
+                <a onClick={toggle}> {isOpen ? "" : "Read more"}</a>
               )}
             </p>
           </div>
@@ -52,7 +87,10 @@ export const NewsItems = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    deleteGroupNew : state.deleteGroupNew
+  };
 };
 
-export default connect(mapStateToProps, { getAllGroupNews })(NewsItems);
+export default connect(mapStateToProps, { getAllGroupNews , deleteNews})(NewsItems);
+

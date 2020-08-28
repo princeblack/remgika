@@ -15,10 +15,14 @@ class SignUp extends React.Component {
       lastName: "",
       email: "",
       password: "",
-      role: "Admin"
+      role: "Admin",
+      imgCollection: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFiles = this.handleFiles.bind(this);
+    this.checkMimeType = this.checkMimeType.bind(this);
+    this.maxSelectFile = this.maxSelectFile.bind(this);
   }
   handleInputChange(e) {
     const name = e.target.name;
@@ -27,9 +31,59 @@ class SignUp extends React.Component {
       [name]: value
     });
   }
+   maxSelectFile (event) {
+    let files = event.target.files; // create file object
+    if (files.length > 1) {
+      event.target.value = null; // discard selected file
+      return false;
+    }
+    return true;
+  };
+  checkMimeType (event)  {
+      //getting file object
+      let files = event.target.files;
+      //define message container
+      let err = "";
+      // list allow mime type
+      const types = ["image/png", "image/jpeg", "image/gif"];
+      // loop access array
+      for (var x = 0; x < files.length; x++) {
+        // compare file type find doesn't matach
+        // eslint-disable-next-line no-loop-func
+        if (types.every((type) => files[x].type !== type)) {
+          // create error message and assign to container
+          err += files[x].type + " is not a supported format\n";
+        }
+      }
+      if (err !== "") {
+        // if message not same old that mean has error
+        event.target.value = null; // discard selected file
+        return false;
+      }
+      return true;
+    };
+  
+     handleFiles  (event)  {
+      if (this.maxSelectFile(event) && this.checkMimeType(event)) {
+        // if return true allow to setState
+        console.log(event.target.files[0]);
+        this.setState({
+          imgCollection: event.target.files[0]
+        });
+      }
+    };
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signUp(this.state);
+    const data = new FormData()
+    data.append("firstName",this.state.firstName)
+    data.append("lastName",this.state.lastName)
+    data.append("email",this.state.email)
+    data.append("password",this.state.password)
+    data.append("role",this.state.role)
+    data.append("imgCollection",this.state.imgCollection)
+
+    this.props.signUp(data);
+
   }
   render() {
     const isLoggedIn = this.props.isLoggedIn;
@@ -52,6 +106,15 @@ class SignUp extends React.Component {
               <div className="sign-form">
                 <h1>SIGN UP</h1>
                 <form onSubmit={this.handleSubmit}>
+                <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
+                      type="file"
+                      placeholder="Profile picture"
+                      onChange={this.handleFiles}
+                      required
+                    />
+                  </div>
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"

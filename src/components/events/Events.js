@@ -11,6 +11,8 @@ import AddressInfo from "./AddressInfo";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
+
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -84,109 +86,53 @@ class Events extends Component {
     return (
       this.props.data && (
         <>
-               <div className="events-item">
-        <div className="userVote">
-          {/* <img src={link} alt="like"></img>
-          <img src={unlink} alt="unlike"></img> */}
-        </div>
-        <div className="image">
-          <ItemsCarousel
-            enablePlaceholder
-            requestToChangeActive={this.changeActiveItem}
-            activeItemIndex={activeItemIndex}
-            numberOfCards={1}
-            gutter={12}
-            outsideChevron={false}
-            chevronWidth={chevronWidth}
-            leftChevron={<button></button>}
-            rightChevron={<button></button>}
-          >
-            {image}
-          </ItemsCarousel>
-          <div className="info">
-            <p className="address">{this.props.data.address}</p>
-          </div>
-          <div className="dictanceInfo">
-            <AddressInfo
-              google={this.props.google}
-              data={this.state}
-            ></AddressInfo>
-          </div>
-        </div>
-        <div  className="title">
-          <h3>{this.props.data.eventName}</h3>
-        </div>
-        <div className="timeItem">
-          <div className="start">
-            <span>Start:</span>
-            <p>{start}</p>
-          </div>
-          <div className="end">
-            <span>End:</span>
-            <p>{end}</p>
-          </div>
-        </div>
-        {/* <div className="author">
-          <p>By:</p> <span>{this.props.user.firstName}</span>
-        </div> */}
-        <div className="description">
-          <p>{this.props.data.description}</p>
-        </div>
-        <div className="mapLogo">
-          <img
-            src={map}
-            alt="map"
-            onClick={this.toggleClass.bind(this, index)}
-          ></img>
-          <span>Click here to see the map</span>
-        </div>
-        {this.state.lng !== null && (
-          <Collapse isOpened={this.state.activeIndex === index}>
-            <div
-              className={classNames("map", {
-                show: this.state.activeIndex === index,
-                hide: this.state.activeIndex !== index,
-              })}
-            >
-              <div className="close-container">
-                <img
-                  className="close"
-                  src={close}
-                  alt="close"
-                  onClick={this.toggleClass.bind(this, index)}
-                ></img>
-              </div>
-
-              <Map
-                className="map"
-                google={this.props.google}
-                zoom={14}
-                style={mapStyles}
-                initialCenter={{
-                  lat: this.state.lat,
-                  lng: this.state.lng,
-                }}
+          <div className="events-item">
+            <div className="image">
+              <ItemsCarousel
+                enablePlaceholder
+                requestToChangeActive={this.changeActiveItem}
+                activeItemIndex={activeItemIndex}
+                numberOfCards={1}
+                gutter={12}
+                outsideChevron={false}
+                chevronWidth={chevronWidth}
+                leftChevron={<button></button>}
+                rightChevron={<button></button>}
               >
-                <Marker
-                  position={{
-                    lat: this.state.lat,
-                    lng: this.state.lng,
-                  }}
-                />
-              </Map>
+                {image}
+              </ItemsCarousel>
+              <div className="dictanceInfo">
+                <AddressInfo
+                  google={this.props.google}
+                  data={this.state}
+                ></AddressInfo>
+              </div>
             </div>
-          </Collapse>
-        )}
-      </div>
+            <div className="title">
+              <h3>{this.props.data.eventName}</h3>
+            </div>
+            <div className="timeItem">
+              <div className="start">
+                <span>Start:</span>
+                <p>{start}</p>
+              </div>
+              <div className="end">
+                <span>End:</span>
+                <p>{end}</p>
+              </div>
+            </div>
+            <div className="visite">
+            <NavLink to={`/eventPage/${this.props.data._id}`}>
+              Visit
+            </NavLink>
+          </div>
+          </div>
         </>
       )
     );
   }
 }
 
-// const mapStateToProps = (state) => ({});
-
-// export default connect(mapStateToProps)(Events);
 export default GoogleApiWrapper({
   apiKey: "AIzaSyADwKVOI7pGKkLCxhJy4B_Rjw03DG56WwI",
 })(Events);

@@ -16,18 +16,12 @@ import { NavLink } from "react-router-dom";
 import camera from "../../img/camera.svg";
 import "../../scss/Playground.scss";
 import Play from "./Play";
-import ItemsCarousel from "react-items-carousel";
 
 const PlacesAutocomplete = (props) => {
-  
-  useEffect((prevProps, nextState) => {
-    props.allUser()
-    props.fetchPlayground();
-    props.fetchComment()
-  }, []);
-// console.log(props.allUserInfo);
-// console.log(props.playground);
 
+  useEffect((prevProps, nextState) => {
+    props.fetchPlayground();
+  }, []);
 
   const {
     ready,
@@ -89,14 +83,12 @@ const PlacesAutocomplete = (props) => {
     });
     setgetPlay(filterCharacter);
   };
-// console.log(props.allUserInfo);
 
   /* seaching playround return r*/
   let playgroundList;
   playgroundList =  props.playground.map((el, index) => {
       return (
         <Play
-          user={props.info}
           playIndex={index}
           data={el}
           key={index}
@@ -107,8 +99,6 @@ const PlacesAutocomplete = (props) => {
     playgroundList = getPlay.map((el, index) => {
         return (
           <Play
-            // allUsers={ell}
-            user={props.info}
             playIndex={index}
             data={el}
             key={index}
@@ -116,34 +106,6 @@ const PlacesAutocomplete = (props) => {
         );
       })
   }
-  
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 40;
-
-  const [size, setSize] = useState(0);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize(window.innerWidth);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  let cardNumber = 1;
-  // if (size >= 600) {
-  //   cardNumber = 2;
-  // }
-  // if (size >= 850) {
-  //   cardNumber = 3;
-  // }
-  // if (size >= 990) {
-  //   cardNumber = 4;
-  // }
-  // if (size >= 1200) {
-  //   cardNumber = 5;
-  // }
-
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -169,41 +131,17 @@ const PlacesAutocomplete = (props) => {
         <h1>Playgrounds</h1>
         <hr></hr>
       </div>
-      {size <= 600 ? (
-        <div className="carouselDiv">
-          <ItemsCarousel
-            enablePlaceholder
-            requestToChangeActive={setActiveItemIndex}
-            activeItemIndex={activeItemIndex}
-            numberOfCards={cardNumber}
-            gutter={12}
-            leftChevron={<button></button>}
-            rightChevron={<button></button>}
-            outsideChevron
-            disableSwipe
-            chevronWidth={chevronWidth}
-          >
-            {playgroundList}
-          </ItemsCarousel>
-        </div>
-      ) : (
-        <div className="playground-table">
+      <div className="playground-table">
           {playgroundList}
-        </div>
-      )}
-          {/* {commentList} */}
-
+      </div>
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    allUserInfo: state.allUserInfo,
     playground: state.playground,
     addPlay: state.addPlay,
-    info: state.info,
-    allComment: state.allComment,
   };
 };
 

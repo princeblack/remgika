@@ -105,6 +105,7 @@ export const ChatContainer = (props) => {
       setShow( !show) 
     }
   }
+
   return (
     <div className="chatContainer" >
       <ScrollToBottom className={ROOT_CSS} >

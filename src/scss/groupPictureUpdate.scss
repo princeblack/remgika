@@ -1,0 +1,43 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+
+.update-container{
+    min-height: 500px;
+
+    .update-picture{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        min-height: 500px;
+        padding: 15px;
+
+        img{
+            width: 50%;
+            height: 300px;
+            object-fit: cover;
+        }
+        div{
+            width: 80%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+
+            input{
+                font-size: 20px;
+            }
+            button{
+                background-color: #69ca62;
+                outline: none;
+                margin-top: 10px;
+                border: 0;
+                width: 100px;
+                height: 35px;
+                font-size: 20px;
+                border-radius: 5px
+            }
+        }
+    }
+}

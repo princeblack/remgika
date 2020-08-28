@@ -1,7 +1,7 @@
 import React from "react";
 import "../scss/App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { authorise, allMyImage} from "../actions";
+import { authorise, OneUser} from "../actions";
 import { connect } from "react-redux";
 import Dashboard from "./dashboard/Dashboard";
 import Login from "./login-signUp/Login";
@@ -10,6 +10,7 @@ import NotFound from "./load-notfound/NotFound";
 import Welcome from "./home-welcome/Welcome";
 import Navigation from "./Navigation";
 import Playground from "./playground/Playground";
+import PlayPage from "./playground/PlayPage";
 import AddPlaygroung from "./playground/AddPlaygroung";
 import MainEvents from "./events/MainEvents";
 import AddEvents from "./events/AddEvents";
@@ -17,16 +18,12 @@ import Loading from "./Loading";
 import MainGroup  from "./group/MainGroup";
 import GroupPage  from "./group/GroupPage";
 import  EventFormular  from "./group/EventFormular";
+import  EventPage  from "./events/EventPage";
 
 
 class App extends React.Component {
    componentDidMount() {
     this.props.authorise();    
-    if (this.props.isLoggedIn) {
-      this.props.allMyImage();
-      this.props.authorise();    
-      // this.props.fetchComment()
-    }
   }   
   render() {
     const loading = this.props.loading
@@ -41,7 +38,10 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/playground" component={Playground} />
+            <Route exact path="/playgroundPage/:id" component={PlayPage} />
             <Route exact path="/events" component={MainEvents} />
+            <Route exact path="/eventPage/:id" component={EventPage} />
+
             <Route exact path="/addEvents" component={AddEvents} />
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route exact path="/groups" component={MainGroup} />
@@ -67,5 +67,5 @@ const mapsStateToProps = state => {
   };
 };
 
-export default connect(mapsStateToProps, { authorise, allMyImage })(App)
+export default connect(mapsStateToProps, {authorise,  OneUser})(App)
 ;

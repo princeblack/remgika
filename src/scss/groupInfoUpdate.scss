@@ -1,0 +1,70 @@
+$main-color: #69ca62;
+$remgika: #c7cda4;
+
+.update-container{
+    min-height: 500px;
+
+    .UpdateGroup{
+        min-height: 400px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        div{
+            width: 100%;
+            padding: 15px;
+            input{
+                width: 90%;
+
+                margin-top: 10px;
+                border: #4a4b46 solid 1px;
+                padding: 10px;
+                font-size: 20px;
+            }
+            textarea{
+                width: 90%;
+
+                margin-top: 10px;
+                border: #4a4b46 solid 1px;
+                padding: 10px;
+                font-size: 20px;
+            }
+            button{
+                width: 100px;
+                background-color: #69ca62;
+                outline: none;
+                border: 0;
+                height: 35px;
+                font-size: 20px;
+                border-radius: 5px;
+            
+            }
+            select{
+                width: 50%;
+                border: solid rgb(94, 92, 92);
+                option{
+                    width: 100%;
+                }
+            }
+        }
+          .check-container {
+            position: relative;
+            bottom: 510px;
+            z-index: 1;
+            background-color: #c7cda4;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .spinner {
+              width: 100%;
+              font-size: 100px;
+              color: #ffffff;
+            }
+            p {
+              font-size: 22px;
+              color: #ffffff;
+              font-weight: 500;
+            }
+          }
+    }
+}

@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faImages } from "@fortawesome/free-solid-svg-icons";
-import { NewsItems } from "./NewsItems";
+import  NewsItems  from "./NewsItems";
 import { useForm } from "react-hook-form";
-import { postNewsGroup, getAllGroupNews } from "../../actions";
+import { postNewsGroup, getAllGroupNews ,deleteNews } from "../../actions";
 import TextareaAutosize from 'react-autosize-textarea';
 
 const News = (props) => {
@@ -19,7 +19,14 @@ const News = (props) => {
       props.getAllGroupNews(id);
     }
   }, [props.addNewsGroup]);
-  const news = props.GroupNews.reverse();
+  useEffect(() => {
+    if (props.deleteGroupNew) {
+      const id = props.data._id
+      props.getAllGroupNews(id)
+    }
+  }, [props.deleteGroupNew])
+
+  const news = props.GroupNews
   let allNews;
   allNews = news.map((el, index) => {
     return <NewsItems data={el} key={el._id}></NewsItems>;
@@ -122,37 +129,48 @@ const News = (props) => {
       }
     }
   };
+  let member = false;
+  if ( props.info.group) {
+    for (let i = 0; i <  props.info.group.length; i++) {
+      if (props.data._id ===  props.info.group[i]) {
+        member = true;
+      }
+    }
+  }
   return (
     <>
       <div className="pageContenair">
-        <div className="postContenair">
-          <div className="contenair">
-            <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-              <div className="text-contenair">
-                <TextareaAutosize name="content" rows="4" ref={register} autoFocus >
-
-                </TextareaAutosize>
-                {errors.content && <p>content is required</p>}
+        {member && 
+                <div className="postContenair">
+                <div className="contenair">
+                  <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="text-contenair">
+                      <TextareaAutosize name="content" rows="4" ref={register} autoFocus >
+      
+                      </TextareaAutosize>
+                      {errors.content && <p>content is required</p>}
+                    </div>
+                    <div className="file-contenair">
+                      <input
+                        type="file"
+                        name="imgCollection"
+                        className="input"
+                        onChange={handlefiles}
+                        multiple
+                        ref={register}
+                      ></input>
+                      <input
+                        className="submit"
+                        type="submit"
+                        value="Post"
+                      ></input>
+                    </div>
+                    <div id="image-block"></div>
+                  </form>
+                </div>
               </div>
-              <div className="file-contenair">
-                <input
-                  type="file"
-                  name="imgCollection"
-                  className="input"
-                  onChange={handlefiles}
-                  multiple
-                  ref={register}
-                ></input>
-                <input
-                  className="submit"
-                  type="submit"
-                  value="Post"
-                ></input>
-              </div>
-              <div id="image-block"></div>
-            </form>
-          </div>
-        </div>
+        }
+  
         <div className="news-contenair">
           {allNews}
         </div>
@@ -167,9 +185,11 @@ const mapStateToProps = (state) => {
     info: state.info,
     GroupNews: state.GroupNews,
     addNewsGroup: state.addNewsGroup,
+    deleteGroupNew : state.deleteGroupNew
+
   };
 };
 
-export default connect(mapStateToProps, { postNewsGroup, getAllGroupNews })(
+export default connect(mapStateToProps, { postNewsGroup, getAllGroupNews ,deleteNews})(
   News
 );

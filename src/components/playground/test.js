@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class AddressInfo extends Component {
+class PlayAddressInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,4 +78,4 @@ class AddressInfo extends Component {
   }
 }
 
-export default AddressInfo;
+export default PlayAddressInfo;

@@ -13,7 +13,6 @@ export const AddGroup = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [spinner, setSpinner] = useState(false);
   const [check, setCheck] = useState(false);
-
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {

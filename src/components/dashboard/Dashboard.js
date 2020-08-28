@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import {
   authorise,
   myPlayground,
-  allMyImage,
   myEvents,
 } from "../../actions/index";
 import "../../scss/Dashboard.scss";
@@ -30,15 +29,11 @@ class Dashboard extends React.Component {
   componentDidMount() {
     if (this.props.isLoggedIn) {
       this.props.myPlayground();
-      this.props.allMyImage();
       this.props.myEvents();
       this.props.authorise();
     }
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.valideImg !== this.props.valideImg) {
-      this.props.allMyImage();
-    }
     // playground
     if (
       prevProps.personalPlayground.length !==
@@ -190,6 +185,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   authorise,
   myPlayground,
-  allMyImage,
   myEvents,
 })(Dashboard);

@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { NavLink } from "react-router-dom";
-import camerablue from "../../img/camerablue.png";
+import camera from "../../img/camera.svg";
 import "../../scss/Playground.scss";
 import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
@@ -121,7 +121,7 @@ const EventsAutocomplete = (props) => {
         </div>
         <div className="camera-flex">
           <NavLink to="/addEvents">
-            <img src={camerablue} alt="camera"></img>
+            <img src={camera} alt="camera"></img>
           </NavLink>
           <span>Add Events</span>
         </div>
@@ -130,29 +130,10 @@ const EventsAutocomplete = (props) => {
         <h1>Events</h1>
         <hr></hr>
       </div>
-      {size <= 600 ? (
-              <div className="carouselDiv">
-              <ItemsCarousel
-                enablePlaceholder
-                requestToChangeActive={setActiveItemIndex}
-                activeItemIndex={activeItemIndex}
-                numberOfCards={cardNumber}
-                gutter={12}
-                leftChevron={<button></button>}
-                rightChevron={<button></button>}
-                outsideChevron
-                disableSwipe
-                chevronWidth={chevronWidth}
-              >
-                {events}
-              </ItemsCarousel>
-            </div>
-        ):(
           <div className="event-table">
           {events}
         </div>
-        )
-      }
+      
     </>
   );
 };

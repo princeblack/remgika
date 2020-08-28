@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Groups from "./Groups";
 import AddGroup from "./AddGroup";
+import { OneUser } from "../../actions";
+import IamMember  from "./IamMember";
 
 class GroupsMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      discoverToggle: true,
+      discoverToggle: false,
       groupsToggle: true,
       addsToggle: true,
     };
@@ -15,42 +17,37 @@ class GroupsMenu extends Component {
     this.handleGroups = this.handleGroups.bind(this);
     this.handleAdds = this.handleAdds.bind(this);
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.info !== this.props.info) {
+      const id = this.props.info._id
+      this.props.OneUser(id)
+    }
+  }
   
   handleDiscover(e) {
     e.preventDefault();
     this.setState((state) => ({
-      discoverToggle: !state.discoverToggle,
+      discoverToggle: false,
+      groupsToggle: true,
+      addsToggle: true,
     }));
-    if (this.state.discoverToggle === true) {
-      this.setState((state) => ({
-        groupsToggle: true,
-        addsToggle: true,
-      }));
-    }
   }
   handleGroups(e) {
     e.preventDefault();
     this.setState((state) => ({
-      groupsToggle: !state.groupsToggle,
+      groupsToggle: false,
+      discoverToggle: true,
+      addsToggle: true,
     }));
-    if (this.state.groupsToggle === true) {
-      this.setState((state) => ({
-        discoverToggle: true,
-        addsToggle: true,
-      }));
-    }
   }
   handleAdds(e) {
     e.preventDefault();
     this.setState((state) => ({
-      addsToggle: !state.addsToggle,
+      addsToggle: false,
+      discoverToggle: true,
+      groupsToggle: true,
     }));
-    if (this.state.addsToggle === true) {
-      this.setState((state) => ({
-        discoverToggle: true,
-        groupsToggle: true,
-      }));
-    }
   }
 
   render() {
@@ -59,9 +56,7 @@ class GroupsMenu extends Component {
     let handleAdds = this.state.addsToggle;
     let filterdata = this.props.filterGroup;
 
-if (handleDiscover && handleGroups && handleAdds) {
-    handleDiscover = false
-}
+
     // get random Groups
     let n = 20;
     let rendom = this.props.allPublicGroup
@@ -92,8 +87,17 @@ if (handleDiscover && handleGroups && handleAdds) {
         );
       });
     }
+    
+    let memberGroup;
+    if (this.props.getOneUser.group) {
+      memberGroup = this.props.getOneUser.group.map((el,index)=>{
+      return(
+      <IamMember data={el} key={el._id}></IamMember>
+      )
+      })
+    }
+    
     // console.log(this.props.allPublicGroup[Math.floor(Math.random()*this.props.allPublicGroup.length)]);
-
     return (
       <>
         <div className="menu">
@@ -110,8 +114,16 @@ if (handleDiscover && handleGroups && handleAdds) {
               </>
             )}
           </>
-          <>{!handleGroups && <>you are members in these groups</>}</>
-          <>{!handleAdds && <> <AddGroup></AddGroup> </>}</>
+          <>{!handleGroups && <>
+          <div className="sugges">You are members in these groups</div>
+          <div className="group-table">{memberGroup}</div>
+          </>}</>
+          <>
+          
+          {!handleAdds && <>
+            <div className="sugges">Create a new group</div>
+           <AddGroup></AddGroup> 
+          </>}</>
         </div>
       </>
     );
@@ -121,7 +133,9 @@ if (handleDiscover && handleGroups && handleAdds) {
 const mapStateToProps = (state) => {
   return {
     allPublicGroup: state.allPublicGroup,
+    info:  state.info,
+    getOneUser : state.getOneUser
   };
 };
 
-export default connect(mapStateToProps)(GroupsMenu);
+export default connect(mapStateToProps,{OneUser})(GroupsMenu);

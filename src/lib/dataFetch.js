@@ -34,12 +34,11 @@ export const getAllUsers = async (data) => {
     return [];
   }
 };
-export const signUpUsers = async (data) => {
+export const getOneUser = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/users`, {
-        method: "POST",
-        body: JSON.stringify(data),
+      await fetch(`${url}/users/${data}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,6 +48,21 @@ export const signUpUsers = async (data) => {
     return res;
   } catch (error) {
     return [];
+  }
+};
+export const signUpUsers = async (data) => {
+  try {
+    const info = data
+    const res = await (
+      await fetch(`${url}/users`, {
+        method: "POST",
+        body: info,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
   }
 };
 
@@ -174,6 +188,24 @@ export const getPlayground = async (data) => {
     return [];
   }
 };
+export const getOnePlayground = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/playground/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
 
 export const addPlayground = async (data) => {
   try {
@@ -240,6 +272,36 @@ export const updatePlayground = async (data, id) => {
   }
 };
 
+export const likeOnePlayground = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/playground/like/${id}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const unLikeOnePlayground = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/playground/unlike/${id}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
 /**********************************************************
  ************************ events **************************
  ***********************************************************/
@@ -268,6 +330,25 @@ export const getEventsList = async (data) => {
         credentials: "include",
       })
     ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getOneEvent = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/events/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+
     return res;
   } catch (error) {
     return [];
@@ -345,9 +426,10 @@ export const addComment = async (data) => {
 };
 
 export const getcomment = async (data) => {
+  const id = data;
   try {
     const res = await (
-      await fetch(`${url}/comment/`, {
+      await fetch(`${url}/comment/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -481,7 +563,23 @@ export const getGroupNews = async (data) => {
     return [];
   }
 };
-
+export const deleteGroupNews= async (data) => {
+  const id = data;
+  try {
+    const res = await (
+      await fetch(`${url}/news/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
 export const getGroupMembers = async (data) => {
   try {
     const id = await data;
@@ -581,5 +679,119 @@ export const groupChats = async (data,skip,limit) => {
     return res;
   } catch (error) {
     return [];
+  }
+};
+
+export const addNewAdmin = async (id, user) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/addNewAdmin/${id}?user=${user}`, {
+        method: "PUT",
+        body: user,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const removeAdmin = async (id, user) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/removeAdmin/${id}?user=${user}`, {
+        method: "PUT",
+        body: user,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const removeMembers = async (id, user) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/removeMember/${id}?user=${user}`, {
+        method: "PUT",
+        body: user,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const joinGroupRequest = async (id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/joinGroupRequest/${id}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const joinAccpet = async (id,user,admin) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/join/${id}?user=${user}&admin=${admin}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const joinRefused = async (id,user,admin) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/joinRefused/${id}?user=${user}&admin=${admin}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const updateGroupInfo = async (data,id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const updateGroupPicture = async (data,id) => {
+  try {
+    const res = await (
+      await fetch(`${url}/group/picture/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
   }
 };

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logOut, allMyImage } from "../actions/index";
+import { logOut } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import remgika from "../img/remgika.png";
 import avatar from "../img/avatar.png"
-
 import {
   faBars,
   faUserInjured,
@@ -23,10 +22,6 @@ class Navigation extends Component {
       refrech: false,
     };
   }
-  componentDidMount() {
-    this.props.allMyImage();     
-
-  }
   toggleSidebar = (e) => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("slide-right");
@@ -40,23 +35,30 @@ class Navigation extends Component {
   render() {
     const isLoggedIn = this.props.isLoggedIn;
     const active = { color: "#6bc774" };
-    
     return (
       <div className="navigation-block">
         <div id="navigation" className="flex-row-space-between navColor">
           <div className="logo">
-            <img src={remgika} alt="remgika"></img>
+            <NavLink to="/"
+            >
+            </NavLink>
           </div>
           {isLoggedIn && (
             <div className="right flex-row-center">
               <div className="avatar" id="avatarHide">
-                {this.props.proImage[0] !== undefined ? (
-                  <img
-                    src={this.props.proImage[0].imgCollection}
-                    alt="profile"
-                  ></img>
-                ) : (
+                {this.props.info.imgCollection ? (
+                  <>
+                    {this.props.info.imgCollection[0] !== undefined && (
+                      <img
+                      src={this.props.info.imgCollection[0]}
+                      alt="profile"
+                    ></img>
+                    )}
+                  </>
+                ):(
+                  <>
                   <img src={avatar} alt="profile"></img>
+                  </>
                 )}
               </div>
             </div>
@@ -136,6 +138,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  allMyImage,
   logOut,
 })(withRouter(Navigation));
