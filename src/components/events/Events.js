@@ -96,8 +96,8 @@ class Events extends Component {
                 gutter={12}
                 outsideChevron={false}
                 chevronWidth={chevronWidth}
-                leftChevron={<button></button>}
-                rightChevron={<button></button>}
+                leftChevron={"<"}
+                rightChevron={">"}
               >
                 {image}
               </ItemsCarousel>

@@ -220,6 +220,10 @@ $remgika: #c7cda4;
         font-size: 18px;
         font-weight: 400;
         min-height: 60px;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
       }
     }
     .visite {

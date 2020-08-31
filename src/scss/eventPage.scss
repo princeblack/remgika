@@ -1,23 +1,209 @@
-.event-container{
+.event-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 80%;
+    .image {
+      width: 100%;
+      .sc-ifAKCX.geRExE.sc-EHOje.aoTUt {
+        font-size: 150px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo {
+        font-size: 150px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      img {
+        width: 100%;
+      }
+      .date {
+        display: flex;
+        p {
+          color: rgb(240, 40, 74);
+          font-size: 20px;
+          font-weight: 400;
+          letter-spacing: 1px;
+        }
+      }
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: black;
+        p{
+          word-wrap: break-word;
+          word-break: break-word;
+          overflow-wrap: break-word;
+          hyphens: auto;
+            text-align: left;
+        }
+      }
+    }
+  }
+  .participate-container{
+    border-top: black 1px solid;
+    margin-top: 15px;
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-around;
+
+    .participete{
+      margin-top: 20px;
+      padding: 10px;
+      display: flex;
+      background-color:rgb(228, 230, 235);
+      min-width: 140px;
+      max-height: 40px;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      border-radius: 8px;
+      cursor: pointer;
+      svg{
+        width: 20px;
+        height: 20px;
+      }
+      img{
+        width: 20px;
+        height: 20px;
+      }
+      p{
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: 1px;
+        line-height: 16.08px;
+      }
+    }
+    .user-participete{
+      margin-top: 20px;;
+      min-width: 100px;
+
+      .nombre{
+        width: 100%;
+        background-color: #df7575b7;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        span{
+          font-weight: bold;
+          font-size: 22px;
+        }
+      }
+      .user{
+        width: 100%;
+        background-color:rgb(228, 230, 235);
+        p{
+          font-size: 18px;
+          letter-spacing: 1px;
+          color: rgb(73, 71, 71);
+        }
+      }
+    }
+  }
+  .detail-container{
+    // position: relative;
+    width: 95%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    .address{
+      display: flex;
+      min-width: 280px;
+      max-width: 95%;
+      cursor: pointer;
+      svg{
+        width: 50px;
+        font-size: 30px;
+        color: #69ca62a6;
+      }
+      p{
+        margin-left: 10px;
+        font-size: 20px;
+        word-break: break-all;
+        color: rgb(105, 104, 104);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .map-container{
+      width: 100%;
+      margin-top: 20px;
+    
+    }
+    .time{
+      display: flex;
+      min-width: 300px;
+      width: 95%;
+      margin-top: 10px;
+      svg{
+        width: 50px;
+        font-size: 30px;
+        color: white;
+        path{
+          color: rgb(100, 93, 93);
+        }
+      }
+      p{
+        margin-left: 10px;
+        font-size: 20px;
+        word-break: break-all;
+        color: rgb(105, 104, 104);
+      }
+    }
+    .detail{
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      width: 80%;
+      min-height: 200px;
+      p{
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        // color: chocolate;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .event-container{
     width: 100%;
     .info-container{
-        width: 100%;
-        .image{
-            width: 100%;
-            .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
-                font-size:150px;
-                color: #69ca62;
-                font-weight: 600;
-                
-              }
-              .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
-                font-size: 150px;
-                color: #69ca62;
-                font-weight: 600;
-              }
-            img{
-                width: 100%;
-            }
+      .image{
+        img{
+          max-width: 600px;
         }
+      }
     }
+  }
+}
+@media only screen and (min-width: 900px) {
+  .event-container {
+    width: 100%;
+    .info-container{
+      width: 50%;
+      .image{
+        img{
+          max-width: 100%;
+        }
+      }
+    }
+    .detail-container{
+      width: 50%;
+    }
+  }
 }

@@ -27,6 +27,7 @@ const initialState = {
   eventIsUpdate: false,
   eventIsDelete: false,
   getOneEvent: [],
+  joinEvent: false,
   // COMMENT
   addComment: false,
   getComment: false,
@@ -74,6 +75,7 @@ const mainReducer = (state = initialState, action) => {
       state.isLoggedIn = true;
       state.sign = true;
       state.addGroup = false;
+      state.joinEvent = false;
       state.info = action.payload;
     }
     state.loading = false;
@@ -275,6 +277,7 @@ const mainReducer = (state = initialState, action) => {
       state.getOneEvent = [];
     } else {
       state.getOneEvent = action.payload;
+      state.joinEvent = false;
     }
     return Object.assign({}, state);
   }
@@ -310,6 +313,18 @@ const mainReducer = (state = initialState, action) => {
       state.eventIsDelete = false;
     } else {
       state.eventIsDelete = true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "JOIN_EVENT") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.joinEvent = false;
+    } else {
+      state.joinEvent = true;
     }
     return Object.assign({}, state);
   }

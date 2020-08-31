@@ -173,6 +173,10 @@ $remgika: #c7cda4;
         font-size: 18px;
         font-weight: 400;
         height: 60px;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
       }
 
       .timeItem {
@@ -193,6 +197,7 @@ $remgika: #c7cda4;
         p{
           letter-spacing: 1px;
           font-weight: 600;
+          
         }
       }
       .visite {
@@ -264,6 +269,18 @@ $remgika: #c7cda4;
   }
   .event-table{
     justify-content: center;
+    .events-item{
+      .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
+        font-size:50px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
+        font-size: 50px;
+        color: #69ca62;
+        font-weight: 400;
+      }
+    }
   }
 }
 
@@ -273,6 +290,18 @@ $remgika: #c7cda4;
   }
   .event-table{
     justify-content: center;
+    .events-item{
+      .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
+        font-size:70px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
+        font-size: 70px;
+        color: #69ca62;
+        font-weight: 400;
+      }
+    }
   }
 }
 @media (min-width: 600px) {
@@ -281,6 +310,18 @@ $remgika: #c7cda4;
   }
   .event-table{
     justify-content: flex-start;
+    .events-item{
+    .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
+      font-size:80px;
+      color: #69ca62;
+      font-weight: 600;
+    }
+    .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
+      font-size: 80px;
+      color: #69ca62;
+      font-weight: 400;
+    }
+  }
   }
 }
 
@@ -290,6 +331,18 @@ $remgika: #c7cda4;
   }
   .event-table{
     justify-content: flex-start;
+    .events-item{
+      .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
+        font-size:90px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
+        font-size: 90px;
+        color: #69ca62;
+        font-weight: 400;
+      }
+    }
   }
 }
 @media (min-width: 1092px) {
@@ -298,5 +351,17 @@ $remgika: #c7cda4;
   }
   .event-table{
     justify-content: flex-start;
+    .events-item{
+      .sc-ifAKCX.geRExE.sc-EHOje.aoTUt{
+        font-size:90px;
+        color: #69ca62;
+        font-weight: 600;
+      }
+      .sc-ifAKCX.geRExE.sc-bZQynM.dHQcjo{
+        font-size: 90px;
+        color: #69ca62;
+        font-weight: 400;
+      }
+    }
   }
 }

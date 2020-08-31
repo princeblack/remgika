@@ -9,7 +9,9 @@ import AddressInfo from "./AddressInfo";
 import { connect } from "react-redux";
 import { commentAdd, fetchComment, writerImage } from "../../actions";
 import { NavLink } from "react-router-dom";
-import { ButtonToolbar } from "reactstrap";
+import { ButtonToolbar } from "reactstrap"
+
+const online = window.navigator.onLine
 
 class Play extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class Play extends Component {
       comment: "",
     };
     this.changeActiveItem = this.changeActiveItem.bind(this);
-    this.handlePlace = this.handlePlace.bind(this);
+    // this.handlePlace = this.handlePlace.bind(this);
     this.toggleClass = this.toggleClass.bind(this);
     this.toggleCommenter = this.toggleCommenter.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -58,27 +60,28 @@ class Play extends Component {
   }
   handlePlace() {
     let userlongitude, userlatitude;
-
-    navigator.geolocation.getCurrentPosition(function (position) {
-      userlongitude = position.coords.latitude;
-      userlatitude = position.coords.longitude;
-    });
-
-    getGeocode({
-      address: this.props.data.street 
-    })
-      .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        if (lat !== null) {
-          this.setState({
-            lat: lat,
-            lng: lng,
-            userlng: userlongitude,
-            userlat: userlatitude,
-          });
-        }
+    if (online) {
+      console.log(online);
+      navigator.geolocation.getCurrentPosition(function (position) {
+        userlongitude = position.coords.latitude;
+        userlatitude = position.coords.longitude;
+      });
+      getGeocode({
+        address: this.props.data.street 
       })
-      .catch((error) => {});
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          if (lat !== null) {
+            this.setState({
+              lat: lat,
+              lng: lng,
+              userlng: userlongitude,
+              userlat: userlatitude,
+            });
+          }
+        })
+        .catch((error) => {});
+    }
   }
 
   changeActiveItem(activeItemIndex) {
@@ -144,10 +147,12 @@ class Play extends Component {
               <p className="address">{this.props.data.street}</p>
             </div>
             <div className="dictanceInfo">
-              <AddressInfo
-                google={this.props.google}
-                data={this.state}
-              ></AddressInfo>
+              {online && 
+                            <AddressInfo
+                            google={this.props.google}
+                            data={this.state}
+                          ></AddressInfo>
+              }
             </div>
           </div>
           <div className="title">
@@ -177,8 +182,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
+ export default connect(mapStateToProps, {
   commentAdd,
   fetchComment,
   writerImage,
-})(WrappedContainer);
+})(online? WrappedContainer : Play) 
+

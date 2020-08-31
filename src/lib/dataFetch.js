@@ -403,6 +403,20 @@ export const deleteEvents = async (data) => {
     return [error];
   }
 };
+export const eventParticipation = async (data) => {
+  const id = data
+  try {
+    const res = await (
+      await fetch(`${url}/events/participation/${id}`, {
+        method: "PUT",
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
 /**********************************************************
  ************************ comment **************************
  ***********************************************************/

@@ -28,7 +28,7 @@ import {
   updateEvents,
   deleteEvents,
   getOneEvent,
-
+  eventParticipation,
   // comment
 
   addComment,
@@ -278,6 +278,15 @@ export const deleteEvent = (payload) => {
     const data = await deleteEvents(payload);
     dispatch({
       type: "DELETE_EVENT",
+      payload: data,
+    });
+  };
+};
+export const handleEventParticipation = (payload) => {
+  return async (dispatch) => {
+    const data = await eventParticipation(payload);
+    dispatch({
+      type: "JOIN_EVENT",
       payload: data,
     });
   };
