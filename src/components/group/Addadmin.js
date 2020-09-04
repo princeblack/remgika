@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import avatar from "../../img/avatar.png";
 import { addToAdmin, getAllGroupMembers,urlGroupPage } from "../../actions";
+import { NavLink } from "react-router-dom";
 
 export const Addadmin = (props) => {
   const member = props.data;
@@ -28,14 +29,17 @@ export const Addadmin = (props) => {
     }
    
   }, [props.addNewAdmin])
+  const image = props.data.imgCollection[0]
   return (
     <>
       {!IamAdminUser && (
         <div className="member">
-          <img src={avatar} alt="user"></img>
+          <NavLink to={`/user/${props.data._id}`}>
+          <img src={image} alt="user"></img>
           <p>
             {member.firstName} {member.lastName}
           </p>
+          </NavLink>
           <button onClick={addAdmin}>add to admin</button>
         </div>
       )}

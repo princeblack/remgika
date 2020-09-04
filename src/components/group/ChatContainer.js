@@ -96,6 +96,7 @@ export const ChatContainer = (props) => {
       setUsertext("");
     }
   };
+  
   const ROOT_CSS = css({
     height: "50vh",
     width: "85%",

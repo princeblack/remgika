@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import avatar from "../../img/avatar.png";
 import { removeMember,getAllGroupMembers } from "../../actions";
+import { NavLink } from "react-router-dom";
 
 export const RemoveMembers = (props) => {
   const member = props.data;
@@ -17,13 +18,16 @@ export const RemoveMembers = (props) => {
         props.getAllGroupMembers(id)
     }
   }, [props.removeMembers])
+  const image = props.data.imgCollection[0]
   return (
     <>
       <div className="member">
-        <img src={avatar} alt="user"></img>
+        <NavLink to={`/user/${props.data._id}`}>
+        <img src={image} alt="user"></img>
         <p>
           {member.firstName} {member.lastName}
         </p>
+        </NavLink>
         <button onClick={removeRmbrs}>remove</button>
       </div>
     </>

@@ -288,7 +288,6 @@ $remgika: #c7cda4;
           margin-top: 20px;
           .admin_section {
             background-color: white;
-            // height: 80px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -321,8 +320,19 @@ $remgika: #c7cda4;
               display: flex;
               margin-left: 20px;
               align-items: center;
+              a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: black;
+              }
               img {
-                width: 35px;
+                margin-right: 5px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
               }
               button{
                 background-color:#d47963 ;
@@ -347,9 +357,19 @@ $remgika: #c7cda4;
               margin-left: 20px;
               align-items: center;
               padding: 5px;
-
-              img {
-                width: 35px;
+              a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: black;
+              }
+              img {                
+                  margin-right: 5px;
+                  border-radius: 50%;
+                  width: 50px;
+                  height: 50px;
+                  object-fit: cover;
               }
               button{
                 background-color:#c0d1a3 ;
@@ -374,9 +394,19 @@ $remgika: #c7cda4;
               margin-left: 20px;
               align-items: center;
               padding: 5px;
-
+              a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: black;
+              }
               img {
-                width: 35px;
+                margin-right: 5px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
               }
               button{
                 background-color: #d47963 ;
@@ -401,9 +431,19 @@ $remgika: #c7cda4;
               margin-left: 20px;
               align-items: center;
               padding: 5px;
-
+              a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: black;
+              }
               img {
-                width: 35px;
+                margin-right: 5px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
               }
               button{
                 background-color: #d47963 ;

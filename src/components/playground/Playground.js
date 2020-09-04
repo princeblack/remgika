@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import "../../scss/Playground.scss";
 import PlacesAutocomplete from "./PlacesAutocomplete";
-import {
-  fetchPlayground
-} from "../../actions";
+import { fetchPlayground } from "../../actions";
 
-class Playground extends React.Component {
+const Playground = (props) => {
+  useEffect(() => {
+    props.fetchPlayground();
+  }, []);
 
-  componentDidMount (){
-    this.props.fetchPlayground()
+  useEffect(() => {
+    const fetchData = async () => {
+      const scroll = document;
+    };
+  }, []);
+
+  const isBrowser = typeof window !== `undefined`
+
+  function getScrollPosition({ element, useWindow }) {
+    if (!isBrowser) return { x: 0, y: 0 }
+  
+    const target = element ? element.current : document.body
+    const position = target.getBoundingClientRect()
+  
+    return useWindow
+      ? { x: window.scrollX, y: window.scrollY }
+      : { x: position.left, y: position.top }
   }
-  render() { 
-    return (
-      <div className="playground">
-          <div className="serchBar">
-            <PlacesAutocomplete />
-          </div>
+ 
+
+  return (
+    <div className="playground">
+      <div className="serchBar">
+        <PlacesAutocomplete />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -28,4 +44,4 @@ const mapStateToProps = (state) => {
     addPlay: state.addPlay,
   };
 };
-export default connect(mapStateToProps,{fetchPlayground})(Playground);
+export default connect(mapStateToProps, { fetchPlayground })(Playground);

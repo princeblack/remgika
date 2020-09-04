@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import avatar from "../../img/avatar.png";
+import { NavLink } from "react-router-dom";
 import {joinGroupAccpet, urlGroupPage , getAllGroupMembers, joinGroupRefused} from '../../actions/index'
 export const NewMembers = (props) => {
   const user = props.data;
@@ -28,13 +29,17 @@ export const NewMembers = (props) => {
   const refuse = () => {
     props.joinGroupRefused(group,user._id,admin._id);
   };
+  const image = props.data.imgCollection[0]
+
   return (
     <>
       <div className="member">
-        <img src={avatar} alt="user"></img>
+        <NavLink to={`/user/${props.data._id}`}>
+        <img src={image} alt="user"></img>
         <p>
           {user.firstName} {user.lastName}
         </p>
+        </NavLink>
         <button className="accpet" onClick={accpet}>accepted</button>
         <button onClick={refuse}>decline</button>
       </div>

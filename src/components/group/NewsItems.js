@@ -1,12 +1,12 @@
 import React, {useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 // import avatar from "../../img/avatar.png";
 import "../../scss/groupNews.scss";
 import { getAllGroupNews, deleteNews } from "../../actions";
 import { GroupNewsImag } from "./GroupNewsImag";
 import moment from "moment";
-// import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
@@ -56,9 +56,11 @@ const NewsItems = (props) => {
       <div className="contenair">
         <div className="info">
           <div className="container">
-            <div className="userImage">
+          <NavLink to={`/user/${props.data.userId._id}`}>
+          <div className="userImage">
               <img id="userPicture" src={user} alt="user"></img>
             </div>
+          </NavLink>
             <strong>{date}</strong>
           </div>
           <div className="delete">

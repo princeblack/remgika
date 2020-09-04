@@ -19,6 +19,7 @@ import MainGroup  from "./group/MainGroup";
 import GroupPage  from "./group/GroupPage";
 import  EventFormular  from "./group/EventFormular";
 import  EventPage  from "./events/EventPage";
+import  UserPage  from "./dashboard/UserPage";
 
 
 class App extends React.Component {
@@ -37,11 +38,11 @@ class App extends React.Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/user/:id" component={UserPage} />
             <Route exact path="/playground" component={Playground} />
             <Route exact path="/playgroundPage/:id" component={PlayPage} />
             <Route exact path="/events" component={MainEvents} />
             <Route exact path="/eventPage/:id" component={EventPage} />
-
             <Route exact path="/addEvents" component={AddEvents} />
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route exact path="/groups" component={MainGroup} />
