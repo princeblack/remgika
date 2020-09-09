@@ -8,6 +8,11 @@ const initialState = {
   sign: false,
   info: {},
   getOneUser: {},
+  // friend user
+  friendReq: false,
+  friendAccepted: false,
+  friendRefuse : false,
+  friendIsRemove: false ,
   // user Image
   proImage: [],
   valideImg: false,
@@ -88,6 +93,10 @@ const mainReducer = (state = initialState, action) => {
   }
   if (action.type === "GET_ONE_USERS") {
     state.getOneUser = action.payload;
+    state.friendReq= false;
+    state.friendAccepted= false;
+    state.friendRefuse= false;
+    state.friendIsRemove= false;
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_LOGIN") {
@@ -126,6 +135,58 @@ const mainReducer = (state = initialState, action) => {
     state.isLoggedIn = false;
     state.sign = false;
     state.info = [];
+    return Object.assign({}, state);
+  }
+   /**********************************************************
+   ************************ friend ***********************
+   ***********************************************************/
+  if (action.type === "FRIEND_REQUEST") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.friendReq= false;
+    } else {
+      state.friendReq= true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "FRIEND_REQUEST_ACCEPTE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.friendAccepted= false;
+    } else {
+      state.friendAccepted= true;
+    }
+    return Object.assign({}, state);
+  }
+
+  if (action.type === "FRIEND_REQUEST_REFUSE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.friendRefuse= false;
+    } else {
+      state.friendRefuse= true;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "REMOVE_FRIEND") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.friendIsRemove= false;
+    } else {
+      state.friendIsRemove= true;
+    }
     return Object.assign({}, state);
   }
   /**********************************************************

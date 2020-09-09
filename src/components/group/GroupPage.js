@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { urlGroupPage, joinGroupReq } from "../../actions/index";
 import BackNav from "./BackNav";
 import "../../scss/groupeUrl.scss";
-import woman from "../../img/pro3.jpeg";
 import { faLock, faGlobeAfrica } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Menu from "./Menu";

@@ -167,7 +167,70 @@ export const handleLogOut = async (data) => {
     return [];
   }
 };
+/**********************************************************
+ ************************ Friend ***********************
+ ***********************************************************/
 
+export const friendReq = async (data) =>{
+  const id= data
+  try {
+    const res = await(
+      await fetch(`${url}/users/friend/${id}`,{
+        method: "PUT",
+        credentials: "include"
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return [error]
+  }
+}
+export const friendReqAccepte = async (data) =>{
+  const id= data
+  try {
+    
+    const res = await(
+      await fetch(`${url}/users/accepteFriend/${id}`,{
+        method: "PUT",
+        credentials: "include"
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return [error]
+  }
+}
+
+export const friendReqRefuse = async (data) =>{
+  const id= data
+  try {
+    
+    const res = await(
+      await fetch(`${url}/users/refuseFriend/${id}`,{
+        method: "PUT",
+        credentials: "include"
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return [error]
+  }
+}
+export const removeOneFriend = async (data) =>{
+  const id= data
+  try {
+    
+    const res = await(
+      await fetch(`${url}/users/removeFriend/${id}`,{
+        method: "PUT",
+        credentials: "include"
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return [error]
+  }
+}
 /**********************************************************
  ************************ PLAYGROUND ***********************
  ***********************************************************/

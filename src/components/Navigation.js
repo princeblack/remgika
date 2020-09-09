@@ -49,10 +49,13 @@ class Navigation extends Component {
                 {this.props.info.imgCollection ? (
                   <>
                     {this.props.info.imgCollection[0] !== undefined && (
-                      <img
-                      src={this.props.info.imgCollection[0]}
-                      alt="profile"
-                    ></img>
+                    <NavLink to={`/user/${this.props.info._id}`}>
+                      <div
+                    className="image"
+                    style={{ backgroundImage: `url(${this.props.info.imgCollection[0] })` }}
+                  ></div>
+                    </NavLink>
+                    
                     )}
                   </>
                 ):(

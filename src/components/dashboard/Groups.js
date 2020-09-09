@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from "react-router-dom";
 
 export const Groups = (props) => {
-    console.log(props.data);
     const image = props.data.imgCollection
     return (
         <div className="group">

@@ -8,6 +8,13 @@ import {
   signUpUsers,
   getOneUser,
 
+  // friend
+
+  friendReq,
+  friendReqAccepte,
+  friendReqRefuse,
+  removeOneFriend,
+
   //  playground 
 
   getOnePlayground,
@@ -134,6 +141,45 @@ export const logOut = (payload) => {
     dispatch({
       type: "HANDLE_LOGOUT",
       payload,
+    });
+  };
+};
+/**********************************************************
+ ************************ friend **************************
+ ***********************************************************/
+export const userFriendreq = (payload) => {
+  return async (dispatch) => {
+    const data = await friendReq(payload);
+    dispatch({
+      type: "FRIEND_REQUEST",
+      payload: data,
+    });
+  };
+};
+export const accepteFriend= (payload) => {
+  return async (dispatch) => {
+    const data = await friendReqAccepte(payload);
+    dispatch({
+      type: "FRIEND_REQUEST_ACCEPTE",
+      payload: data,
+    });
+  };
+};
+export const refuseFriend= (payload) => {
+  return async (dispatch) => {
+    const data = await friendReqRefuse(payload);
+    dispatch({
+      type: "FRIEND_REQUEST_REFUSE",
+      payload: data,
+    });
+  };
+};
+export const removeFriend= (payload) => {
+  return async (dispatch) => {
+    const data = await removeOneFriend(payload);
+    dispatch({
+      type: "REMOVE_FRIEND",
+      payload: data,
     });
   };
 };

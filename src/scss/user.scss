@@ -18,31 +18,35 @@ $remgika: #c7cda4;
 
     .firstDiv {
       width: 100%;
-      height: 150px;
+      min-height: 200px;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      border-top-right-radius:15px ;
+      border-top-right-radius: 15px;
       border-top-left-radius: 15px;
       padding-bottom: 57.098%;
     }
     .image {
-      width: 150px;
-      height: 200px;
+      width: 100%;
+      height: auto;
       position: absolute;
-      top: 70%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
-      .theUser{
-        width: 100%;
-        height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .theUser {
+        width: 150px;
+        min-height: 150px;
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
-        border-top-right-radius:15px ;
+        border-top-right-radius: 15px;
         border-top-left-radius: 15px;
         border-radius: 50%;
-        padding-bottom: 57.098%;
+        padding-bottom: 17.098%;
         border: white solid 10px;
       }
       h1 {
@@ -52,80 +56,98 @@ $remgika: #c7cda4;
     }
     .lastDiv {
       width: 100%;
-      height: 150px;
+      min-height: 200px;
       background-color: #f0f0f09c;
     }
   }
+  .user-req {
+    width: 85%;
+    margin-top: 20px;
+    .back-green {
+      height: 100px;
+      background-color: #c7cda4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      p {
+        margin-left: 15px;
+        color: white;
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+  }
 }
-.information{
+.information {
   margin-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .info-container{
+  .info-container {
     width: 85%;
     min-width: 280px;
     display: block;
-    .toggle{
+    .toggle {
       border: #627eca solid;
       display: flex;
     }
-    .info{
+    .info {
       text-align: left;
       min-width: 280px;
-      p{
+      p {
         padding: 5px;
         font-size: 18px;
         font-weight: bold;
         letter-spacing: 1px;
         min-width: 280px;
 
-        span{
+        span {
           font-size: 20px;
         }
       }
     }
   }
-  .user-group{
+  .user-group {
     width: 85%;
     min-width: 280px;
     display: block;
-    .toggle{
+    .toggle {
       border: #627eca solid;
       display: flex;
     }
-    .group{
+    .group {
       margin-top: 20px;
       min-width: 280px;
       max-width: 95%;
       display: flex;
       align-items: center;
-      border:rgba(139, 69, 19, 0.507) solid 0.5px;
+      border: rgba(139, 69, 19, 0.507) solid 0.5px;
       border-radius: 5px;
       overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-      .link{
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      .link {
         text-decoration: none;
         color: black;
         display: flex;
         min-width: 200px;
-        max-width: 95%
+        max-width: 95%;
       }
-      .firstDiv{
+      .firstDiv {
         width: 80px;
         height: 80px;
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
-        border-top-right-radius:15px ;
+        border-top-right-radius: 15px;
         border-top-left-radius: 15px;
         border-radius: 50%;
         border: rgb(226, 226, 226) solid 5px;
       }
-      .title{
+      .title {
         text-align: left;
         min-width: 200px;
         font-size: 20px;
@@ -133,9 +155,145 @@ $remgika: #c7cda4;
         font-weight: 400;
         letter-spacing: 1px;
         overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  .user-friend {
+    width: 85%;
+    min-width: 280px;
+    display: block;
+    .toggle {
+      border: #627eca solid;
+      display: flex;
+    }
+    .request {
+      width: 100%;
+      .button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+        padding: 5px;
+        cursor: pointer;
+        border-bottom: solid grey 1px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 10%;
+          object-fit: cover;
+          background-color: #c7cda4;
+        }
+        p {
+          font-size: 20px;
+          margin-left: 15px;
+          font-weight: 400;
+        }
+      }
+      .user {
+        width: 100%;
+        margin-top: 5px;
+        a {
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+
+          color: black;
+          .image {
+            min-width: 50px;
+            height: 50px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+          }
+          .name{
+            margin-left: 15px;
+            width: 120px;
+          }
+          .request-container{
+            margin-left: 15px;
+            button{
+              margin: 5px;
+              padding: 5px;
+              border: #c7cda4 solid 1px;
+              border-radius: 10%;
+              background-color: white;
+              letter-spacing: 1px;
+
+            }
+            .refuse{
+              border: #c53920 solid 1px;
+
+            }
+          }
+        }
+      }
+    }
+    .myFriend{
+      width: 100%;
+      .button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+        padding: 5px;
+        cursor: pointer;
+        border-bottom: solid grey 1px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 10%;
+          object-fit: cover;
+          background-color: #c7cda4;
+        }
+        p {
+          font-size: 20px;
+          margin-left: 15px;
+          font-weight: 400;
+        }
+      }
+      .user {
+        width: 100%;
+        margin-top: 5px;
+        a {
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          color: black;
+          .image {
+            min-width: 70px;
+            height: 70px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+          }
+          .name{
+            margin-left: 15px;
+            width: 220px;
+            p{
+              font-weight: 400;
+              letter-spacing: 1px;
+            }
+          }
+          .request-container{
+            margin-left: 15px;
+            button{
+              margin: 5px;
+              padding: 5px;
+              border-radius: 10%;
+              background-color: white;
+              letter-spacing: 1px;
+            }
+            .refuse{
+              border: #c53920 solid 1px;
+            }
+          }
+        }
       }
     }
   }
