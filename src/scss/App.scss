@@ -12,6 +12,11 @@ $remgika: #c7cda4;
     resize: none;
   }
 }
+a{
+  outline: none;
+  color: currentColor;
+  text-decoration: none;
+}
 .App {
   text-align: center;
   overflow: hidden;

@@ -105,11 +105,11 @@ const EventItems = (props) => {
             <span>Place:</span>
             <p>{data.address}</p>
           </div>
-          <div className="addressItem">
+          <div className="time">
             <span>Start:</span>
             <p>{start}</p>
           </div>
-          <div className="addressItem">
+          <div className="time">
             <span>End:</span>
             <p>{end}</p>
           </div>

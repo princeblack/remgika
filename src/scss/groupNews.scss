@@ -4,11 +4,10 @@ $remgika: #c7cda4;
 .news-contenair {
   margin-top: 15px;
   min-height: 500px;
-
   .contenair {
     background-color: white;
     margin-bottom: 10px;
-
+    border-bottom: grey 1px solid;
     .info {
       display: flex;
       justify-content: space-between;

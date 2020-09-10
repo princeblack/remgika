@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { OneUser, userFriendreq } from "../../actions";
+import { OneUser, userFriendreq ,myEvents} from "../../actions";
 import "../../scss/user.scss";
-import less from "../../img/less.svg";
+ import less from "../../img/less.svg";
 import more from "../../img/more.svg";
 import people from "../../img/people.svg";
 import person from "../../img/person.svg";
@@ -12,6 +12,8 @@ import moment from "moment";
 import { Groups } from "./Groups";
 import Friendrequest from "./Friendrequest";
 import Myfriend from "./Myfriend"
+import  ProfileEvent  from "./ProfileEvent";
+import { MutualFriend } from "./MutualFriend";
 
 export const UserPage = (props) => {
   const [state, setstate] = useState();
@@ -20,10 +22,13 @@ export const UserPage = (props) => {
   const [friend, setfriend] = useState(false);
   const [friendREq, setFriendREq] = useState(false);
   const [myFriend, setmyFriend] = useState(false);
+  const [allMyEvent, setAllMyEvent] = useState(false);
+
 
   useEffect(() => {
     const id = props.match.params.id;
     props.OneUser(id);
+    props.myEvents(id)
   }, [props.match.params.id]);
   useEffect(() => {
     if (props.getOneUser._id) {
@@ -75,6 +80,10 @@ export const UserPage = (props) => {
     const id = props.getOneUser._id;
     props.userFriendreq(id);
   };
+  const handleMyevent = (e)=>{
+    setAllMyEvent(!allMyEvent)
+    e.preventDefault();
+  }
   useEffect(() => {
     if (props.friendReq || props.friendRefuse || props.friendAccepted || props.friendIsRemove) {
       const id = props.getOneUser._id;
@@ -88,11 +97,25 @@ export const UserPage = (props) => {
       return <Friendrequest data={el} key={el._id}></Friendrequest>;
     });
   }
+  let allEvent ;
+  if (props.getOneUser._id) {
+    allEvent = props.getOneUser.event.map((el, index) => {
+      return <ProfileEvent data={el} key={el._id}></ProfileEvent>;
+    });
+  }
+  let mutuelFriend;
+  let mutual ;
+  if (props.getOneUser._id) {
+    mutuelFriend = props.getOneUser.friend.filter(user => props.info.friendId.includes(user._id))
+    mutual = mutuelFriend.map((el, index)=> {
+      return <MutualFriend data={el} key={el._id}></MutualFriend>;
+    })
+  }
   return (
     <div className="user-container">
       {props.getOneUser._id && (
         <>
-          <di className="user-Image">
+          <div className="user-Image">
             <div
               className="firstDiv"
               style={{ backgroundImage: `url(${state})` }}
@@ -107,7 +130,7 @@ export const UserPage = (props) => {
               </h1>
             </div>
             <div className="lastDiv"></div>
-          </di>
+          </div>
           {props.getOneUser._id !== props.info._id && (
             <>
               {!props.getOneUser.friendId.includes(props.info._id) && (
@@ -148,9 +171,28 @@ export const UserPage = (props) => {
                     {props.getOneUser.lastName}
                   </p>
                   <p>
-                    <span>since: </span>
+                    <span>Since: </span>
                     {create}
                   </p>
+                </div>
+              )}
+            </div>
+            <div className="event-container">
+              <div className="toggle" onClick={handleMyevent}>
+                <img src={allMyEvent ? less : more} alt="info"></img>
+                <h2> Event</h2>
+              </div>
+              {allMyEvent && (
+                <div className="info">
+                  {props.getOneUser.event.length > 0 ? (
+                    <>
+                      {allEvent}
+                    </>
+                  ):(
+                    <>  
+                      <div>No event available</div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -195,6 +237,7 @@ export const UserPage = (props) => {
                     <img src={friend ? less : more} alt="info"></img>
                     <h2> mutual friends</h2>
                   </div>
+                  {friend && mutual}
                 </>
               )}
             </div>
@@ -212,7 +255,8 @@ const mapStateToProps = (state) => ({
   info: state.info,
   friendAccepted: state.friendAccepted,
   friendRefuse: state.friendRefuse,
-  friendIsRemove : state.friendIsRemove
+  friendIsRemove : state.friendIsRemove,
+  personalEvents: state.personalEvents,
 });
 
-export default connect(mapStateToProps, { OneUser, userFriendreq })(UserPage);
+export default connect(mapStateToProps, { OneUser, userFriendreq, myEvents })(UserPage);

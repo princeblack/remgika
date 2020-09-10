@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 
 export const EventImage = (props) => {
     return (
-        <div className="image">
-            <img  src={props.data} alt="event"></img>
-        </div>
+            <div
+              className="image"
+              style={{ backgroundImage: `url(${props.data})` }}
+            ></div>
     )
 }
 

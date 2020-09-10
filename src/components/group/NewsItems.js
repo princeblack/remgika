@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const NewsItems = (props) => {
   let text = content.join("");
   const toggle = () => {
     setIsOpen(!isOpen);
-    setShow(false)
+    setShow(false);
   };
 
   if (content.length > 600) {
@@ -36,41 +36,45 @@ const NewsItems = (props) => {
   }
   const user = props.data.userId.imgCollection[0];
 
-  const handleClick = (e)=>{
+  const handleClick = (e) => {
     e.preventDefault();
-    setShow(!show)
-  }
-  const handleClickContent = (e)=>{
+    setShow(!show);
+  };
+  const handleClickContent = (e) => {
     e.preventDefault();
 
-    setShow(false)
-  }
-  const handleDelete = (e)=>{
+    setShow(false);
+  };
+  const handleDelete = (e) => {
     e.preventDefault();
-    const id = props.data._id
-    props.deleteNews(id)
-  }
+    const id = props.data._id;
+    props.deleteNews(id);
+  };
 
   return (
     <>
       <div className="contenair">
         <div className="info">
           <div className="container">
-          <NavLink to={`/user/${props.data.userId._id}`}>
-          <div className="userImage">
-              <img id="userPicture" src={user} alt="user"></img>
-            </div>
-          </NavLink>
+            <NavLink to={`/user/${props.data.userId._id}`}>
+              <div className="userImage">
+                <img id="userPicture" src={user} alt="user"></img>
+              </div>
+            </NavLink>
             <strong>{date}</strong>
           </div>
-          <div className="delete">
-            <FontAwesomeIcon icon={faEllipsisH}  onClick={handleClick}/>
-            {show && (
-              <>
-                <div className="handledelete" onClick={handleDelete}>Delete</div>
-              </>
-            )}
-          </div>
+          {props.data.userId._id === props.info._id && (
+            <div className="delete">
+              <FontAwesomeIcon icon={faEllipsisH} onClick={handleClick} />
+              {show && (
+                <>
+                  <div className="handledelete" onClick={handleDelete}>
+                    Delete
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
         <div className="content" onClick={handleClickContent}>
           <div className="text">
@@ -90,9 +94,11 @@ const NewsItems = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    deleteGroupNew : state.deleteGroupNew
+    deleteGroupNew: state.deleteGroupNew,
+    info: state.info,
   };
 };
 
-export default connect(mapStateToProps, { getAllGroupNews , deleteNews})(NewsItems);
-
+export default connect(mapStateToProps, { getAllGroupNews, deleteNews })(
+  NewsItems
+);
