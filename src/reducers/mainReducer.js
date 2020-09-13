@@ -81,6 +81,7 @@ const mainReducer = (state = initialState, action) => {
       state.sign = true;
       state.addGroup = false;
       state.joinEvent = false;
+      state.valideImg = false;
       state.info = action.payload;
     }
     state.loading = false;

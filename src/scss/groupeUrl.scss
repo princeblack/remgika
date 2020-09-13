@@ -274,10 +274,11 @@ $remgika: #c7cda4;
                   justify-content: center;
                   img {
                     width: 30%;
+                    min-width: 100px;
                     object-fit: cover;
                     border-radius: 10px;
                     padding: 10px;
-                    // height: 250px;
+                    height: 200px;
                   }
                 }
               }
@@ -639,6 +640,12 @@ $remgika: #c7cda4;
         .navMenu {
           .groupContent {
             .pageContenair {
+              .postContenair{
+                min-width: 60%;
+                max-width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+              }
               .news-contenair {
                 min-width: 50%;
                 max-width: 50%;

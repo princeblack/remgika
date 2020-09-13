@@ -5,7 +5,6 @@ import {
   fetchPlayground,
   commentAdd,
   fetchComment,
-  writerImage
 } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -147,7 +146,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   allUser,
-  writerImage,
   commentAdd,
   fetchComment,
   fetchPlayground,

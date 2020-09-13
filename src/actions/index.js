@@ -40,8 +40,6 @@ import {
 
   addComment,
   getcomment,
-  getwriterImage,
-  getWriterInfo,
   deleteComment,
 
   // group
@@ -361,25 +359,6 @@ export const fetchComment= (payload) => {
   };
 };
 
-export const writerImage = (payload) => {
-  return async (dispatch) => {
-    const data = await getwriterImage(payload);
-    dispatch({
-      type: "GET_WRITER_IMAGE",
-      payload: data,
-    });
-  };
-};
-
-export const writerInfomation = (payload) => {
-  return async (dispatch) => {
-    const data = await getWriterInfo(payload);
-    dispatch({
-      type: "GET_WRITER_INFO",
-      payload: data,
-    });
-  };
-};
 
 export const deleteCommenter = (payload) => {
   return async (dispatch) => {

@@ -3,13 +3,12 @@ import link from "../../img/link.svg";
 import unlink from "../../img/unlink.svg";
 import ItemsCarousel from "react-items-carousel";
 import PlayImage from "./PlayImage";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import {  GoogleApiWrapper } from "google-maps-react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 import AddressInfo from "./AddressInfo";
 import { connect } from "react-redux";
-import { commentAdd, fetchComment, writerImage } from "../../actions";
+import { commentAdd, fetchComment } from "../../actions";
 import { NavLink } from "react-router-dom";
-import { ButtonToolbar } from "reactstrap"
 
 const online = window.navigator.onLine
 
@@ -185,6 +184,5 @@ const mapStateToProps = (state) => {
  export default connect(mapStateToProps, {
   commentAdd,
   fetchComment,
-  writerImage,
 })(online? WrappedContainer : Play) 
 

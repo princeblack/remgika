@@ -33,7 +33,38 @@ const News = (props) => {
   });
   const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
+    const check = document.querySelector(".iAmAlert")
+    if (check) {
+      check.remove()
+    }
+    var imgBlok = document.getElementById("image-block");
+    if (imgBlok.hasChildNodes()) {
+      for (let index = 0; index < imgBlok.childNodes.length; index++) {
+        if (imgBlok.hasChildNodes()) {
+          imgBlok.removeChild(imgBlok.childNodes[index])
+          index--
+        }
+      }
+    }
     if (files.length > 4) {
+      const div = document.querySelector(".text-contenair")
+      const input = document.querySelector(".text-contenair")
+      const alert = document.createElement("div")
+      alert.className="iAmAlert";
+      alert.style.color="red";
+      alert.style.fontSize="20px"
+      alert.style.fontWeight="400"
+      alert.innerHTML="You can only choose a maximum of 4 photos"
+      div.appendChild(alert)
+      var imgBlok = document.getElementById("image-block");
+      if (imgBlok.hasChildNodes()) {
+        for (let index = 0; index < imgBlok.childNodes.length; index++) {
+          if (imgBlok.hasChildNodes()) {
+            imgBlok.removeChild(imgBlok.childNodes[index])
+            index--
+          }
+        }
+      }
       event.target.value = null; // discard selected file
       return false;
     }
@@ -46,7 +77,7 @@ const News = (props) => {
     //define message container
     let err = "";
     // list allow mime type
-    const types = ["image/png", "image/jpeg", "image/gif"];
+    const types = ["image/png", "image/jpeg",'image/jpg', "image/gif"];
     // loop access array
     for (var x = 0; x < files.length; x++) {
       // compare file type find doesn't matach
@@ -68,16 +99,6 @@ const News = (props) => {
 
   const handlefiles = (event) => {
     if (maxSelectFile(event) && checkMimeType(event)) {
-      // if return true allow to setState
-      // var output = document.getElementById("output");
-      var imgBlokremove = document.getElementById("image-block");
-      // var outputreomve = document.createElement("Img");
-
-      if (imgBlokremove.hasChildNodes() ||imgBlokremove.childNodes.length > 0 ) {
-        for (let index = 0; index <= imgBlokremove.childNodes.length; index++) {
-          imgBlokremove.removeChild(imgBlokremove.childNodes[0])
-        }
-      }
       for (let index = 0; index < event.target.files.length; index++) {
         var imgBlok = document.getElementById("image-block");
       var output = document.createElement("Img");
@@ -124,8 +145,11 @@ const News = (props) => {
     );
     var imgBlok = document.getElementById("image-block");
     if (imgBlok.hasChildNodes()) {
-      for (let index = 0; index <= imgBlok.childNodes.length; index++) {
-        imgBlok.removeChild(imgBlok.childNodes[0])
+      for (let index = 0; index < imgBlok.childNodes.length; index++) {
+        if (imgBlok.hasChildNodes()) {
+          imgBlok.removeChild(imgBlok.childNodes[index])
+          index--
+        }
       }
     }
   };
@@ -157,6 +181,7 @@ const News = (props) => {
                         className="input"
                         onChange={handlefiles}
                         multiple
+                        accept =".png, .jpg, .jpeg, .gif"
                         ref={register}
                       ></input>
                       <input

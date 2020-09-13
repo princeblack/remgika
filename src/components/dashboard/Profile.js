@@ -100,6 +100,10 @@ class Profile extends React.Component {
     if (this.state.imgCollection.length > 0) {
       this.props.profileImage(data);
     }
+    this.setState({
+      imgCollection : ""
+    })
+    
   }
   handleDeleteClick() {
     const id = this.props.proImage[0]._id;
@@ -139,7 +143,7 @@ class Profile extends React.Component {
                 {this.props.proImage.length <= 0 ? (
                   <>
                     <button onClick={() => this.fileInput.click()}>
-                      Upload profile image
+                      Update your profile image
                     </button>
                     <input
                       style={{ display: "none" }}

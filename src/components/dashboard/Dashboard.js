@@ -30,10 +30,14 @@ class Dashboard extends React.Component {
     if (this.props.isLoggedIn) {
       this.props.myPlayground();
       this.props.myEvents();
-      this.props.authorise();
+      // this.props.authorise();
     }
   }
   componentDidUpdate(prevProps) {
+    //image 
+    if (prevProps.valideImg !== this.props.valideImg) {
+      this.props.authorise();
+    }
     // playground
     if (
       prevProps.personalPlayground.length !==

@@ -69,8 +69,8 @@ export const signUpUsers = async (data) => {
 export const addProfileImage = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/images`, {
-        method: "POST",
+      await fetch(`${url}/users/userImage`, {
+        method: "PUT",
         body: data,
         credentials: "include",
       })
@@ -81,40 +81,7 @@ export const addProfileImage = async (data) => {
   }
 };
 
-export const getProfileImage = async (data) => {
-  try {
-    const res = await (
-      await fetch(`${url}/images/profileImage`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      })
-    ).json();
-    return res;
-  } catch (error) {
-    return [];
-  }
-};
 
-export const getwriterImage = async (data) => {
-  const id = data;
-  try {
-    const res = await (
-      await fetch(`${url}/images/writer/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      })
-    ).json();
-    return res;
-  } catch (error) {
-    return [error];
-  }
-};
 export const deleteProfileImage = async (data) => {
   const id = data;
   try {
