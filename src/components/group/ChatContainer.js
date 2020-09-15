@@ -22,7 +22,7 @@ export const ChatContainer = (props) => {
   var [page, setPage] = useState(0);
   let test = 1;
   const logginOut = props.isLoggedIn;
-  const ENDPOINT = "http://localhost:8000";
+  const ENDPOINT = "https://node-server.remgika.com/";
   const fullName = props.info.firstName + " " + props.info.lastName;
   const room = props.data._id;
   const user = props.info._id;
