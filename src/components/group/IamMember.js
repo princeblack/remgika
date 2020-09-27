@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { NavLink } from "react-router-dom";
 
 export const IamMember = (props) => {
-    console.log(props.data);
     const image = props.data.imgCollection
     return (
         <div className="items">

@@ -10,6 +10,7 @@ $remgika: #c7cda4;
     justify-content: start;
     flex-direction: column;
     .playgroud-item {
+      position: relative;
       border-radius: 10px;
       border: solid 2px #8d8d8c;
       width: 70%;
@@ -72,6 +73,38 @@ $remgika: #c7cda4;
           border-radius: 10px;
           &:focus {
             outline: none;
+          }
+        }
+      }
+      .option{
+        z-index: 1;
+        width: 90%;
+        height: 250px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #c0d1a3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .text{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 15px;
+          color: #000000;
+        }
+        .choice{
+          button{
+            margin: 10px;
+            outline: none;
+            border: none;
+            padding:5px;
+            cursor: pointer;
+
+          }
+          .reject{
+            background-color: #d47963;
           }
         }
       }

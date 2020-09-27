@@ -62,6 +62,13 @@ const initialState = {
   groupRefusedUser: false,
   updateGroupInfo: false,
   updateGroupPIc: false,
+
+  // articles
+  articleIsAdd : false,
+  newArticle: [],
+  allArticles: [],
+  allMatch : []
+
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -662,6 +669,37 @@ const mainReducer = (state = initialState, action) => {
     } else {
       state.updateGroupPIc = true;
     }
+    return Object.assign({}, state);
+  }
+   /**********************************************************
+   ************************ Profile iMAGES ***********************
+   ***********************************************************/
+  if(action.type === "NEW_ARTICLES"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.newArticle = [];
+      state.articleIsAdd = false;
+    }else{
+      state.newArticle = action.payload;
+      state.articleIsAdd = true;
+    }
+    return Object.assign({}, state);
+  }
+  if(action.type === "ALL_ARTICLES_CITY_OR_TITLE"){
+    state.allArticles = action.payload;
+    state.articleIsAdd = false;
+    return Object.assign({}, state);
+  }
+  if (action.type=== "ALL_ARTICLES") {
+    state.allArticles = action.payload
+    state.articleIsAdd = false;
+    return Object.assign({}, state);
+  }
+  if (action.type=== "MACTH_ARTICLE_BY_TITLE") {
+    state.allMatch = action.payload
     return Object.assign({}, state);
   }
   return state;

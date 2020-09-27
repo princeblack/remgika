@@ -120,6 +120,7 @@ $remgika: #c7cda4;
           text-align: center;
           border-radius: 2px;
           background-image: none;
+          cursor: pointer;
         }
       }
       .group-about {
@@ -174,6 +175,7 @@ $remgika: #c7cda4;
               border: 0;
               background-color: white;
               display: block;
+              cursor: pointer;
             }
           }
           div:hover {
@@ -310,6 +312,7 @@ $remgika: #c7cda4;
               border-style: solid;
               border-radius: 5px;
               margin: 5px;
+              cursor: pointer;
             }
             .focus.btn.btn-secondary {
               background-color: #69ca62;
@@ -319,7 +322,7 @@ $remgika: #c7cda4;
             background-color: white;
             margin-top: 10px;
             min-height: 500px;
-
+            position: relative;
             .admin {
               display: flex;
               margin-left: 20px;
@@ -345,8 +348,41 @@ $remgika: #c7cda4;
                 padding: 3px;
                 margin-left: 10px;
                 outline: none;
+                cursor: pointer;
                 &:focus{
                   outline: none;
+                }
+              }
+            }
+            .option{
+              z-index: 1;
+              width: 90%;
+              height: 250px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: #c0d1a3;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              .text{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+                color: #000000;
+              }
+              .choice{
+                button{
+                  margin: 10px;
+                  outline: none;
+                  border: none;
+                  padding:5px;
+                  cursor: pointer;
+
+                }
+                .reject{
+                  background-color: #d47963;
                 }
               }
             }
@@ -382,6 +418,7 @@ $remgika: #c7cda4;
                 padding: 3px;
                 margin-left: 10px;
                 outline: none;
+                cursor: pointer;
                 &:focus{
                   outline: none;
                 }
@@ -392,7 +429,7 @@ $remgika: #c7cda4;
             background-color: white;
             margin-top: 10px;
             min-height: 500px;
-
+            position: relative;
             .member{
               display: flex;
               margin-left: 20px;
@@ -419,8 +456,41 @@ $remgika: #c7cda4;
                 padding: 3px;
                 margin-left: 10px;
                 outline: none;
+                cursor: pointer;
                 &:focus{
                   outline: none;
+                }
+              }
+            }
+            .option{
+              z-index: 1;
+              width: 90%;
+              height: 250px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: #c0d1a3;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              .text{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+                color: #000000;
+              }
+              .choice{
+                button{
+                  margin: 10px;
+                  outline: none;
+                  border: none;
+                  padding:5px;
+                  cursor: pointer;
+
+                }
+                .reject{
+                  background-color: #d47963;
                 }
               }
             }
@@ -456,6 +526,7 @@ $remgika: #c7cda4;
                 padding: 3px;
                 margin-left: 10px;
                 outline: none;
+                cursor: pointer;
                 &:focus{
                   outline: none;
                 }
@@ -483,6 +554,7 @@ $remgika: #c7cda4;
               border-style: solid;
               border-radius: 5px;
               margin: 5px;
+              cursor: pointer;
             }
             .focus.btn.btn-secondary {
               background-color: #69ca62;

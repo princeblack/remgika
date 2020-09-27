@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { logOut } from "../actions/index";
 import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import remgika from "../img/remgika.png";
-import avatar from "../img/avatar.png"
+import avatar from "../img/avatar.png";
+import store from "../img/store.svg";
+
 import {
   faBars,
   faUserInjured,
@@ -13,7 +14,8 @@ import {
   faCarrot,
   faDemocrat,
   faUsers,
-  faCalendar
+  faCalendar,
+  faStore,
 } from "@fortawesome/free-solid-svg-icons";
 class Navigation extends Component {
   constructor(props) {
@@ -99,6 +101,12 @@ class Navigation extends Component {
             <NavLink activeStyle={active} to="/groups">
               <FontAwesomeIcon icon={faUsers} />
               Groups
+            </NavLink>
+          </div>
+          <div className="menu-item" onClick={this.toggleSidebar}>
+            <NavLink activeStyle={active} to="/store">
+               <FontAwesomeIcon icon={faStore} />
+              Share market
             </NavLink>
           </div>
           {isLoggedIn && (

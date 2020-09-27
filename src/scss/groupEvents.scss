@@ -122,6 +122,38 @@ $remgika: #c7cda4;
 
         }
       }
+      .option{
+        z-index: 1;
+        width: 90%;
+        height: 250px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #c0d1a3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .text{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 15px;
+          color: #000000;
+        }
+        .choice{
+          button{
+            margin: 10px;
+            outline: none;
+            border: none;
+            padding:5px;
+            cursor: pointer;
+
+          }
+          .reject{
+            background-color: #d47963;
+          }
+        }
+      }
       .ReactCollapse--collapse {
         margin-top: 10px;
         .ReactCollapse--content {

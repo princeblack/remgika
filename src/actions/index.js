@@ -64,6 +64,13 @@ import {
   joinRefused,
   updateGroupInfo,
   updateGroupPicture,
+
+  // articles
+
+  addNewArticle,
+  getAllArticles,
+  getArticlesCityOrTitle,
+  getArticleTitle
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -563,3 +570,46 @@ export const updateGroupPhoto= (payload,info) => {
     });
   };
 };
+
+/**********************************************************
+ ************************ articles **************************
+ ***********************************************************/
+
+ export const newArticle = (payload)=>{
+   return async (dispatch)=>{
+     const data = await addNewArticle(payload);
+     dispatch({
+       type: "NEW_ARTICLES",
+       payload: data
+     })
+   }
+ }
+
+//  export const allArticle = (payload) =>{
+//     return async (dispatch)=>{
+//       const data = await getAllArticles(payload);
+//       dispatch({
+//         type: "ALL_ARTICLES",
+//         payload: data
+//       })
+//     }
+//  }
+
+ export const ArticleCityAndTitle = (city,title,option,distance) =>{
+  return async (dispatch)=>{
+    const data = await getArticlesCityOrTitle(city,title,option,distance);
+    dispatch({
+      type: "ALL_ARTICLES_CITY_OR_TITLE",
+      payload: data
+    })
+  }
+}
+export const matchTitle = (title) =>{
+  return async (dispatch)=>{
+    const data = await getArticleTitle(title);
+    dispatch({
+      type: "MACTH_ARTICLE_BY_TITLE",
+      payload: data
+    })
+  }
+}

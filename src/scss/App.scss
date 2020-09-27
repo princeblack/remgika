@@ -19,7 +19,7 @@ a{
 }
 .App {
   text-align: center;
-  overflow: hidden;
+  // overflow: hidden;
   input:focus {
     outline: none;
   }
@@ -31,13 +31,22 @@ a{
   ********************* NAVIGATION HEADER ******************
   **********************************************************
   **********************************************************/
+  div.navigation-block{
+    position: sticky;
+  top: 0;
+  width: 100%;
+  min-width: 280px;
+  background-color: white;
+  z-index: 2222;
+
   #navigation {
+
+    top:10px;
     height: 110px;
     color: black;
     width: 100%;
     min-width: 280px;
     z-index: 2222;
-    top: 0;
     display: flex;
     justify-content: center;
     justify-content: space-around;
@@ -95,6 +104,7 @@ a{
       }
     }
   }
+}
   /*********************************************************
   **********************************************************
   ************************* SIDEBAR ************************

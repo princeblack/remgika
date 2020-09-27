@@ -13,6 +13,7 @@ class Myplay extends Component {
     this.state = {
       activeItemIndex: 0,
       setActiveItemIndex: 0,
+      show:false,
       title: "",
       street: "",
       postalCode: "",
@@ -27,6 +28,8 @@ class Myplay extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleClass = this.toggleClass.bind(this);
+    this.showOption = this.showOption.bind(this);
+
   }
   componentDidMount() {
     this.setState({
@@ -63,6 +66,9 @@ class Myplay extends Component {
   handleClick() {
     const id = this.props.data._id;
     this.props.deletePlay(id);
+    this.setState({
+      show: false,
+    })
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -75,6 +81,20 @@ class Myplay extends Component {
      data.delete("activeIndex", this.state.activeIndex);
     const id = this.props.data._id;
     this.props.updatePlay(data, id);
+  }
+  showOption (e){
+    e.preventDefault();
+    if (this.state.show) {
+      this.setState({
+        show: false,
+      })
+    } else {
+      this.setState({
+        show: !this.state.show,
+      })
+    }
+    
+    console.log(this.state.show);
   }
   render() {
     const chevronWidth = 40;
@@ -109,7 +129,7 @@ class Myplay extends Component {
           </div>
           <div className="description">
             <p>{this.props.data.description}</p>
-            <button onClick={this.handleClick}> Delete</button>
+            <button onClick={this.showOption}> Delete</button>
             <button
               className="updatePlay"
               onClick={this.toggleClass.bind(this, index)}
@@ -117,6 +137,17 @@ class Myplay extends Component {
               Update
             </button>
           </div>
+          {this.state.show && 
+      <div className="option">
+        <di className="text">
+          <h2>You are sure you want to remove this playground ?</h2>
+        </di>
+        <div className="choice">
+          <button onClick={this.handleClick}>Yes I am sure</button>
+          <button onClick={this.showOption} className="reject">No cancel </button>
+        </div>
+      </div>
+      }
           {/**********************************************************
            **********************************************************
            **************** UPDATE PLAYGROUND  FORM *****************

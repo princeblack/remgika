@@ -8,6 +8,7 @@ $remgika: #c7cda4;
     background-color: white;
     margin-bottom: 10px;
     border-bottom: grey 1px solid;
+    position: relative;
     .info {
       display: flex;
       justify-content: space-between;
@@ -45,8 +46,41 @@ $remgika: #c7cda4;
           left: -10px;
           padding: 2px;
           border-radius: 5px;
-
+          cursor: pointer;
           font-size: 20px;
+        }
+            
+      }
+    }
+    .option{
+      z-index: 1;
+      width: 90%;
+      height: 250px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #c0d1a3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .text{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+        color: #000000;
+      }
+      .choice{
+        button{
+          margin: 10px;
+          outline: none;
+          border: none;
+          padding:5px;
+          cursor: pointer;
+
+        }
+        .reject{
+          background-color: #d47963;
         }
       }
     }
@@ -57,9 +91,16 @@ $remgika: #c7cda4;
       padding: 10px;
       .text{
         display: flex;
-        p {
+        pre {
           text-align: left;
-          word-break: break-all;
+          // word-break: break-all;
+          overflow-x: auto;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+          // width: 100%;
           a{
             color: blue;
             font-weight: 600;

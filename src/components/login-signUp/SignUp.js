@@ -1,37 +1,105 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp, handleLogin } from "../../actions";
-import LoginHeader from "../login-signUp/LoginHeader";
+import LoginHeader from "./LoginHeader";
 import black from "../../img/black-man-phone.svg";
 import { Link } from "react-router-dom";
-import '../../scss/sign.scss'
+import "../../scss/sign.scss";
+import useOnclickOutside from "react-cool-onclickoutside";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      role: "Admin",
-      imgCollection: ""
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFiles = this.handleFiles.bind(this);
-    this.checkMimeType = this.checkMimeType.bind(this);
-    this.maxSelectFile = this.maxSelectFile.bind(this);
-  }
-  handleInputChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({
-      [name]: value
+export const SignUp = (props) => {
+    const [firstName, setFirstName] = useState("");
+    const [ lastName, setLastName] = useState("");
+    const [ email, setEmail] = useState("");
+    const [ city, setCity] = useState("");
+    const [ password, setPassword] = useState("");
+    const [ imgCollection, setImgCollection] = useState("");
+    const [ role, setRole] = useState("Admin");
+    const [location, setLocation] = useState([]);
+
+    const handleFirstName =(e)=>{
+        setFirstName(e.target.value)
+        console.log(firstName);
+    }
+    const handleLastName =(e)=>{
+        setLastName(e.target.value)
+        console.log(lastName);
+
+    }
+    const handleEmail =(e)=>{
+        setEmail(e.target.value)
+        console.log(email);
+
+    }
+    const handleCity =(e)=>{
+        setCity(e.target.value)
+        setValue(e.target.value);
+
+        console.log(city);
+
+    }
+    const handlePassword =(e)=>{
+        setPassword(e.target.value)
+        console.log(password);
+
+    }
+    const {
+      ready,
+      value,
+      suggestions: { status, data },
+      setValue,
+      clearSuggestions,
+    } = usePlacesAutocomplete({
+      requestOptions: {
+        // location: { lat: () => 43.6532, lng: () => -79.3832 },
+        // radius: 100 * 1000,
+        /* Define search scope here */
+      },
+      debounce: 200,
     });
-  }
-   maxSelectFile (event) {
+    const ref = useOnclickOutside(() => {
+      // When user clicks outside of the component, we can dismiss
+      // the searched suggestions by calling this method
+      clearSuggestions();
+    });
+    const handleSelect = ({ description }) => () => {
+      // When user selects a place, we can replace the keyword without request data from API
+      // by setting the second parameter to "false"
+      setValue(description, false);
+      setCity(description);
+      clearSuggestions();
+        // Get latitude and longitude via utility functions
+        getGeocode({ address: description })
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          setLocation([lng,lat])
+          console.log([lng,lat] ,'get info');
+        })
+        .catch((error) => {
+          console.log("😱 Error: ", error);
+        });
+    };
+  
+    const renderSuggestions = () =>
+      data.map((suggestion) => {
+        const {
+          id,
+          structured_formatting: { main_text, secondary_text},
+        } = suggestion;
+  
+        return (
+          <li key={id} onClick={handleSelect(suggestion)}>
+            <strong>{main_text}</strong> <small>{secondary_text}</small>
+          </li>
+        );
+      });
+
+  const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
     if (files.length > 1) {
       event.target.value = null; // discard selected file
@@ -39,55 +107,55 @@ class SignUp extends React.Component {
     }
     return true;
   };
-  checkMimeType (event)  {
-      //getting file object
-      let files = event.target.files;
-      //define message container
-      let err = "";
-      // list allow mime type
-      const types = ["image/png", "image/jpeg", "image/gif"];
-      // loop access array
-      for (var x = 0; x < files.length; x++) {
-        // compare file type find doesn't matach
-        // eslint-disable-next-line no-loop-func
-        if (types.every((type) => files[x].type !== type)) {
-          // create error message and assign to container
-          err += files[x].type + " is not a supported format\n";
-        }
+  const checkMimeType = (event) => {
+    //getting file object
+    let files = event.target.files;
+    //define message container
+    let err = "";
+    // list allow mime type
+    const types = ["image/png", "image/jpeg", "image/gif"];
+    // loop access array
+    for (var x = 0; x < files.length; x++) {
+      // compare file type find doesn't matach
+      // eslint-disable-next-line no-loop-func
+      if (types.every((type) => files[x].type !== type)) {
+        // create error message and assign to container
+        err += files[x].type + " is not a supported format\n";
       }
-      if (err !== "") {
-        // if message not same old that mean has error
-        event.target.value = null; // discard selected file
-        return false;
-      }
-      return true;
-    };
-  
-     handleFiles  (event)  {
-      if (this.maxSelectFile(event) && this.checkMimeType(event)) {
-        // if return true allow to setState
-        console.log(event.target.files[0]);
-        this.setState({
-          imgCollection: event.target.files[0]
-        });
-      }
-    };
-  handleSubmit(e) {
+    }
+    if (err !== "") {
+      // if message not same old that mean has error
+      event.target.value = null; // discard selected file
+      return false;
+    }
+    return true;
+  };
+
+  const handleFiles = (event) => {
+    if (maxSelectFile(event) && checkMimeType(event)) {
+      // if return true allow to setState
+      console.log(event.target.files[0]);
+    //   setState({
+    //     imgCollection: event.target.files[0],
+    //   });
+    }
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData()
-    data.append("firstName",this.state.firstName)
-    data.append("lastName",this.state.lastName)
-    data.append("email",this.state.email)
-    data.append("password",this.state.password)
-    data.append("role",this.state.role)
-    data.append("imgCollection",this.state.imgCollection)
+    const data = new FormData();
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("role", role);
+    data.append("imgCollection", imgCollection);
+    data.append("city", city);
+    data.append("location", [location[0], location[1]]);
 
-    this.props.signUp(data);
-
-  }
-  render() {
-    const isLoggedIn = this.props.isLoggedIn;
-    const sign = this.props.sign;
+    props.signUp(data);
+  };
+  const isLoggedIn = props.isLoggedIn;
+    const sign = props.sign;
     return (
       <>
         {isLoggedIn ? (
@@ -105,13 +173,13 @@ class SignUp extends React.Component {
               </div>
               <div className="sign-form">
                 <h1>SIGN UP</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
                 <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
                       type="file"
                       placeholder="Profile picture"
-                      onChange={this.handleFiles}
+                      onChange={handleFiles}
                       required
                     />
                   </div>
@@ -120,9 +188,9 @@ class SignUp extends React.Component {
                       className="input-transition"
                       name="firstName"
                       type="text"
-                      value={this.state.firstName}
+                      value={firstName}
                       placeholder="First Name"
-                      onChange={this.handleInputChange}
+                      onChange={handleFirstName}
                       id="firstName"
                       required
                     />
@@ -132,9 +200,9 @@ class SignUp extends React.Component {
                       className="input-transition"
                       name="lastName"
                       type="text"
-                      value={this.state.lastName}
+                      value={lastName}
                       placeholder="Last Name"
-                      onChange={this.handleInputChange}
+                      onChange={handleLastName}
                       id="lastName"
                       required
                     />
@@ -142,11 +210,25 @@ class SignUp extends React.Component {
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
+                      name="city"
+                      type="text"
+                      value={city}
+                      placeholder="city"
+                      onChange={handleCity}
+                      id="city"
+                      required
+                    />
+                    {/* We can use the "status" to decide whether we should display the dropdown or not */}
+                    {status === "OK" && <ul>{renderSuggestions()}</ul>}
+                  </div>
+                  <div className="row flex-revcol-left">
+                    <input
+                      className="input-transition"
                       name="email"
                       type="email"
-                      value={this.state.email}
+                      value={email}
                       placeholder="Email"
-                      onChange={this.handleInputChange}
+                      onChange={handleEmail}
                       id="email"
                       required
                     />
@@ -157,8 +239,8 @@ class SignUp extends React.Component {
                       name="password"
                       type="password"
                       placeholder="Password"
-                      value={this.state.password}
-                      onChange={this.handleInputChange}
+                      value={password}
+                      onChange={handlePassword}
                       id="password"
                       required
                     />
@@ -180,13 +262,13 @@ class SignUp extends React.Component {
         )}
       </>
     );
-  }
-}
-const mapStateToProps = state => {
-  return {
-    isLoggedIn: state.isLoggedIn,
-    sign: state.sign,
-    info: state.info
-  };
 };
-export default connect(mapStateToProps, { handleLogin, signUp })(SignUp);
+
+const mapStateToProps = (state) => ({
+    isLoggedIn : state.isLoggedIn,
+    sign : state.sign
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, {signUp})(SignUp);

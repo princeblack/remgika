@@ -16,6 +16,7 @@ class MyEvents extends Component {
     this.state = {
       activeItemIndex: 0,
       setActiveItemIndex: 0,
+      show:false,
       eventName: "",
       address: "",
       description: "",
@@ -31,6 +32,8 @@ class MyEvents extends Component {
     this.toggleClass = this.toggleClass.bind(this);
     this.handleDateStart = this.handleDateStart.bind(this);
     this.handleDateEnd = this.handleDateEnd.bind(this);
+    this.showOption = this.showOption.bind(this);
+
   }
   componentDidMount() {
     this.setState({
@@ -73,6 +76,9 @@ class MyEvents extends Component {
   handleClick() {
     const id = this.props.data._id;
     this.props.deleteEvent(id);
+    this.setState({
+      show: false,
+    })
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -84,6 +90,12 @@ class MyEvents extends Component {
     data.append("description", this.state.description);
     const id = this.props.data._id;
     this.props.updateEvent(data, id);
+  }
+   showOption (e){
+    e.preventDefault();
+    this.setState({
+      show: !this.state.show,
+    })
   }
   render() {
     const chevronWidth = 40;
@@ -102,6 +114,7 @@ class MyEvents extends Component {
     const dateEnd = moment(newEndDate);
     const start = moment(dateStart).format("dddd, MMMM D, h:mm A");
     const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
+    
     return (
       <>
         <div className="playgroud-item">
@@ -134,7 +147,7 @@ class MyEvents extends Component {
 
           <div className="description">
             <p>{this.props.data.description}</p>
-            <button onClick={this.handleClick}> Delete</button>
+            <button onClick={this.showOption}> Delete</button>
             <button
               className="updatePlay"
               onClick={this.toggleClass.bind(this, index)}
@@ -142,6 +155,17 @@ class MyEvents extends Component {
               Update
             </button>
           </div>
+          {this.state.show && 
+      <div className="option">
+        <di className="text">
+          <h2>You are sure you want to remove this event ?</h2>
+        </di>
+        <div className="choice">
+          <button onClick={this.handleClick}>Yes I am sure</button>
+          <button onClick={this.showOption} className="reject">No cancel </button>
+        </div>
+      </div>
+      }
           {/**********************************************************
            **********************************************************
            **************** UPDATE event  FORM *****************

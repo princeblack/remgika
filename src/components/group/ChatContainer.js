@@ -9,7 +9,7 @@ import io from "socket.io-client";
 import { getGroupChats } from "../../actions";
 import Chat from "./Chat";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { css } from "glamor";
+// import { css } from "glamor";
 import TextareaAutosize from 'react-autosize-textarea';
 
 let socket;
@@ -22,7 +22,9 @@ export const ChatContainer = (props) => {
   var [page, setPage] = useState(0);
   let test = 1;
   const logginOut = props.isLoggedIn;
-  const ENDPOINT = "https://node-server.remgika.com/";
+  const ENDPOINT = "http://localhost:8000";
+
+  // const ENDPOINT = "https://node-server.remgika.com/";
   const fullName = props.info.firstName + " " + props.info.lastName;
   const room = props.data._id;
   const user = props.info._id;
@@ -97,10 +99,10 @@ export const ChatContainer = (props) => {
     }
   };
   
-  const ROOT_CSS = css({
-    height: "50vh",
-    width: "85%",
-  });
+  // const ROOT_CSS = css({
+  //   height: "50vh",
+  //   width: "85%",
+  // });
   function clearEmo() {
     if (show) {
       setShow( !show) 
@@ -109,7 +111,7 @@ export const ChatContainer = (props) => {
 
   return (
     <div className="chatContainer" >
-      <ScrollToBottom className={ROOT_CSS} >
+      <ScrollToBottom >
         <div className="chatItems" onClick={clearEmo}>{allChatMessages}</div>
       </ScrollToBottom>
       <div className="input">

@@ -16,10 +16,24 @@ $remgika: #c7cda4;
       flex-direction: column;
       width: 70%;
       margin: 10px;
+      input{
+         margin-top: 10px;
+        height: 50px;
+      }
+      #img-input{
+        height: 50px;
+      }
+      textarea{
+        margin-top: 10px;
+        
+
+      }
       span {
         color: red;
       }
       select {
+        margin-top: 10px;
+
         font-size: 15px;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 

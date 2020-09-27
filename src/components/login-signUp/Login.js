@@ -6,7 +6,7 @@ import woman from "../../img/black-woman.svg";
 import LoginHeader from "./LoginHeader";
 import { Link } from "react-router-dom";
 import '../../scss/login.scss'
-
+import { withRouter } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -97,4 +97,4 @@ const mapStateToProps = state => {
   return { isLoggedIn: state.isLoggedIn, info: state.info };
 };
 
-export default connect(mapStateToProps, { handleLogin })(Login);
+export default connect(mapStateToProps, { handleLogin })(withRouter(Login));

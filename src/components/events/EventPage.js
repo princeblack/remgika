@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
+import Header from "../login-signUp/LoginHeader";
 
 export const EventPage = (props) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -125,6 +126,7 @@ export const EventPage = (props) => {
   };
   return (
     <>
+      <Header></Header>
       {props.getOneEvent._id && (
         <div className="event-container">
           <div className="info-container">

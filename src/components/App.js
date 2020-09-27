@@ -20,12 +20,17 @@ import GroupPage  from "./group/GroupPage";
 import  EventFormular  from "./group/EventFormular";
 import  EventPage  from "./events/EventPage";
 import  UserPage  from "./dashboard/UserPage";
+import StoreContainer from './store/StoreContainer';
+import NewArticle from './store/NewArticle';
+
 
 
 class App extends React.Component {
+ 
    componentDidMount() {
-    this.props.authorise();    
-  }   
+    this.props.authorise(); 
+  }  
+ 
   render() {
     const loading = this.props.loading
     return (
@@ -49,6 +54,8 @@ class App extends React.Component {
             <Route exact path="/group/:id" component={GroupPage} />
             <Route exact path="/group/:id/:name" component={GroupPage} />
             <Route exact path="/group/:id/:name/events" component={EventFormular} />
+            <Route exact path="/store" component={StoreContainer}/>
+            <Route exact path="/store/NewArticle" component={NewArticle}/>
 
             <Route path="*" component={NotFound} />
           </Switch>

@@ -1,5 +1,7 @@
-const url = "https://node-server.remgika.com";
-// const url = "http://localhost:8000";
+import { fetchComment } from "../actions";
+
+// const url = "https://node-server.remgika.com";
+const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -839,3 +841,80 @@ export const updateGroupPicture = async (data,id) => {
     return [error];
   }
 };
+
+/**********************************************************
+ ************************ articles **************************
+ ***********************************************************/
+
+ export const addNewArticle = async (data) =>{
+   try {
+     const res = await(
+       await fetch(`${url}/articles`,{
+         method: "POST",
+         body: data,
+         credentials: "include"
+       })
+     ).json()
+     return res;
+   } catch (error) {
+     return [error]
+   }
+ }
+
+ export const getAllArticles = async (data) =>{
+   try {
+     const res = await(
+       await fetch(`${url}/articles`,{
+         method: "GET",
+         headers: {
+          "Content-Type": "application/json",
+        },
+         credentials: "include"
+       })
+     ).json()
+     return res;
+   } catch (error) {
+     return[error]
+   }
+ }
+
+ export const getArticlesCityOrTitle = async (reqCity,reqTitle,reqOption, reqDistance) =>{
+  const city = reqCity;
+  const title = reqTitle;
+  const option = reqOption;
+  const distance = reqDistance
+  try {
+    const res = await(
+      await fetch(`${url}/articles/city?city=${city}&title=${title}&option=${option}&distance=${distance}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return[error]
+  }
+}
+export const getArticleTitle = async (reqTitle) =>{
+  
+  const title = reqTitle;
+  try {
+    const res = await(
+      await fetch(`${url}/articles/title?title=${title}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res;
+  } catch (error) {
+    return[error]
+  }
+}
+// ?city=${city}
+// &title=${title}

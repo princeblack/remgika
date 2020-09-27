@@ -8,7 +8,6 @@ import {
   unLikePlayground
 } from "../../actions/index";
 import ItemsCarousel from "react-items-carousel";
-import AddressInfo from "./AddressInfo";
 import PlayImage from "./PlayImage";
 import "../../scss/playgroundPlage.scss";
 import link from "../../img/link.svg";
@@ -16,11 +15,12 @@ import unlink from "../../img/unlink.svg";
 import feedback from "../../img/feedback.svg";
 import TextareaAutosize from "react-autosize-textarea";
 import Comment from "./Comment";
-
+import Header from "../login-signUp/LoginHeader";
 import place from "../../img/place.svg";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 import map from "../../img/map.svg";
+import mapStyles from "../mapStyles";
 
 export const PlayPage = (props) => {
   const [lng, setLng] = useState(null);
@@ -145,15 +145,21 @@ export const PlayPage = (props) => {
       return <Comment key={el._id} comment={el}></Comment>;
     });
   }
-  const mapStyles = {
+  const styles = {
     position: "relative",
     width: "90%",
     height: "80%",
   };
+  const options = {
+    styles: mapStyles,
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
   return (
     <>
       {props.onePlayground._id === props.match.params.id && (
-        <>
+        <> 
+          <Header></Header>
           <div className="playgroud-plage-item">
             <div className="container1">
               <div className="image">
@@ -217,13 +223,15 @@ export const PlayPage = (props) => {
                       className="map"
                       google={props.google}
                       zoom={14}
-                      style={mapStyles}
+                      style={styles}
+                      options={options}
                       initialCenter={{
                         lat: lat,
                         lng: lng,
                       }}
                     >
                       <Marker position={{ lat: lat, lng: lng }} />
+
                     </Map>
                   )}
                 </div>

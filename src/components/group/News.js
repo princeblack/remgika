@@ -114,18 +114,26 @@ const News = (props) => {
 
   const onSubmit = (e) => {
     const data = new FormData();
+    console.log(`${e.content}`);
     const id = props.data._id;
     if (e.imgCollection.length > 0) {
       for (const key of Object.keys(e.imgCollection)) {
         data.append("imgCollection", e.imgCollection[key]);
       }
     }
-    for (var key in e) {
-      data.append(key, e[key]);
-      if (e.imgCollection.length === 0) {
-        data.delete("imgCollection");
-      }
+    if (e.imgCollection.length === 0) {
+      data.delete("imgCollection");
     }
+
+    // for (var key in e) {
+    //   data.append(key, e[key]);
+    //   console.log(`${e[key]}`);
+    //   if (e.imgCollection.length === 0) {
+    //     data.delete("imgCollection");
+    //   }
+    // }
+    data.append("content", `${e.content}`);
+
     data.append("groupId", id);
     props.postNewsGroup(data);
     reset(

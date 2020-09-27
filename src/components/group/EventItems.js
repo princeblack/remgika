@@ -17,6 +17,7 @@ const EventItems = (props) => {
   const [description, setDescription] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [toggling, setToggling] = useState(false);
+  const [show, setShow]= useState(false)
 
   useEffect(() => {
     setAddress(props.data.address);
@@ -91,7 +92,9 @@ const EventItems = (props) => {
     const id = props.data._id;    
     props.updateGroupevents(data, id);
   };
-  
+  const showOption = ()=>{
+    setShow(!show)
+  }
   return (
     <div className="event-item">
       {image}
@@ -115,11 +118,22 @@ const EventItems = (props) => {
           </div>
           <div className="description">
             <p>{data.description}</p>
-            <button onClick={handlDelete}> Delete</button>
+            <button onClick={showOption}> Delete</button>
             <button className="updatePlay" onClick={() => toggleClass(index)}>
               Update
             </button>
           </div>
+          {show && 
+      <div className="option">
+        <di className="text">
+          <h2>You are sure you want to remove this event ?</h2>
+        </di>
+        <div className="choice">
+          <button onClick={handlDelete}>Yes I am sure</button>
+          <button onClick={showOption} className="reject">No cancel </button>
+        </div>
+      </div>
+      }
         </>
       )}
 
