@@ -11,7 +11,6 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import ArticleItems from "./ArticleItems";
-import ArticleSugg from "./ArticleSugg";
 
 export const StoreContainer = (props) => {
   const [city, setCity] = useState();
@@ -87,12 +86,7 @@ export const StoreContainer = (props) => {
     },
     debounce: 200,
   });
-  const ref = useOnclickOutside(() => {
-    // When user clicks outside of the component, we can dismiss
-    // the searched suggestions by calling this method
-    clearSuggestions();
-    setCity("");
-  });
+
   const handleSelect = ({ description }) => () => {
     // When user selects a place, we can replace the keyword without request data from API
     // by setting the second parameter to "false"
@@ -141,25 +135,34 @@ export const StoreContainer = (props) => {
     const items = document.getElementById("all-titles").style.display="none"
   }
 
+  const clear = (e)=>{
+    const items = document.getElementById("all-titles").style.display="none";
+    const ref =(() => {
+      // When user clicks outside of the component, we can dismiss
+      // the searched suggestions by calling this method
+      clearSuggestions();
+    });
+    ref()
+  }
+
   let titleSugg;
   if (props.allMatch) {
     titleSugg = props.allMatch.map((el, index) => {
       return <p  onClick={handleChoise}  data-user={el.title} value={el.title}  key={el._id}><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon> {el.title}</p>;
     });
-  }
-  
+  }  
   const active = { color: "#6bc477" };
   return (
-    <div className="container" ref={ref}>
+    <div className="container" onClick={clear} >
       <div className="store-article">
         <div className="new-article">
-          <NavLink activeStyle={active} to="/store/newArticle">
+          <NavLink activeStyle={active} to="/store/newArticle/store">
             <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
             <span>Create an ad</span>
           </NavLink>
         </div>
         <div className="my-article">
-          <NavLink activeStyle={active} to="/myArticle">
+          <NavLink activeStyle={active} to="/store/MyArticles/store">
             <FontAwesomeIcon icon={faUserTag}></FontAwesomeIcon>
             <span>My articles</span>
           </NavLink>

@@ -22,6 +22,8 @@ import  EventPage  from "./events/EventPage";
 import  UserPage  from "./dashboard/UserPage";
 import StoreContainer from './store/StoreContainer';
 import NewArticle from './store/NewArticle';
+import MyArticles from './store/MyArticles';
+import Articles from './store/Articles';
 
 
 
@@ -46,8 +48,11 @@ class App extends React.Component {
             <Route exact path="/user/:id" component={UserPage} />
             <Route exact path="/playground" component={Playground} />
             <Route exact path="/playgroundPage/:id" component={PlayPage} />
+            <Route exact path="/playgroundPage/:id/:name" component={PlayPage} />
             <Route exact path="/events" component={MainEvents} />
+            <Route exact path="/events/:id" component={MainEvents} />
             <Route exact path="/eventPage/:id" component={EventPage} />
+            <Route exact path="/eventPage/:id/:name" component={EventPage} />
             <Route exact path="/addEvents" component={AddEvents} />
             <Route exact path="/addplayground" component={AddPlaygroung} />
             <Route exact path="/groups" component={MainGroup} />
@@ -56,6 +61,12 @@ class App extends React.Component {
             <Route exact path="/group/:id/:name/events" component={EventFormular} />
             <Route exact path="/store" component={StoreContainer}/>
             <Route exact path="/store/NewArticle" component={NewArticle}/>
+            <Route exact path="/store/NewArticle/:id" component={NewArticle}/>
+            <Route exact path="/store/MyArticles" component={MyArticles}/>
+            <Route exact path="/store/MyArticles/:id" component={MyArticles}/>
+            <Route exact path="/Articles/:id" component={Articles}/>
+            <Route exact path="/Articles/:id/:name" component={Articles}/>
+
 
             <Route path="*" component={NotFound} />
           </Switch>

@@ -7,7 +7,7 @@ export default class Groups extends Component {
     return (
       <div className="items">
         <NavLink className="a_link-group_url"
-          to={`/group/${this.props.data._id}`}
+          to={`/group/${this.props.data._id}/groups`}
         >
         <div className="img-title">
           <img src={image} alt="avatar"></img>
@@ -20,7 +20,7 @@ export default class Groups extends Component {
         <div className="visit-button">
           <button>
             <NavLink
-              to={`/group/${this.props.data._id}`}
+              to={`/group/${this.props.data._id}/groups`}
             >
               Visit
             </NavLink>

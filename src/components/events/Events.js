@@ -122,7 +122,7 @@ class Events extends Component {
               </div>
             </div>
             <div className="visite">
-            <NavLink to={`/eventPage/${this.props.data._id}`}>
+            <NavLink to={`/eventPage/${this.props.data._id}/events`}>
               Visit
             </NavLink>
           </div>

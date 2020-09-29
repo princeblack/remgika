@@ -861,10 +861,10 @@ export const updateGroupPicture = async (data,id) => {
    }
  }
 
- export const getAllArticles = async (data) =>{
+ export const getOneArticles = async (data) =>{
    try {
      const res = await(
-       await fetch(`${url}/articles`,{
+       await fetch(`${url}/articles/${data}`,{
          method: "GET",
          headers: {
           "Content-Type": "application/json",
@@ -916,5 +916,21 @@ export const getArticleTitle = async (reqTitle) =>{
     return[error]
   }
 }
-// ?city=${city}
-// &title=${title}
+
+export const getUserArticles = async (id)=>{
+  const userid = id;
+  try {
+    const res = await(
+      await fetch(`${url}/articles/user/${userid}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res
+  } catch (error) {
+    return [error]
+  }
+}

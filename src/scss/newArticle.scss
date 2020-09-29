@@ -117,6 +117,7 @@ form {
     margin: auto;
     outline: none;
     display: block;
+    border: solid 1px;
     &:hover {
       background: $main-color;
       color: white;

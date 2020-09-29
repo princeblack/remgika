@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import "../../scss/articleItems.scss";
 import { NavLink } from "react-router-dom";
-
-export const ArticleItems = (props) => {
+export const MyArticleItems = (props) => {
   return (
-    <NavLink to={`/Articles/${props.data._id}/store`}>
+    <NavLink to={`/Articles/${props.data._id}/MyArticles`}>
       <div className="items-container">
         <div className="image">
           <img src={props.data.imgCollection[0]} alt=""></img>
@@ -17,7 +15,6 @@ export const ArticleItems = (props) => {
           <p>{props.data.title}</p>
           <span>{props.data.city}</span>
         </div>
-        <div className=""></div>
       </div>
     </NavLink>
   );
@@ -27,4 +24,4 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleItems);
+export default connect(mapStateToProps, mapDispatchToProps)(MyArticleItems);

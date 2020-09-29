@@ -159,7 +159,7 @@ export const PlayPage = (props) => {
     <>
       {props.onePlayground._id === props.match.params.id && (
         <> 
-          <Header></Header>
+          {props.match.params.name && <Header data={props.match.params.name}></Header>}
           <div className="playgroud-plage-item">
             <div className="container1">
               <div className="image">

@@ -33,7 +33,7 @@ const AddEvents = (props) => {
   }, [props.addEvents]);
   const maxSelectFile = (event) => {
     let files = event.target.files; // create file object
-    if (files.length > 3) {
+    if (files.length > 1) {
       event.target.value = null; // discard selected file
       return false;
     }
@@ -154,7 +154,6 @@ const AddEvents = (props) => {
                   name="imgCollection"
                   id="myImage"
                   onChange={handlefiles}
-                  multiple
                   ref={register({ required: true })}
                 />
                 {errors.imgCollection && <p>Images is required</p>}

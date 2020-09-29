@@ -28,8 +28,8 @@ export const NewArticle = (props) => {
   };
   const handlecity = (e) => {
     setCity(e.target.value);
-     // Update the keyword of the input element
-     setValue(e.target.value);
+    // Update the keyword of the input element
+    setValue(e.target.value);
   };
   const handledescription = (e) => {
     setDescription(`${e.target.value}`);
@@ -59,12 +59,12 @@ export const NewArticle = (props) => {
     setValue(description, false);
     setCity(description);
     clearSuggestions();
-      // Get latitude and longitude via utility functions
-      getGeocode({ address: description })
+    // Get latitude and longitude via utility functions
+    getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        setLocation([lng,lat])
-        console.log([lng,lat] ,'get info');
+        setLocation([lng, lat]);
+        console.log([lng, lat], "get info");
       })
       .catch((error) => {
         console.log("😱 Error: ", error);
@@ -75,7 +75,7 @@ export const NewArticle = (props) => {
     data.map((suggestion) => {
       const {
         id,
-        structured_formatting: { main_text, secondary_text},
+        structured_formatting: { main_text, secondary_text },
       } = suggestion;
 
       return (
@@ -110,113 +110,130 @@ export const NewArticle = (props) => {
     if (
       productName !== undefined &&
       city !== undefined &&
-      description !== undefined && files !== undefined
+      description !== undefined &&
+      files !== undefined
     ) {
-        const data = new FormData();
+      const data = new FormData();
 
       data.append("title", productName);
-      data.append("prixOption", option );
+      data.append("prixOption", option);
       data.append("city", value);
       data.append("location", [location[0], location[1]]);
       data.append("description", `${description}`);
       for (const key in Object.keys(files)) {
-              const element = files[key];
-              data.append("imgCollection", element);
+        const element = files[key];
+        data.append("imgCollection", element);
       }
-      props.newArticle(data)
-
+      props.newArticle(data);
     }
   };
   useEffect(() => {
-      if (props.articleIsAdd) {
-        setProductName('')
-        setCity('')
-        setFiles('')
-        setDescription('')
-        setValue('')
-        const image = document.getElementById("image");
-    if (image.hasChildNodes()) {
-      for (let index = 0; index < image.childNodes.length; index++) {
-        if (image.hasChildNodes()) {
-          image.removeChild(image.childNodes[index]);
-          index--;
+    if (props.articleIsAdd) {
+      setProductName("");
+      setCity("");
+      setFiles("");
+      setDescription("");
+      setValue("");
+      const image = document.getElementById("image");
+      if (image.hasChildNodes()) {
+        for (let index = 0; index < image.childNodes.length; index++) {
+          if (image.hasChildNodes()) {
+            image.removeChild(image.childNodes[index]);
+            index--;
+          }
         }
       }
     }
-      }
-  }, [props.articleIsAdd])
+  }, [props.articleIsAdd]);
 
   const inputRef = useRef();
   return (
     <div className="article-box">
-      <BackNav></BackNav>
-      <form>
-        <div>
-          <FontAwesomeIcon
-            className="image-upload"
-            icon={faImage}
-            onClick={() => {
-              inputRef.current.click();
-            }}
-          ></FontAwesomeIcon>
-          <input
-            style={{ display: "none" }}
-            ref={inputRef}
-            type="file"
-            multiple
-            onChange={handleFiles}
-          ></input>
-          <div id="image"></div>
+      {props.match.params.id && 
+            <BackNav data={props.match.params.id}></BackNav>
+      }
+      {props.isLoggedIn ? (
+        <form>
+          <div>
+            <FontAwesomeIcon
+              className="image-upload"
+              icon={faImage}
+              onClick={() => {
+                inputRef.current.click();
+              }}
+            ></FontAwesomeIcon>
+            <input
+              style={{ display: "none" }}
+              ref={inputRef}
+              type="file"
+              multiple
+              onChange={handleFiles}
+            ></input>
+            <div id="image"></div>
+          </div>
+          <div>
+            <input
+              className=" input-transition"
+              placeholder="Product Name"
+              onChange={handleName}
+              value={productName}
+            ></input>
+          </div>
+          <div className=" ">
+            <select
+              id="browsers"
+              className=" input-transition"
+              onChange={handleoption}
+              value={option}
+            >
+              <option>Free</option>
+              <option>Exchange</option>
+              <option value="Looking">Looking for</option>
+            </select>
+          </div>
+          <div className="city">
+            <input
+              className=" input-transition"
+              placeholder="City"
+              onChange={handlecity}
+              disabled={!ready}
+              value={value}
+            ></input>
+            {/* We can use the "status" to decide whether we should display the dropdown or not */}
+            {status === "OK" && <ul>{renderSuggestions()}</ul>}
+          </div>
+          <div className="">
+            <TextareaAutosize
+              className=" input-transition"
+              placeholder="Product Description"
+              rows="5"
+              onChange={handledescription}
+              value={description}
+            ></TextareaAutosize>
+          </div>
+          <div className="">
+            <input
+              type="submit"
+              className="login-submit"
+              onClick={handleSubmit}
+            ></input>
+          </div>
+        </form>
+      ) : (
+        <div className="log-container">
+          <p>Please you must log in to continue </p>
         </div>
-        <div>
-          <input
-            className=" input-transition"
-            placeholder="Product Name"
-            onChange={handleName}
-            value={productName}
-          ></input>
-        </div>
-        <div className=" ">
-          <select  id="browsers" className=" input-transition" onChange={handleoption} value={option}>
-            <option>Free</option>
-            <option>Exchange</option>
-            <option value="Looking">Looking for</option>
-          </select>
-        </div>
-        <div className="city">
-          <input
-            className=" input-transition"
-            placeholder="City"
-            onChange={handlecity}
-            disabled={!ready}
-            value={value}
-
-          ></input>
-          {/* We can use the "status" to decide whether we should display the dropdown or not */}
-          {status === "OK" && <ul>{renderSuggestions()}</ul>}
-        </div>
-        <div className="">
-          <TextareaAutosize
-            className=" input-transition"
-            placeholder="Product Description"
-            rows="5"
-            onChange={handledescription}
-            value={description}
-          ></TextareaAutosize>
-        </div>
-        <div className="">
-          <input type="submit" className="login-submit" onClick={handleSubmit}></input>
-        </div>
-      </form>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-    articleIsAdd: state.articleIsAdd,
-    allArticles: state.allArticles
+  articleIsAdd: state.articleIsAdd,
+  allArticles: state.allArticles,
+  isLoggedIn: state.isLoggedIn,
 });
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, {newArticle})(NewArticle);
+export default connect(mapStateToProps, { newArticle })(NewArticle);

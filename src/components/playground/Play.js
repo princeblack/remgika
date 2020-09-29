@@ -60,7 +60,6 @@ class Play extends Component {
   handlePlace() {
     let userlongitude, userlatitude;
     if (online) {
-      console.log(online);
       navigator.geolocation.getCurrentPosition(function (position) {
         userlongitude = position.coords.latitude;
         userlatitude = position.coords.longitude;
@@ -158,7 +157,7 @@ class Play extends Component {
             <h3>{this.props.data.title}</h3>
           </div>
           <div className="visite">
-            <NavLink to={`/playgroundPage/${this.props.data._id}`}>
+            <NavLink to={`/playgroundPage/${this.props.data._id}/playground`}>
               Visit
             </NavLink>
           </div>

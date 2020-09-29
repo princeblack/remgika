@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Groups from "./Groups";
 import AddGroup from "./AddGroup";
 import { OneUser } from "../../actions";
-import IamMember  from "./IamMember";
+import IamMember from "./IamMember";
 
 class GroupsMenu extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class GroupsMenu extends Component {
       this.props.OneUser(id)
     }
   }
-  
+
   handleDiscover(e) {
     e.preventDefault();
     this.setState((state) => ({
@@ -87,16 +87,16 @@ class GroupsMenu extends Component {
         );
       });
     }
-    
+
     let memberGroup;
     if (this.props.getOneUser.group) {
-      memberGroup = this.props.getOneUser.group.map((el,index)=>{
-      return(
-      <IamMember data={el} key={el._id}></IamMember>
-      )
+      memberGroup = this.props.getOneUser.group.map((el, index) => {
+        return (
+          <IamMember data={el} key={el._id}></IamMember>
+        )
       })
     }
-    
+
     // console.log(this.props.allPublicGroup[Math.floor(Math.random()*this.props.allPublicGroup.length)]);
     return (
       <>
@@ -115,15 +115,15 @@ class GroupsMenu extends Component {
             )}
           </>
           <>{!handleGroups && <>
-          <div className="sugges">You are members in these groups</div>
-          <div className="group-table">{memberGroup}</div>
+            <div className="sugges">You are members in these groups</div>
+            <div className="group-table">{memberGroup}</div>
           </>}</>
           <>
-          
-          {!handleAdds && <>
-            <div className="sugges">Create a new group</div>
-           <AddGroup></AddGroup> 
-          </>}</>
+
+            {!handleAdds && <>
+              <div className="sugges">Create a new group</div>
+              <AddGroup></AddGroup>
+            </>}</>
         </div>
       </>
     );
@@ -133,9 +133,9 @@ class GroupsMenu extends Component {
 const mapStateToProps = (state) => {
   return {
     allPublicGroup: state.allPublicGroup,
-    info:  state.info,
-    getOneUser : state.getOneUser
+    info: state.info,
+    getOneUser: state.getOneUser
   };
 };
 
-export default connect(mapStateToProps,{OneUser})(GroupsMenu);
+export default connect(mapStateToProps, { OneUser })(GroupsMenu);

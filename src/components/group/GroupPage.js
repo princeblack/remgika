@@ -53,11 +53,14 @@ const [isTrue,setIsTrue] = useState(false);
   }
   
   const image = data.imgCollection;
+
   return (
     <>
       {redirect && <Redirect to="/login"></Redirect>}
       <div className="groupePage">
-        <BackNav></BackNav>
+        {props.match.params.name && 
+        <BackNav data={props.match.params.name}></BackNav>
+        }
         {data._id && (
           <div className="info">
             <div className="groupPictur-info">

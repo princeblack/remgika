@@ -31,8 +31,6 @@ export const EventPage = (props) => {
     props.fetchOneEvents(id);
   }, [props.match.params.id]);
 
-
-
   let image;
   if (props.getOneEvent._id) {
     image = props.getOneEvent.imgCollection.map((el, index) => {
@@ -62,35 +60,8 @@ export const EventPage = (props) => {
   }, [props.joinEvent]);
 
   const userId = props.info._id;
-  useEffect(() => {
-    // if (props.getOneEvent._id === props.match.params.id) {
-    //   const handlePlace = () => {
-    //     let userlongitude, userlatitude;
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-    //       userlongitude = position.coords.latitude;
-    //       userlatitude = position.coords.longitude;
-    //     });
-    //     if (props.getOneEvent.address) {
-    //       getGeocode({
-    //         address: props.getOneEvent.address,
-    //       })
-    //         .then((results) => getLatLng(results[0]))
-    //         .then(({ lat, lng }) => {
-    //           if (lat !== null) {
-    //             setLng(lng);
-    //             setLat(lat);
-    //             setUserlng(userlongitude);
-    //             setUserlat(userlatitude);
-    //           }
-    //         })
-    //         .catch((error) => {});
-    //     }
-    //   };
-    //   handlePlace();
-    // }
-  }, [props]);
-  const handleMapToggle = (e)=>{
-    e.preventDefault()
+  const handleMapToggle = (e) => {
+    e.preventDefault();
     if (props.getOneEvent._id === props.match.params.id) {
       const handlePlace = () => {
         let userlongitude, userlatitude;
@@ -116,8 +87,8 @@ export const EventPage = (props) => {
       };
       handlePlace();
     }
-    setShowMap(!showMap)
-  }
+    setShowMap(!showMap);
+  };
 
   const mapStyles = {
     position: "relative",
@@ -126,7 +97,8 @@ export const EventPage = (props) => {
   };
   return (
     <>
-      <Header></Header>
+      {props.match.params.name && <Header data={props.match.params.name}></Header>}
+
       {props.getOneEvent._id && (
         <div className="event-container">
           <div className="info-container">
@@ -184,23 +156,23 @@ export const EventPage = (props) => {
               <p> {props.getOneEvent.address} </p>
             </div>
             {showMap && (
-                <div className="map-container">
-                  {lat !== null && (
-                    <Map
-                      className="map"
-                      google={props.google}
-                      zoom={14}
-                      // style={mapStyles}
-                      initialCenter={{
-                        lat: lat,
-                        lng: lng,
-                      }}
-                    >
-                      <Marker position={{ lat: lat, lng: lng }} />
-                    </Map>
-                  )}
-                </div>
-              )}
+              <div className="map-container">
+                {lat !== null && (
+                  <Map
+                    className="map"
+                    google={props.google}
+                    zoom={14}
+                    // style={mapStyles}
+                    initialCenter={{
+                      lat: lat,
+                      lng: lng,
+                    }}
+                  >
+                    <Marker position={{ lat: lat, lng: lng }} />
+                  </Map>
+                )}
+              </div>
+            )}
             <div className="time">
               <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
               <p>

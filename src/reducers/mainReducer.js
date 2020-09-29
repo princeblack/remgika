@@ -67,7 +67,9 @@ const initialState = {
   articleIsAdd : false,
   newArticle: [],
   allArticles: [],
-  allMatch : []
+  allMatch : [],
+  userArticle : [],
+  oneArticleItme : []
 
 };
 
@@ -693,14 +695,18 @@ const mainReducer = (state = initialState, action) => {
     state.articleIsAdd = false;
     return Object.assign({}, state);
   }
-  if (action.type=== "ALL_ARTICLES") {
-    state.allArticles = action.payload
+  if (action.type=== "ONE_ARTICLES") {
+    state.oneArticleItme = action.payload
     state.articleIsAdd = false;
     return Object.assign({}, state);
   }
   if (action.type=== "MACTH_ARTICLE_BY_TITLE") {
     state.allMatch = action.payload
     return Object.assign({}, state);
+  }
+  if (action.type === "GET_USER_ARTICLES") {
+    state.userArticle = action.payload
+    return Object.assign({},state)
   }
   return state;
 };
