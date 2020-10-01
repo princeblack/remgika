@@ -11,7 +11,6 @@ export const MyArticles = (props) => {
       props.UserArticles(id);
     }
   }, [props.info]);
-  console.log(props);
   let artitlesArray;
   if (props.userArticle) {
     artitlesArray = props.userArticle.map((el, index) => {

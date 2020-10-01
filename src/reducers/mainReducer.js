@@ -69,8 +69,10 @@ const initialState = {
   allArticles: [],
   allMatch : [],
   userArticle : [],
-  oneArticleItme : []
-
+  oneArticleItme : [],
+  articleIsUpdate : false,
+  articleIssave : false,
+  articleIsDelete : false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -690,14 +692,42 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
+  if(action.type === "UPDATE_ARTICLES"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.articleIsUpdate = false;
+    }else{
+      state.articleIsUpdate = true;
+    }
+    return Object.assign({}, state);
+  }
+  if(action.type === "SAVE_ARTICLES"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.articleIssave = false;
+    }else{
+      state.articleIssave = true;
+    }
+    return Object.assign({}, state);
+  }
   if(action.type === "ALL_ARTICLES_CITY_OR_TITLE"){
     state.allArticles = action.payload;
     state.articleIsAdd = false;
+    state.articleIsDelete = false;
+
     return Object.assign({}, state);
   }
   if (action.type=== "ONE_ARTICLES") {
     state.oneArticleItme = action.payload
     state.articleIsAdd = false;
+    state.articleIsUpdate = false;
+    state.articleIssave = false;
     return Object.assign({}, state);
   }
   if (action.type=== "MACTH_ARTICLE_BY_TITLE") {
@@ -707,6 +737,18 @@ const mainReducer = (state = initialState, action) => {
   if (action.type === "GET_USER_ARTICLES") {
     state.userArticle = action.payload
     return Object.assign({},state)
+  }
+  if(action.type === "DELETE_ARTICLES"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.articleIsDelete = false;
+    }else{
+      state.articleIsDelete = true;
+    }
+    return Object.assign({}, state);
   }
   return state;
 };

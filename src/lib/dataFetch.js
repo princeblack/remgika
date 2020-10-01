@@ -860,7 +860,36 @@ export const updateGroupPicture = async (data,id) => {
      return [error]
    }
  }
-
+ export const updateArticles = async (newdata,articleId) => {
+   const data = newdata;
+   const id = articleId;
+  try {
+    const res = await (
+      await fetch(`${url}/articles/${id}`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+export const SaveArticles = async (articleId) => {
+  const id = articleId;
+ try {
+   const res = await (
+     await fetch(`${url}/articles/save/${id}`, {
+       method: "PUT",
+       credentials: "include",
+     })
+   ).json();
+   return res;
+ } catch (error) {
+   return [error];
+ }
+};
  export const getOneArticles = async (data) =>{
    try {
      const res = await(
@@ -934,3 +963,21 @@ export const getUserArticles = async (id)=>{
     return [error]
   }
 }
+
+export const deleteArticles = async (articleId) => {
+  const id = articleId;
+ try {
+   const res = await (
+     await fetch(`${url}/articles/${id}`, {
+       method: "DELETE",
+       headers: {
+        "Content-Type": "application/json",
+      },
+       credentials: "include",
+     })
+   ).json();
+   return res;
+ } catch (error) {
+   return [error];
+ }
+};

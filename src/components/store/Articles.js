@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import { oneArticle } from "../../actions";
+import { oneArticle, updateOneArticle, saveOneArticles, deleteOneArticles } from "../../actions";
 import BackNav from "../group/BackNav";
+import {Link , NavLink, Redirect} from "react-router-dom"
 import ItemsCarousel from "react-items-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
@@ -18,10 +19,11 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+
 export const Articles = (props) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [showUpdate, setShowUpdate] = useState(false);
-
+  const [state, setstate] = useState(false)
   const chevronWidth = 40;
 
   useEffect(() => {
@@ -30,36 +32,51 @@ export const Articles = (props) => {
       props.oneArticle(id);
     }
   }, [props.match.params.id]);
+
   let image;
   if (props.oneArticleItme.imgCollection) {
     image = props.oneArticleItme.imgCollection.map((el, index) => {
       return <img src={el} key={index} alt=""></img>;
     });
   }
-  const handleUpdate = (e) => {
-    setShowUpdate(!showUpdate);
-  };
+  
   const [files, setFiles] = useState(undefined);
   const [productName, setProductName] = useState(undefined);
   const [option, setOption] = useState("Free");
   const [city, setCity] = useState(undefined);
   const [description, setDescription] = useState(undefined);
   const [location, setLocation] = useState([]);
-//   console.log(files);
-//   console.log(productName);
-//   console.log(option);
-//   console.log(city);
-//   console.log(description);
-//   console.log(location);
+
   useEffect(() => {
-     if (props.oneArticleItme.city) {
-        setProductName(props.oneArticleItme.title)
-        setOption(props.oneArticleItme.prixOption)
-        setCity(props.oneArticleItme.city)
-        console.log(props.oneArticleItme.city);
-        setDescription(props.oneArticleItme.description)
+     if (props.articleIsUpdate) {
+        const id = props.match.params.id;
+        props.oneArticle(id);
+        setShowUpdate(!showUpdate);
      }
-  }, [props.match.params.id,props.oneArticleItme])
+  }, [props.articleIsUpdate])
+
+  useEffect(() => {
+    if (props.articleIssave) {
+       const id = props.match.params.id;
+       props.oneArticle(id);
+    }
+ }, [props.articleIssave])
+  const handleUpdate = (e) => {
+    setShowUpdate(!showUpdate);
+    if (props.oneArticleItme.city) {
+        setProductName(props.oneArticleItme.title);
+        setOption(props.oneArticleItme.prixOption);
+        setCity(props.oneArticleItme.city);
+        setDescription(props.oneArticleItme.description);
+        setValue(props.oneArticleItme.city);
+        handleSelect(props.oneArticleItme.city)
+      }
+  };
+  
+  const handlesave = (e)=>{
+    const id = props.match.params.id;
+    props.saveOneArticles(id)
+  }
   const handleName = (e) => {
     setProductName(`${e.target.value}`);
   };
@@ -71,9 +88,18 @@ export const Articles = (props) => {
     // Update the keyword of the input element
     setValue(e.target.value);
   };
+
   const handledescription = (e) => {
     setDescription(`${e.target.value}`);
   };
+
+  const handleDelete = ()=>{
+    const id = props.match.params.id;
+    props.deleteOneArticles(id)
+  }
+  const handleConfirmation = (e)=>{
+      setstate(!state)
+}
   const {
     ready,
     value,
@@ -81,18 +107,16 @@ export const Articles = (props) => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete({
-    requestOptions: {
-      // location: { lat: () => 43.6532, lng: () => -79.3832 },
-      // radius: 100 * 1000,
-      /* Define search scope here */
-    },
+    requestOptions: {},
     debounce: 200,
   });
+
   const ref = useOnclickOutside(() => {
     // When user clicks outside of the component, we can dismiss
     // the searched suggestions by calling this method
     clearSuggestions();
   });
+
   const handleSelect = ({ description }) => () => {
     // When user selects a place, we can replace the keyword without request data from API
     // by setting the second parameter to "false"
@@ -104,10 +128,8 @@ export const Articles = (props) => {
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         setLocation([lng, lat]);
-        console.log([lng, lat], "get info");
       })
       .catch((error) => {
-        console.log("😱 Error: ", error);
       });
   };
 
@@ -117,13 +139,13 @@ export const Articles = (props) => {
         id,
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
-
       return (
         <li key={id} onClick={handleSelect(suggestion)}>
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
     });
+
   const handleFiles = (e) => {
     e.preventDefault();
     const image = document.getElementById("image");
@@ -147,30 +169,26 @@ export const Articles = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      productName !== undefined &&
-      city !== undefined &&
-      description !== undefined &&
-      files !== undefined
-    ) {
-      const data = new FormData();
-
-      data.append("title", productName);
-      data.append("prixOption", option);
-      data.append("city", value);
-      data.append("location", [location[0], location[1]]);
-      data.append("description", `${description}`);
+    const data = new FormData();
+    data.append("title", productName);
+    data.append("prixOption", option);
+    data.append("city", value);
+    data.append("location", [location[0], location[1]]);
+    data.append("description", `${description}`);
+    if (files) {
       for (const key in Object.keys(files)) {
         const element = files[key];
         data.append("imgCollection", element);
       }
-      props.newArticle(data);
     }
+    const id = props.oneArticleItme._id;
+    props.updateOneArticle(data, id);
   };
-  const inputRef = useRef();
 
+  const inputRef = useRef();
   return (
     <div className="articles-container">
+        {props.articleIsDelete && (<Redirect to="/store"></Redirect>)}
       {props.match.params.name && (
         <BackNav data={props.match.params.name}></BackNav>
       )}
@@ -209,8 +227,8 @@ export const Articles = (props) => {
                     <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
                     Update
                   </button>
-                  <button className="delete">
-                    <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+                  <button className="delete" onClick={handleConfirmation}>
+                    <FontAwesomeIcon icon={faTrashAlt} ></FontAwesomeIcon>
                     Delete
                   </button>
                 </div>
@@ -218,14 +236,29 @@ export const Articles = (props) => {
             ) : (
               <>
                 <div className="save-message">
-                  <button className="save">
-                    <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
-                    Save
-                  </button>
-                  <button className="message">
-                    <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
-                    Message
-                  </button>
+                {props.oneArticleItme._id &&
+                    (props.oneArticleItme.articlesSave.includes(
+                      props.info._id
+                    ) ? (
+                      <>
+                        <button className="save" onClick={handlesave}>
+                          <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="save" onClick={handlesave}>
+                          <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
+                          Save
+                        </button>
+                      </>
+                    ))}
+                    <button className="message">
+                          <FontAwesomeIcon
+                            icon={faPaperPlane}
+                          ></FontAwesomeIcon>
+                          Message
+                        </button>
                 </div>
               </>
             )}
@@ -233,6 +266,15 @@ export const Articles = (props) => {
           <div className="descri">
             <pre>{`${props.oneArticleItme.description}`}</pre>
           </div>
+          {state && (
+              <>
+                <div className="delete-confi">
+                    <h2>Do you really want to delete this article?</h2>
+                    <button className="yes-confi" onClick={handleDelete}>Yes</button>
+                    <button className="no-confi" onClick={handleConfirmation}>No</button>
+                </div>
+              </>
+          )}
           {showUpdate && (
             <>
               <div className="updatecontainer">
@@ -260,6 +302,7 @@ export const Articles = (props) => {
                       placeholder="Product Name"
                       onChange={handleName}
                       value={productName}
+                      required
                     ></input>
                   </div>
                   <div className=" ">
@@ -268,6 +311,7 @@ export const Articles = (props) => {
                       className=" input-transition"
                       onChange={handleoption}
                       defaultValue={option}
+                      required
                     >
                       <option>Free</option>
                       <option>Exchange</option>
@@ -281,6 +325,7 @@ export const Articles = (props) => {
                       onChange={handlecity}
                       disabled={!ready}
                       value={city}
+                      required
                     ></input>
                     {/* We can use the "status" to decide whether we should display the dropdown or not */}
                     {status === "OK" && <ul>{renderSuggestions()}</ul>}
@@ -292,6 +337,7 @@ export const Articles = (props) => {
                       rows="5"
                       onChange={handledescription}
                       value={`${description}`}
+                      required
                     ></TextareaAutosize>
                   </div>
                   <div className="">
@@ -302,7 +348,9 @@ export const Articles = (props) => {
                     ></input>
                   </div>
                 </form>
-                <button className="cancel"onClick={handleUpdate} >Cancel</button>
+                <button className="cancel" onClick={handleUpdate}>
+                  Cancel
+                </button>
               </div>
             </>
           )}
@@ -315,6 +363,12 @@ export const Articles = (props) => {
 const mapStateToProps = (state) => ({
   oneArticleItme: state.oneArticleItme,
   info: state.info,
+  articleIsUpdate: state.articleIsUpdate,
+  articleIssave : state.articleIssave,
+  articleIsDelete : state.articleIsDelete
+
 });
 
-export default connect(mapStateToProps, { oneArticle })(Articles);
+export default connect(mapStateToProps, { oneArticle, updateOneArticle, saveOneArticles, deleteOneArticles })(
+  Articles
+);

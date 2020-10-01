@@ -71,7 +71,10 @@ import {
   getOneArticles,
   getArticlesCityOrTitle,
   getArticleTitle,
-  getUserArticles
+  getUserArticles,
+  updateArticles,
+  SaveArticles,
+  deleteArticles
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -585,6 +588,15 @@ export const updateGroupPhoto= (payload,info) => {
      })
    }
  }
+ export const updateOneArticle = (payload,id)=>{
+  return async (dispatch)=>{
+    const data = await updateArticles(payload,id);
+    dispatch({
+      type: "UPDATE_ARTICLES",
+      payload: data
+    })
+  }
+}
 
  export const oneArticle = (payload) =>{
     return async (dispatch)=>{
@@ -620,6 +632,26 @@ export const UserArticles = (id)=>{
     const data = await getUserArticles(id);
     dispatch({
       type: "GET_USER_ARTICLES",
+      payload: data
+    })
+  }
+}
+
+export const saveOneArticles = (id)=>{
+  return async (dispatch)=>{
+    const data = await SaveArticles(id);
+    dispatch({
+      type: "SAVE_ARTICLES",
+      payload: data
+    })
+  }
+}
+
+export const deleteOneArticles = (id)=>{
+  return async (dispatch)=>{
+    const data = await deleteArticles(id);
+    dispatch({
+      type: "DELETE_ARTICLES",
       payload: data
     })
   }

@@ -162,7 +162,7 @@ export const StoreContainer = (props) => {
           </NavLink>
         </div>
         <div className="my-article">
-          <NavLink activeStyle={active} to="/store/MyArticles/store">
+          <NavLink activeStyle={active} to="/MyArticles/store">
             <FontAwesomeIcon icon={faUserTag}></FontAwesomeIcon>
             <span>My articles</span>
           </NavLink>
@@ -211,7 +211,7 @@ export const StoreContainer = (props) => {
           </div>
         </div>
         <div className="articles-box">
-          <div className="articles-items">{artitlesArray}</div>
+          <div className="articles-items">{props.allArticles && artitlesArray}</div>
         </div>
       </div>
     </div>

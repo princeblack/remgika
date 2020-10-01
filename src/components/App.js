@@ -62,8 +62,8 @@ class App extends React.Component {
             <Route exact path="/store" component={StoreContainer}/>
             <Route exact path="/store/NewArticle" component={NewArticle}/>
             <Route exact path="/store/NewArticle/:id" component={NewArticle}/>
-            <Route exact path="/store/MyArticles" component={MyArticles}/>
-            <Route exact path="/store/MyArticles/:id" component={MyArticles}/>
+            <Route exact path="/MyArticles" component={MyArticles}/>
+            <Route exact path="/MyArticles/:id" component={MyArticles}/>
             <Route exact path="/Articles/:id" component={Articles}/>
             <Route exact path="/Articles/:id/:name" component={Articles}/>
 
