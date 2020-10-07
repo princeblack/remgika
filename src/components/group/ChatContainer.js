@@ -145,10 +145,10 @@ export const ChatContainer = (props) => {
             emoji="point_up"
             skin="5"
             i18n={{
-              search: "Recherche",
+              search: "Research",
               categories: {
-                search: "Résultats de recherche",
-                recent: "Récents",
+                search: "Search results",
+                recent: "Recent",
               },
             }}
           />

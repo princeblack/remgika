@@ -72,7 +72,11 @@ const initialState = {
   oneArticleItme : [],
   articleIsUpdate : false,
   articleIssave : false,
-  articleIsDelete : false
+  articleIsDelete : false,
+
+  // message
+  msgUnRead : {},
+  myMsg : [],
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -119,6 +123,7 @@ const mainReducer = (state = initialState, action) => {
     ) {
       state.isLoggedIn = false;
     } else {
+      console.log(action.payload);
       state.isLoggedIn = true;
       state.sign = true;
       state.info = action.payload;
@@ -750,6 +755,32 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
+  /**********************************************************
+   ************************ message ***********************
+   ***********************************************************/
+  if(action.type === "GET_MESSAGE"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.myMsg = [];
+    }else{
+      state.myMsg = action.payload;
+    }
+    return Object.assign({}, state);
+  }
+  if(action.type === "UNREAD_MESSAGE"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.msgUnRead = 0;
+    }else{
+      state.msgUnRead = action.payload;
+    }
+    return Object.assign({}, state);
+  }
+
   return state;
 };
 

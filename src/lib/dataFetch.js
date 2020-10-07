@@ -981,3 +981,42 @@ export const deleteArticles = async (articleId) => {
    return [error];
  }
 };
+
+/**********************************************************
+ ************************ MESSAGER **************************
+ ***********************************************************/
+export const getMyMessage = async (id)=>{
+  const room = id;
+  try {
+    const res = await(
+      await fetch(`${url}/message/${room}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res
+  } catch (error) {
+    return [error]
+  }
+}
+
+export const unReadMessage = async (id)=>{
+  const userid = id;
+  try {
+    const res = await(
+      await fetch(`${url}/message/unread/${userid}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res
+  } catch (error) {
+    return [error]
+  }
+}

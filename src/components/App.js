@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "../scss/App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { authorise, OneUser} from "../actions";
@@ -24,17 +24,17 @@ import StoreContainer from './store/StoreContainer';
 import NewArticle from './store/NewArticle';
 import MyArticles from './store/MyArticles';
 import Articles from './store/Articles';
+import Messager from './message/Messager';
+import Chat from './message/Chat';
 
+const App = (props)=> {
 
-
-class App extends React.Component {
- 
-   componentDidMount() {
-    this.props.authorise(); 
-  }  
- 
-  render() {
-    const loading = this.props.loading
+  useEffect(() => {
+    props.authorise(); 
+  }, [])
+  
+  
+    const loading = props.loading
     return (
       <div className="App">
         {loading && <Loading></Loading>}
@@ -66,14 +66,15 @@ class App extends React.Component {
             <Route exact path="/MyArticles/:id" component={MyArticles}/>
             <Route exact path="/Articles/:id" component={Articles}/>
             <Route exact path="/Articles/:id/:name" component={Articles}/>
-
+            <Route exact path="/Messager" component={Messager}/>
+            <Route exact path="/Chat/:id" component={Chat}/>
 
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>
       </div>
     );
-  }
+  
 }
 const mapsStateToProps = state => {
   return {

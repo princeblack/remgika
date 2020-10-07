@@ -1,0 +1,47 @@
+.message-container{
+    margin-top: 20px;
+    a{
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        img{
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .info{
+            p{
+                margin-left: 10px;
+                span{
+                    font-weight: 600;
+                    color: green;
+                }
+            }
+        }
+    }
+}
+
+.chatBox{
+    // display: flex;
+    min-width: 280px;
+    padding: 10px;
+    .friend{
+        display: flex;
+        img{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    .my{
+        display: flex;
+        img{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+}

@@ -17,6 +17,7 @@ import {
   faCalendar,
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
+import {faCommentAlt} from '@fortawesome/free-regular-svg-icons'
 class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -78,9 +79,15 @@ class Navigation extends Component {
           {isLoggedIn && (
             <>
               <div className="menu-item" onClick={this.toggleSidebar}>
+                <NavLink activeStyle={active} to="/Messager">
+                  <FontAwesomeIcon icon={faCommentAlt} />
+                  Messages
+                </NavLink>
+              </div>
+              <div className="menu-item" onClick={this.toggleSidebar}>
                 <NavLink activeStyle={active} to="/dashboard">
                   <FontAwesomeIcon icon={faCarrot} />
-                  Dashboard
+                  {/* Dashboard */}
                 </NavLink>
               </div>
             </>
@@ -88,25 +95,25 @@ class Navigation extends Component {
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/playground">
               <FontAwesomeIcon icon={faDemocrat} />
-              Playgrounds
+              {/* Playgrounds */}
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/events">
               <FontAwesomeIcon icon={faCalendar} />
-              Events
+              {/* Events */}
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/groups">
               <FontAwesomeIcon icon={faUsers} />
-              Groups
+              {/* Groups */}
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/store">
                <FontAwesomeIcon icon={faStore} />
-              Share market
+              {/* Share market */}
             </NavLink>
           </div>
           {isLoggedIn && (

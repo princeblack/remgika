@@ -74,7 +74,12 @@ import {
   getUserArticles,
   updateArticles,
   SaveArticles,
-  deleteArticles
+  deleteArticles,
+
+  // message
+
+  unReadMessage,
+  getMyMessage,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -652,6 +657,28 @@ export const deleteOneArticles = (id)=>{
     const data = await deleteArticles(id);
     dispatch({
       type: "DELETE_ARTICLES",
+      payload: data
+    })
+  }
+}
+
+/**********************************************************
+ ************************ messager **************************
+ ***********************************************************/
+export const myMessages = (id)=>{
+  return async (dispatch)=>{
+    const data = await getMyMessage(id);
+    dispatch({
+      type: "GET_MESSAGE",
+      payload: data
+    })
+  }
+}
+export const getUnread = (id)=>{
+  return async (dispatch)=>{
+    const data = await unReadMessage(id);
+    dispatch({
+      type: "UNREAD_MESSAGE",
       payload: data
     })
   }

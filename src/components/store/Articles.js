@@ -19,11 +19,13 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import  MsgBox  from "./MsgBox";
 
 export const Articles = (props) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [showUpdate, setShowUpdate] = useState(false);
-  const [state, setstate] = useState(false)
+  const [state, setstate] = useState(false);
+  const [toogleMsg, setToogleMsg] = useState(false);  
   const chevronWidth = 40;
 
   useEffect(() => {
@@ -92,7 +94,9 @@ export const Articles = (props) => {
   const handledescription = (e) => {
     setDescription(`${e.target.value}`);
   };
-
+  const handleMsgToogle = (e)=>{
+    setToogleMsg(!toogleMsg)
+  }
   const handleDelete = ()=>{
     const id = props.match.params.id;
     props.deleteOneArticles(id)
@@ -187,176 +191,202 @@ export const Articles = (props) => {
 
   const inputRef = useRef();
   return (
-    <div className="articles-container">
-        {props.articleIsDelete && (<Redirect to="/store"></Redirect>)}
-      {props.match.params.name && (
-        <BackNav data={props.match.params.name}></BackNav>
-      )}
-      <div className="container-box">
-        <div className="container-2">
-          <div className="image">
-            <ItemsCarousel
-              enablePlaceholder
-              requestToChangeActive={setActiveItemIndex}
-              activeItemIndex={activeItemIndex}
-              numberOfCards={1}
-              gutter={12}
-              outsideChevron={false}
-              chevronWidth={chevronWidth}
-              leftChevron={"<"}
-              rightChevron={">"}
-            >
-              {image}
-            </ItemsCarousel>
-          </div>
-          <div className="info-container">
-            <div className="info">
-              <h3>{props.oneArticleItme.title}</h3>
-              <h2>{props.oneArticleItme.prixOption}</h2>
-              <span className="address">{props.oneArticleItme.city}</span>
-              <span className="date">
-                Published: {props.oneArticleItme.createdAt}
-              </span>
+    <> 
+      {props.oneArticleItme.title && (
+            <div className="articles-container">
+            {props.articleIsDelete && (<Redirect to="/store"></Redirect>)}
+          {props.match.params.name && (
+            <BackNav data={props.match.params.name}></BackNav>
+          )}
+          <div className="container-box">
+            <div className="container-2">
+              <div className="image">
+                <ItemsCarousel
+                  enablePlaceholder
+                  requestToChangeActive={setActiveItemIndex}
+                  activeItemIndex={activeItemIndex}
+                  numberOfCards={1}
+                  gutter={12}
+                  outsideChevron={false}
+                  chevronWidth={chevronWidth}
+                  leftChevron={"<"}
+                  rightChevron={">"}
+                >
+                  {image}
+                </ItemsCarousel>
+              </div>
+              <div className="info-container">
+                <div className="info">
+                  <h3>{props.oneArticleItme.title}</h3>
+                  <h2>{props.oneArticleItme.prixOption}</h2>
+                  <span className="address">{props.oneArticleItme.city}</span>
+                  <span className="date">
+                    Published: {props.oneArticleItme.createdAt}
+                  </span>
+                </div>
+              </div>
+              <div className="user-massage-option">
+                {props.info._id === props.oneArticleItme.userId ? (
+                  <>
+                    <div className="upd-dele">
+                      <button className="update" onClick={handleUpdate}>
+                        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                        Update
+                      </button>
+                      <button className="delete" onClick={handleConfirmation}>
+                        <FontAwesomeIcon icon={faTrashAlt} ></FontAwesomeIcon>
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="save-message">
+                    {props.oneArticleItme._id &&
+                        (props.oneArticleItme.articlesSave.includes(
+                          props.info._id
+                        ) ? (
+                          <>
+                            <button className="save" onClick={handlesave}>
+                              <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button className="save" onClick={handlesave}>
+                              <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
+                              Save
+                            </button>
+                          </>
+                        ))}
+                        <button className="message" onClick={handleMsgToogle}>
+                              <FontAwesomeIcon
+                                icon={faPaperPlane}
+                              ></FontAwesomeIcon>
+                              Message
+                            </button>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="descri">
+                <pre>{`${props.oneArticleItme.description}`}</pre>
+              </div>
+              {state && (
+                  <>
+                    <div className="delete-confi">
+                        <h2>Do you really want to delete this article?</h2>
+                        <button className="yes-confi" onClick={handleDelete}>Yes</button>
+                        <button className="no-confi" onClick={handleConfirmation}>No</button>
+                    </div>
+                  </>
+              )}
+              <>
+                <MsgBox data={props.oneArticleItme} toggle={toogleMsg} fun={handleMsgToogle}></MsgBox>
+              </>
+              {/* {toogleMsg && (
+                <>
+                  <div className="msg-container">
+                    <div className="article-heater">
+                      <img className="image" alt="" src={props.oneArticleItme.imgCollection[0]}></img>
+                      <p> {props.oneArticleItme.title}</p>
+                    </div>
+                    <div className="msg-div">
+                      <TextareaAutosize rows="5"></TextareaAutosize>
+                    </div>
+                    <div className="choice">
+                      <button className="submit">Submit</button>
+                      <button className="cancel" onClick={handleMsgToogle}>Cancel</button>
+                    </div>
+                  </div>
+                </>
+              )} */}
+              {showUpdate && (
+                <>
+                  <div className="updatecontainer">
+                    <form>
+                      <div>
+                        <FontAwesomeIcon
+                          className="image-upload"
+                          icon={faImage}
+                          onClick={() => {
+                            inputRef.current.click();
+                          }}
+                        ></FontAwesomeIcon>
+                        <input
+                          style={{ display: "none" }}
+                          ref={inputRef}
+                          type="file"
+                          multiple
+                          onChange={handleFiles}
+                        ></input>
+                        <div id="image"></div>
+                      </div>
+                      <div>
+                        <input
+                          className=" input-transition"
+                          placeholder="Product Name"
+                          onChange={handleName}
+                          value={productName}
+                          required
+                        ></input>
+                      </div>
+                      <div className=" ">
+                        <select
+                          id="browsers"
+                          className=" input-transition"
+                          onChange={handleoption}
+                          defaultValue={option}
+                          required
+                        >
+                          <option>Free</option>
+                          <option>Exchange</option>
+                          <option value="Looking">Looking for</option>
+                        </select>
+                      </div>
+                      <div className="city">
+                        <input
+                          className=" input-transition"
+                          placeholder="City"
+                          onChange={handlecity}
+                          disabled={!ready}
+                          value={city}
+                          required
+                        ></input>
+                        {/* We can use the "status" to decide whether we should display the dropdown or not */}
+                        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+                      </div>
+                      <div className="">
+                        <TextareaAutosize
+                          className=" input-transition"
+                          placeholder="Product Description"
+                          rows="5"
+                          onChange={handledescription}
+                          value={`${description}`}
+                          required
+                        ></TextareaAutosize>
+                      </div>
+                      <div className="">
+                        <input
+                          type="submit"
+                          className="login-submit"
+                          onClick={handleSubmit}
+                        ></input>
+                      </div>
+                    </form>
+                    <button className="cancel" onClick={handleUpdate}>
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-          <div className="user-massage-option">
-            {props.info._id === props.oneArticleItme.userId ? (
-              <>
-                <div className="upd-dele">
-                  <button className="update" onClick={handleUpdate}>
-                    <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-                    Update
-                  </button>
-                  <button className="delete" onClick={handleConfirmation}>
-                    <FontAwesomeIcon icon={faTrashAlt} ></FontAwesomeIcon>
-                    Delete
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="save-message">
-                {props.oneArticleItme._id &&
-                    (props.oneArticleItme.articlesSave.includes(
-                      props.info._id
-                    ) ? (
-                      <>
-                        <button className="save" onClick={handlesave}>
-                          <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button className="save" onClick={handlesave}>
-                          <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
-                          Save
-                        </button>
-                      </>
-                    ))}
-                    <button className="message">
-                          <FontAwesomeIcon
-                            icon={faPaperPlane}
-                          ></FontAwesomeIcon>
-                          Message
-                        </button>
-                </div>
-              </>
-            )}
-          </div>
-          <div className="descri">
-            <pre>{`${props.oneArticleItme.description}`}</pre>
-          </div>
-          {state && (
-              <>
-                <div className="delete-confi">
-                    <h2>Do you really want to delete this article?</h2>
-                    <button className="yes-confi" onClick={handleDelete}>Yes</button>
-                    <button className="no-confi" onClick={handleConfirmation}>No</button>
-                </div>
-              </>
-          )}
-          {showUpdate && (
-            <>
-              <div className="updatecontainer">
-                <form>
-                  <div>
-                    <FontAwesomeIcon
-                      className="image-upload"
-                      icon={faImage}
-                      onClick={() => {
-                        inputRef.current.click();
-                      }}
-                    ></FontAwesomeIcon>
-                    <input
-                      style={{ display: "none" }}
-                      ref={inputRef}
-                      type="file"
-                      multiple
-                      onChange={handleFiles}
-                    ></input>
-                    <div id="image"></div>
-                  </div>
-                  <div>
-                    <input
-                      className=" input-transition"
-                      placeholder="Product Name"
-                      onChange={handleName}
-                      value={productName}
-                      required
-                    ></input>
-                  </div>
-                  <div className=" ">
-                    <select
-                      id="browsers"
-                      className=" input-transition"
-                      onChange={handleoption}
-                      defaultValue={option}
-                      required
-                    >
-                      <option>Free</option>
-                      <option>Exchange</option>
-                      <option value="Looking">Looking for</option>
-                    </select>
-                  </div>
-                  <div className="city">
-                    <input
-                      className=" input-transition"
-                      placeholder="City"
-                      onChange={handlecity}
-                      disabled={!ready}
-                      value={city}
-                      required
-                    ></input>
-                    {/* We can use the "status" to decide whether we should display the dropdown or not */}
-                    {status === "OK" && <ul>{renderSuggestions()}</ul>}
-                  </div>
-                  <div className="">
-                    <TextareaAutosize
-                      className=" input-transition"
-                      placeholder="Product Description"
-                      rows="5"
-                      onChange={handledescription}
-                      value={`${description}`}
-                      required
-                    ></TextareaAutosize>
-                  </div>
-                  <div className="">
-                    <input
-                      type="submit"
-                      className="login-submit"
-                      onClick={handleSubmit}
-                    ></input>
-                  </div>
-                </form>
-                <button className="cancel" onClick={handleUpdate}>
-                  Cancel
-                </button>
-              </div>
-            </>
-          )}
         </div>
-      </div>
-    </div>
+      )}
+    
+    </>
+
   );
 };
 

@@ -11,13 +11,8 @@ $remgika: #c7cda4;
   border-top-width: 40px;
   padding: 10px;
   position: relative;
+  min-height: 600px;
   .chatItems {
-    // max-height: 27vh;
-    // min-height: 27vh;
-    // overflow: scroll;
-    // overscroll-behavior: contain;
-    // overflow-y: auto;
-    // width: 85%;
     margin-top: 50px;
     .chatBoxItem{
       width: 100%;
