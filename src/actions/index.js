@@ -78,8 +78,9 @@ import {
 
   // message
 
-  unReadMessage,
+  getChatMembers,
   getMyMessage,
+  readMyMsg,
 } from "../lib/dataFetch.js";
 
 export const authorise = (payload) => {
@@ -665,20 +666,42 @@ export const deleteOneArticles = (id)=>{
 /**********************************************************
  ************************ messager **************************
  ***********************************************************/
-export const myMessages = (id)=>{
+export const myMessages = (id,id2)=>{
   return async (dispatch)=>{
-    const data = await getMyMessage(id);
+    const data = await getMyMessage(id,id2);
     dispatch({
       type: "GET_MESSAGE",
       payload: data
     })
   }
 }
-export const getUnread = (id)=>{
+export const chatMembers = (id)=>{
   return async (dispatch)=>{
-    const data = await unReadMessage(id);
+    const data = await getChatMembers(id);
     dispatch({
-      type: "UNREAD_MESSAGE",
+      type: "USERS_MESSAGE",
+      payload: data
+    })
+  }
+}
+
+
+
+export const refre = (data)=>{
+  return async (dispatch)=>{
+    dispatch({
+      type: "REFREC_MESSAGE",
+      payload: data
+    })
+  }
+}
+
+
+export const readMsg = (id)=>{
+  return async (dispatch)=>{
+    const data = await readMyMsg(id);
+    dispatch({
+      type: "READ_MESSAGE",
       payload: data
     })
   }

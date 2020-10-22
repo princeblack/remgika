@@ -10,15 +10,21 @@ export const MsgBox = (props) => {
   const [usertext, setUsertext] = useState("");
 
   const ENDPOINT = "http://localhost:8000";
-  const fullName = props.info.firstName + " " + props.info.lastName;
-  const room = props.data.userId + "" + props.info._id;
-  console.log(room);
+  
+  
   const user = props.info._id;
   const friend = props.data.userId 
+  console.log(props.info._id);
   socket = io(ENDPOINT);
   useEffect(() => {
-    socket.emit("join", { room: room, name: fullName, userId: user , friend: friend});
-  }, [room, user, fullName,friend]);
+    if (props.info._id) {
+      const fullName = props.info.firstName + " " + props.info.lastName;
+  const room = props.data.userId._id+ "" + props.info._id;
+  const room2 = props.info._id + "" + props.data.userId._id
+      socket.emit("join", { room: room, room2: room2, name: fullName, userId: user , friend: friend});
+    }
+    
+  }, [props.info._id,props.data.userId]);
 
   useEffect(() => {
     if (logginOut === false || props.fun) {
@@ -41,10 +47,14 @@ export const MsgBox = (props) => {
   // if (event.key === "Enter") {
   // }
   if (usertext) {
+    const fullName = props.info.firstName + " " + props.info.lastName;
+  const room = props.data.userId._id + "" + props.info._id;
+  const room2 = props.info._id + "" + props.data.userId._id
     console.log(usertext);
     socket.emit("chatMessage", {
       message: usertext,
       room: room,
+      room2: room2,
       name: fullName,
       userId: user,
       friend: friend

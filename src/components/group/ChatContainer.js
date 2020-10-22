@@ -10,7 +10,7 @@ import { getGroupChats } from "../../actions";
 import Chat from "./Chat";
 import ScrollToBottom from "react-scroll-to-bottom";
 // import { css } from "glamor";
-import TextareaAutosize from 'react-autosize-textarea';
+import TextareaAutosize from "react-autosize-textarea";
 
 let socket;
 
@@ -39,8 +39,7 @@ export const ChatContainer = (props) => {
   }, [room, user, fullName]);
 
   useEffect(() => {
-      props.getGroupChats(room, skip,limit);
-    
+    props.getGroupChats(room, skip, limit);
   }, [room]);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export const ChatContainer = (props) => {
     });
   }, []);
 
-  let chats =[...props.groupChats].reverse()
+  let chats = [...props.groupChats].reverse();
   //  maping alles messages
   let allChatMessages;
   allChatMessages = chats.map((el, index) => {
@@ -98,30 +97,32 @@ export const ChatContainer = (props) => {
       setUsertext("");
     }
   };
-  
+
   // const ROOT_CSS = css({
   //   height: "50vh",
   //   width: "85%",
   // });
   function clearEmo() {
     if (show) {
-      setShow( !show) 
+      setShow(!show);
     }
   }
 
   return (
-    <div className="chatContainer" >
-      <ScrollToBottom >
-        <div className="chatItems" onClick={clearEmo}>{allChatMessages}</div>
+    <div className="chatContainer">
+      <ScrollToBottom>
+        <div className="chatItems" onClick={clearEmo}>
+          {allChatMessages}
+        </div>
       </ScrollToBottom>
       <div className="input">
         <div className="text-input">
-        <TextareaAutosize
-          value={usertext}
-          placeholder='Type a messsage...'
-          onChange={handleChange}
-          onKeyPress={e => e.key === 'Enter' ? sendMessage(e) : null} 
-        />
+          <TextareaAutosize
+            value={usertext}
+            placeholder="Type a messsage..."
+            onChange={handleChange}
+            onKeyPress={(e) => (e.key === "Enter" ? sendMessage(e) : null)}
+          />
           <FontAwesomeIcon
             icon={faSmile}
             onClick={handleShowIcon}
@@ -163,7 +164,7 @@ const mapStateToProps = (state) => {
     info: state.info,
     isLoggedIn: state.isLoggedIn,
     groupChats: state.groupChats,
-    groupChatsData: state.groupChatsData
+    groupChatsData: state.groupChatsData,
   };
 };
 

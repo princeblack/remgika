@@ -190,9 +190,15 @@ export const Articles = (props) => {
   };
 
   const inputRef = useRef();
+  // console.log(props.oneArticleItme);
+  let userId;
+  if (props.oneArticleItme.userId) {
+    userId = props.oneArticleItme.userId._id 
+  }
+   
   return (
     <> 
-      {props.oneArticleItme.title && (
+      {props.oneArticleItme.title && props.oneArticleItme.userId._id && (
             <div className="articles-container">
             {props.articleIsDelete && (<Redirect to="/store"></Redirect>)}
           {props.match.params.name && (
@@ -223,10 +229,16 @@ export const Articles = (props) => {
                   <span className="date">
                     Published: {props.oneArticleItme.createdAt}
                   </span>
+                  <p>By: {props.oneArticleItme.userId.firstName[0].toUpperCase() +
+                  props.oneArticleItme.userId.firstName.substring(1) 
+                  + " " + 
+                  props.oneArticleItme.userId.lastName[0].toUpperCase() +
+                  props.oneArticleItme.userId.lastName.substring(1)
+                  }</p>
                 </div>
               </div>
               <div className="user-massage-option">
-                {props.info._id === props.oneArticleItme.userId ? (
+                {props.info._id === userId? (
                   <>
                     <div className="upd-dele">
                       <button className="update" onClick={handleUpdate}>

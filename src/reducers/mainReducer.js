@@ -75,11 +75,14 @@ const initialState = {
   articleIsDelete : false,
 
   // message
-  msgUnRead : {},
+  userMsg : {},
   myMsg : [],
+  allMsg : [],
+  getRefrec: "",
+  countMsg : false
 };
 
-const mainReducer = (state = initialState, action) => {
+const mainReducer =  (state = initialState, action) => {
   /**********************************************************
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
@@ -97,7 +100,7 @@ const mainReducer = (state = initialState, action) => {
       state.addGroup = false;
       state.joinEvent = false;
       state.valideImg = false;
-      state.info = action.payload;
+      state.info =  action.payload;
     }
     state.loading = false;
 
@@ -123,10 +126,9 @@ const mainReducer = (state = initialState, action) => {
     ) {
       state.isLoggedIn = false;
     } else {
-      console.log(action.payload);
       state.isLoggedIn = true;
       state.sign = true;
-      state.info = action.payload;
+      state.info =  action.payload;
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -769,15 +771,42 @@ const mainReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-  if(action.type === "UNREAD_MESSAGE"){
+  if(action.type === "USERS_MESSAGE"){
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors")
     ) {
-      state.msgUnRead = 0;
+      state.userMsg = 0;
     }else{
-      state.msgUnRead = action.payload;
+      state.userMsg = action.payload;
     }
+    return Object.assign({}, state);
+  }
+  if(action.type === "GET_ALL_MESSAGE"){
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.allMsg = [];
+    }else{
+      state.allMsg = action.payload;
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "REFREC_MESSAGE") {
+    state.getRefrec = action.payload;
+    return Object.assign({}, state);
+  }
+  if (action.type === "COUNT_UNREAD_MESSAGE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.countMsg = false;
+    }else{
+      state.countMsg =  action.payload;
+    }
+    
     return Object.assign({}, state);
   }
 

@@ -985,11 +985,12 @@ export const deleteArticles = async (articleId) => {
 /**********************************************************
  ************************ MESSAGER **************************
  ***********************************************************/
-export const getMyMessage = async (id)=>{
+export const getMyMessage = async (id,id2)=>{
   const room = id;
+  const room2 = id2
   try {
     const res = await(
-      await fetch(`${url}/message/${room}`,{
+      await fetch(`${url}/message/${room}?id=${room2}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -1003,11 +1004,45 @@ export const getMyMessage = async (id)=>{
   }
 }
 
-export const unReadMessage = async (id)=>{
-  const userid = id;
+export const getChatMembers = async (id)=>{
   try {
     const res = await(
-      await fetch(`${url}/message/unread/${userid}`,{
+      await fetch(`${url}/message/getChatMembers`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json()
+    return res
+  } catch (error) {
+    return [error]
+  }
+}
+
+
+
+export const readMyMsg = async (articleId) => {
+  const id = articleId;
+ try {
+   const res = await (
+     await fetch(`${url}/message/${id}`, {
+       method: "PUT",
+       credentials: "include",
+     })
+   ).json();
+   return res;
+ } catch (error) {
+   return [error];
+ }
+};
+
+export const countUnread = async (id)=>{
+  const user = id;
+  try {
+    const res = await(
+      await fetch(`${url}/message/count/${user}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",

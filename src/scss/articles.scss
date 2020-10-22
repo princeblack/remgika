@@ -84,6 +84,18 @@
         text-overflow: ellipsis;
         text-align: left;
       }
+      p {
+        width: 100%;
+        color: #241f1f;
+        font-weight: bold;
+        font-size: 1rem;
+        margin: 8px 0;
+        line-height: 1.5;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+      }
     }
   }
   .user-massage-option {

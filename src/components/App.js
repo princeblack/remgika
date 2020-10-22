@@ -26,13 +26,20 @@ import MyArticles from './store/MyArticles';
 import Articles from './store/Articles';
 import Messager from './message/Messager';
 import Chat from './message/Chat';
-
+import Zest from './message/Zest'
+import Socket from "./Sockect"
+import socket from "./Sockect";
 const App = (props)=> {
 
   useEffect(() => {
     props.authorise(); 
   }, [])
   
+  useEffect(() => {
+     if (props.info._id) {
+      //  socket
+     }
+  }, [props.info._id])
   
     const loading = props.loading
     return (
@@ -67,7 +74,10 @@ const App = (props)=> {
             <Route exact path="/Articles/:id" component={Articles}/>
             <Route exact path="/Articles/:id/:name" component={Articles}/>
             <Route exact path="/Messager" component={Messager}/>
+            {/* <Route exact path="/Messager" component={Zest}/> */}
+
             <Route exact path="/Chat/:id" component={Chat}/>
+            <Route exact path="/Chat/:id/:name" component={Chat}/>
 
             <Route path="*" component={NotFound} />
           </Switch>

@@ -16,8 +16,9 @@ import {
   faUsers,
   faCalendar,
   faStore,
+  faCommentAlt
+  
 } from "@fortawesome/free-solid-svg-icons";
-import {faCommentAlt} from '@fortawesome/free-regular-svg-icons'
 class Navigation extends Component {
   constructor(props) {
     super(props);

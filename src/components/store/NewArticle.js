@@ -64,7 +64,6 @@ export const NewArticle = (props) => {
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         setLocation([lng, lat]);
-        console.log([lng, lat], "get info");
       })
       .catch((error) => {
         console.log("😱 Error: ", error);
