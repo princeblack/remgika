@@ -34,13 +34,7 @@ const App = (props)=> {
   useEffect(() => {
     props.authorise(); 
   }, [])
-  
-  useEffect(() => {
-     if (props.info._id) {
-      //  socket
-     }
-  }, [props.info._id])
-  
+    
     const loading = props.loading
     return (
       <div className="App">

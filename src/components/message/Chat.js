@@ -15,8 +15,11 @@ import LoginHeader from "../login-signUp/LoginHeader";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Picker } from "emoji-mart";
 import { css } from "glamor";
-import socket from "../Sockect";
+// import socket from "../Sockect";
 import { useLocation, Switch } from "react-router-dom";
+import io from "socket.io-client";
+
+let socket;
 
 export const Chat = (props) => {
   const [usertext, setUsertext] = useState("");
@@ -34,13 +37,11 @@ export const Chat = (props) => {
   const friend = chatId;
 
   useEffect(() => {
-    if (chatId) {
+    // if (user && chatId ) {
       props.readMsg(chatId);
-    }
-  }, [chatId]);
 
-  useEffect(() => {
-    // if (user && chatId) {
+    const ENDPOINT = "http://localhost:8000";
+    socket = io(ENDPOINT);
     socket.emit("chat", {
       room: room,
       room2: room2,
@@ -49,6 +50,7 @@ export const Chat = (props) => {
       friend: friend,
     });
     // }
+
   }, [room, room2, user, fullName, friend, chatId]);
 
   useEffect(() => {
@@ -59,33 +61,29 @@ export const Chat = (props) => {
     }
   }, [chatId, props.info._id]);
 
-  // console.log("original");
 
-  socket.on("newMessage", ({ name, user, message, files, room, room2 }) => {
-    const roomData = room;
-    const room2Data = room2;
-    const roomCheck = chatId + "" + props.info._id;
-    const room2chek = props.info._id + "" + chatId;
-    const id = props.info._id + "" + chatId;
-    const id2 = chatId + "" + props.info._id;
-    if (
-      (roomData === roomCheck && room2Data === room2chek) ||
-      (roomData === room2chek && room2Data === roomCheck)
-    ) {
-      props.myMessages(id, id2);
-    }
-    setJoin("");
-    props.readMsg(chatId);
-  });
   useEffect(() => {
-    return () => {
-      socket.emit("leaving", {
-        room: room,
-        room2: room2,
-        name: fullName,
-      });
-    };
-  }, []);
+   if (chatId) {
+    socket.on("newChat", ({ name, user, message, files, room, room2 }) => {
+      const roomData = room;
+      const room2Data = room2;
+      const roomCheck = chatId + "" + props.info._id;
+      const room2chek = props.info._id + "" + chatId;
+      const id = props.info._id + "" + chatId;
+      const id2 = chatId + "" + props.info._id;
+      if (
+        (roomData === roomCheck && room2Data === room2chek) ||
+        (roomData === room2chek && room2Data === roomCheck)
+      ) {
+        props.myMessages(id, id2);
+      }
+      setJoin("");
+      props.readMsg(chatId);
+    });
+   }
+  }, [socket])
+
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -119,19 +117,19 @@ export const Chat = (props) => {
       setUsertext("");
     }
   };
-
+  useEffect(() => {
+    return () => {
+      socket.emit("leaving", {
+        room: room,
+        room2: room2,
+        name: fullName,
+      });
+    }
+  }, [chatId])
   const ROOT_CSS = css({
     height: "63vh",
     minWidth: 280,
   });
-  useEffect(() => {
-    if (logginOut === false || props.fun) {
-      return () => {
-        socket.emit("disconnect");
-        socket.off();
-      };
-    }
-  }, [logginOut, props.fun]);
 
   return (
     <>

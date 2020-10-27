@@ -77,9 +77,8 @@ const initialState = {
   // message
   userMsg : {},
   myMsg : [],
-  allMsg : [],
   getRefrec: "",
-  countMsg : false
+  msgIsRead : false
 };
 
 const mainReducer =  (state = initialState, action) => {
@@ -779,17 +778,7 @@ const mainReducer =  (state = initialState, action) => {
       state.userMsg = 0;
     }else{
       state.userMsg = action.payload;
-    }
-    return Object.assign({}, state);
-  }
-  if(action.type === "GET_ALL_MESSAGE"){
-    if (
-      action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
-    ) {
-      state.allMsg = [];
-    }else{
-      state.allMsg = action.payload;
+      state.msgIsRead = false
     }
     return Object.assign({}, state);
   }
@@ -797,18 +786,11 @@ const mainReducer =  (state = initialState, action) => {
     state.getRefrec = action.payload;
     return Object.assign({}, state);
   }
-  if (action.type === "COUNT_UNREAD_MESSAGE") {
-    if (
-      action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")
-    ) {
-      state.countMsg = false;
-    }else{
-      state.countMsg =  action.payload;
-    }
-    
+  if (action.type === "READ_MESSAGE") {
+    state.msgIsRead = true
     return Object.assign({}, state);
   }
+
 
   return state;
 };

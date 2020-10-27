@@ -1,14 +1,33 @@
 $main-color: #69ca62;
 $remgika: #c7cda4;
 
+.info-box{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  div{
+    width: 50%;
+    min-width: 280px;
+    background-color: #c7cda4;
+    padding: 15px;
+    border-radius: 20px;
+    border: #69ca62 solid;
+  }
+}
 .message-container {
   position: relative;
   min-width: 280px;
   height: 75vh;
   width: 100%;
-  // margin-top: 20px;
   display: flex;
   justify-content: flex-start;
+}
+.toggleMsgBox{
+  display: flex;
+  align-items: center;
+  h2{
+    margin-left: 20px;
+  }
 }
 .toggleMsg{
   display: none;

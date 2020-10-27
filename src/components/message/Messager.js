@@ -3,69 +3,79 @@ import { connect } from "react-redux";
 import Uses from "./Uses";
 import "../../scss/message.scss";
 import { OneUser, chatMembers } from "../../actions";
-import socket from "../Sockect";
-import  Chat  from "./Chat";
+import Chat from "./Chat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope  ,
-  faCaretSquareDown
-} from "@fortawesome/free-solid-svg-icons"
+import { faCaretSquareDown } from "@fortawesome/free-solid-svg-icons";
+import socket from "../Sockect";
 
 export const Messager = (props) => {
+  const user = props.info._id;
   useEffect(() => {
     if (props.info._id) {
       props.chatMembers();
     }
   }, [props.info._id]);
 
-  const user = props.info._id;
   useEffect(() => {
-    if (user) {
-      socket.emit("myChat", {
-        room: user,
-      });
+    if (props.msgIsRead) {
+      props.chatMembers();
     }
-  }, [user]);
+  }, [props.msgIsRead]);
 
-  socket.on("newMessage", ({ name, user, message, files, room, room2  }) => {
-    props.chatMembers();
-    console.log(user);
-  });
-  console.log(props.userMsg);
-
-  const  toggleSidebar = (e) => {
+  const toggleSidebar = (e) => {
     const sidebar = document.querySelector(".user-container-lelt");
-    sidebar.classList.toggle("slide-left");
-   
+    if (sidebar) {
+      sidebar.classList.toggle("slide-left");
+    }
   };
-  
+
   return (
     <>
-      <div>
-        <FontAwesomeIcon className="toggleMsg" icon={faCaretSquareDown} onClick={toggleSidebar}></FontAwesomeIcon>
-      </div>
-      <div className="message-container">
-      {props.userMsg.length > 0 && (
-        <div div className="user-container-lelt">
-          {props.userMsg.map((el, index) => {
-            return <Uses data={el} toggle={toggleSidebar} key={el._id}></Uses>;
-          })}
-        </div>
-      )}
-        {props.info && <Chat /> }
-    </div>
-
+      {props.userMsg &&  props.info._id &&
+        
+        props.userMsg.length > 0 ? (
+          <>
+            <div className="toggleMsgBox">
+              <FontAwesomeIcon
+                className="toggleMsg"
+                icon={faCaretSquareDown}
+                onClick={toggleSidebar}
+              ></FontAwesomeIcon>
+              <h2>Messages</h2>
+            </div>
+            <div className="message-container">
+              {props.userMsg.length > 0 && (
+                <div div className="user-container-lelt">
+                  {props.userMsg.map((el, index) => {
+                    return (
+                      <Uses data={el} toggle={toggleSidebar} key={el._id}></Uses>
+                    );
+                  })}
+                </div>
+              )}
+              {props.info && <Chat />}
+            </div>
+          </>
+        ) : (
+          <div className="info-box">
+            <div>
+              <h1>sorry you do not have a conversation with another user yet.</h1>
+              <h4>
+                If you write another user and they reply to you then you will see
+                your conversation here
+              </h4>
+            </div>
+          </div>
+        )
+      }
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
   info: state.info,
-  getOneUser: state.getOneUser,
-  isLoggedIn: state.isLoggedIn,
   userMsg: state.userMsg,
-  getRefrec: state.getRefrec,
-  countMsg: state.countMsg,
+  msgIsRead: state.msgIsRead,
 });
 
 export default connect(mapStateToProps, { OneUser, chatMembers })(Messager);

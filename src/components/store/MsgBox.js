@@ -44,14 +44,13 @@ export const MsgBox = (props) => {
  const sendMessage = (event) => {
   event.preventDefault();
   console.log(event);
-  // if (event.key === "Enter") {
-  // }
+
   if (usertext) {
     const fullName = props.info.firstName + " " + props.info.lastName;
   const room = props.data.userId._id + "" + props.info._id;
   const room2 = props.info._id + "" + props.data.userId._id
     console.log(usertext);
-    socket.emit("chatMessage", {
+    socket.emit("sendMessage", {
       message: usertext,
       room: room,
       room2: room2,
