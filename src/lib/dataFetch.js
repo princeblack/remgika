@@ -136,6 +136,64 @@ export const handleLogOut = async (data) => {
     return [];
   }
 };
+
+export const password = async (data) => {
+  try {
+    const email = data
+    const res = await (
+      await fetch(`${url}/users/forgotPassword`, {
+        method: "POST",
+        body: JSON.stringify(email),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const validateResetToken = async (data) => {
+  try {
+    const info = data
+    const res = await (
+      await fetch(`${url}/users/validateResetToken`, {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
+export const resetPassword = async (data) => {
+  try {
+    const info = data
+    const res = await (
+      await fetch(`${url}/users/resetPassword`, {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+    return res;
+  } catch (error) {
+    return [error];
+  }
+};
+
 /**********************************************************
  ************************ Friend ***********************
  ***********************************************************/
@@ -709,6 +767,7 @@ export const deleteGroupEvents = async (data) => {
     return [];
   }
 };
+
 
 export const groupChats = async (data,skip,limit) => {
   try {

@@ -7,6 +7,9 @@ import {
   handleLogOut,
   signUpUsers,
   getOneUser,
+  password,
+  validateResetToken,
+  resetPassword,
 
   // friend
 
@@ -156,6 +159,37 @@ export const logOut = (payload) => {
     dispatch({
       type: "HANDLE_LOGOUT",
       payload,
+    });
+  };
+};
+export const passwordForgot = (payload) => {
+  return async (dispatch) => {
+    // eslint-disable-next-line no-unused-vars
+    const data = await password(payload);
+    dispatch({
+      type: "PASSWORD_FORGOT",
+      payload: data
+    });
+  };
+};
+
+export const validateToken = (payload) => {
+  return async (dispatch) => {
+    const data = await validateResetToken(payload);
+    dispatch({
+      type: "TOKEN_VALIDATION",
+      payload: data
+    });
+  };
+};
+
+export const passwordReset = (payload) => {
+  return async (dispatch) => {
+    // eslint-disable-next-line no-unused-vars
+    const data = await resetPassword(payload);
+    dispatch({
+      type: "PASSWORD_RESET",
+      payload: data
     });
   };
 };

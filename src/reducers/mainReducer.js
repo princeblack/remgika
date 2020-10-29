@@ -8,11 +8,14 @@ const initialState = {
   sign: false,
   info: {},
   getOneUser: {},
+  passForgot : false,
+  valideToken : false,
   // friend user
   friendReq: false,
   friendAccepted: false,
   friendRefuse : false,
   friendIsRemove: false ,
+  passIsUpdate: false,
   // user Image
   proImage: [],
   valideImg: false,
@@ -153,6 +156,38 @@ const mainReducer =  (state = initialState, action) => {
     state.isLoggedIn = false;
     state.sign = false;
     state.info = [];
+    return Object.assign({}, state);
+  }
+  if (action.type === "PASSWORD_FORGOT") {
+    state.passForgot = action.payload;
+    state.valideToken = false
+    return Object.assign({}, state);
+  }
+  if (action.type === "TOKEN_VALIDATION") {
+
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.valideToken = Error
+    } else {
+      state.passForgot = false;
+      state.valideToken = action.payload
+    }
+    return Object.assign({}, state);
+  }
+  if (action.type === "PASSWORD_RESET") {
+
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.passIsUpdate = Error
+    } else {
+      state.passIsUpdate = true;
+    }    
     return Object.assign({}, state);
   }
    /**********************************************************

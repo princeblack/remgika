@@ -4,6 +4,6 @@ let socket;
 
 const ENDPOINT = "http://localhost:8000";
 
-socket = io(ENDPOINT);
+// socket = io(ENDPOINT);
 
 export default socket;

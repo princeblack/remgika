@@ -29,12 +29,13 @@ import Chat from './message/Chat';
 import Zest from './message/Zest'
 import Socket from "./Sockect"
 import socket from "./Sockect";
+import  PasswordForgot  from "./login-signUp/PasswordForgot";
+import  PasswordReset  from "./login-signUp/PasswordReset";
 const App = (props)=> {
 
   useEffect(() => {
     props.authorise(); 
   }, [])
-    
     const loading = props.loading
     return (
       <div className="App">
@@ -68,8 +69,8 @@ const App = (props)=> {
             <Route exact path="/Articles/:id" component={Articles}/>
             <Route exact path="/Articles/:id/:name" component={Articles}/>
             <Route exact path="/Messager" component={Messager}/>
-            {/* <Route exact path="/Messager" component={Zest}/> */}
-
+            <Route exact path="/password-forgot" component={PasswordForgot}/>
+            <Route exact path="/account/reset-password/:id" component={PasswordReset}/>
             <Route exact path="/Chat/:id" component={Chat}/>
             <Route exact path="/Chat/:id/:name" component={Chat}/>
 

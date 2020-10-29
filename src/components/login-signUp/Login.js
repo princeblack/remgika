@@ -77,7 +77,7 @@ class Login extends React.Component {
                     type="submit"
                     value="Submit"
                   />
-                  <Link to="/"> Forgot password?</Link>
+                  <Link to="/password-forgot"> Forgot password?</Link>
                 </form>
                 <p>
                   Don't have an account? <Link to="/signup">Sign up</Link>
