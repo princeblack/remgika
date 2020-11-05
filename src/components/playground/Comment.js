@@ -16,7 +16,6 @@ export const Comment = (props) => {
     setShow(false);
   };
   const date = moment(props.comment.createdAt).fromNow();
-  // console.log(props.data.content.length);
   let content = props.comment.content.split("");
   let text = content.join("");
   const toggle = () => {

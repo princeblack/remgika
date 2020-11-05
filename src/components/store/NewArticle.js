@@ -66,7 +66,6 @@ export const NewArticle = (props) => {
         setLocation([lng, lat]);
       })
       .catch((error) => {
-        console.log("😱 Error: ", error);
       });
   };
 

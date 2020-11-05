@@ -62,7 +62,6 @@ const EventsAutocomplete = (props) => {
           
         })
         .catch((e) => {
-          console.log(e);
         });
     };
     if (location.length > 0) {
@@ -147,7 +146,6 @@ const EventsAutocomplete = (props) => {
   let cardNumber = 1;
 
   const currentPosts = posts;
-  // console.log(posts);
 
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);

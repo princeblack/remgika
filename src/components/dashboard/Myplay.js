@@ -94,7 +94,6 @@ class Myplay extends Component {
       })
     }
     
-    console.log(this.state.show);
   }
   render() {
     const chevronWidth = 40;

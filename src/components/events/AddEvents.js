@@ -123,7 +123,6 @@ const AddEvents = (props) => {
   };
 
   const onSubmit = (e) => {
-    console.log(e);
     
     const data = new FormData();
     data.append("location", [location[0], location[1]]);

@@ -143,7 +143,6 @@ const mainReducer =  (state = initialState, action) => {
   }
 
   if (action.type === "HANDLE_SIGN") {
-    console.log(action.payload);
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||

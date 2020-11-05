@@ -25,7 +25,6 @@ export const Addadmin = (props) => {
       const group = props.urlGroupInfo._id
       props.urlGroupPage(group)
       props.getAllGroupMembers(group)
-      console.log('yes');
     }
    
   }, [props.addNewAdmin])

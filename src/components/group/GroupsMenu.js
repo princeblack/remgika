@@ -97,7 +97,6 @@ class GroupsMenu extends Component {
       })
     }
 
-    // console.log(this.props.allPublicGroup[Math.floor(Math.random()*this.props.allPublicGroup.length)]);
     return (
       <>
         <div className="menu">

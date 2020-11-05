@@ -84,7 +84,6 @@ const News = (props) => {
       // eslint-disable-next-line no-loop-func
       if (types.every((type) => files[x].type !== type)) {
         // create error message and assign to container
-        console.log(files[x]);
 
         err += files[x].type + " is not a supported format\n";
       }
@@ -114,7 +113,6 @@ const News = (props) => {
 
   const onSubmit = (e) => {
     const data = new FormData();
-    console.log(`${e.content}`);
     const id = props.data._id;
     if (e.imgCollection.length > 0) {
       for (const key of Object.keys(e.imgCollection)) {

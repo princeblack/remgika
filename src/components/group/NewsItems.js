@@ -33,7 +33,6 @@ const NewsItems = (props) => {
       text = content.slice(0, 600) + "....." + "  "
     } else {
       text = content;
-      console.log(text);
     }
   }else{
     text = content

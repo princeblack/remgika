@@ -73,10 +73,8 @@ export const SignUp = (props) => {
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
           setLocation([lng,lat])
-          console.log([lng,lat] ,'get info');
         })
         .catch((error) => {
-          console.log("😱 Error: ", error);
         });
     };
   
@@ -128,11 +126,8 @@ export const SignUp = (props) => {
 
   const handleFiles = (event) => {
     if (maxSelectFile(event) && checkMimeType(event)) {
-      // if return true allow to setState
-      // console.log(event.target.files[0]);
-    //   setState({
-    //     imgCollection: event.target.files[0],
-    //   });
+      setImgCollection( event.target.files[0])
+
     }
   };
   const handleSubmit = (e) => {

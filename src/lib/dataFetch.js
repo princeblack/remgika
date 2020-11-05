@@ -279,7 +279,6 @@ export const getPlayground = async (data) => {
   }
 };
 export const getPlaygroundPagination = async (skip,location) => {
-  console.log(skip);
   try {
     const res = await (
       await fetch(`${url}/playground?skip=${skip}&city=${location}`, {

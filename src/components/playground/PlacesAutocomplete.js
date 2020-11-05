@@ -62,7 +62,6 @@ const PlacesAutocomplete = (props) => {
           
         })
         .catch((e) => {
-          console.log(e);
         });
     };
     if (location.length > 0) {

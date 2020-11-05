@@ -190,7 +190,6 @@ export const Articles = (props) => {
   };
 
   const inputRef = useRef();
-  // console.log(props.oneArticleItme);
   let userId;
   if (props.oneArticleItme.userId) {
     userId = props.oneArticleItme.userId._id 

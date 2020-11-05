@@ -14,7 +14,6 @@ export const MsgBox = (props) => {
   
   const user = props.info._id;
   const friend = props.data.userId 
-  console.log(props.info._id);
   socket = io(ENDPOINT);
   useEffect(() => {
     if (props.info._id) {
@@ -43,13 +42,11 @@ export const MsgBox = (props) => {
  // send message to the room
  const sendMessage = (event) => {
   event.preventDefault();
-  console.log(event);
 
   if (usertext) {
     const fullName = props.info.firstName + " " + props.info.lastName;
   const room = props.data.userId._id + "" + props.info._id;
   const room2 = props.info._id + "" + props.data.userId._id
-    console.log(usertext);
     socket.emit("sendMessage", {
       message: usertext,
       room: room,
