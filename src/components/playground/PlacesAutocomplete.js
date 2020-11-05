@@ -29,7 +29,7 @@ const PlacesAutocomplete = (props) => {
 
   const [postsPerPage] = useState(12);
 
-  const url = "http://localhost:8000";
+  const url = "https://node-server.remgika.com";
 
   useEffect(() => {
     if ("geolocation" in navigator) {
