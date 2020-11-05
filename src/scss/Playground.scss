@@ -95,16 +95,31 @@ $remgika: #c7cda4;
   }
   .playground-table {
     width: 100%;
+    min-height: 600px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    // justify-content: center;
   }
+
+  .pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 100px;
+    li{
+      list-style: none;
+      padding: 5px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
   // .playground-table > div {
   //   width: 80%;
   //   margin-top: 15px;
   //   flex: 1;
   // }
+
   .playgroud-item {
     border-radius: 10px;
     box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;

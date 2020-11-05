@@ -7,14 +7,14 @@ $remgika: #c7cda4;
   .contenair {
     background-color: white;
     margin-bottom: 10px;
-    border-bottom: grey 1px solid;
+    // border-bottom: grey 1px solid;
     position: relative;
     .info {
       display: flex;
       justify-content: space-between;
       padding: 10px;
       position: relative;
-      .container{
+      .info-container{
         display: flex;
         align-items: center;
         .userImage{

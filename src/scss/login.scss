@@ -60,6 +60,14 @@ $remgika: #c7cda4;
         form{
           min-width: 100%;
         }
+        .alert-login{
+          color: red;
+          font-style: italic;
+          span{
+            font-weight: 500;
+            font-size: 20px;
+          }
+        }
         .input-transition {
           width: 90%;
           font-weight: 300;

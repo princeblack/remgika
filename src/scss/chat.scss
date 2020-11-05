@@ -1,5 +1,7 @@
 $main-color: #69ca62;
 $remgika: #c7cda4;
+.chatPage{
+}
 .chatContainer {
   display: flex;
   flex-direction: column;
@@ -12,8 +14,10 @@ $remgika: #c7cda4;
   padding: 10px;
   position: relative;
   min-height: 600px;
+  // border: #69ca62 solid 5px;
   .chatItems {
-    margin-top: 50px;
+    border: #69ca62 solid 5px;
+
     .chatBoxItem{
       width: 100%;
       margin-top: 5px;
@@ -67,6 +71,8 @@ $remgika: #c7cda4;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: #69ca62 solid 5px;
+    background-color: #69ca62;
     .text-input{
         background-color: rgba(128, 128, 128, 0.096);
         width: 80%;
@@ -83,6 +89,12 @@ $remgika: #c7cda4;
             word-break: break-all;
             border-color: none;
             padding: 10px;
+            font-size: 20px;
+            color: white;
+            &::placeholder{
+              color: white;
+              font-size: 18px;
+            }
             &:focus,
             &:focus-visible {
               border: none;
@@ -92,7 +104,7 @@ $remgika: #c7cda4;
           }
           svg {
             font-size: 20px;
-            color: $main-color;
+            color: white;
           }
     }
     
@@ -103,7 +115,7 @@ $remgika: #c7cda4;
 
       svg {
         font-size: 40px;
-        color: $main-color;
+        color: white;
       }
     }
   }

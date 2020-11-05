@@ -85,6 +85,8 @@ export const AddGroup = (props) => {
   if (isLoggedIn) {
     data = props.info.group.slice(-1);
   }
+  console.log(data);
+  console.log(props.info);
   return (
     <>
       {isLoggedIn ? (

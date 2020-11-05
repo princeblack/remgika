@@ -5,6 +5,7 @@ import {
   fetchPlayground,
   commentAdd,
   fetchComment,
+  fetchPlaygroundPagination,
 } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -15,12 +16,59 @@ import { NavLink } from "react-router-dom";
 import camera from "../../img/camera.svg";
 import "../../scss/Playground.scss";
 import Play from "./Play";
+import axios from "axios";
+import Post from "./Post";
+import Pagination from "./Pagination";
 
 const PlacesAutocomplete = (props) => {
+  const [location, setLocation] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
-  useEffect((prevProps, nextState) => {
-    props.fetchPlayground();
-  }, []);
+  const [postsPerPage] = useState(12);
+
+  const url = "http://localhost:8000";
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      /* la géolocalisation est disponible */
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLocation([position.coords.longitude, position.coords.latitude]);
+      });
+    }
+  }, [navigator.geolocation]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      let cancel;
+      const res = axios({
+        method: "GET",
+        url: `${url}/playground`,
+        withCredentials: true,
+        params: { skip: currentPage, city: location },
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        cancelToken: new axios.CancelToken(c => cancel = c)
+      })
+        .then((res) => {
+          setPosts(res.data.play);
+          setTotal(res.data.count)
+          setLoading(false);
+          
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    if (location.length > 0) {
+      fetchPosts();
+    }
+  }, [location, currentPage]);
 
   const {
     ready,
@@ -32,7 +80,7 @@ const PlacesAutocomplete = (props) => {
     requestOptions: "string",
     debounce: 300,
   });
-  
+
   const ref = useRef();
   useOnclickOutside(ref, () => {
     // When user clicks outside of the component, we can dismiss
@@ -41,9 +89,10 @@ const PlacesAutocomplete = (props) => {
   });
 
   const handleInput = (e) => {
+    e.preventDefault();
     // Update the keyword of the input element
     setValue(e.target.value);
-    handelCharacters(e.target.value);
+    // handelCharacters(e.target.value);
   };
 
   const handleSelect = ({ description }) => () => {
@@ -56,7 +105,9 @@ const PlacesAutocomplete = (props) => {
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {})
+      .then(({ lat, lng }) => {
+        setLocation([lng, lat]);
+      })
       .catch((error) => {});
   };
 
@@ -73,38 +124,14 @@ const PlacesAutocomplete = (props) => {
       );
     });
 
-  // find play by city reseach
-  const [getPlay, setgetPlay] = useState();
-  const handelCharacters = async (character) => {
-    let filterCharacter;
-    filterCharacter = await props.playground.filter((play) => {
-      return play.street.toLowerCase().indexOf(character.toLowerCase()) !== -1;
-    });
-    setgetPlay(filterCharacter);
-  };
+  // Get current posts
+  //  const indexOfLastPost = currentPage * postsPerPage;
+  //  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+   const currentPosts = posts;
 
-  /* seaching playround return r*/
-  let playgroundList;
-  playgroundList =  props.playground.map((el, index) => {
-      return (
-        <Play
-          playIndex={index}
-          data={el}
-          key={index}
-        ></Play>
-      );    
-  });
-  if (getPlay !== undefined) {
-    playgroundList = getPlay.map((el, index) => {
-        return (
-          <Play
-            playIndex={index}
-            data={el}
-            key={index}
-          ></Play>
-        );
-      })
-  }
+  // change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       <div ref={ref} className="play-autocomplte">
@@ -131,8 +158,9 @@ const PlacesAutocomplete = (props) => {
         <hr></hr>
       </div>
       <div className="playground-table">
-          {playgroundList}
+        <Post post={currentPosts} loading={loading}/>
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPost={total}  paginate={paginate} currentPage={currentPage}/>
     </>
   );
 };
@@ -141,6 +169,8 @@ const mapStateToProps = (state) => {
   return {
     playground: state.playground,
     addPlay: state.addPlay,
+    info: state.info,
+    count: state.count,
   };
 };
 
@@ -149,4 +179,5 @@ export default connect(mapStateToProps, {
   commentAdd,
   fetchComment,
   fetchPlayground,
+  fetchPlaygroundPagination,
 })(PlacesAutocomplete);

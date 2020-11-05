@@ -19,29 +19,24 @@ const NewsItems = (props) => {
     return <GroupNewsImag data={el} key={index}></GroupNewsImag>;
   });
   const date = moment(props.data.createdAt).fromNow();
-  // console.log(props.data.content.length);
-  let content = `${props.data.content.split(" ")}`;
-  // let content = props.data.content.split("");
 
-  // console.log(content);
+  let content = `${props.data.content}`;
   let text;
-  // text = `${content.join("")}`;
-  // console.log(props.data.content);
+
   const toggle = () => {
     setIsOpen(!isOpen);
-    setShow(false);
+    setShow(!show);
   };
 
   if (content.length > 600) {
     if (!isOpen) {
-      // text = content.slice(0, 600).join("") + "....." + "  ";
-      text= content.split()
-      console.log(text);
-      let test = text.join('  ')
-      console.log(test);
+      text = content.slice(0, 600) + "....." + "  "
     } else {
-      text = content.join(" ");
+      text = content;
+      console.log(text);
     }
+  }else{
+    text = content
   }
   const user = props.data.userId.imgCollection[0];
 
@@ -61,13 +56,14 @@ const NewsItems = (props) => {
   };
   const showOption = () => {
     setShowPop(!showPop);
-    console.log(showPop);
   };
+  
+ 
   return (
     <>
       <div className="contenair">
         <div className="info">
-          <div className="container">
+          <div className="info-container">
             <NavLink to={`/user/${props.data.userId._id}`}>
               <div className="userImage">
                 <img id="userPicture" src={user} alt="user"></img>
@@ -89,30 +85,29 @@ const NewsItems = (props) => {
           )}
         </div>
         {showPop && (
-                <div className="option">
-                  <di className="text">
-                    <h2>
-                      You are sure you want to remove this post ?
-                    </h2>
-                  </di>
-                  <div className="choice">
-                    <button onClick={handleDelete}>Yes I am sure</button>
-                    <button onClick={showOption} className="reject">
-                      No cancel{" "}
-                    </button>
-                  </div>
-                </div>
-              )}
+          <div className="option">
+            <di className="text">
+              <h2>You are sure you want to remove this post ?</h2>
+            </di>
+            <div className="choice">
+              <button onClick={handleDelete}>Yes I am sure</button>
+              <button onClick={showOption} className="reject">
+                No cancel{" "}
+              </button>
+            </div>
+          </div>
+        )}
         <div className="content" onClick={handleClickContent}>
           <div className="text">
-            <pre>
-            {props.data.content}
-              {/* {content} */}
-              {/* {`${content}`} */}
-              {content.length > 600 && (
-                <a onClick={toggle}> {isOpen ? "" : "Read more"}</a>
+            {props.data.content !== "undefined" &&
+              (
+                <pre>
+                  {text}
+                  {content.length > 600 && (
+                    <a onClick={toggle}> {isOpen ? "Reduce" : "Read more"}</a>
+                  )}
+                </pre>
               )}
-            </pre>
           </div>
           {props.data.imgCollection.length > 0 && <div>{image}</div>}
         </div>

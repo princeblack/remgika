@@ -91,20 +91,20 @@ export const Menu = (props) => {
       <div className="menu">
         <div className="" onClick={handleNewsPage}>
           <FontAwesomeIcon icon={faNewspaper} />
-          <ButtonToggle autoFocus>News</ButtonToggle>
+          {/* <ButtonToggle autoFocus>News</ButtonToggle> */}
         </div>
         <div className="" onClick={handleMembersPage}>
           <FontAwesomeIcon icon={faUsers} />
-          <ButtonToggle>Members</ButtonToggle>
+          {/* <ButtonToggle>Members</ButtonToggle> */}
         </div>
         <div className="" onClick={handleEventsPage}>
           <FontAwesomeIcon icon={faCalendarCheck} />
-          <ButtonToggle>Events</ButtonToggle>
+          {/* <ButtonToggle>Events</ButtonToggle> */}
         </div>
         {member && 
                 <div className="" onClick={handleChatPage}>
                 <FontAwesomeIcon icon={faComments} />
-                <ButtonToggle>Chat</ButtonToggle>
+                {/* <ButtonToggle>Chat</ButtonToggle> */}
               </div>
         }
         {IamAdminUser && (

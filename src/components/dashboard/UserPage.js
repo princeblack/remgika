@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { OneUser, userFriendreq ,myEvents} from "../../actions";
+import { OneUser, userFriendreq, myEvents } from "../../actions";
 import "../../scss/user.scss";
- import less from "../../img/less.svg";
+import less from "../../img/less.svg";
 import more from "../../img/more.svg";
 import people from "../../img/people.svg";
 import person from "../../img/person.svg";
@@ -11,9 +11,10 @@ import personRemove from "../../img/person-remove.svg";
 import moment from "moment";
 import { Groups } from "./Groups";
 import Friendrequest from "./Friendrequest";
-import Myfriend from "./Myfriend"
-import  ProfileEvent  from "./ProfileEvent";
+import Myfriend from "./Myfriend";
+import ProfileEvent from "./ProfileEvent";
 import { MutualFriend } from "./MutualFriend";
+import { NavLink } from "react-router-dom";
 
 export const UserPage = (props) => {
   const [state, setstate] = useState();
@@ -24,11 +25,10 @@ export const UserPage = (props) => {
   const [myFriend, setmyFriend] = useState(false);
   const [allMyEvent, setAllMyEvent] = useState(false);
 
-
   useEffect(() => {
     const id = props.match.params.id;
     props.OneUser(id);
-    props.myEvents(id)
+    props.myEvents(id);
   }, [props.match.params.id]);
   useEffect(() => {
     if (props.getOneUser._id) {
@@ -80,16 +80,26 @@ export const UserPage = (props) => {
     const id = props.getOneUser._id;
     props.userFriendreq(id);
   };
-  const handleMyevent = (e)=>{
-    setAllMyEvent(!allMyEvent)
+  const handleMyevent = (e) => {
+    setAllMyEvent(!allMyEvent);
     e.preventDefault();
-  }
+  };
   useEffect(() => {
-    if (props.friendReq || props.friendRefuse || props.friendAccepted || props.friendIsRemove) {
+    if (
+      props.friendReq ||
+      props.friendRefuse ||
+      props.friendAccepted ||
+      props.friendIsRemove
+    ) {
       const id = props.getOneUser._id;
       props.OneUser(id);
     }
-  }, [props.friendReq, props.friendRefuse, props.friendAccepted, props.friendIsRemove]);
+  }, [
+    props.friendReq,
+    props.friendRefuse,
+    props.friendAccepted,
+    props.friendIsRemove,
+  ]);
 
   let friendRequest;
   if (props.getOneUser._id) {
@@ -97,19 +107,24 @@ export const UserPage = (props) => {
       return <Friendrequest data={el} key={el._id}></Friendrequest>;
     });
   }
-  let allEvent ;
+  let allEvent;
   if (props.getOneUser._id) {
     allEvent = props.getOneUser.event.map((el, index) => {
       return <ProfileEvent data={el} key={el._id}></ProfileEvent>;
     });
   }
   let mutuelFriend;
-  let mutual ;
-  if (props.getOneUser._id) {
-    mutuelFriend = props.getOneUser.friend.filter(user => props.info.friendId.includes(user._id))
-    mutual = mutuelFriend.map((el, index)=> {
-      return <MutualFriend data={el} key={el._id}></MutualFriend>;
-    })
+  let mutual;
+
+  if (props.info.friendId) {
+    if (props.getOneUser._id && props.info.friendId.length > 0) {
+      mutuelFriend = props.getOneUser.friend.filter((user) =>
+        props.info.friendId.includes(user._id)
+      );
+      mutual = mutuelFriend.map((el, index) => {
+        return <MutualFriend data={el} key={el._id}></MutualFriend>;
+      });
+    }
   }
   return (
     <div className="user-container">
@@ -135,7 +150,6 @@ export const UserPage = (props) => {
             <>
               {!props.getOneUser.friendId.includes(props.info._id) && (
                 <div className="user-req">
-                  
                   <div className="back-green" onClick={jandleFriendReq}>
                     <>
                       {props.getOneUser.friendReqId.includes(props.info._id) ? (
@@ -152,6 +166,17 @@ export const UserPage = (props) => {
                     </>
                   </div>
                 </div>
+              )}
+              {props.getOneUser.friendId.includes(props.info._id) && (
+                <NavLink to="/Messager">
+                <div className="user-req">
+                  <div className="back-green">
+                    
+                      <p>Go to message</p>
+                    
+                  </div>
+                </div>
+                </NavLink>
               )}
             </>
           )}
@@ -185,11 +210,9 @@ export const UserPage = (props) => {
               {allMyEvent && (
                 <div className="info">
                   {props.getOneUser.event.length > 0 ? (
+                    <>{allEvent}</>
+                  ) : (
                     <>
-                      {allEvent}
-                    </>
-                  ):(
-                    <>  
                       <div>No event available</div>
                     </>
                   )}
@@ -255,8 +278,10 @@ const mapStateToProps = (state) => ({
   info: state.info,
   friendAccepted: state.friendAccepted,
   friendRefuse: state.friendRefuse,
-  friendIsRemove : state.friendIsRemove,
+  friendIsRemove: state.friendIsRemove,
   personalEvents: state.personalEvents,
 });
 
-export default connect(mapStateToProps, { OneUser, userFriendreq, myEvents })(UserPage);
+export default connect(mapStateToProps, { OneUser, userFriendreq, myEvents })(
+  UserPage
+);

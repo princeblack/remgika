@@ -24,28 +24,23 @@ export const SignUp = (props) => {
 
     const handleFirstName =(e)=>{
         setFirstName(e.target.value)
-        console.log(firstName);
     }
     const handleLastName =(e)=>{
         setLastName(e.target.value)
-        console.log(lastName);
 
     }
     const handleEmail =(e)=>{
         setEmail(e.target.value)
-        console.log(email);
 
     }
     const handleCity =(e)=>{
         setCity(e.target.value)
         setValue(e.target.value);
 
-        console.log(city);
 
     }
     const handlePassword =(e)=>{
         setPassword(e.target.value)
-        console.log(password);
 
     }
     const {
@@ -134,7 +129,7 @@ export const SignUp = (props) => {
   const handleFiles = (event) => {
     if (maxSelectFile(event) && checkMimeType(event)) {
       // if return true allow to setState
-      console.log(event.target.files[0]);
+      // console.log(event.target.files[0]);
     //   setState({
     //     imgCollection: event.target.files[0],
     //   });
@@ -156,6 +151,7 @@ export const SignUp = (props) => {
   };
   const isLoggedIn = props.isLoggedIn;
     const sign = props.sign;
+    const emailExist = props.emailExist
     return (
       <>
         {isLoggedIn ? (
@@ -164,7 +160,7 @@ export const SignUp = (props) => {
           <Redirect to="/dashboard" />
         ) : (
           <div id="sign-up">
-            <LoginHeader />
+            {/* <LoginHeader /> */}
             <div className="sign-body">
               {black && (
                 <>
@@ -233,6 +229,9 @@ export const SignUp = (props) => {
                       required
                     />
                   </div>
+                  {emailExist &&
+                  <p className="emailExist">this email is already used for another account</p>
+                  }
                   <div className="row flex-revcol-left">
                     <input
                       className="input-transition"
@@ -245,10 +244,13 @@ export const SignUp = (props) => {
                       required
                     />
                   </div>
+                  <div className="terms">
+                    <p>By clicking Sign Up, you agree to our <a href="/terms">Terms</a> , <a href="/privacy">Privacy Policy</a></p>
+                  </div>
                   <input
                     className="login-submit"
                     type="submit"
-                    value="Submit"
+                    value="Sign Up"
                   />
                 </form>
                 <p>
@@ -266,7 +268,8 @@ export const SignUp = (props) => {
 
 const mapStateToProps = (state) => ({
     isLoggedIn : state.isLoggedIn,
-    sign : state.sign
+    sign : state.sign,
+    emailExist :  state.emailExist
 });
 
 const mapDispatchToProps = {};

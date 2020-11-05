@@ -233,14 +233,12 @@ $remgika: #c7cda4;
               justify-content: center;
               align-items: center;
               background-color: white;
-              padding: 20px;
               overflow: hidden;
               flex-wrap: nowrap;
               width: 100%;
               .contenair {
                 width: 90%;
-                box-shadow: -1px -1px 4px #dcdef19f,
-                  rgb(226, 216, 216) 1px 1px 4px;
+                
                 .text-contenair {
                   width: 100%;
                   border-bottom: groove;
@@ -266,6 +264,7 @@ $remgika: #c7cda4;
                     border: 0;
                     border-radius: 5px;
                     font-size: 20px;
+                    background-color: #69ca62;
                   }
                 }
                 #image-block {

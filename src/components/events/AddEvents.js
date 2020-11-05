@@ -20,6 +20,8 @@ const AddEvents = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [redirect, setRedirect] = useState(false);
+  const [location, setLocation] = useState([]);
+
   useEffect(() => {
     async function f() {
       if (props.addEvents) {
@@ -71,7 +73,9 @@ const AddEvents = (props) => {
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {})
+      .then(({ lat, lng }) => {
+        setLocation([lng, lat]);
+      })
       .catch((error) => {});
   };
 
@@ -122,6 +126,7 @@ const AddEvents = (props) => {
     console.log(e);
     
     const data = new FormData();
+    data.append("location", [location[0], location[1]]);
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
     }

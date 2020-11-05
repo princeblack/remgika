@@ -9,10 +9,9 @@ import io from "socket.io-client";
 import { getGroupChats } from "../../actions";
 import Chat from "./Chat";
 import ScrollToBottom from "react-scroll-to-bottom";
-// import { css } from "glamor";
+import { css } from "glamor";
 import TextareaAutosize from "react-autosize-textarea";
-
-let socket;
+import socket from '../Sockect'
 
 export const ChatContainer = (props) => {
   const [welcome, setWelcome] = useState("");
@@ -22,9 +21,7 @@ export const ChatContainer = (props) => {
   var [page, setPage] = useState(0);
   let test = 1;
   const logginOut = props.isLoggedIn;
-  const ENDPOINT = "http://localhost:8000";
 
-  // const ENDPOINT = "https://node-server.remgika.com/";
   const fullName = props.info.firstName + " " + props.info.lastName;
   const room = props.data._id;
   const user = props.info._id;
@@ -32,9 +29,10 @@ export const ChatContainer = (props) => {
   let skip = 0;
   let limit = 10;
   let loading = false;
-  socket = io(ENDPOINT);
+
   // connected to the room
   useEffect(() => {
+    
     socket.emit("join", { room: room, name: fullName, userId: user });
   }, [room, user, fullName]);
 
@@ -88,7 +86,7 @@ export const ChatContainer = (props) => {
     if (event.key === "Enter") {
     }
     if (usertext) {
-      socket.emit("sendMessage", {
+      socket.emit("groupChat", {
         message: usertext,
         room: room,
         name: fullName,
@@ -98,10 +96,10 @@ export const ChatContainer = (props) => {
     }
   };
 
-  // const ROOT_CSS = css({
-  //   height: "50vh",
-  //   width: "85%",
-  // });
+  const ROOT_CSS = css({
+    height: "50vh",
+    width: "90%",
+  });
   function clearEmo() {
     if (show) {
       setShow(!show);
@@ -110,7 +108,7 @@ export const ChatContainer = (props) => {
 
   return (
     <div className="chatContainer">
-      <ScrollToBottom>
+      <ScrollToBottom className={ROOT_CSS}>
         <div className="chatItems" onClick={clearEmo}>
           {allChatMessages}
         </div>

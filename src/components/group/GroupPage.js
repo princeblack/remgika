@@ -53,7 +53,6 @@ const [isTrue,setIsTrue] = useState(false);
   }
   
   const image = data.imgCollection;
-
   return (
     <>
       {redirect && <Redirect to="/login"></Redirect>}

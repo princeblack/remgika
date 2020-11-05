@@ -5,11 +5,13 @@ const initialState = {
   loading: true,
   allUserInfo: [],
   isLoggedIn: false,
+  loginInfo: false,
   sign: false,
   info: {},
   getOneUser: {},
   passForgot : false,
   valideToken : false,
+  emailExist : false,
   // friend user
   friendReq: false,
   friendAccepted: false,
@@ -36,6 +38,7 @@ const initialState = {
   eventIsDelete: false,
   getOneEvent: [],
   joinEvent: false,
+
   // COMMENT
   addComment: false,
   getComment: false,
@@ -43,6 +46,7 @@ const initialState = {
   writerImg: [],
   writerInfo: [],
   commentIsDelete: false,
+  eventCount : 0,
   // Groups
   addGroup: false,
   allPublicGroup: [],
@@ -127,9 +131,11 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("length")
     ) {
       state.isLoggedIn = false;
+      state.loginInfo= Error
     } else {
       state.isLoggedIn = true;
       state.sign = true;
+      state.loginInfo= true
       state.info =  action.payload;
     }
     state.loading = false;
@@ -137,17 +143,21 @@ const mainReducer =  (state = initialState, action) => {
   }
 
   if (action.type === "HANDLE_SIGN") {
+    console.log(action.payload);
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
-      action.payload.hasOwnProperty("length")
+      action.payload.hasOwnProperty("length")||
+      action.payload.res
     ) {
       state.sign = false;
       state.isLoggedIn = false;
+      state.emailExist = action.payload
     } else {
       state.sign = true;
       state.isLoggedIn = true;
       state.info = action.payload;
+      
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -281,7 +291,15 @@ const mainReducer =  (state = initialState, action) => {
    ************************ PLAYGROUND ***********************
    ***********************************************************/
   if (action.type === "FETCH_PLAYGROUND") {
-    state.playground = action.payload;
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") 
+    ) {
+      state.playground = [];
+    } else {
+      state.playground = action.payload.play; 
+      state.count = action.payload.count
+    }
     return Object.assign({}, state);
   }
   if (action.type === "FETCH_ONE_PLAYGROUND") {
@@ -396,7 +414,18 @@ const mainReducer =  (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "FETCH_EVENTS") {
-    state.eventsList = action.payload;
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors") ||
+      action.payload.hasOwnProperty("length")
+    ) {
+      state.eventsList = [];
+    } else {
+      state.eventsList = action.payload.event;
+      state.eventCount = action.payload.count
+
+
+    }
     return Object.assign({}, state);
   }
   if (action.type === "MY_EVENTS") {

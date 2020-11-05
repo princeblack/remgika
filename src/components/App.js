@@ -26,11 +26,12 @@ import MyArticles from './store/MyArticles';
 import Articles from './store/Articles';
 import Messager from './message/Messager';
 import Chat from './message/Chat';
-import Zest from './message/Zest'
 import Socket from "./Sockect"
 import socket from "./Sockect";
+import Terms from "./login-signUp/Terms"
 import  PasswordForgot  from "./login-signUp/PasswordForgot";
 import  PasswordReset  from "./login-signUp/PasswordReset";
+import Privacy from "./login-signUp/Privacy";
 const App = (props)=> {
 
   useEffect(() => {
@@ -45,7 +46,11 @@ const App = (props)=> {
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/login/:id" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signup/:id" component={SignUp} />
+            <Route exact path="/terms" component={Terms} />
+            <Route exact path="/privacy" component={Privacy} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/user/:id" component={UserPage} />
             <Route exact path="/playground" component={Playground} />

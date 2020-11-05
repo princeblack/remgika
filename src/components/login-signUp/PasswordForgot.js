@@ -58,7 +58,7 @@ useEffect(()=>{
     }, 3000);
 }
   return (
-    <div className="container">
+    <div className="password-container">
       <div className="password-box">
         <div className="text">
           <h2>Please enter your email</h2>

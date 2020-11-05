@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { handleLogin } from "../../actions";
 import black from "../../img/black-man.svg";
+import children from "../../img/children.svg";
+import event from "../../img/event.svg";
+import group from "../../img/group.svg";
+
 import "../../scss/welcom.scss";
 
 class Welcome extends Component {
@@ -29,26 +33,55 @@ class Welcome extends Component {
             <div className="first-section">
               {black && (
                 <>
-                  <img src={black} alt="remgika"></img>
                   <div className="remgika-texte">
-                    <h2>Welcome to Remgika</h2>
+                    <h1>Welcome to Remgika</h1>
+                    <h3>social network for parents</h3>
                     <p>
-                      Find playground or add playground to help other parents
-                      find playgrounds in your city.
+                      Find or add a playground that is around you to help other
+                      parents find playgrounds in their city or neighborhood.
                     </p>
+                  </div>
+                  <img src={black} alt="remgika"></img>
+                </>
+              )}
+            </div>
+            <div className="first-section reverse">
+              {children && (
+                <>
+                  <img src={children} alt="remgika"></img>
+                  <div className="remgika-texte">
+                    <h2>Playgrounds</h2>
                     <p>
-                      You don't know what to do with your children! find an
-                      activity near you to enjoy with them, or create your own
-                      event.
+                      Find playgrounds around you with your geolocation or in
+                      the search bar indicating the address of your location or
+                      the city.
                     </p>
-                    <div className="soon">
-                      <p className="title-soon">Coming soon</p>
-                      <div>
-                        <p>Group</p>
-                        <p>Chat</p>
-                        <p>Sharing</p>
-                      </div>
-                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="first-section">
+              {event && (
+                <>
+                  <div className="remgika-texte">
+                    <h2>Events</h2>
+                    <p>
+                    You don't know what to do with your children! find a activity near you to enjoy with them, or create your own  event.
+                    </p>
+                  </div>
+                  <img src={event} alt="remgika"></img>
+                </>
+              )}
+            </div>
+            <div className="first-section reverse">
+              {group && (
+                <>
+                  <img src={group} alt="remgika"></img>
+                  <div className="remgika-texte">
+                    <h2>Groups</h2>
+                    <p>
+                    Build your own network of parents by creating a Group or joining.
+                    </p>
                   </div>
                 </>
               )}

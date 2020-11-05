@@ -16,7 +16,8 @@ import {
   faUsers,
   faCalendar,
   faStore,
-  faCommentAlt
+  faCommentAlt,
+  faIdCard
   
 } from "@fortawesome/free-solid-svg-icons";
 class Navigation extends Component {
@@ -87,8 +88,8 @@ class Navigation extends Component {
               </div>
               <div className="menu-item" onClick={this.toggleSidebar}>
                 <NavLink activeStyle={active} to="/dashboard">
-                  <FontAwesomeIcon icon={faCarrot} />
-                  {/* Dashboard */}
+                  <FontAwesomeIcon icon={faIdCard} />
+                  Dashboard
                 </NavLink>
               </div>
             </>
@@ -96,25 +97,25 @@ class Navigation extends Component {
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/playground">
               <FontAwesomeIcon icon={faDemocrat} />
-              {/* Playgrounds */}
+              Playgrounds
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/events">
               <FontAwesomeIcon icon={faCalendar} />
-              {/* Events */}
+              Events
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/groups">
               <FontAwesomeIcon icon={faUsers} />
-              {/* Groups */}
+              Groups
             </NavLink>
           </div>
           <div className="menu-item" onClick={this.toggleSidebar}>
             <NavLink activeStyle={active} to="/store">
                <FontAwesomeIcon icon={faStore} />
-              {/* Share market */}
+              market
             </NavLink>
           </div>
           {isLoggedIn && (

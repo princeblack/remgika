@@ -29,6 +29,7 @@ import {
   updatePlayground,
   likeOnePlayground,
   unLikeOnePlayground,
+  getPlaygroundPagination,
 
   // events 
 
@@ -249,7 +250,16 @@ export const playground = (payload) => {
 
 export const fetchPlayground = (payload) => {
   return async (dispatch) => {
-    const data = await getPlayground();
+    const data = await getPlayground(payload);
+    dispatch({
+      type: "FETCH_PLAYGROUND",
+      payload: data,
+    });
+  };
+};
+export const fetchPlaygroundPagination = (skip,location) => {
+  return async (dispatch) => {
+    const data = await getPlaygroundPagination(skip,location);
     dispatch({
       type: "FETCH_PLAYGROUND",
       payload: data,

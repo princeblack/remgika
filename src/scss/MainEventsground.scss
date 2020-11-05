@@ -94,7 +94,18 @@ $remgika: #c7cda4;
       background-color: rgba(58, 57, 57, 0.335);
     }
   }
- 
+  .pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 100px;
+    li{
+      list-style: none;
+      padding: 5px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
   .event-table {
     display: flex;
     flex-wrap: wrap;

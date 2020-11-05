@@ -264,7 +264,25 @@ export const removeOneFriend = async (data) =>{
 export const getPlayground = async (data) => {
   try {
     const res = await (
-      await fetch(`${url}/playground`, {
+      await fetch(`${url}/playground?city=${data}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+    ).json();
+
+    return res;
+  } catch (error) {
+    return [];
+  }
+};
+export const getPlaygroundPagination = async (skip,location) => {
+  console.log(skip);
+  try {
+    const res = await (
+      await fetch(`${url}/playground?skip=${skip}&city=${location}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

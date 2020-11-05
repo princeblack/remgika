@@ -11,12 +11,65 @@ import camera from "../../img/camera.svg";
 import "../../scss/Playground.scss";
 import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
+import axios from "axios";
+import Post from "./Post"
+import Pagination from "./Pagination";
 
 const EventsAutocomplete = (props) => {
   const [userId] = useState(0);
+  const [location, setLocation] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
+
+  const [postsPerPage] = useState(12);
+
+  const url = "http://localhost:8000";
+
   useEffect(() => {
-    props.fetcheventsList();
-  }, [userId]);
+    if ("geolocation" in navigator) {
+      /* la géolocalisation est disponible */
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLocation([position.coords.longitude, position.coords.latitude]);
+      });
+    }else{
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLocation([position.coords.longitude, position.coords.latitude]);
+      });
+    }
+  }, [navigator.geolocation]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      let cancel;
+      const res = axios({
+        method: "GET",
+        url: `${url}/events`,
+        withCredentials: true,
+        params: { skip: currentPage, city: location },
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        cancelToken: new axios.CancelToken(c => cancel = c)
+      })
+        .then((res) => {
+          setPosts(res.data.event);
+          setTotal(res.data.count)
+          setLoading(false);
+          
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    if (location.length > 0) {
+      fetchPosts();
+    }
+  }, [location, currentPage]);
+
   const {
     ready,
     value,
@@ -50,7 +103,9 @@ const EventsAutocomplete = (props) => {
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {})
+      .then(({ lat, lng }) => {
+        setLocation([lng, lat]);
+      })
       .catch((error) => {});
   };
 
@@ -74,22 +129,8 @@ const EventsAutocomplete = (props) => {
     });
     setgetEvents(filterCharacter);
   };
-  let events;
-  events = props.eventsList.map((el, index) => {
-    return (
-      <Events
-        user={props.info}
-        eventsIndex={index}
-        data={el}
-        key={index}
-      ></Events>
-    );
-  });
-  if (getEvents !== undefined) {
-    events = getEvents.map((el, index) => {
-      return <Events user={props.info} eventsIndex={index} data={el} key={index}></Events>;
-    });
-  }
+ 
+
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;  
 
@@ -104,6 +145,14 @@ const EventsAutocomplete = (props) => {
   }, []); 
   
   let cardNumber = 1;
+
+  const currentPosts = posts;
+  // console.log(posts);
+
+  // change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+ 
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">
@@ -131,8 +180,9 @@ const EventsAutocomplete = (props) => {
         <hr></hr>
       </div>
           <div className="event-table">
-          {events}
+            <Post post={currentPosts} loading={loading} />
         </div>
+        <Pagination postsPerPage={postsPerPage} totalPost={total}  paginate={paginate} currentPage={currentPage}/>
       
     </>
   );
@@ -143,6 +193,7 @@ const mapStateToProps = (state) => {
     eventsList: state.eventsList,
     addEvents: state.addEvents,
     info: state.info,
+    eventCount :  state.eventCount
   };
 };
 export default connect(mapStateToProps, { fetcheventsList})(

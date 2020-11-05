@@ -18,6 +18,7 @@ const AddPlaygroung = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [imgCollection, setimgCollection] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [location, setLocation] = useState([]);
 
   useEffect(() => {    
     async function f() {
@@ -70,7 +71,9 @@ const AddPlaygroung = (props) => {
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {})
+      .then(({ lat, lng }) => {
+        setLocation([lng, lat]);
+      })
       .catch((error) => {});
   };
 
@@ -119,6 +122,7 @@ const AddPlaygroung = (props) => {
 
   const onSubmit = (e) => {    
     const data = new FormData();
+    data.append("location", [location[0], location[1]]);
     for (const key of Object.keys(e.imgCollection)) {
       data.append("imgCollection", e.imgCollection[key]);
     }
