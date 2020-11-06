@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
-import { connect } from "react-redux"; 
+import { connect } from "react-redux";
 import { fetcheventsList } from "../../actions";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -12,7 +12,7 @@ import "../../scss/Playground.scss";
 import Events from "./Events";
 import ItemsCarousel from "react-items-carousel";
 import axios from "axios";
-import Post from "./Post"
+import Post from "./Post";
 import Pagination from "./Pagination";
 
 const EventsAutocomplete = (props) => {
@@ -33,7 +33,7 @@ const EventsAutocomplete = (props) => {
       navigator.geolocation.getCurrentPosition(function (position) {
         setLocation([position.coords.longitude, position.coords.latitude]);
       });
-    }else{
+    } else {
       navigator.geolocation.getCurrentPosition(function (position) {
         setLocation([position.coords.longitude, position.coords.latitude]);
       });
@@ -53,16 +53,14 @@ const EventsAutocomplete = (props) => {
           "Content-Type": "application/json",
         },
 
-        cancelToken: new axios.CancelToken(c => cancel = c)
+        cancelToken: new axios.CancelToken((c) => (cancel = c)),
       })
         .then((res) => {
           setPosts(res.data.event);
-          setTotal(res.data.count)
+          setTotal(res.data.count);
           setLoading(false);
-          
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     };
     if (location.length > 0) {
       fetchPosts();
@@ -128,21 +126,20 @@ const EventsAutocomplete = (props) => {
     });
     setgetEvents(filterCharacter);
   };
- 
 
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 40;  
+  const chevronWidth = 40;
 
   const [size, setSize] = useState(0);
   useLayoutEffect(() => {
     function updateSize() {
       setSize(window.innerWidth);
     }
-    window.addEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
     updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []); 
-  
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   let cardNumber = 1;
 
   const currentPosts = posts;
@@ -150,7 +147,6 @@ const EventsAutocomplete = (props) => {
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
- 
   return (
     <>
       <div ref={ref} className="MainEvents-autocomplte">
@@ -177,11 +173,15 @@ const EventsAutocomplete = (props) => {
         <h1>Events</h1>
         <hr></hr>
       </div>
-          <div className="event-table">
-            <Post post={currentPosts} loading={loading} />
-        </div>
-        <Pagination postsPerPage={postsPerPage} totalPost={total}  paginate={paginate} currentPage={currentPage}/>
-      
+      <div className="event-table">
+        <Post post={currentPosts} loading={loading} />
+      </div>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPost={total}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </>
   );
 };
@@ -191,9 +191,9 @@ const mapStateToProps = (state) => {
     eventsList: state.eventsList,
     addEvents: state.addEvents,
     info: state.info,
-    eventCount :  state.eventCount
+    eventCount: state.eventCount,
   };
 };
-export default connect(mapStateToProps, { fetcheventsList})(
+export default connect(mapStateToProps, { fetcheventsList })(
   EventsAutocomplete
 );

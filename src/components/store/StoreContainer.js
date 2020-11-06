@@ -11,6 +11,8 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import ArticleItems from "./ArticleItems";
+import Post from "./Post";
+import Pagination from "./Pagination";
 
 export const StoreContainer = (props) => {
   const [city, setCity] = useState();
@@ -19,7 +21,11 @@ export const StoreContainer = (props) => {
   const [option, setOption] = useState("Free");
   const [distance, setDistance] = useState(5);
   const [word, setWord] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
+  const [postsPerPage] = useState(12);
   useEffect(() => {
     if ("geolocation" in navigator) {
       /* la géolocalisation est disponible */
@@ -30,21 +36,19 @@ export const StoreContainer = (props) => {
       /* la géolocalisation n'est pas disponible */
       navigator.geolocation.getCurrentPosition(function (position) {});
     }
-  }, []);
+  }, [navigator.geolocation]);
   useEffect(() => {
-    props.ArticleCityAndTitle([location], title, option, distance);
-  }, []);
-
-  useEffect(() => {
-    if (props.info.location) {
-      setLocation([
-        props.info.location.coordinates[0],
-        props.info.location.coordinates[1],
-      ]);
-
-      props.ArticleCityAndTitle([location], title, option, distance);
+    if (location.length > 0) {
+      props.ArticleCityAndTitle([location], title, option, distance,currentPage);
     }
-  }, [props.info]);
+    
+  }, [location,currentPage]);
+
+
+
+  useEffect(() => {
+    setTotal(props.articleTotal)
+  }, [props.articleTotal])
   useEffect(() => {
     if (word.length >= 5) {
       props.matchTitle(word);
@@ -119,7 +123,8 @@ export const StoreContainer = (props) => {
 
   const handleSeacrh = (e) => {
     e.preventDefault();
-    props.ArticleCityAndTitle([location], title, option, distance);
+    setCurrentPage(1)
+    props.ArticleCityAndTitle([location], title, option, distance,currentPage);
   };
   let artitlesArray;
   if (props.allArticles) {
@@ -151,6 +156,12 @@ export const StoreContainer = (props) => {
     });
   }  
   const active = { color: "#6bc477" };
+
+  const currentPosts = props.allArticles;
+
+  // change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container" onClick={clear} >
       <div className="store-article">
@@ -210,8 +221,17 @@ export const StoreContainer = (props) => {
           </div>
         </div>
         <div className="articles-box">
-          <div className="articles-items">{props.allArticles && artitlesArray}</div>
+          <div className="articles-items">
+            {props.allArticles && 
+            <Post post={currentPosts} loading={loading} />
+            }</div>
         </div>
+        <Pagination
+        postsPerPage={postsPerPage}
+        totalPost={total}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
       </div>
     </div>
   );
@@ -221,6 +241,7 @@ const mapStateToProps = (state) => ({
   allArticles: state.allArticles,
   info: state.info,
   allMatch: state.allMatch,
+  articleTotal : state.articleTotal
 });
 
 export default connect(mapStateToProps, { ArticleCityAndTitle, matchTitle })(

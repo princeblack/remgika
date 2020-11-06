@@ -9,14 +9,14 @@ const initialState = {
   sign: false,
   info: {},
   getOneUser: {},
-  passForgot : false,
-  valideToken : false,
-  emailExist : false,
+  passForgot: false,
+  valideToken: false,
+  emailExist: false,
   // friend user
   friendReq: false,
   friendAccepted: false,
-  friendRefuse : false,
-  friendIsRemove: false ,
+  friendRefuse: false,
+  friendIsRemove: false,
   passIsUpdate: false,
   // user Image
   proImage: [],
@@ -46,7 +46,7 @@ const initialState = {
   writerImg: [],
   writerInfo: [],
   commentIsDelete: false,
-  eventCount : 0,
+  eventCount: 0,
   // Groups
   addGroup: false,
   allPublicGroup: [],
@@ -71,24 +71,25 @@ const initialState = {
   updateGroupPIc: false,
 
   // articles
-  articleIsAdd : false,
+  articleIsAdd: false,
   newArticle: [],
   allArticles: [],
-  allMatch : [],
-  userArticle : [],
-  oneArticleItme : [],
-  articleIsUpdate : false,
-  articleIssave : false,
-  articleIsDelete : false,
+  allMatch: [],
+  userArticle: [],
+  oneArticleItme: [],
+  articleIsUpdate: false,
+  articleIssave: false,
+  articleIsDelete: false,
+  articleTotal: 0,
 
   // message
-  userMsg : {},
-  myMsg : [],
+  userMsg: {},
+  myMsg: [],
   getRefrec: "",
-  msgIsRead : false
+  msgIsRead: false,
 };
 
-const mainReducer =  (state = initialState, action) => {
+const mainReducer = (state = initialState, action) => {
   /**********************************************************
    ********************* USER LOGIN & SIGN-UP ***************
    ***********************************************************/
@@ -106,7 +107,7 @@ const mainReducer =  (state = initialState, action) => {
       state.addGroup = false;
       state.joinEvent = false;
       state.valideImg = false;
-      state.info =  action.payload;
+      state.info = action.payload;
     }
     state.loading = false;
 
@@ -118,10 +119,10 @@ const mainReducer =  (state = initialState, action) => {
   }
   if (action.type === "GET_ONE_USERS") {
     state.getOneUser = action.payload;
-    state.friendReq= false;
-    state.friendAccepted= false;
-    state.friendRefuse= false;
-    state.friendIsRemove= false;
+    state.friendReq = false;
+    state.friendAccepted = false;
+    state.friendRefuse = false;
+    state.friendIsRemove = false;
     return Object.assign({}, state);
   }
   if (action.type === "HANDLE_LOGIN") {
@@ -131,12 +132,12 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("length")
     ) {
       state.isLoggedIn = false;
-      state.loginInfo= Error
+      state.loginInfo = Error;
     } else {
       state.isLoggedIn = true;
       state.sign = true;
-      state.loginInfo= true
-      state.info =  action.payload;
+      state.loginInfo = true;
+      state.info = action.payload;
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -146,17 +147,16 @@ const mainReducer =  (state = initialState, action) => {
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
-      action.payload.hasOwnProperty("length")||
+      action.payload.hasOwnProperty("length") ||
       action.payload.res
     ) {
       state.sign = false;
       state.isLoggedIn = false;
-      state.emailExist = action.payload
+      state.emailExist = action.payload;
     } else {
       state.sign = true;
       state.isLoggedIn = true;
       state.info = action.payload;
-      
     }
     state.loading = false;
     return Object.assign({}, state);
@@ -169,37 +169,35 @@ const mainReducer =  (state = initialState, action) => {
   }
   if (action.type === "PASSWORD_FORGOT") {
     state.passForgot = action.payload;
-    state.valideToken = false
+    state.valideToken = false;
     return Object.assign({}, state);
   }
   if (action.type === "TOKEN_VALIDATION") {
-
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.valideToken = Error
+      state.valideToken = Error;
     } else {
       state.passForgot = false;
-      state.valideToken = action.payload
+      state.valideToken = action.payload;
     }
     return Object.assign({}, state);
   }
   if (action.type === "PASSWORD_RESET") {
-
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.passIsUpdate = Error
+      state.passIsUpdate = Error;
     } else {
       state.passIsUpdate = true;
-    }    
+    }
     return Object.assign({}, state);
   }
-   /**********************************************************
+  /**********************************************************
    ************************ friend ***********************
    ***********************************************************/
   if (action.type === "FRIEND_REQUEST") {
@@ -208,9 +206,9 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.friendReq= false;
+      state.friendReq = false;
     } else {
-      state.friendReq= true;
+      state.friendReq = true;
     }
     return Object.assign({}, state);
   }
@@ -220,9 +218,9 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.friendAccepted= false;
+      state.friendAccepted = false;
     } else {
-      state.friendAccepted= true;
+      state.friendAccepted = true;
     }
     return Object.assign({}, state);
   }
@@ -233,9 +231,9 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.friendRefuse= false;
+      state.friendRefuse = false;
     } else {
-      state.friendRefuse= true;
+      state.friendRefuse = true;
     }
     return Object.assign({}, state);
   }
@@ -245,9 +243,9 @@ const mainReducer =  (state = initialState, action) => {
       action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
-      state.friendIsRemove= false;
+      state.friendIsRemove = false;
     } else {
-      state.friendIsRemove= true;
+      state.friendIsRemove = true;
     }
     return Object.assign({}, state);
   }
@@ -292,12 +290,12 @@ const mainReducer =  (state = initialState, action) => {
   if (action.type === "FETCH_PLAYGROUND") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors") 
+      action.payload.hasOwnProperty("errors")
     ) {
       state.playground = [];
     } else {
-      state.playground = action.payload.play; 
-      state.count = action.payload.count
+      state.playground = action.payload.play;
+      state.count = action.payload.count;
     }
     return Object.assign({}, state);
   }
@@ -421,9 +419,7 @@ const mainReducer =  (state = initialState, action) => {
       state.eventsList = [];
     } else {
       state.eventsList = action.payload.event;
-      state.eventCount = action.payload.count
-
-
+      state.eventCount = action.payload.count;
     }
     return Object.assign({}, state);
   }
@@ -486,10 +482,10 @@ const mainReducer =  (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "FETCH_COMMENT") {
-      state.allComment = action.payload;
-      state.addComment = false;
-      state.commentIsDelete = false;
-    
+    state.allComment = action.payload;
+    state.addComment = false;
+    state.commentIsDelete = false;
+
     return Object.assign({}, state);
   }
   if (action.type === "GET_WRITER_IMAGE") {
@@ -744,77 +740,85 @@ const mainReducer =  (state = initialState, action) => {
     }
     return Object.assign({}, state);
   }
-   /**********************************************************
+  /**********************************************************
    ************************ Profile iMAGES ***********************
    ***********************************************************/
-  if(action.type === "NEW_ARTICLES"){
+  if (action.type === "NEW_ARTICLES") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
       state.newArticle = [];
       state.articleIsAdd = false;
-    }else{
+    } else {
       state.newArticle = action.payload;
       state.articleIsAdd = true;
     }
     return Object.assign({}, state);
   }
-  if(action.type === "UPDATE_ARTICLES"){
+  if (action.type === "UPDATE_ARTICLES") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
       state.articleIsUpdate = false;
-    }else{
+    } else {
       state.articleIsUpdate = true;
     }
     return Object.assign({}, state);
   }
-  if(action.type === "SAVE_ARTICLES"){
+  if (action.type === "SAVE_ARTICLES") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
       state.articleIssave = false;
-    }else{
+    } else {
       state.articleIssave = true;
     }
     return Object.assign({}, state);
   }
-  if(action.type === "ALL_ARTICLES_CITY_OR_TITLE"){
-    state.allArticles = action.payload;
-    state.articleIsAdd = false;
-    state.articleIsDelete = false;
+  if (action.type === "ALL_ARTICLES_CITY_OR_TITLE") {
+    if (
+      action.payload.hasOwnProperty("error") ||
+      action.payload.hasOwnProperty("errors")
+    ) {
+      state.allArticles = [];
+    } else {
+      state.allArticles = action.payload.articles;
+      state.articleTotal = action.payload.count;
+      state.articleIsAdd = false;
+      state.articleIsDelete = false;
+    }
 
     return Object.assign({}, state);
   }
-  if (action.type=== "ONE_ARTICLES") {
-    state.oneArticleItme = action.payload
+  if (action.type === "ONE_ARTICLES") {
+    state.oneArticleItme = action.payload;
     state.articleIsAdd = false;
     state.articleIsUpdate = false;
     state.articleIssave = false;
     return Object.assign({}, state);
   }
-  if (action.type=== "MACTH_ARTICLE_BY_TITLE") {
-    state.allMatch = action.payload
+  if (action.type === "MACTH_ARTICLE_BY_TITLE") {
+    state.allMatch = action.payload;
     return Object.assign({}, state);
   }
   if (action.type === "GET_USER_ARTICLES") {
-    state.userArticle = action.payload
-    return Object.assign({},state)
+    state.userArticle = action.payload;
+    return Object.assign({}, state);
   }
-  if(action.type === "DELETE_ARTICLES"){
+  if (action.type === "DELETE_ARTICLES") {
     if (
       action.payload.hasOwnProperty("error") ||
-      action.payload.hasOwnProperty("errors")||
+      action.payload.hasOwnProperty("errors") ||
       action.payload.hasOwnProperty("length")
     ) {
       state.articleIsDelete = false;
-    }else{
+    } else {
       state.articleIsDelete = true;
     }
     return Object.assign({}, state);
@@ -822,26 +826,26 @@ const mainReducer =  (state = initialState, action) => {
   /**********************************************************
    ************************ message ***********************
    ***********************************************************/
-  if(action.type === "GET_MESSAGE"){
+  if (action.type === "GET_MESSAGE") {
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors")
     ) {
       state.myMsg = [];
-    }else{
+    } else {
       state.myMsg = action.payload;
     }
     return Object.assign({}, state);
   }
-  if(action.type === "USERS_MESSAGE"){
+  if (action.type === "USERS_MESSAGE") {
     if (
       action.payload.hasOwnProperty("error") ||
       action.payload.hasOwnProperty("errors")
     ) {
       state.userMsg = 0;
-    }else{
+    } else {
       state.userMsg = action.payload;
-      state.msgIsRead = false
+      state.msgIsRead = false;
     }
     return Object.assign({}, state);
   }
@@ -850,10 +854,9 @@ const mainReducer =  (state = initialState, action) => {
     return Object.assign({}, state);
   }
   if (action.type === "READ_MESSAGE") {
-    state.msgIsRead = true
+    state.msgIsRead = true;
     return Object.assign({}, state);
   }
-
 
   return state;
 };

@@ -658,9 +658,9 @@ export const updateGroupPhoto= (payload,info) => {
     }
  }
 
- export const ArticleCityAndTitle = (city,title,option,distance) =>{
+ export const ArticleCityAndTitle = (city,title,option,distance,currentPage) =>{
   return async (dispatch)=>{
-    const data = await getArticlesCityOrTitle(city,title,option,distance);
+    const data = await getArticlesCityOrTitle(city,title,option,distance,currentPage);
     dispatch({
       type: "ALL_ARTICLES_CITY_OR_TITLE",
       payload: data

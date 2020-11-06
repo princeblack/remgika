@@ -1,7 +1,7 @@
 import { fetchComment } from "../actions";
 
-const url = "https://node-server.remgika.com";
-// const url = "http://localhost:8000";
+// const url = "https://node-server.remgika.com";
+const url = "http://localhost:8000";
 
 export const checkCredentials = async (data) => {
   try {
@@ -983,14 +983,15 @@ export const SaveArticles = async (articleId) => {
    }
  }
 
- export const getArticlesCityOrTitle = async (reqCity,reqTitle,reqOption, reqDistance) =>{
+ export const getArticlesCityOrTitle = async (reqCity,reqTitle,reqOption, reqDistance,currentPage) =>{
   const city = reqCity;
   const title = reqTitle;
   const option = reqOption;
   const distance = reqDistance
+  const skip = currentPage
   try {
     const res = await(
-      await fetch(`${url}/articles/city?city=${city}&title=${title}&option=${option}&distance=${distance}`,{
+      await fetch(`${url}/articles/city?city=${city}&title=${title}&option=${option}&distance=${distance}&skip=${skip}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
