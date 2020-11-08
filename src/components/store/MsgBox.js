@@ -9,7 +9,7 @@ export const MsgBox = (props) => {
   const logginOut = props.isLoggedIn;
   const [usertext, setUsertext] = useState("");
 
-  const ENDPOINT = "http://localhost:8000";
+  const ENDPOINT = "https://node-server.remgika.com";
   
   
   const user = props.info._id;

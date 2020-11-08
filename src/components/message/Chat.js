@@ -40,7 +40,7 @@ export const Chat = (props) => {
     // if (user && chatId ) {
       props.readMsg(chatId);
 
-    const ENDPOINT = "http://localhost:8000";
+    const ENDPOINT = "https://node-server.remgika.com";
     socket = io(ENDPOINT);
     socket.emit("chat", {
       room: room,
