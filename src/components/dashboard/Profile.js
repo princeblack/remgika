@@ -143,7 +143,7 @@ class Profile extends React.Component {
                 {this.props.proImage.length <= 0 ? (
                   <>
                     <button onClick={() => this.fileInput.click()}>
-                      Update your profile image
+                      Update Picture
                     </button>
                     <input
                       style={{ display: "none" }}
