@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 let socket;
 
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://node-server.remgika.com";
 
 socket = io(ENDPOINT);
 
