@@ -139,7 +139,7 @@ const AddPlaygroung = (props) => {
       {isLoggedIn ? (
         <>
           {redirect && <Redirect to="/playground"></Redirect>}
-          <LoginHeader />
+          <LoginHeader data="playground" />
           <div className="addPlaygroung-form">
             <div id="addPlay-img">
               <img src={game} alt="game"></img>

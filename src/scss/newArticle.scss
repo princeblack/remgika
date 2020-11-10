@@ -1,6 +1,10 @@
 $clip-distance: 0.05;
 $main-color: #69ca62;
 $remgika: #c7cda4;
+.article-box{
+  min-height: 80vh;
+
+}
 .icon-go-back {
   width: 100%;
   min-width: 280px;
@@ -17,6 +21,9 @@ $remgika: #c7cda4;
     color: black;
     margin-left: 15px;
   }
+}
+.log-container{
+  min-height: 90vh;
 }
 form {
   background-color: rgba(182, 166, 166, 0.24);

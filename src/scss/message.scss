@@ -5,6 +5,8 @@ $remgika: #c7cda4;
   margin-top: 50px;
   display: flex;
   justify-content: center;
+  min-height: 80vh;
+
   div{
     width: 50%;
     min-width: 280px;
@@ -21,6 +23,7 @@ $remgika: #c7cda4;
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 50px;
 }
 .toggleMsgBox{
   display: flex;

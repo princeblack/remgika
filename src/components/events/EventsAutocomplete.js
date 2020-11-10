@@ -26,6 +26,7 @@ const EventsAutocomplete = (props) => {
   const [postsPerPage] = useState(12);
 
   const url = "https://node-server.remgika.com";
+  // const url = "http://localhost:8000";
 
   useEffect(() => {
     if ("geolocation" in navigator) {

@@ -31,10 +31,10 @@ export const Messager = (props) => {
 
   return (
     <>
-      {props.userMsg &&  props.info._id &&
+      {/* {props.userMsg &&  props.info._id &&
         
         props.userMsg.length > 0 ? (
-          <>
+          <> */}
             <div className="toggleMsgBox">
               <FontAwesomeIcon
                 className="toggleMsg"
@@ -55,8 +55,9 @@ export const Messager = (props) => {
               )}
               {props.info && <Chat />}
             </div>
-          </>
-        ) : (
+          {/* </>
+        )
+         : (
           <div className="info-box">
             <div>
               <h1>sorry you do not have a conversation with another user yet.</h1>
@@ -67,7 +68,7 @@ export const Messager = (props) => {
             </div>
           </div>
         )
-      }
+      } */}
     </>
   );
 };

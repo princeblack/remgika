@@ -114,12 +114,15 @@ export const PlayPage = (props) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    const newData = await {
-      content: commit,
-      postId: props.match.params.id,
-    };
-    props.commentAdd(newData);
-    setCommit("");
+    if (commit.length > 0) {
+      const newData = await {
+        content: commit,
+        postId: props.match.params.id,
+      };
+      props.commentAdd(newData);
+      setCommit("");
+    }
+    
   };
   const handleLike = (e)=>{
     e.preventDefault();

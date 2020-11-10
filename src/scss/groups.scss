@@ -73,6 +73,8 @@ $remgika: #c7cda4;
       flex-direction: column;
       .groupMenu {
         width: 100%;
+        min-height: 80vh;
+
         .menu {
           background-color: $remgika;
           width: 100%;

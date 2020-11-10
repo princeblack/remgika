@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 export const Chat = (props) => {
   const data = props.data
   const user = props.info._id

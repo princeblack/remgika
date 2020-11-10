@@ -146,7 +146,7 @@ const AddEvents = (props) => {
       {redirect && <Redirect to="/events"></Redirect>}
       {isLoggedIn && (
         <>
-          <LoginHeader />
+          <LoginHeader  data="events"/>
           <div className="addPlaygroung-form">
             <div id="addPlay-img">
               <img src={blackCalender} alt="game"></img>

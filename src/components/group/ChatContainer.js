@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import ChatRoom from "./ChatRoom";
 import { faPaperPlane, faSmile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Picker } from "emoji-mart";
 import "../../scss/chat.scss";
-import io from "socket.io-client";
 import { getGroupChats } from "../../actions";
 import Chat from "./Chat";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -14,12 +12,9 @@ import TextareaAutosize from "react-autosize-textarea";
 import socket from '../Sockect'
 
 export const ChatContainer = (props) => {
-  const [welcome, setWelcome] = useState("");
   const [usertext, setUsertext] = useState("");
   const [show, setShow] = useState(false);
-  const [chatMessages, setChatMessages] = useState([]);
-  var [page, setPage] = useState(0);
-  let test = 1;
+ 
   const logginOut = props.isLoggedIn;
 
   const fullName = props.info.firstName + " " + props.info.lastName;
@@ -28,7 +23,6 @@ export const ChatContainer = (props) => {
 
   let skip = 0;
   let limit = 10;
-  let loading = false;
 
   // connected to the room
   useEffect(() => {

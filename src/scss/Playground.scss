@@ -8,7 +8,7 @@ $remgika: #c7cda4;
 //   **********************************************************/
 
 .playground {
-  overflow: hidden;
+  // overflow: hidden;
   min-width: 280px;
   .serchBar {
     width: 100%;
@@ -95,7 +95,7 @@ $remgika: #c7cda4;
   }
   .playground-table {
     width: 100%;
-    min-height: 600px;
+    min-height: 80vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

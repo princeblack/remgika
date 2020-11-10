@@ -3,6 +3,7 @@ import "../scss/App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { authorise, OneUser} from "../actions";
 import { connect } from "react-redux";
+import Footer from "./home-welcome/Footer"
 import Dashboard from "./dashboard/Dashboard";
 import Login from "./login-signUp/Login";
 import SignUp from "./login-signUp/SignUp";
@@ -81,6 +82,7 @@ const App = (props)=> {
 
             <Route path="*" component={NotFound} />
           </Switch>
+          <Footer></Footer>
         </BrowserRouter>
       </div>
     );

@@ -49,7 +49,7 @@ useEffect(() => {
   const data = props.groupEvents.reverse();
   let event;
   event = data.map((el, index) => {
-    return <EventItems playIndex={index} data={el} key={el._id}></EventItems>;
+    return <EventItems playIndex={index} data={el} key={el._id} group={props.data} ></EventItems>;
   });
   if (data.length === 0) {
     event = <span>There is no event available</span>;

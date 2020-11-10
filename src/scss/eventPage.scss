@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 80vh;
+  margin-bottom: 50px;
   .info-container {
     width: 100%;
     display: flex;
@@ -41,6 +43,7 @@
           overflow-wrap: break-word;
           hyphens: auto;
           text-align: left;
+          white-space: pre-wrap;
         }
       }
     }
@@ -168,8 +171,8 @@
         word-wrap: break-word;
         word-break: break-word;
         overflow-wrap: break-word;
+        white-space: pre-wrap;
         hyphens: auto;
-        // color: chocolate;
         text-align: left;
       }
     }

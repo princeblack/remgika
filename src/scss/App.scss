@@ -24,12 +24,16 @@ a {
 }
 .App {
   text-align: center;
+  min-width: 280px;
   // overflow: hidden;
   input:focus {
     outline: none;
   }
   button:focus {
     outline: none;
+  }
+  .notFound{
+    min-height: 90vh;
   }
   /*********************************************************
   **********************************************************

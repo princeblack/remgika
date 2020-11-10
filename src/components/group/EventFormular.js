@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import LoginHeader from "../login-signUp/LoginHeader";
-import { postGroupEvent } from "../../actions/index";
+import { postGroupEvent, events } from "../../actions/index";
 import done from "../../img/done.svg";
 import blackCalender from "../../img/black-events.svg";
 import { Redirect } from "react-router-dom";
@@ -20,18 +20,9 @@ export const EventFormular = (props) => {
     const [imgCollection, setimgCollection] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [redirect, setRedirect] = useState(false);
-    // useEffect(() => {
-    //   async function f() {
-    //     if (props.addGroupEvent) {
-    //       setTimeout(() => {
-    //         setRedirect(true);
-    //         props.myEvents();
-    //       }, 3000);
-    //     }
-    //   }
-    //   f();
-    // }, [props.addGroupEvent]);
+    const [location, setLocation] = useState([]);
+
+ 
     const maxSelectFile = (event) => {
       let files = event.target.files; // create file object
       if (files.length > 1) {
@@ -72,7 +63,9 @@ export const EventFormular = (props) => {
       // Get latitude and longitude via utility functions
       getGeocode({ address: description })
         .then((results) => getLatLng(results[0]))
-        .then(({ lat, lng }) => {})
+        .then(({ lat, lng }) => {
+          setLocation([lng, lat]);
+        })
         .catch((error) => {});
     };
   
@@ -122,6 +115,7 @@ export const EventFormular = (props) => {
     const onSubmit = (e) => {
       const id = props.data._id
       const data = new FormData();
+      data.append("location", [location[0], location[1]]);
       for (const key of Object.keys(e.imgCollection)) {
         data.append("imgCollection", e.imgCollection[key]);
       }
@@ -132,7 +126,7 @@ export const EventFormular = (props) => {
       for (var key in e) {
         data.append(key, e[key]);
       }
-      props.postGroupEvent(data);
+      props.events(data);
     };
   
     const isLoggedIn = props.isLoggedIn;
@@ -271,4 +265,4 @@ const mapStateToProps = (state) => {
   };
 
 
-export default connect(mapStateToProps,{postGroupEvent})(EventFormular)
+export default connect(mapStateToProps,{postGroupEvent, events})(EventFormular)

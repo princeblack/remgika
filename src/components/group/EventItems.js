@@ -7,7 +7,12 @@ import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import close from "../../img/close.svg";
 import EventImage from "./EventImage";
-import { updateGroupevents, getAllGroupevents, deleteGroupEvent } from "../../actions/index";
+import {
+  updateGroupevents,
+  getAllGroupevents,
+  deleteGroupEvent,
+} from "../../actions/index";
+import { NavLink } from "react-router-dom";
 
 const EventItems = (props) => {
   const [eventName, setEventName] = useState();
@@ -17,7 +22,7 @@ const EventItems = (props) => {
   const [description, setDescription] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [toggling, setToggling] = useState(false);
-  const [show, setShow]= useState(false)
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     setAddress(props.data.address);
@@ -43,20 +48,21 @@ const EventItems = (props) => {
   const end = moment(dateEnd).format("dddd, MMMM D, h:mm A");
 
   const toggle = () => {
-    setToggling(true);
+    setToggling(!toggling);
   };
 
   const toggleClass = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
+    setToggling(false);
   };
 
   useEffect(() => {
     if (props.groupEventIsUpdate) {
       setTimeout(() => {
-        toggleClass(index)
+        toggleClass(index);
       }, 2000);
     }
- }, [props.groupEventIsUpdate])
+  }, [props.groupEventIsUpdate]);
 
   const handleDateStart = (e) => {
     setStarted(e);
@@ -89,54 +95,62 @@ const EventItems = (props) => {
     data.append("start", started);
     data.append("end", ended);
     data.append("description", description);
-    const id = props.data._id;    
+    const id = props.data._id;
     props.updateGroupevents(data, id);
   };
-  const showOption = ()=>{
-    setShow(!show)
+  
+  const showOption = () => {
+    setShow(!show);
+  };
+  let userAdmin = false;
+  let admin;
+  if (props.info._id) {
+    admin = props.group.admin.filter((el) =>
+      el._id === props.info._id ? (userAdmin = true) : (userAdmin = false)
+    );
   }
+
   return (
     <div className="event-item">
-      {image}
-      <div className="eventTitle">
-        <h4>{data.eventName}</h4>
-      </div>
-      {!toggling && <p className="more" onClick={toggle}> {toggling ? "Less" : "Read more"}</p>}
-      {toggling && (
-        <>
-          <div className="addressItem">
-            <span>Place:</span>
-            <p>{data.address}</p>
-          </div>
-          <div className="time">
+      <div className="events-item">
+        <div className="image">
+          <img src={props.data.imgCollection[0]} alt=""></img>
+          {userAdmin && (
+            <p className="more" onClick={toggle}>
+              Option
+            </p>
+          )}
+        </div>
+        <div className="title">
+          <h3>{props.data.eventName}</h3>
+        </div>
+        <div className="timeItem">
+          <div className="start">
             <span>Start:</span>
             <p>{start}</p>
           </div>
-          <div className="time">
+          <div className="end">
             <span>End:</span>
             <p>{end}</p>
           </div>
-          <div className="description">
-            <p>{data.description}</p>
-            <button onClick={showOption}> Delete</button>
-            <button className="updatePlay" onClick={() => toggleClass(index)}>
-              Update
-            </button>
-          </div>
-          {show && 
-      <div className="option">
-        <di className="text">
-          <h2>You are sure you want to remove this event ?</h2>
-        </di>
-        <div className="choice">
-          <button onClick={handlDelete}>Yes I am sure</button>
-          <button onClick={showOption} className="reject">No cancel </button>
         </div>
+        <div className="visite">
+          <NavLink to={`/eventPage/${props.data._id}/groups`}>Visit</NavLink>
+        </div>
+        {toggling && (
+          <div className="option">
+            <div className="button">
+              <button onClick={handlDelete}> Delete</button>
+              <button className="updatePlay" onClick={() => toggleClass(index)}>
+                Update
+              </button>
+            </div>
+            <div className="closeBtn">
+              <button onClick={toggle}> Close </button>
+            </div>
+          </div>
+        )}
       </div>
-      }
-        </>
-      )}
-
       {/**********************************************************
        **********************************************************
        ***************** UPDATE Events  FORM ********************
@@ -242,7 +256,9 @@ const EventItems = (props) => {
                   rows="10"
                 />
               </div>
-              <button className="addPlay-submit" type="Submit"  value="Submit" > Update </button>
+              <button className="addPlay-submit" type="Submit" value="Submit">
+                Update
+              </button>
             </form>
           </div>
         </div>
@@ -254,8 +270,13 @@ const EventItems = (props) => {
 const mapStateToProps = (state) => {
   return {
     groupEventIsUpdate: state.groupEventIsUpdate,
-    GroupEventIsDelete: state.GroupEventIsDelete
+    GroupEventIsDelete: state.GroupEventIsDelete,
+    info: state.info,
   };
 };
 
-export default connect(mapStateToProps, { updateGroupevents, getAllGroupevents,deleteGroupEvent })(EventItems);
+export default connect(mapStateToProps, {
+  updateGroupevents,
+  getAllGroupevents,
+  deleteGroupEvent,
+})(EventItems);

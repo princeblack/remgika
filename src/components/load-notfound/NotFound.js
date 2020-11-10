@@ -5,7 +5,7 @@ import React from 'react';
 class NotFound extends React.Component {
     render() {
       return (
-        <div> Notfound </div>
+        <div className="notFound"> Notfound </div>
       );
     }
   }

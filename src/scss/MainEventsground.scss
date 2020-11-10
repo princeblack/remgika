@@ -110,6 +110,8 @@ $remgika: #c7cda4;
     display: flex;
     flex-wrap: wrap;
     margin-left: 20px;
+    min-height: 80vh;
+
     .events-item {
       border-radius: 10px;
       box-shadow: -1px -1px 4px #dcdef19f, rgb(226, 216, 216) 1px 1px 4px;

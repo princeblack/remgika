@@ -1,4 +1,3 @@
-import { fetchComment } from "../actions";
 
 const url = "https://node-server.remgika.com";
 // const url = "http://localhost:8000";
@@ -738,7 +737,7 @@ export const getGroupEvent = async (data) => {
   try {
     const id = await data;
     const res = await (
-      await fetch(`${url}/groupEvent/${id}`, {
+      await fetch(`${url}/events/group/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -753,11 +752,13 @@ export const getGroupEvent = async (data) => {
 };
 
 export const updateGroupEvents = async (data, id) => {
+  const eventId = id;
+  const info = data
   try {
     const res = await (
-      await fetch(`${url}/groupEvent/${id}`, {
+      await fetch(`${url}/groupEvent/${eventId}`, {
         method: "PUT",
-        body: data,
+        body: info,
         credentials: "include",
       })
     ).json();
